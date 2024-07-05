@@ -47,26 +47,25 @@
             <li><a href="#services">Profil</a></li>
             <li><a href="#portfolio">Berita</a></li>
             <li><a href="#team">Program</a></li>
-            <li><a href="blog.html">Galeri</a></li>
-            <li class="dropdown"><a href="#"><span>Dokumen</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="#">Dropdown 1</a></li>
-                <li><a href="#">Dropdown 2</a></li>
-              </ul>
-            </li>
-            <div class="language-switcher">
-            <a href="?lang=id" class="language-link">
+            <li><a href="#blog">Galeri</a></li>
+            <li><a href="#">Dokumen</a></li>
+            <li class="language-switcher">
+              <a href="?lang=id" class="language-link">
                 <img src="assets/img/flag-ID.png" alt="Indonesian Flag" class="flag-icon">
                 <span>ID</span>
-            </a>
-            <a href="?lang=en" class="language-link">
-                <img src="assets/img/flag-EN.jpg" alt="English Flag" class="flag-icon">
-                <span>EN</span>
-            </a>
-        </div>
+                <i class="bi bi-chevron-down toggle-dropdown"></i>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="?lang=en" class="language-link">
+                    <img src="assets/img/flag-EN.jpg" alt="English Flag" class="flag-icon">
+                    <span>EN</span>
+                  </a></li>
+              </ul>
+            </li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
+
 
       </div>
 
@@ -1079,10 +1078,10 @@
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-about">
-            <div>
-                <img src="assets/img/logorumah.png" alt="">
-            </div>
-            <a href="index.html" class="logo d-flex align-items-center">
+          <div>
+            <img src="assets/img/logorumah.png" alt="">
+          </div>
+          <a href="index.html" class="logo d-flex align-items-center">
             <span class="sitename">Impact</span>
           </a>
           <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
