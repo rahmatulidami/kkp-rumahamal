@@ -6,49 +6,78 @@
   <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section accent-background">
-      <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-5 justify-content-between">
-          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <h2><span>Welcome to </span><span class="accent">Rumah Amal USK</span></h2>
-            <p>Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
-            <div class="d-flex">
-              <a href="#about" class="btn-get-started">Selengkapnya</a>
+<section id="hero" class="hero section accent-background">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="assets/img/about.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2><span>Welcome to </span><span class="accent">Rumah Amal USK</span></h2>
+                        <p>Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
+                        <a href="#about" class="btn-get-started">Selengkapnya</a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/img/about-2.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2><span>Welcome to </span><span class="accent">Rumah Amal USK</span></h2>
+                        <p>Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
+                        <a href="#about" class="btn-get-started">Selengkapnya</a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/img/about.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2><span>Welcome to </span><span class="accent">Rumah Amal USK</span></h2>
+                        <p>Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
+                        <a href="#about" class="btn-get-started">Selengkapnya</a>
+                    </div>
+                </div>
             </div>
-          </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-      </div>
+    </div>
 
-      <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
+    <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
         <div class="container position-relative">
-          <div class="row gy-4 mt-5">
+            <div class="row gy-4 mt-5">
 
-            <div class="col-xl-3 col-md-6">
-              <div class="icon-box">
-                <div class="icon"><i class="bi bi-easel"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">Lorem Ipsum</a></h4>
-              </div>
-            </div><!--End Icon Box -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bi bi-easel"></i></div>
+                        <h4 class="title"><a href="" class="stretched-link">Lorem Ipsum</a></h4>
+                    </div>
+                </div><!--End Icon Box -->
 
-            <div class="col-xl-3 col-md-6">
-              <div class="icon-box">
-                <div class="icon"><i class="bi bi-gem"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">Sed ut perspiciatis</a></h4>
-              </div>
-            </div><!--End Icon Box -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bi bi-gem"></i></div>
+                        <h4 class="title"><a href="" class="stretched-link">Sed ut perspiciatis</a></h4>
+                    </div>
+                </div><!--End Icon Box -->
 
-            <div class="col-xl-3 col-md-6">
-              <div class="icon-box">
-                <div class="icon"><i class="bi bi-geo-alt"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">Magni Dolores</a></h4>
-              </div>
-            </div><!--End Icon Box -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bi bi-geo-alt"></i></div>
+                        <h4 class="title"><a href="" class="stretched-link">Magni Dolores</a></h4>
+                    </div>
+                </div><!--End Icon Box -->
 
-          </div>
+            </div>
         </div>
-      </div>
+    </div>
 
-    </section><!-- /Hero Section -->
+</section><!-- /Hero Section -->
+
+
 
     <!-- About Section -->
     <section id="about" class="about section">

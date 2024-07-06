@@ -595,7 +595,7 @@ h6 {
 --------------------------------------------------------------*/
 .footer {
     color: var(--default-color);
-    background-color: var(--background-color);
+    background-color: #45474B;
     font-size: 14px;
     position: relative;
 }
@@ -939,6 +939,7 @@ section,
     background: var(--accent-color);
     font-family: var(--heading-font);
     font-weight: 500;
+    margin-top: 20px;
     font-size: 14px;
     letter-spacing: 1px;
     display: inline-block;
@@ -981,6 +982,12 @@ section,
         border-top: 1px solid
             color-mix(in srgb, var(--default-color), transparent 90%);
     }
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .hero .icon-box {
