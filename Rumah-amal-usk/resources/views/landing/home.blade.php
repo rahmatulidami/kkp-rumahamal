@@ -46,39 +46,44 @@
         </div>
     </div>
 
-    <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
-        <div class="container position-relative">
-            <div class="row gy-4 mt-5">
+      <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
+          <div class="container position-relative">
+              <div class="row gy-4 mt-5">
 
-                <div class="col-xl-3 col-md-6">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bi bi-easel"></i></div>
-                        <h4 class="title"><a href="" class="stretched-link">Lorem Ipsum</a></h4>
-                    </div>
-                </div><!--End Icon Box -->
+                  <div class="col-xl-4 col-md-6">
+                      <div class="icon-box">
+                          <h4 class="title"><a href="" class="stretched-link">Infak</a></h4>
+                          <p>Bersyukur atas rizki, berbagi kebahagian dengan sesama muslim.</p>
+                          <a class="btn-btn-primary" href="#" role="button">Infak</a>
+                      </div>
+                  </div><!--End Icon Box -->
 
-                <div class="col-xl-3 col-md-6">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bi bi-gem"></i></div>
-                        <h4 class="title"><a href="" class="stretched-link">Sed ut perspiciatis</a></h4>
-                    </div>
-                </div><!--End Icon Box -->
+                  <div class="col-xl-4 col-md-6">
+                      <div class="icon-box">
+                          <h4 class="title"><a href="" class="stretched-link">Zakat</a></h4>
+                          <p>Menyempurnakan rukun islam, mensucikan harta dan mententramkan jiwa.</p>
+                          <a class="btn-btn-primary" href="#" role="button">Zakat</a>
+                      </div>
+                  </div><!--End Icon Box -->
 
-                <div class="col-xl-3 col-md-6">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bi bi-geo-alt"></i></div>
-                        <h4 class="title"><a href="" class="stretched-link">Magni Dolores</a></h4>
-                    </div>
-                </div><!--End Icon Box -->
+                  <div class="col-xl-4 col-md-6">
+                      <div class="icon-box">
+                          <h4 class="title"><a href="" class="stretched-link">Program</a></h4>
+                          <p>Rumah amal masjid jamik Universitas Syiah Kuala menyediakan bebarapa program donasi </p>
+                          <a class="btn-btn-primary" href="#" role="button">Program</a>
+                      </div>
+                  </div><!--End Icon Box -->
 
-            </div>
-        </div>
+              </div>
+          </div>
+      </div>
+
     </div>
 
 </section><!-- /Hero Section -->
 
 <!-- Portfolio Section -->
-<section id="portfolio" class="portfolio section">
+<section id="campaign-unggulan" class="campaign-unggulan section">
 
 <!-- Section Title -->
 <div class="container section-title" data-aos="fade-up">
@@ -89,135 +94,81 @@
 
   <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
-    <!-- <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+    <!-- <ul class="campaign-unggulan-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
       <li data-filter="*" class="filter-active">All</li>
       <li data-filter=".filter-app">App</li>
       <li data-filter=".filter-product">Product</li>
       <li data-filter=".filter-branding">Branding</li>
       <li data-filter=".filter-books">Books</li>
-    </ul>End Portfolio Filters -->
+    </ul>End campaign-unggulan Filters -->
 
     <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">App 1</a></h4>
+      <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
+        <div class="campaign-unggulan-content h-100">
+          <a href="assets/img/portfolio/product-1.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
+          <div class="campaign-unggulan-info">
+            <h4><a href="campaign-unggulan-details.html" title="More Details">Product 1</a></h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
+            <a class="btn-btn-primary" href="#" role="button">DONASI</a>
           </div>
         </div>
-      </div><!-- End Portfolio Item -->
+      </div><!-- End campaign-unggulan Item -->
 
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/product-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Product 1</a></h4>
+      <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-branding">
+        <div class="campaign-unggulan-content h-100">
+          <a href="assets/img/portfolio/branding-1.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt=""></a>
+          <div class="campaign-unggulan-info">
+            <h4><a href="campaign-unggulan-details.html" title="More Details">Branding 1</a></h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
+            <a class="btn-btn-primary" href="#" role="button">DONASI</a>
           </div>
         </div>
-      </div><!-- End Portfolio Item -->
+      </div><!-- End campaign-unggulan Item -->
 
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/branding-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Branding 1</a></h4>
+      <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-books">
+        <div class="campaign-unggulan-content h-100">
+          <a href="assets/img/portfolio/books-1.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt=""></a>
+          <div class="campaign-unggulan-info">
+            <h4><a href="campaign-unggulan-details.html" title="More Details">Books 1</a></h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
+            <a class="btn-btn-primary" href="#" role="button">DONASI</a>
           </div>
         </div>
-      </div><!-- End Portfolio Item -->
+      </div><!-- End campaign-unggulan Item -->
 
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/books-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Books 1</a></h4>
+      <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-app">
+        <div class="campaign-unggulan-content h-100">
+          <a href="assets/img/portfolio/app-2.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-2.jpg" class="img-fluid" alt=""></a>
+          <div class="campaign-unggulan-info">
+            <h4><a href="campaign-unggulan-details.html" title="More Details">App 2</a></h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
+            <a class="btn-btn-primary" href="#" role="button">DONASI</a>
           </div>
         </div>
-      </div><!-- End Portfolio Item -->
+      </div><!-- End campaign-unggulan Item -->
 
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/app-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-2.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">App 2</a></h4>
+      <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
+        <div class="campaign-unggulan-content h-100">
+          <a href="assets/img/portfolio/product-2.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt=""></a>
+          <div class="campaign-unggulan-info">
+            <h4><a href="campaign-unggulan-details.html" title="More Details">Product 2</a></h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
+            <a class="btn-btn-primary" href="#" role="button">DONASI</a>
           </div>
         </div>
-      </div><!-- End Portfolio Item -->
+      </div><!-- End campaign-unggulan Item -->
 
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/product-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Product 2</a></h4>
+      <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-branding">
+        <div class="campaign-unggulan-content h-100">
+          <a href="assets/img/portfolio/branding-2.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-2.jpg" class="img-fluid" alt=""></a>
+          <div class="campaign-unggulan-info">
+            <h4><a href="campaign-unggulan-details.html" title="More Details">Branding 2</a></h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
+            <a class="btn-btn-primary" href="#" role="button">DONASI</a>
           </div>
         </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/branding-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-2.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Branding 2</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/books-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-2.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Books 2</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/app-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-3.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">App 3</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/product-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-3.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Product 3</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/branding-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-3.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Branding 3</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/books-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-3.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Books 3</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
+      </div><!-- End campaign-unggulan Item -->
 
     </div><!-- End Portfolio Container -->
 

@@ -994,7 +994,7 @@ section,
     padding: 60px 30px;
     position: relative;
     overflow: hidden;
-    background: var(--background-color);
+    background-color: #F5F7F8;
     box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
     border-radius: 8px;
@@ -1004,6 +1004,10 @@ section,
     text-align: center;
 }
 
+.hero .icon-box p {
+    color: #45474B;
+}
+
 .hero .icon-box .title {
     font-weight: 700;
     margin-bottom: 15px;
@@ -1011,27 +1015,32 @@ section,
 }
 
 .hero .icon-box .title a {
-    color: color-mix(in srgb, var(--default-color), transparent 20%);
+    color: color-mix(in srgb,#45474B, transparent 20%);
     transition: 0.3s;
 }
 
-.hero .icon-box .icon {
-    margin-bottom: 20px;
-    padding-top: 10px;
+.hero .icon-box .btn-btn-primary{
+    color: #FFBB0C;
+    background: var(--accent-color);
+    font-family: var(--heading-font);
+    font-weight: 500;
+    margin-top: 20px;
+    font-size: 14px;
+    letter-spacing: 1px;
     display: inline-block;
-    transition: all 0.3s ease-in-out;
-    font-size: 48px;
-    line-height: 1;
-    color: color-mix(in srgb, var(--default-color), transparent 20%);
+    padding: 14px 80px;
+    border-radius: 20px;
+    transition: 0.3s;
+    border: 2px solid #FFBB0C;
 }
 
 .hero .icon-box:hover {
-    background-color: color-mix(in srgb, var(--background-color), white 10%);
+    background-color: color-mix(in srgb, #F5F7F8, white 10%);
 }
 
 .hero .icon-box:hover .title a,
 .hero .icon-box:hover .icon {
-    color: var(--contrast-color);
+    color: #45474B;
 }
 
 /*--------------------------------------------------------------
@@ -1208,16 +1217,16 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Portfolio Section
+# campaign-unggulan Section
 --------------------------------------------------------------*/
-.portfolio .portfolio-filters {
+.campaign-unggulan .campaign-unggulan-filters {
     padding: 0 0 20px 0;
     margin: 0 auto;
     list-style: none;
     text-align: center;
 }
 
-.portfolio .portfolio-filters li {
+.campaign-unggulan .campaign-unggulan-filters li {
     cursor: pointer;
     display: inline-block;
     padding: 0;
@@ -1228,40 +1237,40 @@ section,
     transition: all 0.3s ease-in-out;
 }
 
-.portfolio .portfolio-filters li:hover,
-.portfolio .portfolio-filters li.filter-active {
+.campaign-unggulan .campaign-unggulan-filters li:hover,
+.campaign-unggulan .campaign-unggulan-filters li.filter-active {
     color: var(--accent-color);
 }
 
-.portfolio .portfolio-filters li:first-child {
+.campaign-unggulan .campaign-unggulan-filters li:first-child {
     margin-left: 0;
 }
 
-.portfolio .portfolio-filters li:last-child {
+.campaign-unggulan .campaign-unggulan-filters li:last-child {
     margin-right: 0;
 }
 
 @media (max-width: 575px) {
-    .portfolio .portfolio-filters li {
+    .campaign-unggulan .campaign-unggulan-filters li {
         font-size: 14px;
         margin: 0 5px;
     }
 }
 
-.portfolio .portfolio-content {
+.campaign-unggulan .campaign-unggulan-content {
     background-color: var(--surface-color);
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
     height: 100%;
     overflow: hidden;
 }
 
-.portfolio .portfolio-content img {
+.pcampaign-unggulan .campaign-unggulan-content img {
     transition: 0.3s;
     position: relative;
     z-index: 1;
 }
 
-.portfolio .portfolio-content .portfolio-info {
+.campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info {
     background-color: var(--background-color);
     border-top: 1px solid
         color-mix(in srgb, var(--default-color), transparent 90%);
@@ -1270,29 +1279,45 @@ section,
     z-index: 2;
 }
 
-.portfolio .portfolio-content .portfolio-info h4 {
+.campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info .btn-btn-primary{
+    color: #f2f9f9;
+    background: #1D7E05;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 5px 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h4 {
     font-size: 18px;
     font-weight: 600;
     padding-right: 50px;
 }
 
-.portfolio .portfolio-content .portfolio-info h4 a {
+.campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h4 a {
     color: var(--heading-color);
     transition: 0.3s;
 }
 
-.portfolio .portfolio-content .portfolio-info h4 a:hover {
+.campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h4 a:hover {
     color: var(--accent-color);
 }
 
-.portfolio .portfolio-content .portfolio-info p {
+.campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info p {
     color: color-mix(in srgb, var(--default-color), transparent 30%);
     font-size: 14px;
     margin-bottom: 0;
     padding-right: 50px;
 }
 
-.portfolio .portfolio-content:hover img {
+.campaign-unggulan .campaign-unggulan-content:hover img {
     transform: scale(1.1);
 }
 
