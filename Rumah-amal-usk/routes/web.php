@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\DonationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('landing/home');
+});
+
+Route::get('/donate', [DonationController::class, 'index']);
+Route::post('/donate', [DonationController::class, 'store']);
+
+Route::get('/success', function () {
+    return view('success');
+});
+
+Route::get('/failure', function () {
+    return view('failure');
 });
