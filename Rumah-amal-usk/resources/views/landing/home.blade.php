@@ -244,7 +244,7 @@
         <p class="post-category">Politics</p>
 
         <h2 class="title">
-          <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos</a>
+          <a href="/detail-berita">Dolorum optio tempore voluptas dignissimos</a>
         </h2>
 
         <div class="d-flex align-items-center">
@@ -310,8 +310,9 @@
         </div>
 
       </article>
+      
     </div><!-- End post list item -->
-
+    <a class="btn-btn-primary" href="/berita" role="button">Selengkapnya</a>
   </div><!-- End recent posts list -->
 
 </div>

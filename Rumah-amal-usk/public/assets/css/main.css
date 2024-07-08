@@ -1610,6 +1610,21 @@ section,
     margin-bottom: 0;
 }
 
+.recent-posts .btn-btn-primary{
+    color: #f2f9f9;
+    background: #1D7E05;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 5px 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
 /*--------------------------------------------------------------
 # Blog Pagination Section
 --------------------------------------------------------------*/
@@ -2163,6 +2178,10 @@ section,
 /*--------------------------------------------------------------
 # Program Section
 --------------------------------------------------------------*/
+#program{
+    background-color: #FFBB0C;
+}
+
 .program .program-filters {
     padding: 0 0 20px 0;
     margin: 0 auto;
