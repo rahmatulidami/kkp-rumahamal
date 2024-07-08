@@ -2159,3 +2159,108 @@ section,
     color: color-mix(in srgb, var(--default-color), transparent 60%);
     font-size: 14px;
 }
+
+/*--------------------------------------------------------------
+# Program Section
+--------------------------------------------------------------*/
+.program .program-filters {
+    padding: 0 0 20px 0;
+    margin: 0 auto;
+    list-style: none;
+    text-align: center;
+}
+
+.program .program-filters li {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 10px;
+    line-height: 1;
+    transition: all 0.3s ease-in-out;
+}
+
+.program .program-filters li:hover,
+.program .program-filters li.filter-active {
+    color: var(--accent-color);
+}
+
+.program .program-filters li:first-child {
+    margin-left: 0;
+}
+
+.program .program-filters li:last-child {
+    margin-right: 0;
+}
+
+@media (max-width: 575px) {
+    .program .program-filters li {
+        font-size: 14px;
+        margin: 0 5px;
+    }
+}
+
+.program .program-content {
+    background-color: var(--surface-color);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    overflow: hidden;
+}
+
+.program .program-content img {
+    transition: 0.3s;
+    position: relative;
+    z-index: 1;
+}
+
+.program .program-content .program-info {
+    background-color: var(--background-color);
+    border-top: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 90%);
+    padding: 25px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.program .program-content .program-info .btn-btn-primary{
+    color: #f2f9f9;
+    background: #1D7E05;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 5px 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.program .program-content .program-info h4 {
+    font-size: 18px;
+    font-weight: 600;
+    padding-right: 50px;
+}
+
+.program .program-content .program-info h4 a {
+    color: var(--heading-color);
+    transition: 0.3s;
+}
+
+.program .program-content .program-info h4 a:hover {
+    color: var(--accent-color);
+}
+
+.program .program-content .program-info p {
+    color: color-mix(in srgb, var(--default-color), transparent 30%);
+    font-size: 14px;
+    margin-bottom: 0;
+    padding-right: 50px;
+}
+
+.program .program-content:hover img {
+    transform: scale(1.1);
+}
