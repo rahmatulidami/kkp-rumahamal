@@ -46,33 +46,38 @@
         </div>
     </div>
 
-    <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
-        <div class="container position-relative">
-            <div class="row gy-4 mt-5">
+      <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
+          <div class="container position-relative">
+              <div class="row gy-4 mt-5">
 
-                <div class="col-xl-3 col-md-6">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bi bi-easel"></i></div>
-                        <h4 class="title"><a href="" class="stretched-link">Lorem Ipsum</a></h4>
-                    </div>
-                </div><!--End Icon Box -->
+                  <div class="col-xl-4 col-md-6">
+                      <div class="icon-box">
+                          <h4 class="title"><a href="" class="stretched-link">Infak</a></h4>
+                          <p>Bersyukur atas rizki, berbagi kebahagian dengan sesama muslim.</p>
+                          <a class="btn-btn-primary" href="#" role="button">Infak</a>
+                      </div>
+                  </div><!--End Icon Box -->
 
-                <div class="col-xl-3 col-md-6">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bi bi-gem"></i></div>
-                        <h4 class="title"><a href="" class="stretched-link">Sed ut perspiciatis</a></h4>
-                    </div>
-                </div><!--End Icon Box -->
+                  <div class="col-xl-4 col-md-6">
+                      <div class="icon-box">
+                          <h4 class="title"><a href="" class="stretched-link">Zakat</a></h4>
+                          <p>Menyempurnakan rukun islam, mensucikan harta dan mententramkan jiwa.</p>
+                          <a class="btn-btn-primary" href="#" role="button">Zakat</a>
+                      </div>
+                  </div><!--End Icon Box -->
 
-                <div class="col-xl-3 col-md-6">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bi bi-geo-alt"></i></div>
-                        <h4 class="title"><a href="" class="stretched-link">Magni Dolores</a></h4>
-                    </div>
-                </div><!--End Icon Box -->
+                  <div class="col-xl-4 col-md-6">
+                      <div class="icon-box">
+                          <h4 class="title"><a href="" class="stretched-link">Program</a></h4>
+                          <p>Rumah amal masjid jamik Universitas Syiah Kuala menyediakan bebarapa program donasi </p>
+                          <a class="btn-btn-primary" href="#" role="button">Program</a>
+                      </div>
+                  </div><!--End Icon Box -->
 
-            </div>
-        </div>
+              </div>
+          </div>
+      </div>
+
     </div>
 
 </section><!-- /Hero Section -->

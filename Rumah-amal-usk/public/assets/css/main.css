@@ -994,7 +994,7 @@ section,
     padding: 60px 30px;
     position: relative;
     overflow: hidden;
-    background: var(--background-color);
+    background-color: #F5F7F8;
     box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
     border-radius: 8px;
@@ -1004,6 +1004,10 @@ section,
     text-align: center;
 }
 
+.hero .icon-box p {
+    color: #45474B;
+}
+
 .hero .icon-box .title {
     font-weight: 700;
     margin-bottom: 15px;
@@ -1011,27 +1015,32 @@ section,
 }
 
 .hero .icon-box .title a {
-    color: color-mix(in srgb, var(--default-color), transparent 20%);
+    color: color-mix(in srgb,#45474B, transparent 20%);
     transition: 0.3s;
 }
 
-.hero .icon-box .icon {
-    margin-bottom: 20px;
-    padding-top: 10px;
+.hero .icon-box .btn-btn-primary{
+    color: #FFBB0C;
+    background: var(--accent-color);
+    font-family: var(--heading-font);
+    font-weight: 500;
+    margin-top: 20px;
+    font-size: 14px;
+    letter-spacing: 1px;
     display: inline-block;
-    transition: all 0.3s ease-in-out;
-    font-size: 48px;
-    line-height: 1;
-    color: color-mix(in srgb, var(--default-color), transparent 20%);
+    padding: 14px 40px;
+    border-radius: 50px;
+    transition: 0.3s;
+    border: 2px solid #FFBB0C;
 }
 
 .hero .icon-box:hover {
-    background-color: color-mix(in srgb, var(--background-color), white 10%);
+    background-color: color-mix(in srgb, #F5F7F8, white 10%);
 }
 
 .hero .icon-box:hover .title a,
 .hero .icon-box:hover .icon {
-    color: var(--contrast-color);
+    color: #45474B;
 }
 
 /*--------------------------------------------------------------
