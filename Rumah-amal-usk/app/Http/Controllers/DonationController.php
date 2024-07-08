@@ -28,6 +28,7 @@ class DonationController extends Controller
         $donation->name = $name;
         $donation->email = $request->email;
         $donation->amount = $request->amount;
+        $donation->payment_method = $request->payment_method;
         $donation->save();
 
         Configuration::setXenditKey(env('XENDIT_SECRET_KEY'));
@@ -39,14 +40,12 @@ class DonationController extends Controller
             'amount' => $donation->amount,
             'invoice_duration' => 86400, // 1 hari
             'currency' => 'IDR',
+            'payer_email' => $donation->email,
+            'should_send_email' => true,
+            'payment_methods' => [$donation->payment_method],
             'success_redirect_url' => url('/success'),
             'failure_redirect_url' => url('/failure'),
         ]);
-
-        // Configuration::getDefaultConfiguration()
-        //     ->setCurlOptions([
-        //         CURLOPT_CAINFO => base_path('/../../../cacert.pem') // sesuaikan path ini
-        //     ]);
 
         try {
             $result = $apiInstance->createInvoice($create_invoice_request);

@@ -1,65 +1,90 @@
-@extends('layouts.layout')
+@extends('donation.layout')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="text-center">Pembayaran Infaq</h3>
-                </div>
-                <div class="card-body">
-                    @if($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="card p-4">
+                <h3 class="mb-3">Pembayaran</h3>
+                <p>Bayarlah zakatmu</p>
+                <form method="POST" action="/donate">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Jumlah Donasi</label>
+                        <div class="input-group">
+                            <span class="input-group-text">Rp.</span>
+                            <input type="number" class="form-control" id="amount" name="amount" placeholder="Jumlah donasi yang ingin didonasikan" required>
                         </div>
-                    @endif
-                    <form action="/donate" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label for="amount">Jumlah Donasi</label>
-                            <input type="number" id="amount" name="amount" class="form-control" required min="1000">
-                        </div>
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="anonymousToggle" onchange="toggleNameInput()">
-                            <label class="form-check-label" for="anonymousToggle">Sembunyikan nama saya (Hamba Allah)</label>
-                        </div>
-                        <div class="form-group" id="nameField">
-                            <label for="name">Nama (optional)</label>
-                            <input type="text" id="name" name="name" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Nomor Telepon</label>
-                            <input type="text" id="phone" name="phone" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">Lanjutkan Pembayaran</button>
-                    </form>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nama Lengkap</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Nama Lengkap">
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="anonymous" name="anonymous">
+                        <label class="form-check-label" for="anonymous">Sembunyikan nama saya (Hamba Allah)</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">No Telepon</label>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="No Telepon" required>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="consent" name="consent">
+                        <label class="form-check-label" for="consent">Bersedia di hubungi oleh <a href="#">Rumah Amal USK</a></label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Pesan</label>
+                        <textarea class="form-control" id="message" name="message" rows="3" placeholder="Tulis doa atau dukungan untuk project donasi ini"></textarea>
+                    </div>
                 </div>
             </div>
-        </div>
+        <div class="col-12 col-md-6">
+            <div class="card p-4">
+                <h3 class="mb-3">Metode Pembayaran</h3>
+                <p>Pilih metode pembayaran di bawah ini, untuk melanjutkan donasi</p>
+                <div class="list-group">
+                    <label class="list-group-item d-flex justify-content-between align-items-center">
+                        <input class="form-check-input me-2" type="radio" name="payment_method" value="QRIS" required>
+                        Pembayaran Qris
+                        <img src="assets/img/qris-logo.jpg" alt="QRIS" class="img-fluid" width="50">
+                    </label>
+                    <label class="list-group-item d-flex justify-content-between align-items-center">
+                        <input class="form-check-input me-2" type="radio" name="payment_method" value="BSI" required>
+                        Virtual Account BSI
+                        <img src="assets/img/bsi-logo.png" alt="BSI" class="img-fluid" width="50">
+                    </label>
+                    <label class="list-group-item d-flex justify-content-between align-items-center">
+                        <input class="form-check-input me-2" type="radio" name="payment_method" value="BTN" required>
+                        Virtual Account BTN
+                        <img src="assets/img/btn-logo.png" alt="BTN" class="img-fluid" width="50">
+                    </label>
+                    <label class="list-group-item d-flex justify-content-between align-items-center">
+                        <input class="form-check-input me-2" type="radio" name="payment_method" value="MANDIRI" required>
+                        Virtual Account Mandiri
+                        <img src="assets/img/mandiri-logo.png" alt="Mandiri" class="img-fluid" width="50">
+                    </label>
+                    <label class="list-group-item d-flex justify-content-between align-items-center">
+                        <input class="form-check-input me-2" type="radio" name="payment_method" value="OVO" required>
+                        OVO
+                        <img src="assets/img/ovo-logo.png" alt="OVO" class="img-fluid" width="50">
+                    </label>
+                    <label class="list-group-item d-flex justify-content-between align-items-center">
+                        <input class="form-check-input me-2" type="radio" name="payment_method" value="DANA" required>
+                        DANA
+                        <img src="assets/img/dana-logo.png" alt="DANA" class="img-fluid" width="50">
+                    </label>
+                </div>
+                <div class="form-check mt-3">
+                    <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                    <label class="form-check-label" for="terms">Saya setuju dengan syarat dan ketentuan yang berlaku</label>
+                </div>
+                <button type="submit" class="btn btn-warning w-100 mt-3">Lanjutkan Pembayaran</button>
+            </div>
+        </form>
     </div>
 </div>
-
-<script>
-    function toggleNameInput() {
-        var checkbox = document.getElementById('anonymousToggle');
-        var nameField = document.getElementById('nameField');
-        var nameInput = document.getElementById('name');
-        if (checkbox.checked) {
-            nameField.style.display = 'none';
-            nameInput.value = 'Hamba Allah';
-        } else {
-            nameField.style.display = 'block';
-            nameInput.value = '';
-        }
-    }
-</script>
 @endsection

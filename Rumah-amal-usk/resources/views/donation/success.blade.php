@@ -1,5 +1,5 @@
 <!-- success.blade.php -->
-@extends('layout')
+@extends('donation.layout')
 
 @section('content')
 <div class="container">

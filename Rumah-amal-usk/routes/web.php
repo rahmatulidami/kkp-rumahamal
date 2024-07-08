@@ -22,7 +22,7 @@ Route::get('/donate', [DonationController::class, 'index']);
 Route::post('/donate', [DonationController::class, 'store']);
 
 Route::get('/success', function () {
-    return view('success');
+    return view('donation/success');
 });
 
 Route::get('/failure', function () {
