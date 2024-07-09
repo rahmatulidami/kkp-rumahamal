@@ -11,14 +11,11 @@
                     @csrf
                     <input type="hidden" id="selected_payment_method" name="payment_method">
                     <div class="mb-3">
-                        <label for="pre-amount" class="form-label">Jumlah Donasi</label>
+                        <label for="amount" class="form-label">Jumlah Donasi</label>
                         <div class="input-group">
                             <span class="input-group-text">Rp.</span>
-                            <input type="number" class="form-control" id="pre-amount" name="pre-amount" placeholder="Jumlah donasi yang ingin didonasikan" required>
+                            <input type="number" class="form-control" id="amount" name="amount" placeholder="Jumlah donasi yang ingin didonasikan" required>
                         </div>
-                    </div>
-                    <div class="mb-3">
-                        <input type="number" class="form-control" style="display: none;" id="amount" name="amount" placeholder="Jumlah donasi yang ingin didonasikan" required>
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama Lengkap</label>
@@ -66,7 +63,7 @@
                         </label>
                     </div>
                     <div class="payment-category d-none" data-category="ewallet">
-                        @foreach(['GoPay', 'Dana', 'OVO'] as $method)
+                        @foreach(['GOPAY', 'DANA', 'OVO'] as $method)
                         <label class="list-group-item d-flex justify-content-between align-items-center payment-method">
                             <div class="payment-label"><span>{{ $method }}</span></div>
                             <img src="assets/img/{{ strtolower($method) }}-logo.png" alt="{{ $method }}" class="img-fluid" width="50">
@@ -75,7 +72,7 @@
                         @endforeach
                     </div>
                     <div class="payment-category d-none" data-category="convenience-store">
-                        @foreach(['Alfamart', 'Indomaret'] as $method)
+                        @foreach(['ALFAMART', 'INDOMARET'] as $method)
                         <label class="list-group-item d-flex justify-content-between align-items-center payment-method">
                             <div class="payment-label"><span>{{ $method }}</span></div>
                             <img src="assets/img/{{ strtolower($method) }}-logo.png" alt="{{ $method }}" class="img-fluid" width="50">
@@ -105,23 +102,23 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const paymentCategories = document.querySelectorAll('#payment-categories .list-group-item');
     const paymentMethods = document.querySelectorAll('.payment-method');
     const paymentDetails = document.getElementById('payment-details');
-    const amountInput = document.getElementById('pre-amount');
+    const amountInput = document.getElementById('amount');
     const paymentCategoryDivs = document.querySelectorAll('.payment-category');
     const selectedPaymentMethodInput = document.getElementById('selected_payment_method');
     const pricing = {
-        QRIS: 0.007,
-        GoPay: 0.02,
-        Dana: 0.015,
-        OVO: 0.02,
-        Alfamart: 0.01,
-        Indomaret: 0.01,
-        BSI: 0.0025,
-        BNI: 0.0025,
-        MANDIRI: 0.0025
+        QRIS: { fee: 0.007, fixed: false },
+        GOPAY: { fee: 0.02, fixed: false },
+        DANA: { fee: 0.015, fixed: false },
+        OVO: { fee: 0.02, fixed: false },
+        ALFAMART: { fee: 5000, fixed: true },
+        INDOMARET: { fee: 7000, fixed: true },
+        BSI: { fee: 4000, fixed: true },
+        BNI: { fee: 4000, fixed: true },
+        MANDIRI: { fee: 4000, fixed: true }
     };
     const anonymousCheckbox = document.getElementById('anonymous');
     if (anonymousCheckbox) {
@@ -151,18 +148,28 @@
     });
 
     const updatePricingDetails = (methodName) => {
-        const feePercentage = pricing[methodName];
+        const feeConfig = pricing[methodName];
         const amount = parseFloat(amountInput.value) || 0;
-        const fee = amount * feePercentage;
-        const total = amount + fee;
+        let fee, vat, total;
+
+        if (feeConfig.fixed) {
+            fee = feeConfig.fee;
+            vat = 0.11 * fee;
+            total = amount + fee + vat;
+        } else {
+            fee = amount * feeConfig.fee;
+            vat = 0.11 * fee;
+            total = amount + fee + vat;
+        }
+
         const detailsDiv = paymentDetails.querySelector(`.payment-details-${methodName}`);
         if (detailsDiv) {
             detailsDiv.innerHTML = `
                 <p>Biaya Transaksi: Rp${fee.toFixed(2)}</p>
+                <p>VAT: Rp${vat.toFixed(2)}</p>
                 <p>Total Pembayaran: Rp${total.toFixed(2)}</p>
             `;
         }
-        document.getElementById('amount').value = total;
     };
 
     paymentMethods.forEach(method => {
@@ -194,6 +201,7 @@
         }
     });
 });
+
 
 </script>
 

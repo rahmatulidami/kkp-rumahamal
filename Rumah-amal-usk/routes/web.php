@@ -29,6 +29,9 @@ Route::get('/failure', function () {
     return view('failure');
 });
 
+Route::post('/xendit-callback', [DonationController::class, 'handleCallback']);
+
+
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 });
@@ -41,4 +44,3 @@ Route::get('/berita', function () {
 Route::get('/detail-berita', function () {
     return view('berita/detail-berita');
 });
-

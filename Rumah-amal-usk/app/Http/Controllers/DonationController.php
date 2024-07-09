@@ -24,10 +24,36 @@ class DonationController extends Controller
 
         $name = $request->input('name') ?: 'Hamba Allah';
 
+        $pricing = [
+            'QRIS' => ['fee' => 0.007, 'fixed' => false],
+            'GOPAY' => ['fee' => 0.02, 'fixed' => false],
+            'DANA' => ['fee' => 0.015, 'fixed' => false],
+            'OVO' => ['fee' => 0.02, 'fixed' => false],
+            'ALFAMART' => ['fee' => 5000, 'fixed' => true],
+            'INDOMARET' => ['fee' => 7000, 'fixed' => true],
+            'BSI' => ['fee' => 4000, 'fixed' => true],
+            'BNI' => ['fee' => 4000, 'fixed' => true],
+            'MANDIRI' => ['fee' => 4000, 'fixed' => true],
+        ];
+
+        $paymentMethod = $request->input('payment_method');
+        $amount = $request->input('amount');
+        $feeConfig = $pricing[$paymentMethod];
+
+        if ($feeConfig['fixed']) {
+            $fee = $feeConfig['fee'];
+            $vat = 0.11 * $fee;
+            $totalAmount = $amount + $fee + $vat;
+        } else {
+            $fee = $amount * $feeConfig['fee'];
+            $vat = 0.11 * $fee;
+            $totalAmount = $amount + $fee + $vat;
+        }
+
         $donation = new Donation();
         $donation->name = $name;
         $donation->email = $request->email;
-        $donation->amount = $request->amount;
+        $donation->amount = $totalAmount;
         $donation->payment_method = $request->payment_method;
         $donation->save();
 
