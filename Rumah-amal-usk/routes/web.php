@@ -33,3 +33,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 });
 
+
+Route::get('/berita', function () {
+    return view('berita/berita');
+});
+
+Route::get('/detail-berita', function () {
+    return view('berita/detail-berita');
+});
+

@@ -37,17 +37,17 @@
         <a href="index.html" class="logo d-flex align-items-center">
           <img src="assets/img/logorumah.png" alt="">
           <!-- <h1 class="sitename">RumahAmal</h1> -->
-          <span>.</span>
+          <!-- <span>.</span> -->
         </a>
 
         <nav id="navmenu" class="navmenu">
           <ul>
             <li><a href="#hero" class="active">Beranda<br></a></li>
-            <li><a href="#about">Campaign</a></li>
-            <li><a href="#services">Profil</a></li>
-            <li><a href="#portfolio">Berita</a></li>
-            <li><a href="#team">Program</a></li>
-            <li><a href="#blog">Galeri</a></li>
+            <li><a href="#campaign-unggulan">Campaign</a></li>
+            <li><a href="#about">Profil</a></li>
+            <li><a href="#recent-posts">Berita</a></li>
+            <li><a href="#program">Program</a></li>
+            <li><a href="#">Galeri</a></li>
             <li><a href="#">Dokumen</a></li>
             <li class="language-switcher">
               <a href="?lang=id" class="language-link">

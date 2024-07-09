@@ -186,37 +186,25 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>PROFIL<br></h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
       <div class="container">
 
         <div class="row gy-4">
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <h3>Voluptatem dignissimos provident laboris nisi ut aliquip ex ea commodo</h3>
-            <img src="assets/img/about.jpg" class="img-fluid rounded-4 mb-4" alt="">
-            <p>Ut fugiat ut sunt quia veniam. Voluptate perferendis perspiciatis quod nisi et. Placeat debitis quia recusandae odit et consequatur voluptatem. Dignissimos pariatur consectetur fugiat voluptas ea.</p>
-            <p>Temporibus nihil enim deserunt sed ea. Provident sit expedita aut cupiditate nihil vitae quo officia vel. Blanditiis eligendi possimus et in cum. Quidem eos ut sint rem veniam qui. Ut ut repellendus nobis tempore doloribus debitis explicabo similique sit. Accusantium sed ut omnis beatae neque deleniti repellendus.</p>
+            <img src="assets/img/profil/usk.png" class="img-fluid rounded-4 mb-4" alt="">
+            <img src="assets/img/profil/mesjid-jamik.png" class="img-fluid rounded-4 mb-4" alt="">
           </div>
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
             <div class="content ps-0 ps-lg-5">
-              <p class="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua.
-              </p>
-              <ul>
-                <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-                <li><i class="bi bi-check-circle-fill"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-                <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
-              </ul>
+              <h3>RUMAH AMAL MASJID JAMIK USK</h2>
               <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
+              Kami menyediakan sistem dan layanan yang memudahkan para muzakki atau donatur dalam menunaikan zakat, infaq, shadaqah, maupun wakaf dengan sebaik-baiknya. Menjadikan masjid sebagai pusat pemberdayaan ekonomi umat, Mendayagunakan dana zakat, infaq shadaqah maupun wakaf melalui program-program yang terasa manfaatnya, Mengangkat martabat mustahik, dan membahagiakan muzakki dan donatur.
               </p>
+              <a href="">Selengkapnya</a>
 
               <div class="position-relative mt-4">
-                <img src="assets/img/about-2.jpg" class="img-fluid rounded-4" alt="">
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox pulsating-play-btn"></a>
+                <img src="assets/img/profil/rek-rumahamal.png" class="img-fluid rounded-4" alt="">
               </div>
             </div>
           </div>
@@ -248,7 +236,7 @@
         <p class="post-category">Politics</p>
 
         <h2 class="title">
-          <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos</a>
+          <a href="/detail-berita">Dolorum optio tempore voluptas dignissimos</a>
         </h2>
 
         <div class="d-flex align-items-center">
@@ -314,8 +302,9 @@
         </div>
 
       </article>
+      
     </div><!-- End post list item -->
-
+    <a class="btn-btn-primary" href="/berita" role="button">Selengkapnya</a>
   </div><!-- End recent posts list -->
 
 </div>
@@ -323,7 +312,7 @@
 </section><!-- /Recent Posts Section -->
 
 <!-- Portfolio Section -->
-<section id="portfolio" class="portfolio section">
+<section id="program" class="program section">
 
 <!-- Section Title -->
 <div class="container section-title" data-aos="fade-up">
@@ -335,135 +324,35 @@
 
   <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
-    <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+    <ul class="program-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
       <li data-filter="*" class="filter-active">All</li>
       <li data-filter=".filter-app">App</li>
       <li data-filter=".filter-product">Product</li>
       <li data-filter=".filter-branding">Branding</li>
       <li data-filter=".filter-books">Books</li>
-    </ul> <!-- End Portfolio Filters -->
+    </ul> <!-- End program Filters -->
 
     <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">App 1</a></h4>
+      <div class="col-lg-4 col-md-6 program-item isotope-item filter-app">
+        <div class="program-content h-100">
+          <a href="assets/img/portfolio/app-1.jpg" data-gallery="program-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+          <div class="program-info">
+            <h4><a href="program-details.html" title="More Details">App 1</a></h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
           </div>
         </div>
-      </div><!-- End Portfolio Item -->
+      </div><!-- End program Item -->
 
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/product-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Product 1</a></h4>
+      <div class="col-lg-4 col-md-6 program-item isotope-item filter-product">
+        <div class="program-content h-100">
+          <a href="assets/img/portfolio/product-1.jpg" data-gallery="program-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
+          <div class="program-info">
+            <h4><a href="program-details.html" title="More Details">Product 1</a></h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
           </div>
         </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/branding-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Branding 1</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/books-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Books 1</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/app-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-2.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">App 2</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/product-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Product 2</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/branding-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-2.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Branding 2</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/books-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-2.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Books 2</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/app-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-3.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">App 3</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/product-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-3.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Product 3</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/branding-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-3.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Branding 3</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
-
-      <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-        <div class="portfolio-content h-100">
-          <a href="assets/img/portfolio/books-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-3.jpg" class="img-fluid" alt=""></a>
-          <div class="portfolio-info">
-            <h4><a href="portfolio-details.html" title="More Details">Books 3</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
-        </div>
-      </div><!-- End Portfolio Item -->
+      </div><!-- End program Item -->
 
     </div><!-- End Portfolio Container -->
 
