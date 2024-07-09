@@ -699,9 +699,9 @@ h6 {
 
 .footer .copyright {
     background-color: #f3f3f3;
-    color: #005621;
-    width: 100%;
+    color: #45474B;
     margin-top: 2rem;
+    font-size: 16px;
     padding-top: 1rem;
     padding-bottom: 1rem;
     border-top: 1px solid #ccc;

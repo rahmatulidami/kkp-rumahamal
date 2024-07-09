@@ -24,3 +24,7 @@ Route::get('/berita', function () {
 Route::get('/detail-berita', function () {
     return view('berita/detail-berita');
 });
+
+Route::get('/admin', function () {
+    return view('admin/index');
+});

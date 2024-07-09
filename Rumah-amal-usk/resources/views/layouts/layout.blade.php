@@ -79,7 +79,6 @@
     <div class="container footer-top">
         <div class="row gy-4">
             <div class="col-lg-5 col-md-12 footer-about">
-                
                 <a href="#" class="logo d-flex align-items-center">
                     <div class="img">
                         <img src="assets/img/logorumah.png" alt="">
@@ -87,11 +86,17 @@
                 </a>
                 <p>Lantai 1 Masjid Jamik USK <br> T. Nyak Arief, Kopelma Darussalam, Banda Aceh 21311</p>
                 <p class="mt-4"><strong>Phone:</strong> <span>0853 7377 4393 / 0853 7234 5133</span></p>
-                <p><strong>Email:</strong> <span>rumahamal@usk.ac.id/span></p>
+                <p><strong>Email:</strong> <span>rumahamal@usk.ac.id</span></p>
                 <div class="social-links d-flex mt-4">
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
                 </div>
+            </div>
+
+            <div class="col-lg-2 col-6 footer-links">
+                <p><strong>Jam Operasional:</strong></p>
+                <p class="mt-4"><i class="bi bi-clock"></i> <span>Mon - Fri: 8AM - 5PM</span></p>
+                <p><i class="bi bi-clock"></i> <span>Sat - Sun: Closed</span></p>
             </div>
 
             <div class="col-lg-2 col-6 footer-links">
@@ -109,7 +114,7 @@
         </div>
     </div>
 
-    <div class="container copyright text-center mt-4">
+    <div class="copyright text-center mt-4">
         <p>© <span>Copyright</span> <strong class="px-1 sitename">Rumah Amal USK</strong> <span>All Rights Reserved</span></p>
     </div>
 </footer>
