@@ -1085,8 +1085,11 @@ section,
     padding-bottom: 56.25%; /* 16:9 aspect ratio */
     height: 0;
     overflow: hidden;
+    border-radius: 10px;
     max-width: 100%;
-    background: #000;
+    background-color: white; 
+    border: solid 3px rgba(0, 86, 33, 0.1); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .video-container iframe {
