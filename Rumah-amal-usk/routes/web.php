@@ -18,9 +18,9 @@ Route::get('/', function () {
 });
 
 Route::get('/berita', function () {
-    return view('landing/berita');
+    return view('berita/berita');
 });
 
 Route::get('/detail-berita', function () {
-    return view('landing/detail-berita');
+    return view('berita/detail-berita');
 });
