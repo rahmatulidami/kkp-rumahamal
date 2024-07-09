@@ -37,7 +37,7 @@
         <a href="index.html" class="logo d-flex align-items-center">
           <img src="assets/img/logorumah.png" alt="">
           <!-- <h1 class="sitename">RumahAmal</h1> -->
-          <span>.</span>
+          <!-- <span>.</span> -->
         </a>
 
         <nav id="navmenu" class="navmenu">
