@@ -1385,6 +1385,55 @@ section,
     margin-bottom: 0;
 }
 
+
+/*--------------------------------------------------------------
+# Profil Section
+--------------------------------------------------------------*/
+.about h3 {
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  
+  .about .fst-italic {
+    color: color-mix(in srgb, var(--default-color), var(--contrast-color) 50%);
+  }
+  
+  .about .content ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .about .content ul li {
+    padding: 0 0 10px 30px;
+    position: relative;
+  }
+  
+  .about .content ul i {
+    position: absolute;
+    font-size: 20px;
+    left: 0;
+    top: -3px;
+    color: var(--accent-color);
+  }
+  
+  .about .content p {
+    text-align: justify;
+  }
+
+  .about .content p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .about .content .position-relative img {
+    position: relative;
+    padding: 16px;
+    background-color: white; 
+    border: solid 2px rgba(0, 86, 33, 0.1); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+
 /*--------------------------------------------------------------
 # Portfolio Details Section
 --------------------------------------------------------------*/
