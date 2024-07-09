@@ -799,8 +799,8 @@ h6 {
 # Global Page Titles & Breadcrumbs
 --------------------------------------------------------------*/
 .page-title {
-    --background-color: var(--accent-color);
-    --default-color: #fff;
+    --background-color: #FFF;
+    --default-color: #45474B;
     --heading-color: #fff;
     color: var(--default-color);
     background-color: var(--background-color);
@@ -808,19 +808,21 @@ h6 {
 }
 
 .page-title .heading {
-    padding: 160px 0 80px 0;
+    padding: 100px 0 40px 0;
     border-top: 1px solid
-        color-mix(in srgb, var(--default-color), transparent 90%);
+        color-mix(in srgb, #45474B, transparent 90%);
 }
 
 .page-title .heading h1 {
     font-size: 38px;
+    color: #45474B;
     font-weight: 700;
 }
 
 .page-title nav {
     background-color: color-mix(in srgb, var(--default-color), transparent 92%);
     padding: 20px 0;
+    color: #45474B;
 }
 
 .page-title nav ol {

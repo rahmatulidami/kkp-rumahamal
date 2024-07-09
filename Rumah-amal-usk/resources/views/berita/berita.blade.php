@@ -27,13 +27,6 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Impact
-  * Template URL: https://bootstrapmade.com/impact-bootstrap-business-website-template/
-  * Updated: Jun 29 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body class="blog-page">
@@ -42,7 +35,7 @@
     <div class="branding d-flex align-items-cente">
 
       <div class="container position-relative d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a href="/" class="logo d-flex align-items-center">
           <img src="assets/img/logorumah.png" alt="">
           <!-- <h1 class="sitename">RumahAmal</h1> -->
           <span>.</span>
@@ -50,12 +43,12 @@
 
         <nav id="navmenu" class="navmenu">
           <ul>
-            <li><a href="#hero" class="active">Beranda<br></a></li>
-            <li><a href="#about">Campaign</a></li>
-            <li><a href="#services">Profil</a></li>
-            <li><a href="#portfolio">Berita</a></li>
-            <li><a href="#team">Program</a></li>
-            <li><a href="#blog">Galeri</a></li>
+            <li><a href="#hero">Beranda<br></a></li>
+            <li><a href="#campaign-unggulan">Campaign</a></li>
+            <li><a href="#about">Profil</a></li>
+            <li><a href="#recent-posts" class="active" >Berita</a></li>
+            <li><a href="#program">Program</a></li>
+            <li><a href="#">Galeri</a></li>
             <li><a href="#">Dokumen</a></li>
             <li class="language-switcher">
               <a href="?lang=id" class="language-link">
@@ -89,8 +82,7 @@
         <div class="container">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
-              <h1>Blog</h1>
-              <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
+              <h1>BERITA</h1>
             </div>
           </div>
         </div>
@@ -121,7 +113,7 @@
               <p class="post-category">Politics</p>
 
               <h2 class="title">
-                <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos</a>
+                <a href="/detail-berita">Dolorum optio tempore voluptas dignissimos</a>
               </h2>
 
               <div class="d-flex align-items-center">
