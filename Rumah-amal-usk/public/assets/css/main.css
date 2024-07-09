@@ -711,9 +711,16 @@ h6 {
     margin-bottom: 0;
 }
 
-.footer .credits {
-    margin-top: 4px;
-    font-size: 13px;
+.footer .footer-links .jadwal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.footer iframe{
+    border-radius: 20px;
 }
 
 /*--------------------------------------------------------------
