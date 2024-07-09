@@ -9,8 +9,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/LOGO.jpeg" rel="icon">
-  <link href="assets/img/LOGO.jpeg" rel="apple-touch-icon">
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/favicon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -85,7 +85,7 @@
                     </div>
                 </a>
                 <p>Lantai 1 Masjid Jamik USK <br> T. Nyak Arief, Kopelma Darussalam, Banda Aceh 21311</p>
-                <p class="mt-4"><strong>Phone:</strong> <span>0853 7377 4393 / 0853 7234 5133</span></p>
+                <p class="mt-4"><strong>Phone:</strong> <span><a href=""></a>0853 7377 4393 / 0853 7234 5133</span></p>
                 <p><strong>Email:</strong> <span>rumahamal@usk.ac.id</span></p>
                 <div class="social-links d-flex mt-4">
                     <a href="https://www.facebook.com/rumahamalusk/"><i class="bi bi-facebook"></i></a>
@@ -103,7 +103,6 @@
             </div>
 
             <div class="col-lg-4 col-md-6 footer-links location-container">
-                <h4>Our Location</h4>
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.062950078828!2d95.3687264!3d5.5709969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304037d79398cc65%3A0x164fb653d9c4a1f7!2sRumah%20Amal%20Masjid%20Jamik%20USK!5e0!3m2!1sen!2sid!4v1688584573276!5m2!1sen!2sid"
                     width="400px"
