@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title', 'Detail Berita')
+@section('title', 'Detail Pengumuman')
 
 @section('content')
 
@@ -14,8 +14,8 @@
         <div class="container">
           <ol>
             <li><a href="/">Home</a></li>
-            <li><a href="/berita">Berita</a></li>
-            <li class="current">Berita Detail</li>
+            <li><a href="/pengumuman">Pengumuman</a></li>
+            <li class="current">Berita Pengumuman</li>
           </ol>
         </div>
       </nav>

@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title', 'Berita')
+@section('title', 'Pengumuman')
 
 @section('content')
 
@@ -12,7 +12,7 @@
         <div class="container">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
-              <h1>BERITA</h1>
+              <h1>PENGUMUMAN</h1>
             </div>
           </div>
         </div>
@@ -21,7 +21,7 @@
         <div class="container">
           <ol>
             <li><a href="/">Home</a></li>
-            <li class="current">Berita</li>
+            <li class="current">Pengumuman</li>
           </ol>
         </div>
       </nav>
@@ -43,7 +43,7 @@
               <p class="post-category">Politics</p>
 
               <h2 class="title">
-                <a href="/detail-berita">Dolorum optio tempore voluptas dignissimos</a>
+                <a href="/detail-pengumuman">Dolorum optio tempore voluptas dignissimos</a>
               </h2>
 
               <div class="d-flex align-items-center">
@@ -69,7 +69,7 @@
               <p class="post-category">Sports</p>
 
               <h2 class="title">
-                <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
+                <a href="/detail-pengumuman">Nisi magni odit consequatur autem nulla dolorem</a>
               </h2>
 
               <div class="d-flex align-items-center">

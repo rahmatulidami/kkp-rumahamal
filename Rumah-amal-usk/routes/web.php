@@ -48,3 +48,15 @@ Route::get('/detail-berita', function () {
 Route::get('/admin', function () {
     return view('admin/index');
 });
+
+Route::get('/pengumuman', function () {
+    return view('pengumuman/pengumuman');
+});
+
+Route::get('/detail-pengumuman', function () {
+    return view('pengumuman/detail-pengumuman');
+});
+
+Route::get('/galeri', function () {
+    return view('galeri/galeri');
+});

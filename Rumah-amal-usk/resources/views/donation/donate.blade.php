@@ -1,4 +1,4 @@
-@extends('donation.layout')
+@extends('layouts.layout')
 
 @section('title', 'Donasi')
 
