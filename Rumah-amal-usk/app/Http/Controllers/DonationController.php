@@ -26,11 +26,11 @@ class DonationController extends Controller
 
         $pricing = [
             'QRIS' => ['fee' => 0.007, 'fixed' => false],
-            'GOPAY' => ['fee' => 0.02, 'fixed' => false],
-            'DANA' => ['fee' => 0.015, 'fixed' => false],
+            'GoPay' => ['fee' => 0.02, 'fixed' => false],
+            'Dana' => ['fee' => 0.015, 'fixed' => false],
             'OVO' => ['fee' => 0.02, 'fixed' => false],
-            'ALFAMART' => ['fee' => 5000, 'fixed' => true],
-            'INDOMARET' => ['fee' => 7000, 'fixed' => true],
+            'Alfamart' => ['fee' => 5000, 'fixed' => true],
+            'Indomaret' => ['fee' => 5000, 'fixed' => true],
             'BSI' => ['fee' => 4000, 'fixed' => true],
             'BNI' => ['fee' => 4000, 'fixed' => true],
             'MANDIRI' => ['fee' => 4000, 'fixed' => true],
@@ -50,34 +50,66 @@ class DonationController extends Controller
             $totalAmount = $amount + $fee + $vat;
         }
 
-        $donation = new Donation();
-        $donation->name = $name;
-        $donation->email = $request->email;
-        $donation->amount = $totalAmount;
-        $donation->payment_method = $request->payment_method;
-        $donation->save();
-
         Configuration::setXenditKey(env('XENDIT_SECRET_KEY'));
 
         $apiInstance = new InvoiceApi();
         $create_invoice_request = new CreateInvoiceRequest([
-            'external_id' => 'donation_' . $donation->id,
-            'description' => 'Donation from ' . $donation->name,
-            'amount' => $donation->amount,
+            'external_id' => 'donation_' . uniqid(),
+            'description' => 'Donation from ' . $name,
+            'amount' => $totalAmount,
             'invoice_duration' => 86400, // 1 hari
             'currency' => 'IDR',
-            'payer_email' => $donation->email,
+            'payer_email' => $request->email,
             'should_send_email' => true,
-            'payment_methods' => [$donation->payment_method],
+            'payment_methods' => [$paymentMethod],
             'success_redirect_url' => url('/success'),
             'failure_redirect_url' => url('/failure'),
         ]);
 
         try {
             $result = $apiInstance->createInvoice($create_invoice_request);
+
+            // Create a temporary record in session
+            session(['donation_data' => [
+                'name' => $name,
+                'email' => $request->email,
+                'amount' => $amount, // Store the original amount
+                'payment_method' => $paymentMethod,
+                'invoice_id' => $result['id'] // Store the Xendit invoice ID for reference
+            ]]);
+
             return redirect($result['invoice_url']);
         } catch (\Xendit\XenditSdkException $e) {
             return back()->withErrors('Error creating invoice: ' . $e->getMessage());
         }
+    }
+
+    public function handleXenditCallback(Request $request)
+    {
+        $data = $request->all();
+
+        // Verify the callback is from Xendit
+        // You can use Xendit's SDK to verify the callback
+        // For simplicity, let's assume it's a valid callback
+
+        if (isset($data['status']) && $data['status'] == 'PAID') {
+            $donationData = session('donation_data');
+
+            if ($donationData && $donationData['invoice_id'] == $data['id']) {
+                // Save donation to the database
+                $donation = new Donation();
+                $donation->name = $donationData['name'];
+                $donation->email = $donationData['email'];
+                $donation->amount = $donationData['amount']; // Save the original amount
+                $donation->payment_method = $donationData['payment_method'];
+                $donation->invoice_id = $donationData['invoice_id']; // Save the Xendit invoice ID for reference
+                $donation->save();
+
+                // Clear session data
+                session()->forget('donation_data');
+            }
+        }
+
+        return response()->json(['message' => 'Callback received']);
     }
 }
