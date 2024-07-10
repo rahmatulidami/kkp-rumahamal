@@ -44,13 +44,13 @@
           <ul>
             <li><a href="/" class="active">Beranda<br></a></li>
             <li><a href="{{ url('/') }}#about">Profil</a></li>
-            <li class="dropdown"><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i>
+            <li class="dropdown"><a href=""><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
                 <li><a href="{{ url('/') }}#program">Program</a></li>
                 <li><a href="{{ url('/') }}#campaign-unggulan">Campaign</a></li>
               </ul>
             </li>
-            <li class="dropdown"><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i>
+            <li class="dropdown"><a href=""><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
                 <li><a href="{{ url('/') }}#recent-posts">Berita</a></li>
                 <li><a href="{{ url('/') }}/pengumuman">Pengumuman</a></li>
