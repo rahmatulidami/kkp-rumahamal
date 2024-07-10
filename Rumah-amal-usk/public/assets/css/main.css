@@ -1324,6 +1324,79 @@ section,
     color: #6c757d;
     margin-top: 5px;
   }
+
+/*--------------------------------------------------------------
+# Pengumuman Section
+--------------------------------------------------------------*/
+.pengumuman article {
+    background: var(--surface-color);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.pengumuman .post-img {
+    max-height: 240px;
+    margin: -30px -30px 15px -30px;
+    overflow: hidden;
+}
+
+.pengumuman .post-category {
+    font-size: 16px;
+    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    margin-bottom: 10px;
+}
+
+.pengumuman .title {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.pengumuman .title a {
+    color: var(--heading-color);
+    transition: 0.3s;
+}
+
+.pengumuman .title a:hover {
+    color: var(--accent-color);
+}
+
+.pengumuman .post-author-img {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.pengumuman .post-author {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.pengumuman .post-date {
+    font-size: 14px;
+    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    margin-bottom: 0;
+}
+
+.pengumuman .btn-btn-primary{
+    color: #f2f9f9;
+    background: #1D7E05;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 5px 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
   
 /*--------------------------------------------------------------
 # Recent Posts Section
@@ -1382,6 +1455,21 @@ section,
     margin-bottom: 0;
 }
 
+.recent-posts .btn-btn-primary{
+    color: #f2f9f9;
+    background: #1D7E05;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 5px 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
 
 /*--------------------------------------------------------------
 # Profil Section
@@ -1663,21 +1751,7 @@ section,
     margin-bottom: 0;
 }
 
-.recent-posts .btn-btn-primary{
-    color: #f2f9f9;
-    background: #1D7E05;
-    font-family: var(--heading-font);
-    font-weight: 700;
-    margin-top: 20px;
-    font-size: 14px;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 1px;
-    display: flex;
-    padding: 5px 15px;
-    border-radius: 10px;
-    transition: 0.3s;
-}
+
 /*--------------------------------------------------------------
 # Blog Pagination Section
 --------------------------------------------------------------*/

@@ -53,7 +53,7 @@
             <li class="dropdown"><a href=""><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
                 <li><a href="{{ url('/') }}#recent-posts">Berita</a></li>
-                <li><a href="{{ url('/') }}/pengumuman">Pengumuman</a></li>
+                <li><a href="{{ url('/') }}#pengumuman">Pengumuman</a></li>
                 <li><a href="{{ url('/') }}#">Dokumen</a></li>
               </ul>
             </li>
