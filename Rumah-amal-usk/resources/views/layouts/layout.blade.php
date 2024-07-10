@@ -9,8 +9,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/LOGO.jpeg" rel="icon">
-  <link href="assets/img/LOGO.jpeg" rel="apple-touch-icon">
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/favicon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -78,27 +78,34 @@
   <footer id="footer" class="footer accent-background">
     <div class="container footer-top">
         <div class="row gy-4">
-            <div class="col-lg-5 col-md-12 footer-about">
-                
+            <div class="col-lg-4 col-md-12 footer-about">
                 <a href="#" class="logo d-flex align-items-center">
                     <div class="img">
                         <img src="assets/img/logorumah.png" alt="">
                     </div>
                 </a>
                 <p>Lantai 1 Masjid Jamik USK <br> T. Nyak Arief, Kopelma Darussalam, Banda Aceh 21311</p>
-                <p class="mt-4"><strong>Phone:</strong> <span>0853 7377 4393 / 0853 7234 5133</span></p>
-                <p><strong>Email:</strong> <span>rumahamal@usk.ac.id/span></p>
+                <p class="mt-4"><strong>Phone:</strong> <span><a href=""></a>0853 7377 4393 / 0853 7234 5133</span></p>
+                <p><strong>Email:</strong> <span>rumahamal@usk.ac.id</span></p>
                 <div class="social-links d-flex mt-4">
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.facebook.com/rumahamalusk/"><i class="bi bi-facebook"></i></a>
+                    <a href="https://www.tiktok.com/@rumahamal.usk"><i class="bi bi-tiktok"></i></i></a>
+                    <a href="https://www.instagram.com/rumahamal.usk/"><i class="bi bi-instagram"></i></a>
                 </div>
             </div>
 
-            <div class="col-lg-2 col-6 footer-links">
-                <h4>Our Location</h4>
+            <div class="col-lg-4 col-md-6 footer-links">
+              <div class="jadwal">
+                <p><strong>Jam Operasional:</strong></p>
+                <p class="mt-4"><i class="bi bi-clock"></i> <span>Mon - Fri: 8AM - 5PM</span></p>
+                <p><i class="bi bi-clock"></i> <span>Sat - Sun: Closed</span></p>
+              </div>  
+            </div>
+
+            <div class="col-lg-4 col-md-6 footer-links location-container">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.062950078828!2d95.3687264!3d5.5709969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304037d79398cc65%3A0x164fb653d9c4a1f7!2sRumah%20Amal%20Masjid%20Jamik%20USK!5e0!3m2!1sen!2sid!4v1688584573276!5m2!1sen!2sid"
-                    width="300px"
+                    width="400px"
                     height="300px"
                     style="border:0; border-radius: 15px;"
                     allowfullscreen=""
@@ -109,7 +116,7 @@
         </div>
     </div>
 
-    <div class="container copyright text-center mt-4">
+    <div class="copyright text-center mt-4">
         <p>© <span>Copyright</span> <strong class="px-1 sitename">Rumah Amal USK</strong> <span>All Rights Reserved</span></p>
     </div>
 </footer>

@@ -5,82 +5,91 @@
 @section('content')
   <main class="main">
 
-    <!-- Hero Section -->
-<section id="hero" class="hero section accent-background">
-    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="assets/img/about.jpg" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h2><span>Welcome to </span><span class="accent">Rumah Amal USK</span></h2>
-                        <p>Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
-                        <a href="#about" class="btn-get-started">Selengkapnya</a>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="assets/img/about-2.jpg" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h2><span>Welcome to </span><span class="accent">Rumah Amal USK</span></h2>
-                        <p>Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
-                        <a href="#about" class="btn-get-started">Selengkapnya</a>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="assets/img/about.jpg" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h2><span>Welcome to </span><span class="accent">Rumah Amal USK</span></h2>
-                        <p>Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
-                        <a href="#about" class="btn-get-started">Selengkapnya</a>
-                    </div>
-                </div>
+<!-- Hero Section -->
+<section id="hero">
+    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+      <div class="carousel-inner" role="listbox">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active" style="background-image: url(assets/img/about-2.jpg)">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Rumah Amal USK</span></h2>
+              <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-
-      <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
-          <div class="container position-relative">
-              <div class="row gy-4 mt-5">
-
-                  <div class="col-xl-4 col-md-6">
-                      <div class="icon-box">
-                          <h4 class="title"><a href="" class="stretched-link">Infak</a></h4>
-                          <p>Bersyukur atas rizki, berbagi kebahagian dengan sesama muslim.</p>
-                          <a class="btn-btn-primary" href="#" role="button">Infak</a>
-                      </div>
-                  </div><!--End Icon Box -->
-
-                  <div class="col-xl-4 col-md-6">
-                      <div class="icon-box">
-                          <h4 class="title"><a href="" class="stretched-link">Zakat</a></h4>
-                          <p>Menyempurnakan rukun islam, mensucikan harta dan mententramkan jiwa.</p>
-                          <a class="btn-btn-primary" href="#" role="button">Zakat</a>
-                      </div>
-                  </div><!--End Icon Box -->
-
-                  <div class="col-xl-4 col-md-6">
-                      <div class="icon-box">
-                          <h4 class="title"><a href="" class="stretched-link">Program</a></h4>
-                          <p>Rumah amal masjid jamik Universitas Syiah Kuala menyediakan bebarapa program donasi </p>
-                          <a class="btn-btn-primary" href="#" role="button">Program</a>
-                      </div>
-                  </div><!--End Icon Box -->
-
-              </div>
           </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item" style="background-image: url(assets/img/about.jpg)">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
+              <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item" style="background-image: url(assets/img/about.jpg)">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
+              <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-    </div>
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+      </a>
 
-</section><!-- /Hero Section -->
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+      </a>
+
+    </div>
+  </section>
+ <!-- End Hero Section -->
+  
+<section id="icon-boxed" class="icon-boxes">
+  <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
+    <div class="container position-relative">
+      <div class="row gy-4 mt-5">
+        <div class="col-xl-4 col-md-6">
+          <div class="icon-box">
+            <h4 class="title"><a href="#" class="stretched-link">Infak</a></h4>
+            <p>Bersyukur atas rizki, berbagi kebahagian dengan sesama muslim.</p>
+            <a class="btn-btn-primary" href="#" role="button">Infak</a>
+          </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+          <div class="icon-box">
+            <h4 class="title"><a href="#" class="stretched-link">Zakat</a></h4>
+            <p>Menyempurnakan rukun islam, mensucikan harta dan mententramkan jiwa.</p>
+            <a class="btn-btn-primary" href="#" role="button">Zakat</a>
+          </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+          <div class="icon-box">
+            <h4 class="title"><a href="#" class="stretched-link">Program</a></h4>
+            <p>Rumah amal masjid jamik USK menyediakan beberapa program donasi.</p>
+            <a class="btn-btn-primary" href="#" role="button">Program</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- Portfolio Section -->
 <section id="campaign-unggulan" class="campaign-unggulan section">
@@ -366,18 +375,18 @@
 <section id="call-to-action" class="call-to-action section dark-background">
 
 <div class="container">
-  <img src="assets/img/cta-bg.jpg" alt="">
   <div class="content row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
     <div class="col-xl-10">
       <div class="text-center">
-        <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
-        <h3>Call To Action</h3>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <a class="cta-btn" href="#">Call To Action</a>
+        <div class="video-container">
+          <iframe id="youtube-video" src="https://www.youtube.com/embed/C1Asqu3uHxs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+
 
 </section><!-- /Call To Action Section -->
 
