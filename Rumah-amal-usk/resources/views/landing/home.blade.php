@@ -113,7 +113,21 @@
           <a href="assets/img/portfolio/product-1.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Product 1</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
+            <div class="progress-container">
+              <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar w-75"></div>
+              </div>
+              <div class="progress-info">
+                <div class="progress-start">
+                  <span>Terkumpul</span>
+                  <div class="amount">Rp. 100.000</div>
+                </div>
+                <div class="progress-end">
+                  <span>Donasi</span>
+                  <div class="days-left">Sisa 3 hari</div>
+                </div>
+              </div>
+            </div>
             <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
         </div>
@@ -124,7 +138,21 @@
           <a href="assets/img/portfolio/branding-1.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt=""></a>
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Branding 1</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
+            <div class="progress-container">
+              <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar w-75"></div>
+              </div>
+              <div class="progress-info">
+                <div class="progress-start">
+                  <span>Terkumpul</span>
+                  <div class="amount">Rp. 100.000</div>
+                </div>
+                <div class="progress-end">
+                  <span>Donasi</span>
+                  <div class="days-left">Sisa 3 hari</div>
+                </div>
+              </div>
+            </div>
             <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
         </div>
@@ -135,7 +163,21 @@
           <a href="assets/img/portfolio/books-1.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt=""></a>
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Books 1</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
+            <div class="progress-container">
+              <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar w-75"></div>
+              </div>
+              <div class="progress-info">
+                <div class="progress-start">
+                  <span>Terkumpul</span>
+                  <div class="amount">Rp. 100.000</div>
+                </div>
+                <div class="progress-end">
+                  <span>Donasi</span>
+                  <div class="days-left">Sisa 3 hari</div>
+                </div>
+              </div>
+            </div>
             <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
         </div>
@@ -146,7 +188,21 @@
           <a href="assets/img/portfolio/app-2.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-2.jpg" class="img-fluid" alt=""></a>
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">App 2</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
+            <div class="progress-container">
+              <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar w-75"></div>
+              </div>
+              <div class="progress-info">
+                <div class="progress-start">
+                  <span>Terkumpul</span>
+                  <div class="amount">Rp. 100.000</div>
+                </div>
+                <div class="progress-end">
+                  <span>Donasi</span>
+                  <div class="days-left">Sisa 3 hari</div>
+                </div>
+              </div>
+            </div>
             <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
         </div>
@@ -157,7 +213,21 @@
           <a href="assets/img/portfolio/product-2.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt=""></a>
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Product 2</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
+            <div class="progress-container">
+              <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar w-75"></div>
+              </div>
+              <div class="progress-info">
+                <div class="progress-start">
+                  <span>Terkumpul</span>
+                  <div class="amount">Rp. 100.000</div>
+                </div>
+                <div class="progress-end">
+                  <span>Donasi</span>
+                  <div class="days-left">Sisa 3 hari</div>
+                </div>
+              </div>
+            </div>
             <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
         </div>
@@ -168,7 +238,21 @@
           <a href="assets/img/portfolio/branding-2.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-2.jpg" class="img-fluid" alt=""></a>
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Branding 2</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
+            <div class="progress-container">
+              <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar w-75"></div>
+              </div>
+              <div class="progress-info">
+                <div class="progress-start">
+                  <span>Terkumpul</span>
+                  <div class="amount">Rp. 100.000</div>
+                </div>
+                <div class="progress-end">
+                  <span>Donasi</span>
+                  <div class="days-left">Sisa 3 hari</div>
+                </div>
+              </div>
+            </div>
             <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
         </div>
