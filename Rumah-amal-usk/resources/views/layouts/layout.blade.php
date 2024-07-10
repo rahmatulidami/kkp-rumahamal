@@ -42,13 +42,22 @@
 
         <nav id="navmenu" class="navmenu">
           <ul>
-            <li><a href="#hero" class="active">Beranda<br></a></li>
-            <li><a href="#campaign-unggulan">Campaign</a></li>
+            <li><a href="/" class="active">Beranda<br></a></li>
             <li><a href="#about">Profil</a></li>
-            <li><a href="#recent-posts">Berita</a></li>
-            <li><a href="#program">Program</a></li>
+            <li class="dropdown"><a href="#"><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="#program">Program</a></li>
+                <li><a href="#campaign-unggulan">Campaign</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#"><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="#recent-posts">Berita</a></li>
+                <li><a href="#">Pengumuman</a></li>
+                <li><a href="#">Dokumen</a></li>
+              </ul>
+            </li>
             <li><a href="#">Galeri</a></li>
-            <li><a href="#">Dokumen</a></li>
             <li class="language-switcher">
               <a href="?lang=id" class="language-link">
                 <img src="assets/img/flag-ID.png" alt="Indonesian Flag" class="flag-icon">

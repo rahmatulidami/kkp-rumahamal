@@ -119,7 +119,7 @@
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Product 1</a></h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
-            <a class="btn-btn-primary" href="#" role="button">DONASI</a>
+            <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
         </div>
       </div><!-- End campaign-unggulan Item -->
@@ -130,7 +130,7 @@
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Branding 1</a></h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
-            <a class="btn-btn-primary" href="#" role="button">DONASI</a>
+            <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
         </div>
       </div><!-- End campaign-unggulan Item -->
@@ -141,7 +141,7 @@
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Books 1</a></h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
-            <a class="btn-btn-primary" href="#" role="button">DONASI</a>
+            <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
         </div>
       </div><!-- End campaign-unggulan Item -->
@@ -152,7 +152,7 @@
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">App 2</a></h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
-            <a class="btn-btn-primary" href="#" role="button">DONASI</a>
+            <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
         </div>
       </div><!-- End campaign-unggulan Item -->
@@ -163,7 +163,7 @@
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Product 2</a></h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
-            <a class="btn-btn-primary" href="#" role="button">DONASI</a>
+            <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
         </div>
       </div><!-- End campaign-unggulan Item -->
@@ -174,7 +174,7 @@
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Branding 2</a></h4>
             <p>Lorem ipsum, dolor sit amet consectetur</p>
-            <a class="btn-btn-primary" href="#" role="button">DONASI</a>
+            <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
         </div>
       </div><!-- End campaign-unggulan Item -->
