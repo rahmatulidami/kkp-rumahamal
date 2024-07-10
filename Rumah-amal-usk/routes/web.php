@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +17,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('landing/home');
 });
+
+Route::get('/donate', [DonationController::class, 'index']);
+Route::post('/donate', [DonationController::class, 'store']);
+
+Route::get('/success', function () {
+    return view('donation/success');
+});
+
+Route::get('/failure', function () {
+    return view('failure');
+});
+
+Route::post('/xendit-callback', [DonationController::class, 'handleCallback']);
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+});
+
 
 Route::get('/berita', function () {
     return view('berita/berita');
