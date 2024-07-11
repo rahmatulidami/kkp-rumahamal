@@ -60,3 +60,7 @@ Route::get('/detail-pengumuman', function () {
 Route::get('/galeri', function () {
     return view('galeri/galeri');
 });
+
+Route::get('/campaign', function () {
+    return view('campaign/campaign');
+});
