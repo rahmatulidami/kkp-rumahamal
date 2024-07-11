@@ -872,7 +872,7 @@ h6 {
 }
 
 .page-title .heading {
-    padding: 100px 0 40px 0;
+    padding: 150px 0 0 0;
     border-top: 1px solid
         color-mix(in srgb, #45474B, transparent 90%);
 }
@@ -884,9 +884,9 @@ h6 {
 }
 
 .page-title nav {
-    background-color: color-mix(in srgb, var(--default-color), transparent 92%);
+    background-color: color-mix(in srgb, var(--background-color), transparent 92%);
     padding: 20px 0;
-    color: #45474B;
+    color: #FFBB0C;
 }
 
 .page-title nav ol {
@@ -1324,6 +1324,79 @@ section,
     color: #6c757d;
     margin-top: 5px;
   }
+
+/*--------------------------------------------------------------
+# Pengumuman Section
+--------------------------------------------------------------*/
+.pengumuman article {
+    background: var(--surface-color);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.pengumuman .post-img {
+    max-height: 240px;
+    margin: -30px -30px 15px -30px;
+    overflow: hidden;
+}
+
+.pengumuman .post-category {
+    font-size: 16px;
+    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    margin-bottom: 10px;
+}
+
+.pengumuman .title {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.pengumuman .title a {
+    color: var(--heading-color);
+    transition: 0.3s;
+}
+
+.pengumuman .title a:hover {
+    color: var(--accent-color);
+}
+
+.pengumuman .post-author-img {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.pengumuman .post-author {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.pengumuman .post-date {
+    font-size: 14px;
+    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    margin-bottom: 0;
+}
+
+.pengumuman .btn-btn-primary{
+    color: #f2f9f9;
+    background: #1D7E05;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 5px 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
   
 /*--------------------------------------------------------------
 # Recent Posts Section
@@ -1382,6 +1455,21 @@ section,
     margin-bottom: 0;
 }
 
+.recent-posts .btn-btn-primary{
+    color: #f2f9f9;
+    background: #1D7E05;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 5px 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
 
 /*--------------------------------------------------------------
 # Profil Section
@@ -1663,21 +1751,7 @@ section,
     margin-bottom: 0;
 }
 
-.recent-posts .btn-btn-primary{
-    color: #f2f9f9;
-    background: #1D7E05;
-    font-family: var(--heading-font);
-    font-weight: 700;
-    margin-top: 20px;
-    font-size: 14px;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 1px;
-    display: flex;
-    padding: 5px 15px;
-    border-radius: 10px;
-    transition: 0.3s;
-}
+
 /*--------------------------------------------------------------
 # Blog Pagination Section
 --------------------------------------------------------------*/
@@ -1733,6 +1807,7 @@ section,
 .blog-details .post-img {
     margin: -30px -30px 20px -30px;
     overflow: hidden;
+    padding: 30px;
 }
 
 .blog-details .title {
@@ -1740,11 +1815,17 @@ section,
     font-size: 28px;
     font-weight: 700;
     padding: 0;
+    padding-bottom: 30px;
     margin: 30px 0;
+    text-align: center;
 }
 
 .blog-details .content {
     margin-top: 20px;
+}
+
+.blog-details .content p{
+    text-align: justify;
 }
 
 .blog-details .content h3 {
@@ -1976,6 +2057,7 @@ section,
 --------------------------------------------------------------*/
 .comment-form {
     padding-top: 10px;
+
 }
 
 .comment-form form {
@@ -2043,13 +2125,13 @@ section,
     border-radius: 4px;
     padding: 10px 20px;
     border: 0;
-    background-color: var(--accent-color);
+    background-color: #1D7E05;
     color: var(--contrast-color);
 }
 
 .comment-form form .btn-primary:hover {
     color: var(--contrast-color);
-    background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+    background-color: color-mix(in srgb, #1D7E05, transparent 20%);
 }
 
 /*--------------------------------------------------------------
@@ -2082,6 +2164,7 @@ section,
     background: var(--background-color);
     border: 1px solid color-mix(in srgb, var(--default-color), transparent 70%);
     padding: 3px 10px;
+    border-radius: 10px;
     position: relative;
     transition: 0.3s;
 }
@@ -2168,6 +2251,7 @@ section,
 .recent-posts-widget .post-item img {
     width: 80px;
     margin-right: 15px;
+    border-radius: 10px;
 }
 
 .recent-posts-widget .post-item h4 {

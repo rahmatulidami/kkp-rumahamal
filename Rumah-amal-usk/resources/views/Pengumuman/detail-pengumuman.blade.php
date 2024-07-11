@@ -31,12 +31,11 @@
             <div class="container">
 
               <article class="article">
-
+                <h3 class="title">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia</h3>
+              
                 <div class="post-img">
                   <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
                 </div>
-
-                <h2 class="title">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia</h2>
 
                 <div class="meta-top">
                   <ul>
@@ -105,28 +104,6 @@
 
             </div>
           </section><!-- /Blog Details Section -->
-
-          <!-- Blog Author Section -->
-          <section id="blog-author" class="blog-author section">
-
-            <div class="container">
-              <div class="author-container d-flex align-items-center">
-                <img src="assets/img/blog/blog-author.jpg" class="rounded-circle flex-shrink-0" alt="">
-                <div>
-                  <h4>Jane Smith</h4>
-                  <div class="social-links">
-                    <a href="https://x.com/#"><i class="bi bi-twitter-x"></i></a>
-                    <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
-                    <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
-                  </div>
-                  <p>
-                    Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium. Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium ut unde voluptas.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-          </section><!-- /Blog Author Section -->
 
           <!-- Blog Comments Section -->
           <section id="blog-comments" class="blog-comments section">
@@ -282,7 +259,7 @@
             </div><!--/Search Widget -->
 
             <!-- Categories Widget -->
-            <div class="categories-widget widget-item">
+            <!-- <div class="categories-widget widget-item">
 
               <h3 class="widget-title">Categories</h3>
               <ul class="mt-3">
@@ -294,7 +271,7 @@
                 <li><a href="#">Educaion <span>(14)</span></a></li>
               </ul>
 
-            </div><!--/Categories Widget -->
+            </div>/Categories Widget -->
 
             <!-- Recent Posts Widget -->
             <div class="recent-posts-widget widget-item">

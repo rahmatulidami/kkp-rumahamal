@@ -32,24 +32,24 @@
   <div class="swiper-wrapper align-items-center">
 
     <div class="swiper-slide">
-      <img src="assets/img/portfolio/app-1.jpg" alt="">
+      <img src="assets/img/campaign/palestine.png" alt="">
     </div>
 
     <div class="swiper-slide">
-      <img src="assets/img/portfolio/product-1.jpg" alt="">
+      <img src="assets/img/campaign/palestine.png" alt="">
     </div>
 
     <div class="swiper-slide">
-      <img src="assets/img/portfolio/branding-1.jpg" alt="">
+      <img src="assets/img/campaign/palestine.png" alt="">
     </div>
 
     <div class="swiper-slide">
-      <img src="assets/img/portfolio/books-1.jpg" alt="">
+      <img src="assets/img/campaign/palestine.png" alt="">
     </div>
 
   </div>
   <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
+  <div class="swiper-button-nexts"></div>
   <div class="swiper-pagination"></div>
 </div>
   </section>
@@ -110,9 +110,9 @@
 
       <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
         <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/portfolio/product-1.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
+          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
           <div class="campaign-unggulan-info">
-            <h4><a href="campaign-unggulan-details.html" title="More Details">Product 1</a></h4>
+            <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
             <div class="progress-container">
               <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-bar w-75"></div>
@@ -135,9 +135,9 @@
 
       <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-branding">
         <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/portfolio/branding-1.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt=""></a>
+          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
           <div class="campaign-unggulan-info">
-            <h4><a href="campaign-unggulan-details.html" title="More Details">Branding 1</a></h4>
+            <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
             <div class="progress-container">
               <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-bar w-75"></div>
@@ -160,9 +160,9 @@
 
       <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-books">
         <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/portfolio/books-1.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt=""></a>
+          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
           <div class="campaign-unggulan-info">
-            <h4><a href="campaign-unggulan-details.html" title="More Details">Books 1</a></h4>
+            <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
             <div class="progress-container">
               <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-bar w-75"></div>
@@ -185,9 +185,9 @@
 
       <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-app">
         <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/portfolio/app-2.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-2.jpg" class="img-fluid" alt=""></a>
+          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
           <div class="campaign-unggulan-info">
-            <h4><a href="campaign-unggulan-details.html" title="More Details">App 2</a></h4>
+            <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
             <div class="progress-container">
               <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-bar w-75"></div>
@@ -210,9 +210,9 @@
 
       <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
         <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/portfolio/product-2.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt=""></a>
+          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
           <div class="campaign-unggulan-info">
-            <h4><a href="campaign-unggulan-details.html" title="More Details">Product 2</a></h4>
+            <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
             <div class="progress-container">
               <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-bar w-75"></div>
@@ -235,9 +235,9 @@
 
       <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-branding">
         <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/portfolio/branding-2.jpg" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-2.jpg" class="img-fluid" alt=""></a>
+          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
           <div class="campaign-unggulan-info">
-            <h4><a href="campaign-unggulan-details.html" title="More Details">Branding 2</a></h4>
+            <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
             <div class="progress-container">
               <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-bar w-75"></div>
@@ -302,6 +302,97 @@
 
     </section><!-- /About Section -->
 
+  <!-- Pengumuman Section -->
+<section id="pengumuman" class="pengumuman section">
+
+<!-- Section Title -->
+<div class="container section-title" data-aos="fade-up">
+  <h2>PENGUMUMAN</h2>
+</div><!-- End Section Title -->
+
+<div class="container">
+
+  <div class="row gy-4">
+
+    <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+      <article>
+
+        <div class="post-img">
+          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
+        </div>
+
+        <p class="post-category">Politics</p>
+
+        <h2 class="title">
+          <a href="/detail-pengumuman">Dolorum optio tempore voluptas dignissimos</a>
+        </h2>
+
+        <div class="d-flex align-items-center">
+          <div class="post-meta">
+            <p class="post-date">
+              <time datetime="2022-01-01">Jan 1, 2022</time>
+            </p>
+          </div>
+        </div>
+
+      </article>
+    </div><!-- End post list item -->
+
+    <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+      <article>
+
+        <div class="post-img">
+          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
+        </div>
+
+        <p class="post-category">Sports</p>
+
+        <h2 class="title">
+          <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
+        </h2>
+
+        <div class="d-flex align-items-center">
+          <div class="post-meta">
+            <p class="post-date">
+              <time datetime="2022-01-01">Jun 5, 2022</time>
+            </p>
+          </div>
+        </div>
+
+      </article>
+    </div><!-- End post list item -->
+
+    <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+      <article>
+
+        <div class="post-img">
+          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
+        </div>
+
+        <p class="post-category">Entertainment</p>
+
+        <h2 class="title">
+          <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
+        </h2>
+
+        <div class="d-flex align-items-center">
+          <div class="post-meta">
+            <p class="post-date">
+              <time datetime="2022-01-01">Jun 22, 2022</time>
+            </p>
+          </div>
+        </div>
+
+      </article>
+      
+    </div><!-- End post list item -->
+    <a class="btn-btn-primary" href="/pengumuman" role="button">Selengkapnya</a>
+  </div><!-- End recent posts list -->
+
+</div>
+
+</section><!-- Pengumuman Section -->
+
 <!-- Recent Posts Section -->
 <section id="recent-posts" class="recent-posts section">
 
@@ -318,7 +409,7 @@
       <article>
 
         <div class="post-img">
-          <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
         </div>
 
         <p class="post-category">Politics</p>
@@ -328,9 +419,7 @@
         </h2>
 
         <div class="d-flex align-items-center">
-          <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
           <div class="post-meta">
-            <p class="post-author">Maria Doe</p>
             <p class="post-date">
               <time datetime="2022-01-01">Jan 1, 2022</time>
             </p>
@@ -344,7 +433,7 @@
       <article>
 
         <div class="post-img">
-          <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
+          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
         </div>
 
         <p class="post-category">Sports</p>
@@ -354,9 +443,7 @@
         </h2>
 
         <div class="d-flex align-items-center">
-          <img src="assets/img/blog/blog-author-2.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
           <div class="post-meta">
-            <p class="post-author">Allisa Mayer</p>
             <p class="post-date">
               <time datetime="2022-01-01">Jun 5, 2022</time>
             </p>
@@ -370,7 +457,7 @@
       <article>
 
         <div class="post-img">
-          <img src="assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
+          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
         </div>
 
         <p class="post-category">Entertainment</p>
@@ -380,10 +467,8 @@
         </h2>
 
         <div class="d-flex align-items-center">
-          <img src="assets/img/blog/blog-author-3.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-          <div class="post-meta">
-            <p class="post-author">Mark Dower</p>
-            <p class="post-date">
+         <div class="post-meta">
+           <p class="post-date">
               <time datetime="2022-01-01">Jun 22, 2022</time>
             </p>
           </div>
@@ -399,7 +484,7 @@
 
 </section><!-- /Recent Posts Section -->
 
-<!-- Portfolio Section -->
+<!-- Program Section -->
 <section id="program" class="program section">
 
 <!-- Section Title -->
@@ -414,41 +499,33 @@
 
     <ul class="program-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
       <li data-filter="*" class="filter-active">All</li>
-      <li data-filter=".filter-app">App</li>
-      <li data-filter=".filter-product">Product</li>
-      <li data-filter=".filter-branding">Branding</li>
-      <li data-filter=".filter-books">Books</li>
+      <li data-filter=".filter-app">BPRA-UKT</li>
+      <li data-filter=".filter-product">program</li>
+      <li data-filter=".filter-branding">program</li>
+      <li data-filter=".filter-books">program</li>
     </ul> <!-- End program Filters -->
 
     <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
       <div class="col-lg-4 col-md-6 program-item isotope-item filter-app">
         <div class="program-content h-100">
-          <a href="assets/img/portfolio/app-1.jpg" data-gallery="program-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
-          <div class="program-info">
-            <h4><a href="program-details.html" title="More Details">App 1</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
+          <a href="assets/img/portfolio/app-1.jpg" data-gallery="program-gallery-app"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
         </div>
       </div><!-- End program Item -->
 
       <div class="col-lg-4 col-md-6 program-item isotope-item filter-product">
         <div class="program-content h-100">
           <a href="assets/img/portfolio/product-1.jpg" data-gallery="program-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
-          <div class="program-info">
-            <h4><a href="program-details.html" title="More Details">Product 1</a></h4>
-            <p>Lorem ipsum, dolor sit amet consectetur</p>
-          </div>
         </div>
       </div><!-- End program Item -->
 
-    </div><!-- End Portfolio Container -->
+    </div><!-- End program Container -->
 
   </div>
 
 </div>
 
-</section><!-- /Portfolio Section -->
+</section><!-- /Porogram Section -->
 
 <!-- Call To Action Section -->
 <section id="call-to-action" class="call-to-action section dark-background">
@@ -471,10 +548,11 @@
 
 <!-- Clients Section -->
      <!-- Section Title -->
-     <div class="container section-title" data-aos="fade-up">
-        <h2>MITRA RUMAH AMAL USK</h2>
+     
     <section id="clients" class="clients section">
-
+    <div class="container section-title" data-aos="fade-up">
+      <h2>MITRA RUMAH AMAL USK</h2>
+    </div>
       <div class="container">
 
         <div class="swiper init-swiper">
