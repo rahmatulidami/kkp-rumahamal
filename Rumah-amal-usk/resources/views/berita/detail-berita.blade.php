@@ -32,11 +32,11 @@
 
               <article class="article">
 
+              <h3 class="title">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia</h3>
+
                 <div class="post-img">
                   <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
                 </div>
-
-                <h2 class="title">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia</h2>
 
                 <div class="meta-top">
                   <ul>
@@ -282,7 +282,7 @@
             </div><!--/Search Widget -->
 
             <!-- Categories Widget -->
-            <div class="categories-widget widget-item">
+            <!-- <div class="categories-widget widget-item">
 
               <h3 class="widget-title">Categories</h3>
               <ul class="mt-3">
@@ -294,7 +294,7 @@
                 <li><a href="#">Educaion <span>(14)</span></a></li>
               </ul>
 
-            </div><!--/Categories Widget -->
+            </div>/Categories Widget -->
 
             <!-- Recent Posts Widget -->
             <div class="recent-posts-widget widget-item">

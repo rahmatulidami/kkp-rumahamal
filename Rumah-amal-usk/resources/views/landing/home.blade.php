@@ -499,10 +499,10 @@
 
     <ul class="program-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
       <li data-filter="*" class="filter-active">All</li>
-      <li data-filter=".filter-app">App</li>
-      <li data-filter=".filter-product">Product</li>
-      <li data-filter=".filter-branding">Branding</li>
-      <li data-filter=".filter-books">Books</li>
+      <li data-filter=".filter-app">BPRA-UKT</li>
+      <li data-filter=".filter-product">program</li>
+      <li data-filter=".filter-branding">program</li>
+      <li data-filter=".filter-books">program</li>
     </ul> <!-- End program Filters -->
 
     <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
