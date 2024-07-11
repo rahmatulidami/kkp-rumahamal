@@ -28,7 +28,7 @@
   <link href="assets/css/main.css" rel="stylesheet">
 </head>
 
-<body class="index-page">
+<body class="index-page" style="user-select: none;">
 
   <header id="header" class="header fixed-top">
     <div class="branding d-flex align-items-cente">

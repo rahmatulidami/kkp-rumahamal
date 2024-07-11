@@ -26,11 +26,11 @@ class DonationController extends Controller
 
         $pricing = [
             'QRIS' => ['fee' => 0.007, 'fixed' => false],
-            'GoPay' => ['fee' => 0.02, 'fixed' => false],
+            'SHOPEEPAY' => ['fee' => 0.02, 'fixed' => false],
             'Dana' => ['fee' => 0.015, 'fixed' => false],
             'OVO' => ['fee' => 0.02, 'fixed' => false],
-            'Alfamart' => ['fee' => 5000, 'fixed' => true],
-            'Indomaret' => ['fee' => 5000, 'fixed' => true],
+            'ALFAMART' => ['fee' => 5000, 'fixed' => true],
+            'INDOMARET' => ['fee' => 7000, 'fixed' => true],
             'BSI' => ['fee' => 4000, 'fixed' => true],
             'BNI' => ['fee' => 4000, 'fixed' => true],
             'MANDIRI' => ['fee' => 4000, 'fixed' => true],

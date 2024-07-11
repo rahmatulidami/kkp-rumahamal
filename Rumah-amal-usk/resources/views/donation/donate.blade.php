@@ -4,12 +4,12 @@
 
 @section('content')
 <section>
-<div class="container mt-5">
+<div class="container mt-5" style="user-select: none;">
     <div class="row">
-        <div class="col-12 col-md-6 mb-3">
+        <div class="col-12 col-lg-6 col-md-6 mb-3">
             <div class="card p-4 shadow-sm">
                 <h3 class="mb-3">Pembayaran</h3>
-                <p>Bayarlah zakatmu</p>
+                <p>Infaq</p>
                 <form id="donationForm" method="POST" action="/donate">
                     @csrf
                     <input type="hidden" id="selected_payment_method" name="payment_method">
@@ -47,54 +47,49 @@
                 </form>
             </div>
         </div>
-        <div class="col-12 col-md-6 mb-3">
+        <div class="col-12 col-lg-6 col-md-6 mb-3">
             <div class="card p-4 payment shadow-sm">
-                <h3 class="mb-3 text-white">Pilih Pembayaran</h3>
+                <h3 class="mb-3 ">Pilih Metode Pembayaran</h3>
                 <div id="payment-categories">
                     <!-- Payment Categories Here -->
                     <div class="payment-category" data-category="qris">
-                        <div class="category-header  d-flex justify-content-between align-items-center">
+                        <div class="category-header">
                             <div id="category-label">
                                 <i class="fas fa-chevron-down"></i>
                                 <span>QRIS</span>
                             </div>
-                            <img src="assets/img/qris-logo.jpg" alt="QRIS" height="30px" class="category-logo">
-                            <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="category-content">
                             <div class="payment-method" data-method="QRIS">
-                                    <img src="assets/img/qris-logo.jpg" alt="QRIS" width="20%" class="category-logo">
+                                    <img src="assets/img/qris-logo.jpg" alt="QRIS" width="20%" class="me-1">
                                         <div class="payment-content">
-                                            <span>QRIS</span>
                                             <span class="fee"></span>
                                             <span class="price"></span>
                                         </div>
                                 </div>
                         </div>
+                        <div class="bottom-logo">
+                            <img src="assets/img/qris-logo.jpg" alt="QRIS" class="me-1">    
+                        </div>
                     </div>
                     <div class="payment-category" data-category="ewallet">
-                        <div class="category-header  d-flex justify-content-between align-items-center">
+                        <div class="category-header">
                             <div id="category-label">
                                 <i class="fas fa-chevron-down"></i>
                                 <span>E-Wallet</span>
                             </div>
-                            <div class="d-flex">
-                                <img src="assets/img/gopay-logo.png" height="20px" alt="GoPay" class="me-1">
-                                <img src="assets/img/dana-logo.png" height="20px" alt="DANA" class="me-1">
-                                <img src="assets/img/ovo-logo.png" height="20px" alt="OVO">
-                            </div>
                         </div>
                         <div class="category-content">
-                            <div class="payment-method" data-method="GOPAY">
-                                <img src="assets/img/gopay-logo.png" height="20px" alt="GoPay" class="me-1">
+                            <div class="payment-method" data-method="SHOPEEPAY">
+                                <img src="assets/img/shopeepay-logo.png" alt="SHOPEEPAY" class="me-1">
                                 <div>
-                                    <span>GoPay</span>
+                                    <span>SHOPEEPAY</span>
                                     <span class="fee"></span>
                                     <span class="price"></span>
                                 </div>
                             </div>
                             <div class="payment-method" data-method="DANA">
-                                <img src="assets/img/dana-logo.png" height="20px" alt="Dana" class="me-1">
+                                <img src="assets/img/dana-logo.png" alt="Dana" class="me-1">
                                 <div>
                                     <span>Dana</span>
                                      <span class="fee"></span>
@@ -102,7 +97,7 @@
                                 </div>
                             </div>
                             <div class="payment-method" data-method="OVO">
-                                <img src="assets/img/ovo-logo.png" height="20px" alt="OVO" class="me-1">
+                                <img src="assets/img/ovo-logo.png" alt="OVO" class="me-1">
                                 <div>
                                     <span>OVO</span>
                                      <span class="fee"></span>
@@ -110,22 +105,22 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="bottom-logo">
+                                <img src="assets/img/shopeepay-logo.png" alt="SHOPEEPAY" class="me-1">
+                                <img src="assets/img/dana-logo.png" alt="DANA" class="me-1">
+                                <img src="assets/img/ovo-logo.png" alt="OVO" class="me-1">   
+                        </div>
                     </div>
-                    
                     <div class="payment-category" data-category="convenience-store">
-                        <div class="category-header  d-flex justify-content-between align-items-center">
+                        <div class="category-header">
                             <div id="category-label">
                                 <i class="fas fa-chevron-down"></i>
                                 <span>Convenience Store</span>
                             </div>
-                            <div class="d-flex">
-                                <img src="assets/img/alfamart-logo.png" alt="Alfamart" height="20px" class="me-1">
-                                <img src="assets/img/indomaret-logo.png" alt="Indomaret" height="20px">
-                            </div>
                         </div>
                         <div class="category-content">
                             <div class="payment-method" data-method="ALFAMART">
-                                <img src="assets/img/alfamart-logo.png" height="20px" alt="Alfamart" class="me-1">
+                                <img src="assets/img/alfamart-logo.png" alt="Alfamart" class="me-1">
                                 <div>
                                     <span>Alfamart</span>
                                      <span class="fee"></span>
@@ -133,30 +128,30 @@
                                 </div>
                             </div>
                             <div class="payment-method" data-method="INDOMARET">
-                                <img src="assets/img/indomaret-logo.png" height="20px" alt="Indomaret" class="me-1">
+                                <img src="assets/img/indomaret-logo.png" alt="Indomaret" class="me-1">
                                 <div>
                                     <span>Indomaret</span>
                                      <span class="fee"></span>
                                 <span class="price"></span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="bottom-logo">
+                            <img src="assets/img/alfamart-logo.png" alt="Alfamart" class="me-1">
+                            <img src="assets/img/indomaret-logo.png" alt="Indomaret">
+                        </div>  
                     </div>
                     </div>
                     <div class="payment-category" data-category="virtual-account">
-                        <div class="category-header  d-flex justify-content-between align-items-center">
+                        <div class="category-header">
                             <div id="category-label">
                                 <i class="fas fa-chevron-down"></i>
                                 <span>Virtual Account</span>
                             </div>
-                            <div class="d-flex">
-                                <img src="assets/img/bsi-logo.png" alt="BSI" height="20px" class="me-1">
-                                <img src="assets/img/bni-logo.png" alt="BNI" height="20px" class="me-1">
-                                <img src="assets/img/mandiri-logo.png" alt="Mandiri" height="20px">
-                            </div>
                         </div>
                         <div class="category-content">
                             <div class="payment-method" data-method="BSI">
-                                <img src="assets/img/bsi-logo.png" height="20px" alt="BSI" class="me-1">
+                                <img src="assets/img/bsi-logo.png" alt="BSI" class="me-1">
                                 <div>
                                     <span>BSI</span>
                                      <span class="fee"></span>
@@ -164,7 +159,7 @@
                                 </div>
                             </div>
                             <div class="payment-method" data-method="BNI">
-                                <img src="assets/img/bni-logo.png" height="20px" alt="BNI" class="me-1">
+                                <img src="assets/img/bni-logo.png" alt="BNI" class="me-1">
                                 <div>
                                     <span>BNI</span>
                                     <span class="fee"></span>
@@ -172,7 +167,7 @@
                                 </div>
                             </div>
                             <div class="payment-method" data-method="MANDIRI">
-                                <img src="assets/img/mandiri-logo.png" height="20px" alt="Mandiri" class="me-1">
+                                <img src="assets/img/mandiri-logo.png" alt="Mandiri" class="me-1">
                                 <div>
                                     <span>Mandiri</span>
                                     <span class="fee"></span>
@@ -180,13 +175,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="bottom-logo">
+                            <img src="assets/img/bsi-logo.png" alt="BSI" class="me-1">
+                            <img src="assets/img/bni-logo.png" alt="BNI" class="me-1">
+                            <img src="assets/img/mandiri-logo.png" alt="Mandiri">
+                        </div>  
                     </div>
                 <div id="payment-details" class="mt-3"></div>
                 <div class="form-check mt-3">
                     <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
                     <label class="form-check-label" for="terms">Saya setuju dengan syarat dan ketentuan yang berlaku</label>
                 </div>
-                <button type="submit" class="btn btn-warning w-100 mt-3" form="donationForm">Lanjutkan Pembayaran</button>
+                <button type="submit" class="btn btn-warning w-100 mt-3" style="color:white; font-weight:400; border-radius:10px;" form="donationForm">Lanjutkan Pembayaran</button>
             </div>
         </div>
     </div>
@@ -194,6 +194,7 @@
 </section>
 
 <style>
+
 .body {
     color: #45474B;
 }
@@ -216,49 +217,103 @@
 
 .category-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    padding: 15px;
+    padding: 15px 15px 15px 15px;
     cursor: pointer;
-    border-radius: 10px;
+    /* height: px; */
+    border-radius: 10px 0 0;
+    color: white;
+    background-color: #45474b;
+    font-weight: 450;
+
+    .d-flex{
+        img{
+            height: 15px;
+            margin-left: 10%;}
+        width: 50%;
+    }
 }
 
-.category-logos img {
-    height: 20px;
-    margin-right: 5px;
+.bottom-logo{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    background-color: white;
+    border-top: 1px solid #e0e0e0;
+    /* height: 50px; */
+    padding: 15px;
+    img{
+        height: 15px;
+    }
 }
+
+.category-logos {
+    width:
+}
+
+/* #category-label {
+    font-weight: 400;
+    color: rgb(69, 71, 75);
+    font-size: 90%;
+} */
 
 .category-content {
     display: flex;
-    display: none;
     flex-wrap: wrap;
+    gap: 1.25em;
+    display: none;
     overflow: hidden;
-    max-height: 0; 
     transition: max-height 0.3s ease-out;
-    padding: 10px 15px;
-    background-color: #f9f9f9;
-    border-top: 1px solid #e0e0e0;
+    padding: 0px 15px 10px 15px;
+    background-color: #45474b;
+    /* border-top: 1px solid #e0e0e0; */
 }
 
 .payment-method {
+    background-color: white;
+    width: 170px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     padding: 10px;
+    border: 1px solid rgba(69, 71, 75, 0.5);
     border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+    div{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    img {
+        height:25px;
+        margin-bottom: 10px;
+    }
+    span {
+        font-size: 70%;
+        font-weight: 400;
+    }
+}
+
+.fee{
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .payment-method:hover,
 .payment-method.selected {
-    border: 2px solid rgba(69, 71, 75, 0.2);
-    box-shadow: 0 0 5px rgba(69, 71, 75, 0.5);
+    border: 4px solid #707feb;
+    box-shadow: 2px 2px 10px #707feb;
 }
 
 .fa-chevron-down {
     transition: transform 0.3s;
+}
+
+.payment-category .category-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
 }
 
 .payment-category.active .fa-chevron-down {
@@ -267,8 +322,10 @@
 
 .payment-category.active .category-content {
     max-height: 1000px;
-    transition: max-height 0.3s ease-in;
+    /* transition: max-height 0.3s ease-in; */
 }
+
+
 </style>
 
 
@@ -280,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const header = category.querySelector('.category-header');
         header.addEventListener('click', () => {
             const content = category.querySelector('.category-content');
-            content.style.display = content.style.display === 'none' || !content.style.display ? 'block' : 'none';
+            content.style.display = content.style.display === 'none' || !content.style.display ? 'flex' : 'none';
             const icon = header.querySelector('i');
             icon.classList.toggle('fa-chevron-down');
             icon.classList.toggle('fa-chevron-up');
@@ -303,13 +360,12 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const paymentCategories = document.querySelectorAll('.payment-category');
     const paymentMethods = document.querySelectorAll('.payment-method');
-    const paymentDetails = document.getElementById('payment-details');
     const amountInput = document.getElementById('amount');
     const selectedPaymentMethodInput = document.getElementById('selected_payment_method');
     const anonymousCheckbox = document.getElementById('anonymous');
     const pricing = {
         QRIS: { fee: 0.007, fixed: false },
-        GOPAY: { fee: 0.02, fixed: false },
+        SHOPEEPAY: { fee: 0.02, fixed: false },
         DANA: { fee: 0.015, fixed: false },
         OVO: { fee: 0.02, fixed: false },
         ALFAMART: { fee: 5000, fixed: true },
@@ -332,23 +388,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    paymentCategories.forEach(category => {
-        const header = category.querySelector('.category-header');
-        header.addEventListener('click', function() {
-            const isActive = category.classList.contains('active');
-            
-            // Close all categories
-            paymentCategories.forEach(cat => {
-                cat.classList.remove('active');
-            });
-
-            // If the clicked category wasn't active, open it
-            if (!isActive) {
-                category.classList.add('active');
-            }
-        });
-    });
-
     const updatePricingDetails = (methodName) => {
         const feeConfig = pricing[methodName];
         const amount = parseFloat(amountInput.value) || 0;
@@ -366,20 +405,47 @@ document.addEventListener('DOMContentLoaded', function() {
             total = amount + totalfee;
         }
 
-        // paymentDetails.innerHTML = `
-        //     <p>Biaya Transaksi: Rp${fee.toFixed(2)}</p>
-        //     <p>VAT: Rp${vat.toFixed(2)}</p>
-        //     <p>Total Pembayaran: Rp${total.toFixed(2)}</p>
-        // `;
-
-        // Update price on the payment method
         const selectedMethod = document.querySelector(`.payment-method[data-method="${methodName}"]`);
         if (selectedMethod) {
             selectedMethod.querySelector('.fee').textContent = `+Rp ${totalfee.toFixed(2)}`;
             selectedMethod.querySelector('.price').textContent = `Rp ${total.toFixed(2)}`;
-            // selectedMethod.querySelector('.price').textContent = `Pajak: Rp${totalfee.toFixed(2)}`;
         }
     };
+
+    const updateAllPricingDetails = () => {
+        paymentMethods.forEach(method => {
+            const methodName = method.getAttribute('data-method');
+            updatePricingDetails(methodName);
+        });
+    };
+
+    paymentCategories.forEach(category => {
+        const header = category.querySelector('.category-header');
+        header.addEventListener('click', function() {
+            const isActive = category.classList.contains('active');
+            
+            // Close all categories
+            paymentCategories.forEach(cat => {
+                cat.classList.remove('active');
+                const content = cat.querySelector('.category-content');
+                content.style.display = 'none';
+            });
+
+            // If the clicked category wasn't active, open it
+            if (!isActive) {
+                category.classList.add('active');
+                const content = category.querySelector('.category-content');
+                content.style.display = 'flex';
+
+                // Update pricing details for all methods in this category
+                const methodsInCategory = category.querySelectorAll('.payment-method');
+                methodsInCategory.forEach(method => {
+                    const methodName = method.getAttribute('data-method');
+                    updatePricingDetails(methodName);
+                });
+            }
+        });
+    });
 
     paymentMethods.forEach(method => {
         method.addEventListener('click', function() {
@@ -397,12 +463,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     amountInput.addEventListener('input', function() {
-        const selectedMethod = document.querySelector('.payment-method.selected');
-        if (selectedMethod) {
-            const methodName = selectedMethod.getAttribute('data-method');
-            updatePricingDetails(methodName);
-        }
+        updateAllPricingDetails();
     });
+
+    // Update pricing details on page load
+    updateAllPricingDetails();
 });
 </script>
+
 @endsection
