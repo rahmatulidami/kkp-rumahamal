@@ -289,7 +289,7 @@
               <p>
               Kami menyediakan sistem dan layanan yang memudahkan para muzakki atau donatur dalam menunaikan zakat, infaq, shadaqah, maupun wakaf dengan sebaik-baiknya. Menjadikan masjid sebagai pusat pemberdayaan ekonomi umat, Mendayagunakan dana zakat, infaq shadaqah maupun wakaf melalui program-program yang terasa manfaatnya, Mengangkat martabat mustahik, dan membahagiakan muzakki dan donatur.
               </p>
-              <a href="">Selengkapnya</a>
+              <a href="/profil">Selengkapnya</a>
 
               <div class="position-relative mt-4">
                 <img src="assets/img/profil/rek-rumahamal.png" class="img-fluid rounded-4" alt="">

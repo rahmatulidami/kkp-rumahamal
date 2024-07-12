@@ -64,3 +64,7 @@ Route::get('/galeri', function () {
 Route::get('/campaign', function () {
     return view('campaign/campaign');
 });
+
+Route::get('/profil', function () {
+    return view('profil/profil');
+});
