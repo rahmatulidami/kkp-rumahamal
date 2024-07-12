@@ -27,7 +27,7 @@ class DonationController extends Controller
         $pricing = [
             'QRIS' => ['fee' => 0.007, 'fixed' => false],
             'SHOPEEPAY' => ['fee' => 0.02, 'fixed' => false],
-            'Dana' => ['fee' => 0.015, 'fixed' => false],
+            'DANA' => ['fee' => 0.015, 'fixed' => false],
             'OVO' => ['fee' => 0.02, 'fixed' => false],
             'ALFAMART' => ['fee' => 5000, 'fixed' => true],
             'INDOMARET' => ['fee' => 7000, 'fixed' => true],

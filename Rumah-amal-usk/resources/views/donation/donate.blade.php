@@ -19,6 +19,7 @@
                             <span class="input-group-text">Rp.</span>
                             <input type="number" class="form-control" id="amount" name="amount" placeholder="Jumlah donasi yang ingin didonasikan" required>
                         </div>
+                        <div id="amount-warning" class="text-danger" style="display: none;">Minimal donasi adalah Rp. 1000</div>
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama Lengkap</label>
@@ -60,7 +61,7 @@
                             </div>
                         </div>
                         <div class="category-content">
-                            <div class="payment-method" data-method="QRIS">
+                            <div class="payment-method" data-method="QRIS" required>
                                     <img src="assets/img/qris-logo.jpg" alt="QRIS" width="20%" class="me-1">
                                         <div class="payment-content">
                                             <span class="fee"></span>
@@ -182,11 +183,12 @@
                         </div>  
                     </div>
                 <div id="payment-details" class="mt-3"></div>
+                <div id="payment-method-warning" class="text-danger" style="display: none;">Silakan pilih metode pembayaran</div>
                 <div class="form-check mt-3">
                     <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
                     <label class="form-check-label" for="terms">Saya setuju dengan syarat dan ketentuan yang berlaku</label>
                 </div>
-                <button type="submit" class="btn btn-warning w-100 mt-3" style="color:white; font-weight:400; border-radius:10px;" form="donationForm">Lanjutkan Pembayaran</button>
+                <button type="submit" class="submit" form="donationForm" disabled>Lanjutkan Pembayaran</button>
             </div>
         </div>
     </div>
@@ -264,7 +266,7 @@
     gap: 1.25em;
     display: none;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: max-height 0.3s ease;
     padding: 0px 15px 10px 15px;
     background-color: #45474b;
     /* border-top: 1px solid #e0e0e0; */
@@ -325,6 +327,15 @@
     /* transition: max-height 0.3s ease-in; */
 }
 
+.submit{
+    background-color: #8b8f97;
+    border-radius: 10px;
+    color: white;
+    height: 35px;
+    font-weight: 600;
+    font-size: 90%;
+}
+
 
 </style>
 
@@ -357,22 +368,54 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     const paymentCategories = document.querySelectorAll('.payment-category');
     const paymentMethods = document.querySelectorAll('.payment-method');
     const amountInput = document.getElementById('amount');
     const selectedPaymentMethodInput = document.getElementById('selected_payment_method');
     const anonymousCheckbox = document.getElementById('anonymous');
+    const termsCheckbox = document.getElementById('terms');
+    const submitButton = document.querySelector('button[type="submit"]');
+    const amountWarning = document.getElementById('amount-warning');
+    const paymentMethodWarning = document.getElementById('payment-method-warning');
     const pricing = {
         QRIS: { fee: 0.007, fixed: false },
         SHOPEEPAY: { fee: 0.02, fixed: false },
         DANA: { fee: 0.015, fixed: false },
         OVO: { fee: 0.02, fixed: false },
-        ALFAMART: { fee: 5000, fixed: true },
-        INDOMARET: { fee: 7000, fixed: true },
+        ALFAMART: { fee: 5000, fixed: true, min: 10000, max: 2500000 },
+        INDOMARET: { fee: 7000, fixed: true, min: 10000, max: 5000000 },
         BSI: { fee: 4000, fixed: true },
         BNI: { fee: 4000, fixed: true },
         MANDIRI: { fee: 4000, fixed: true }
+    };
+
+    const checkSubmitButtonState = () => {
+        const amount = parseFloat(amountInput.value) || 0;
+        const selectedPaymentMethod = selectedPaymentMethodInput.value;
+        const termsAccepted = termsCheckbox.checked;
+        let validAmount = amount >= 1000;
+        let validPayment = true;
+
+        if (selectedPaymentMethod === 'ALFAMART' || selectedPaymentMethod === 'INDOMARET') {
+            const methodConfig = pricing[selectedPaymentMethod];
+            validPayment = amount >= methodConfig.min && amount <= methodConfig.max;
+        }
+
+        if (selectedPaymentMethod === '') {
+            validPayment = false;
+            paymentMethodWarning.style.display = 'block';
+        } else {
+            paymentMethodWarning.style.display = 'none';
+        }
+
+        if (validAmount && validPayment && termsAccepted) {
+            submitButton.disabled = false;
+            submitButton.style.backgroundColor = '#fece03';
+        } else {
+            submitButton.disabled = true;
+            submitButton.style.backgroundColor = '#8b8f97';
+        }
     };
 
     if (anonymousCheckbox) {
@@ -424,20 +467,17 @@ document.addEventListener('DOMContentLoaded', function() {
         header.addEventListener('click', function() {
             const isActive = category.classList.contains('active');
             
-            // Close all categories
             paymentCategories.forEach(cat => {
                 cat.classList.remove('active');
                 const content = cat.querySelector('.category-content');
                 content.style.display = 'none';
             });
 
-            // If the clicked category wasn't active, open it
             if (!isActive) {
                 category.classList.add('active');
                 const content = category.querySelector('.category-content');
                 content.style.display = 'flex';
 
-                // Update pricing details for all methods in this category
                 const methodsInCategory = category.querySelectorAll('.payment-method');
                 methodsInCategory.forEach(method => {
                     const methodName = method.getAttribute('data-method');
@@ -451,24 +491,41 @@ document.addEventListener('DOMContentLoaded', function() {
         method.addEventListener('click', function() {
             const methodName = this.getAttribute('data-method');
             selectedPaymentMethodInput.value = methodName;
-            
-            // Remove selection from all methods
+
             paymentMethods.forEach(m => m.classList.remove('selected'));
-            
-            // Add selection to clicked method
+
             this.classList.add('selected');
 
-            updatePricingDetails(methodName);
+            const amount = parseFloat(amountInput.value) || 0;
+            let validPayment = true;
+            if (methodName === 'ALFAMART' || methodName === 'INDOMARET') {
+                const methodConfig = pricing[methodName];
+                validPayment = amount >= methodConfig.min && amount <= methodConfig.max;
+            }
+
+            if (validPayment) {
+                updatePricingDetails(methodName);
+            }
+            checkSubmitButtonState();
         });
     });
 
     amountInput.addEventListener('input', function() {
-        updateAllPricingDetails();
+        const amount = parseFloat(amountInput.value) || 0;
+        if (amount >= 1000) {
+            amountWarning.style.display = 'none';
+            updateAllPricingDetails();
+        } else {
+            amountWarning.style.display = 'block';
+        }
+        checkSubmitButtonState();
     });
 
-    // Update pricing details on page load
+    termsCheckbox.addEventListener('change', checkSubmitButtonState);
+
     updateAllPricingDetails();
 });
+
 </script>
 
 @endsection
