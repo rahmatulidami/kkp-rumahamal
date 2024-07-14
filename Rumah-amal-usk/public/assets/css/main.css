@@ -1321,6 +1321,22 @@ section,
     margin-top: 5px;
   }
 
+  .campaign-unggulan .button-selengkapnya{
+    color: #f2f9f9;
+    background: #1D7E05;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 5px 20px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
 /*--------------------------------------------------------------
 # Pengumuman Section
 --------------------------------------------------------------*/

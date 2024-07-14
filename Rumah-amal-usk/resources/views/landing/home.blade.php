@@ -262,6 +262,8 @@
 
   </div>
 
+  <a class="button-selengkapnya" href="/campaign" role="button">Selengkapnya</a>
+
 </div>
 
 </section><!-- /campaign Section -->
