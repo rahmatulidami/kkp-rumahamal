@@ -509,13 +509,25 @@
 
       <div class="col-lg-4 col-md-6 program-item isotope-item filter-app">
         <div class="program-content h-100">
-          <a href="assets/img/portfolio/app-1.jpg" data-gallery="program-gallery-app"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+          <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
         </div>
       </div><!-- End program Item -->
 
       <div class="col-lg-4 col-md-6 program-item isotope-item filter-product">
         <div class="program-content h-100">
-          <a href="assets/img/portfolio/product-1.jpg" data-gallery="program-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
+          <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
+        </div>
+      </div><!-- End program Item -->
+
+      <div class="col-lg-4 col-md-6 program-item isotope-item filter-app">
+        <div class="program-content h-100">
+          <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
+        </div>
+      </div><!-- End program Item -->
+
+      <div class="col-lg-4 col-md-6 program-item isotope-item filter-product">
+        <div class="program-content h-100">
+          <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
         </div>
       </div><!-- End program Item -->
 
