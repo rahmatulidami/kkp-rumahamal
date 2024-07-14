@@ -48,11 +48,11 @@
     </div>
 
   </div>
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-nexts"></div>
-  <div class="swiper-pagination"></div>
-</div>
-  </section>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-nexts"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
  <!-- End Hero Section -->
   
 <section id="icon-boxed" class="icon-boxes">
