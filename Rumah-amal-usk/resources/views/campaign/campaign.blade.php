@@ -45,7 +45,7 @@
 
       <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
         <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
+          <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
             <div class="progress-container">
@@ -58,8 +58,8 @@
                   <div class="amount">Rp. 100.000</div>
                 </div>
                 <div class="progress-end">
-                  <span>Donasi</span>
-                  <div class="days-left">Sisa 3 hari</div>
+                  <span>Durasi</span>
+                  <div class="days-left">3 hari lagi</div>
                 </div>
               </div>
             </div>
@@ -70,8 +70,8 @@
 
       <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-branding">
         <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
-          <div class="campaign-unggulan-info">
+        <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
+        <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
             <div class="progress-container">
               <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
@@ -83,8 +83,8 @@
                   <div class="amount">Rp. 100.000</div>
                 </div>
                 <div class="progress-end">
-                  <span>Donasi</span>
-                  <div class="days-left">Sisa 3 hari</div>
+                  <span>Durasi</span>
+                  <div class="days-left">3 hari lagi</div>
                 </div>
               </div>
             </div>
@@ -95,7 +95,7 @@
 
       <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-books">
         <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
+        <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
             <div class="progress-container">
@@ -108,8 +108,8 @@
                   <div class="amount">Rp. 100.000</div>
                 </div>
                 <div class="progress-end">
-                  <span>Donasi</span>
-                  <div class="days-left">Sisa 3 hari</div>
+                  <span>Durasi</span>
+                  <div class="days-left">3 hari lagi</div>
                 </div>
               </div>
             </div>
@@ -120,7 +120,7 @@
 
       <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-app">
         <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
+        <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
             <div class="progress-container">
@@ -133,8 +133,8 @@
                   <div class="amount">Rp. 100.000</div>
                 </div>
                 <div class="progress-end">
-                  <span>Donasi</span>
-                  <div class="days-left">Sisa 3 hari</div>
+                  <span>Durasi</span>
+                  <div class="days-left">3 hari lagi</div>
                 </div>
               </div>
             </div>
@@ -145,7 +145,7 @@
 
       <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
         <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
+        <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
             <div class="progress-container">
@@ -158,8 +158,8 @@
                   <div class="amount">Rp. 100.000</div>
                 </div>
                 <div class="progress-end">
-                  <span>Donasi</span>
-                  <div class="days-left">Sisa 3 hari</div>
+                  <span>Durasi</span>
+                  <div class="days-left">3 hari lagi</div>
                 </div>
               </div>
             </div>
@@ -170,7 +170,7 @@
 
       <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-branding">
         <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
+        <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
             <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
             <div class="progress-container">
@@ -183,8 +183,8 @@
                   <div class="amount">Rp. 100.000</div>
                 </div>
                 <div class="progress-end">
-                  <span>Donasi</span>
-                  <div class="days-left">Sisa 3 hari</div>
+                  <span>Durasi</span>
+                  <div class="days-left">3 hari lagi</div>
                 </div>
               </div>
             </div>
@@ -199,7 +199,4 @@
 
 </div>
 
-</section><!-- /Blog Pagination Section -->
-
-  </main>
-@endsection
+</section>

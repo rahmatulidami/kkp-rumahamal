@@ -57,6 +57,46 @@
 
     </section><!-- /About Section -->
 
+    <section id="visi" class="visi section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>VISI & MISI RUMAH AMAL USK</h2>
+    </div><!-- End Section Title -->
+
+        <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
+            <div class="container position-relative">
+            <div class="row gy-4 mt-5">
+                <div class="col-xl-4 col-md-6">
+                <div class="icon-box">
+                    <h4 class="title">VISI</h4>
+                    <p>Bersyukur atas rizki, berbagi kebahagian dengan sesama muslim.</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                <div class="icon-box">
+                    <h4 class="title">MISI</h4>
+                    <p>Menyempurnakan rukun islam, mensucikan harta dan mententramkan jiwa.</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                <div class="icon-box">
+                    <h4 class="title">LANDASAN UTAMA</h4>
+                    <p>Rumah amal masjid jamik USK menyediakan beberapa program donasi.</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                <div class="icon-box">
+                    <h4 class="title">LANDASAN UTAMA</h4>
+                    <p>Rumah amal masjid jamik USK menyediakan beberapa program donasi.</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </section><!-- /About Section -->
+
 
   </main>
 @endsection

@@ -2390,3 +2390,16 @@ section,
 .program .program-content:hover img {
     transform: scale(1.1);
 }
+
+/*--------------------------------------------------------------
+# Visi Section
+--------------------------------------------------------------*/
+
+
+.visi .visi-ra {
+    background-color: #1D7E05;
+}
+
+.visi .misi-ra {
+    background-color: #FFBB0C;
+}
