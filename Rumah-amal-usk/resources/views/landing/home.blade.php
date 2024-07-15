@@ -3,57 +3,61 @@
 @section('title', 'Beranda')
 
 @section('content')
-  <main class="main">
 
-<!-- Hero Section -->
-<section id="hero">
-<div class="container" data-aos="fade-up">
+<main class="main">
 
-<div class="hero-slider swiper init-swiper">
-  <script type="application/json" class="swiper-config">
-    {
-      "loop": true,
-      "speed": 600,
-      "autoplay": {
-        "delay": 5000
-      },
-      "slidesPerView": "auto",
-      "navigation": {
-        "nextEl": ".swiper-button-next",
-        "prevEl": ".swiper-button-prev"
-      },
-      "pagination": {
-        "el": ".swiper-pagination",
-        "type": "bullets",
-        "clickable": true
-      }
-    }
-  </script>
-  <div class="swiper-wrapper align-items-center">
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="container" data-aos="fade-up">
 
-    <div class="swiper-slide">
-      <img src="assets/img/campaign/palestine.png" alt="">
+    <div class="hero-slider swiper init-swiper">
+      <script type="application/json" class="swiper-config">
+        {
+          "loop": true,
+          "speed": 600,
+          "autoplay": {
+            "delay": 5000
+          },
+          "slidesPerView": "auto",
+          "navigation": {
+            "nextEl": ".swiper-button-next",
+            "prevEl": ".swiper-button-prev"
+          },
+          "pagination": {
+            "el": ".swiper-pagination",
+            "type": "bullets",
+            "clickable": true
+          }
+        }
+      </script>
+        <div class="swiper-wrapper align-items-center">
+
+          <div class="swiper-slide">
+            <img src="assets/img/campaign/palestine.png" alt="">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/img/campaign/palestine.png" alt="">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/img/campaign/palestine.png" alt="">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/img/campaign/palestine.png" alt="">
+          </div>
+
+          </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="swiper-slide">
-      <img src="assets/img/campaign/palestine.png" alt="">
-    </div>
-
-    <div class="swiper-slide">
-      <img src="assets/img/campaign/palestine.png" alt="">
-    </div>
-
-    <div class="swiper-slide">
-      <img src="assets/img/campaign/palestine.png" alt="">
-    </div>
-
-  </div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-nexts"></div>
-    <div class="swiper-pagination"></div>
-  </div>
-</section>
- <!-- End Hero Section -->
+  </section>
+  <!-- End Hero Section -->
   
 <section id="icon-boxed" class="icon-boxes">
   <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
@@ -543,21 +547,24 @@
 
 <!-- Call To Action Section -->
 <section id="call-to-action" class="call-to-action section dark-background">
-
-<div class="container">
-  <div class="content row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
-    <div class="col-xl-10">
-      <div class="text-center">
-        <div class="video-container">
-          <iframe id="youtube-video" src="https://www.youtube.com/embed/C1Asqu3uHxs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="container">
+    <div class="content row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
+      <div class="col-xl-10">
+        <div class="row d-flex flex-wrap">
+          <div class="col-md-8 text-center p-2">
+            <div class="video-container">
+              <iframe id="youtube-video" src="https://www.youtube.com/embed/C1Asqu3uHxs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="col-md-4 text-center p-2">
+            <div class="instagram-container">
+              <iframe src="https://www.instagram.com/rumahamal.usk/embed" frameborder="0"></iframe>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-
-
 </section><!-- /Call To Action Section -->
 
 <!-- Clients Section -->
