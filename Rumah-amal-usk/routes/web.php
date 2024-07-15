@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\AdminController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,8 +30,7 @@ Route::get('/failure', function () {
     return view('failure');
 });
 
-Route::post('/xendit-callback', [DonationController::class, 'handleCallback']);
-
+Route::post('/xendit-callback', [DonationController::class, 'handleXenditCallback']);
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
