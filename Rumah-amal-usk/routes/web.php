@@ -68,3 +68,7 @@ Route::get('/campaign', function () {
 Route::get('/profil', function () {
     return view('profil/profil');
 });
+
+Route::get('/donasi-infak', function () {
+    return view('donation/donasi-infak');
+});

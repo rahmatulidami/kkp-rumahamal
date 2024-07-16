@@ -777,8 +777,15 @@ h6 {
     font-size: 20px;
 }
 
-.footer iframe{
+.footer iframe {
     border-radius: 20px;
+}
+
+@media (max-width: 767px) {
+    .footer iframe {
+        width: 300px;
+        height: 200px;
+    }
 }
 
 /*--------------------------------------------------------------
@@ -2463,3 +2470,54 @@ section,
 .visi-box:hover {
     background-color: color-mix(in srgb, #F5F7F8, white 10%);
 }
+
+/*--------------------------------------------------------------
+# Infak Section
+--------------------------------------------------------------*/
+.infak .container {
+    display: flex;
+  }
+  
+  .infak .left {
+    flex: 1; 
+    background-color: #f0f0f0; 
+    padding: 20px; 
+  }
+  
+  .infak .right {
+    flex: 3; 
+    background-color: #e0e0e0;
+    padding: 20px; 
+  }
+  
+  .infak .container .left .button-infak{
+    color: #45474B;
+    background: #FFBB0C;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 15px 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+
+  .infak .container .left .button-zakat{
+    color: #45474B;
+    background:#d9d9d9;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 15px 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+  }

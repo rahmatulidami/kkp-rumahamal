@@ -68,7 +68,7 @@
 
                       <div class="progress-end">
                           <span>Dana dibutuhkan</span>
-                          <div class="jumlah">Rp. 1.000.000</div>
+                          <div class="jumlah">Rp. 3.000.000</div>
                       </div>
                   </div>
                   
@@ -103,7 +103,7 @@
 
                       <div class="progress-end">
                           <span>Dana dibutuhkan</span>
-                          <div class="jumlah">Rp. 1.000.000</div>
+                          <div class="jumlah">Rp. 3.000.000</div>
                       </div>
                   </div>
                   
@@ -138,7 +138,7 @@
 
                       <div class="progress-end">
                           <span>Dana dibutuhkan</span>
-                          <div class="jumlah">Rp. 1.000.000</div>
+                          <div class="jumlah">Rp. 3.000.000</div>
                       </div>
                   </div>
                   
@@ -173,7 +173,7 @@
 
                       <div class="progress-end">
                           <span>Dana dibutuhkan</span>
-                          <div class="jumlah">Rp. 1.000.000</div>
+                          <div class="jumlah">Rp. 3.000.000</div>
                       </div>
                   </div>
                   
@@ -208,7 +208,7 @@
 
                       <div class="progress-end">
                           <span>Dana dibutuhkan</span>
-                          <div class="jumlah">Rp. 1.000.000</div>
+                          <div class="jumlah">Rp. 3.000.000</div>
                       </div>
                   </div>
                   
@@ -243,7 +243,7 @@
 
                       <div class="progress-end">
                           <span>Dana dibutuhkan</span>
-                          <div class="jumlah">Rp. 1.000.000</div>
+                          <div class="jumlah">Rp. 3.000.000</div>
                       </div>
                   </div>
                   
@@ -260,3 +260,7 @@
 </div>
 
 </section>
+
+</main>
+
+@endsection
