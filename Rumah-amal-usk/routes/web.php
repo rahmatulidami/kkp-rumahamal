@@ -85,3 +85,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::get('/donasi-infak', function () {
+    return view('donation/donasi-infak');
+});

@@ -3,57 +3,61 @@
 @section('title', 'Beranda')
 
 @section('content')
-  <main class="main">
 
-<!-- Hero Section -->
-<section id="hero">
-<div class="container" data-aos="fade-up">
+<main class="main">
 
-<div class="hero-slider swiper init-swiper">
-  <script type="application/json" class="swiper-config">
-    {
-      "loop": true,
-      "speed": 600,
-      "autoplay": {
-        "delay": 5000
-      },
-      "slidesPerView": "auto",
-      "navigation": {
-        "nextEl": ".swiper-button-next",
-        "prevEl": ".swiper-button-prev"
-      },
-      "pagination": {
-        "el": ".swiper-pagination",
-        "type": "bullets",
-        "clickable": true
-      }
-    }
-  </script>
-  <div class="swiper-wrapper align-items-center">
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="container" data-aos="fade-up">
 
-    <div class="swiper-slide">
-      <img src="assets/img/campaign/palestine.png" alt="">
+    <div class="hero-slider swiper init-swiper">
+      <script type="application/json" class="swiper-config">
+        {
+          "loop": true,
+          "speed": 600,
+          "autoplay": {
+            "delay": 5000
+          },
+          "slidesPerView": "auto",
+          "navigation": {
+            "nextEl": ".swiper-button-next",
+            "prevEl": ".swiper-button-prev"
+          },
+          "pagination": {
+            "el": ".swiper-pagination",
+            "type": "bullets",
+            "clickable": true
+          }
+        }
+      </script>
+        <div class="swiper-wrapper align-items-center">
+
+          <div class="swiper-slide">
+            <img src="assets/img/campaign/palestine.png" alt="">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/img/campaign/palestine.png" alt="">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/img/campaign/palestine.png" alt="">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/img/campaign/palestine.png" alt="">
+          </div>
+
+          </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="swiper-slide">
-      <img src="assets/img/campaign/palestine.png" alt="">
-    </div>
-
-    <div class="swiper-slide">
-      <img src="assets/img/campaign/palestine.png" alt="">
-    </div>
-
-    <div class="swiper-slide">
-      <img src="assets/img/campaign/palestine.png" alt="">
-    </div>
-
-  </div>
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-nexts"></div>
-  <div class="swiper-pagination"></div>
-</div>
   </section>
- <!-- End Hero Section -->
+  <!-- End Hero Section -->
   
 <section id="icon-boxed" class="icon-boxes">
   <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
@@ -63,7 +67,7 @@
           <div class="icon-box">
             <h4 class="title"><a href="#" class="stretched-link">Infak</a></h4>
             <p>Bersyukur atas rizki, berbagi kebahagian dengan sesama muslim.</p>
-            <a class="btn-btn-primary" href="#" role="button">Infak</a>
+            <a class="btn-btn-primary" href="/donasi-infak" role="button">Infak</a>
           </div>
         </div>
         <div class="col-xl-4 col-md-6">
@@ -108,159 +112,220 @@
 
     <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
-      <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
-        <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
+    <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
+      <div class="campaign-unggulan-content h-100">
+          <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
-            <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
-            <div class="progress-container">
-              <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar w-75"></div>
-              </div>
-              <div class="progress-info">
-                <div class="progress-start">
-                  <span>Terkumpul</span>
-                  <div class="amount">Rp. 100.000</div>
-                </div>
-                <div class="progress-end">
-                  <span>Donasi</span>
-                  <div class="days-left">Sisa 3 hari</div>
-                </div>
-              </div>
-            </div>
-            <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
-          </div>
-        </div>
-      </div><!-- End campaign-unggulan Item -->
+              <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
+              <div class="progress-container">
+                <div class="Durasi">
+                      <div class="sisa-hari">
+                        <span>Durasi</span>
+                        <div class="days-left">3 hari lagi</div>
+                      </div>
+                  </div>
 
-      <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-branding">
-        <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
+                  <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                      <div class="progress-bar w-75"></div>
+                  </div>
+
+                  <div class="progress-info">
+                      <div class="progress-start">
+                          <span>Terkumpul</span>
+                          <div class="amount">Rp. 2.500.000</div>
+                      </div>
+
+                      <div class="progress-end">
+                          <span>Dana dibutuhkan</span>
+                          <div class="jumlah">Rp. 3.000.000</div>
+                      </div>
+                  </div>
+                  
+              </div>
+              <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
+          </div>
+      </div>
+  </div><!-- End campaign-unggulan Item -->
+
+
+  <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
+      <div class="campaign-unggulan-content h-100">
+          <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
-            <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
-            <div class="progress-container">
-              <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar w-75"></div>
-              </div>
-              <div class="progress-info">
-                <div class="progress-start">
-                  <span>Terkumpul</span>
-                  <div class="amount">Rp. 100.000</div>
-                </div>
-                <div class="progress-end">
-                  <span>Donasi</span>
-                  <div class="days-left">Sisa 3 hari</div>
-                </div>
-              </div>
-            </div>
-            <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
-          </div>
-        </div>
-      </div><!-- End campaign-unggulan Item -->
+              <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
+              <div class="progress-container">
+                <div class="Durasi">
+                      <div class="sisa-hari">
+                        <span>Durasi</span>
+                        <div class="days-left">3 hari lagi</div>
+                      </div>
+                  </div>
 
-      <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-books">
-        <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
+                  <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                      <div class="progress-bar w-75"></div>
+                  </div>
+
+                  <div class="progress-info">
+                      <div class="progress-start">
+                          <span>Terkumpul</span>
+                          <div class="amount">Rp. 2.500.000</div>
+                      </div>
+
+                      <div class="progress-end">
+                          <span>Dana dibutuhkan</span>
+                          <div class="jumlah">Rp. 3.000.000</div>
+                      </div>
+                  </div>
+                  
+              </div>
+              <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
+          </div>
+      </div>
+  </div><!-- End campaign-unggulan Item -->
+
+  <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
+      <div class="campaign-unggulan-content h-100">
+          <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
-            <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
-            <div class="progress-container">
-              <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar w-75"></div>
-              </div>
-              <div class="progress-info">
-                <div class="progress-start">
-                  <span>Terkumpul</span>
-                  <div class="amount">Rp. 100.000</div>
-                </div>
-                <div class="progress-end">
-                  <span>Donasi</span>
-                  <div class="days-left">Sisa 3 hari</div>
-                </div>
-              </div>
-            </div>
-            <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
-          </div>
-        </div>
-      </div><!-- End campaign-unggulan Item -->
+              <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
+              <div class="progress-container">
+                <div class="Durasi">
+                      <div class="sisa-hari">
+                        <span>Durasi</span>
+                        <div class="days-left">3 hari lagi</div>
+                      </div>
+                  </div>
 
-      <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-app">
-        <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
+                  <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                      <div class="progress-bar w-75"></div>
+                  </div>
+
+                  <div class="progress-info">
+                      <div class="progress-start">
+                          <span>Terkumpul</span>
+                          <div class="amount">Rp. 2.500.000</div>
+                      </div>
+
+                      <div class="progress-end">
+                          <span>Dana dibutuhkan</span>
+                          <div class="jumlah">Rp. 3.000.000</div>
+                      </div>
+                  </div>
+                  
+              </div>
+              <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
+          </div>
+      </div>
+  </div><!-- End campaign-unggulan Item -->
+
+  <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
+      <div class="campaign-unggulan-content h-100">
+          <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
-            <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
-            <div class="progress-container">
-              <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar w-75"></div>
-              </div>
-              <div class="progress-info">
-                <div class="progress-start">
-                  <span>Terkumpul</span>
-                  <div class="amount">Rp. 100.000</div>
-                </div>
-                <div class="progress-end">
-                  <span>Donasi</span>
-                  <div class="days-left">Sisa 3 hari</div>
-                </div>
-              </div>
-            </div>
-            <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
-          </div>
-        </div>
-      </div><!-- End campaign-unggulan Item -->
+              <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
+              <div class="progress-container">
+                <div class="Durasi">
+                      <div class="sisa-hari">
+                        <span>Durasi</span>
+                        <div class="days-left">3 hari lagi</div>
+                      </div>
+                  </div>
 
-      <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
-        <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
+                  <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                      <div class="progress-bar w-75"></div>
+                  </div>
+
+                  <div class="progress-info">
+                      <div class="progress-start">
+                          <span>Terkumpul</span>
+                          <div class="amount">Rp. 2.500.000</div>
+                      </div>
+
+                      <div class="progress-end">
+                          <span>Dana dibutuhkan</span>
+                          <div class="jumlah">Rp. 3.000.000</div>
+                      </div>
+                  </div>
+                  
+              </div>
+              <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
+          </div>
+      </div>
+  </div><!-- End campaign-unggulan Item -->
+
+  <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
+      <div class="campaign-unggulan-content h-100">
+          <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
-            <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
-            <div class="progress-container">
-              <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar w-75"></div>
-              </div>
-              <div class="progress-info">
-                <div class="progress-start">
-                  <span>Terkumpul</span>
-                  <div class="amount">Rp. 100.000</div>
-                </div>
-                <div class="progress-end">
-                  <span>Donasi</span>
-                  <div class="days-left">Sisa 3 hari</div>
-                </div>
-              </div>
-            </div>
-            <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
-          </div>
-        </div>
-      </div><!-- End campaign-unggulan Item -->
+              <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
+              <div class="progress-container">
+                <div class="Durasi">
+                      <div class="sisa-hari">
+                        <span>Durasi</span>
+                        <div class="days-left">3 hari lagi</div>
+                      </div>
+                  </div>
 
-      <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-branding">
-        <div class="campaign-unggulan-content h-100">
-          <a href="assets/img/campaign/palestine.png" data-gallery="campaign-unggulan-gallery-app" class="glightbox"><img src="assets/img/campaign/palestine.png" class="img-fluid" alt=""></a>
+                  <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                      <div class="progress-bar w-75"></div>
+                  </div>
+
+                  <div class="progress-info">
+                      <div class="progress-start">
+                          <span>Terkumpul</span>
+                          <div class="amount">Rp. 2.500.000</div>
+                      </div>
+
+                      <div class="progress-end">
+                          <span>Dana dibutuhkan</span>
+                          <div class="jumlah">Rp. 3.000.000</div>
+                      </div>
+                  </div>
+                  
+              </div>
+              <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
+          </div>
+      </div>
+  </div><!-- End campaign-unggulan Item -->
+
+  <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
+      <div class="campaign-unggulan-content h-100">
+          <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
-            <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
-            <div class="progress-container">
-              <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar w-75"></div>
-              </div>
-              <div class="progress-info">
-                <div class="progress-start">
-                  <span>Terkumpul</span>
-                  <div class="amount">Rp. 100.000</div>
-                </div>
-                <div class="progress-end">
-                  <span>Donasi</span>
-                  <div class="days-left">Sisa 3 hari</div>
-                </div>
-              </div>
-            </div>
-            <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
-          </div>
-        </div>
-      </div><!-- End campaign-unggulan Item -->
+              <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
+              <div class="progress-container">
+                <div class="Durasi">
+                      <div class="sisa-hari">
+                        <span>Durasi</span>
+                        <div class="days-left">3 hari lagi</div>
+                      </div>
+                  </div>
 
-    </div><!-- End Portfolio Container -->
+                  <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                      <div class="progress-bar w-75"></div>
+                  </div>
+
+                  <div class="progress-info">
+                      <div class="progress-start">
+                          <span>Terkumpul</span>
+                          <div class="amount">Rp. 2.500.000</div>
+                      </div>
+
+                      <div class="progress-end">
+                          <span>Dana dibutuhkan</span>
+                          <div class="jumlah">Rp. 3.000.000</div>
+                      </div>
+                  </div>
+                  
+              </div>
+              <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
+          </div>
+      </div>
+  </div><!-- End campaign-unggulan Item -->
 
   </div>
+
+  <a class="button-selengkapnya" href="/campaign" role="button">Selengkapnya</a>
 
 </div>
 
@@ -509,13 +574,25 @@
 
       <div class="col-lg-4 col-md-6 program-item isotope-item filter-app">
         <div class="program-content h-100">
-          <a href="assets/img/portfolio/app-1.jpg" data-gallery="program-gallery-app"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+          <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
         </div>
       </div><!-- End program Item -->
 
       <div class="col-lg-4 col-md-6 program-item isotope-item filter-product">
         <div class="program-content h-100">
-          <a href="assets/img/portfolio/product-1.jpg" data-gallery="program-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
+          <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
+        </div>
+      </div><!-- End program Item -->
+
+      <div class="col-lg-4 col-md-6 program-item isotope-item filter-app">
+        <div class="program-content h-100">
+          <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
+        </div>
+      </div><!-- End program Item -->
+
+      <div class="col-lg-4 col-md-6 program-item isotope-item filter-product">
+        <div class="program-content h-100">
+          <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
         </div>
       </div><!-- End program Item -->
 
@@ -529,21 +606,24 @@
 
 <!-- Call To Action Section -->
 <section id="call-to-action" class="call-to-action section dark-background">
-
-<div class="container">
-  <div class="content row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
-    <div class="col-xl-10">
-      <div class="text-center">
-        <div class="video-container">
-          <iframe id="youtube-video" src="https://www.youtube.com/embed/C1Asqu3uHxs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="container">
+    <div class="content row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
+      <div class="col-xl-10">
+        <div class="row d-flex flex-wrap">
+          <div class="col-md-8 text-center p-2">
+            <div class="video-container">
+              <iframe id="youtube-video" src="https://www.youtube.com/embed/C1Asqu3uHxs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="col-md-4 text-center p-2">
+            <div class="instagram-container">
+              <iframe src="https://www.instagram.com/rumahamal.usk/embed" frameborder="0"></iframe>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-
-
 </section><!-- /Call To Action Section -->
 
 <!-- Clients Section -->
