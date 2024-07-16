@@ -37,6 +37,13 @@
                     <p>Silakan isi jumlah infakmu. Insya Allah berkah.</p>
                 </div>
 
+                <div class="input-group">
+                    <button id="currency-button">Rp.</button>
+                    <input type="number" id="infak-amount" placeholder="Masukkan jumlah" oninput="updateTotal()">
+                </div>
+
+                <p id="total-infak"></p>
+
                 <div class="button">
                     <a class="button-infak" href="/donate" role="button">Infak</a>
                 </div>
@@ -47,3 +54,16 @@
     </section> <!-- End Section -->
 </main>
 @endsection
+
+<script>
+  function updateTotal() {
+    const amount = document.getElementById('infak-amount').value;
+    const totalInfak = document.getElementById('total-infak');
+
+    if (amount) {
+      totalInfak.textContent = `Jumlah total infakmu adalah Rp. ${amount}`;
+    } else {
+      totalInfak.textContent = '';
+    }
+  }
+</script>

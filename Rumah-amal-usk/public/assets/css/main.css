@@ -2557,3 +2557,38 @@ section,
     font-weight: 700;
     border-radius: 10px;
   }
+
+  .input-group {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  #currency-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  
+  #infak-amount {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-left: none;
+    font-size: 16px;
+    flex: 1;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  
+  #total-infak {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #28a745;
+  }
+  
+  
