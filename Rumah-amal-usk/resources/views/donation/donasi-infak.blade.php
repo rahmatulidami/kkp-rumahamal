@@ -24,10 +24,25 @@
     <section id="infak" class="infak section">
         <div class="container">
             <div class="left">
-                <a class="button-infak" role="button">Infak</a>
-                <a class="button-zakat" role="button">Zakat</a>
+                <a class="button-infak" href="/donasi-infak" role="button">Infak</a>
+                <a class="button-zakat" href="/" role="button">Zakat</a>
             </div>
-            <div class="right">Right Content</div>
+            <div class="right">
+                <div class="judul">
+                    <i class="bi bi-cash-coin"></i>
+                    <h3>Ayo Mulai Berinfak!</h3>
+                </div>
+
+                <div>
+                    <p>Silakan isi jumlah infakmu. Insya Allah berkah.</p>
+                </div>
+
+                <div class="button">
+                    <a class="button-infak" href="/donate" role="button">Infak</a>
+                </div>
+
+                
+            </div>
         </div>
     </section> <!-- End Section -->
 </main>

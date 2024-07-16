@@ -2480,14 +2480,18 @@ section,
   
   .infak .left {
     flex: 1; 
-    background-color: #f0f0f0; 
+    background-color: #ffffff; 
     padding: 20px; 
   }
   
   .infak .right {
     flex: 3; 
-    background-color: #e0e0e0;
-    padding: 20px; 
+    padding: 40px; 
+    background-color: #ffffff;
+    box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    border-radius: 20px;
+    border: solid 1px rgba(0, 86, 33, 0.1);
   }
   
   .infak .container .left .button-infak{
@@ -2520,4 +2524,36 @@ section,
     padding: 15px 10px;
     border-radius: 10px;
     transition: 0.3s;
+  }
+
+  .right .judul {
+    display: flex;
+    align-items: center;
+  }
+
+  .right .judul i {
+    margin-right: 10px;
+    font-size: 40px;
+    color: #28a745;
+  }
+
+  .right .judul h3 {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #777676;
+    font-weight: 800;
+  }
+
+  .right .button {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .right .button-infak {
+    color: #ffffff;
+    background: #1D7E05;
+    padding: 10px 40px;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 10px;
   }

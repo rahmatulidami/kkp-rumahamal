@@ -67,7 +67,7 @@
           <div class="icon-box">
             <h4 class="title"><a href="#" class="stretched-link">Infak</a></h4>
             <p>Bersyukur atas rizki, berbagi kebahagian dengan sesama muslim.</p>
-            <a class="btn-btn-primary" href="#" role="button">Infak</a>
+            <a class="btn-btn-primary" href="/donasi-infak" role="button">Infak</a>
           </div>
         </div>
         <div class="col-xl-4 col-md-6">
