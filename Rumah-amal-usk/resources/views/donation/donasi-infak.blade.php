@@ -6,20 +6,6 @@
 
 <main class="main">
 
-  <!-- Page Title -->
-  <div class="page-title">
-    <div class="heading">
-    </div>
-    <nav class="breadcrumbs">
-      <div class="container">
-        <ol>
-          <li><a href="/">Home</a></li>
-          <li class="current">Infak</li>
-        </ol>
-      </div>
-    </nav>
-  </div><!-- End Page Title -->
-
   <!-- Section -->
   <section id="infak" class="infak section">
     <div class="container">

@@ -2476,6 +2476,7 @@ section,
 --------------------------------------------------------------*/
 .infak .container {
     display: flex;
+    padding-top: 70px;
   }
   
   .infak .left {
@@ -2610,6 +2611,7 @@ section,
 --------------------------------------------------------------*/
 .zakat .container {
     display: flex;
+    padding-top: 70px;
   }
   
   .zakat .left {
@@ -2736,5 +2738,10 @@ section,
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+  }
+  
+  .total-amount {
+    font-size: 24px;
+    font-weight: bold;
   }
   

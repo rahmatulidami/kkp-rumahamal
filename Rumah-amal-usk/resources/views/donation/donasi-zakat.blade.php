@@ -6,20 +6,6 @@
 
 <main class="main">
 
-  <!-- Page Title -->
-  <div class="page-title">
-    <div class="heading">
-    </div>
-    <nav class="breadcrumbs">
-      <div class="container">
-        <ol>
-          <li><a href="/">Home</a></li>
-          <li class="current">Zakat</li>
-        </ol>
-      </div>
-    </nav>
-  </div><!-- End Page Title -->
-
   <!-- Section -->
   <section id="zakat" class="zakat section">
     <div class="container">
@@ -72,14 +58,28 @@
 
 <script>
     function updateTotal() {
-        const amount = document.getElementById('infak-amount').value;
-        const infakType = document.getElementById('infak-type').value;
-        const totalInfak = document.getElementById('total-infak');
+    const amount = document.getElementById('infak-amount').value;
+    const zakatType = document.getElementById('infak-type').value;
+    const totalInfak = document.getElementById('total-infak');
+    let zakatAmount = 0;
 
-        if (amount) {
-            totalInfak.textContent = `Jumlah total Zakatmu adalah Rp. ${amount} untuk ${infakType}`;
-        } else {
-            totalInfak.textContent = '';
-        }
+    if (amount && zakatType) {
+      switch(zakatType) {
+        case 'Zakat Maal':
+        case 'Zakat Emas':
+        case 'Zakat Perniagaan':
+          zakatAmount = amount * 0.025;
+          break;
+        case 'Zakat Fitrah':
+          zakatAmount = 30000; // Fixed amount for Zakat Fitrah
+          break;
+        default:
+          zakatAmount = 0;
+      }
+
+      totalInfak.innerHTML = `Jumlah total Zakat ${zakatType}mu adalah <span class="total-amount">Rp. ${zakatAmount.toFixed(2)}`;
+    } else {
+      totalInfak.textContent = '';
     }
+  }
 </script>
