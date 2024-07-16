@@ -2476,6 +2476,7 @@ section,
 --------------------------------------------------------------*/
 .infak .container {
     display: flex;
+    padding-top: 70px;
   }
   
   .infak .left {
@@ -2529,6 +2530,7 @@ section,
   .right .judul {
     display: flex;
     align-items: center;
+    padding-bottom: 30px;
   }
 
   .right .judul i {
@@ -2547,6 +2549,7 @@ section,
   .right .button {
     display: flex;
     justify-content: flex-end;
+    padding-top: 40px;
   }
 
   .right .button-infak {
@@ -2562,6 +2565,7 @@ section,
     display: flex;
     align-items: center;
     margin-top: 10px;
+    padding-top: 20px
   }
   
   #currency-button {
@@ -2591,4 +2595,153 @@ section,
     color: #28a745;
   }
   
+  #infak-type {
+    margin-top: 10px;
+    padding: 10px;
+    color: #777676;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+
+  /*--------------------------------------------------------------
+# Zakat Section
+--------------------------------------------------------------*/
+.zakat .container {
+    display: flex;
+    padding-top: 70px;
+  }
+  
+  .zakat .left {
+    flex: 1; 
+    background-color: #ffffff; 
+    padding: 20px; 
+  }
+  
+  .zakat .right {
+    flex: 3; 
+    padding: 40px; 
+    background-color: #ffffff;
+    box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    border-radius: 20px;
+    border: solid 1px rgba(0, 86, 33, 0.1);
+  }
+  
+  .zakat .container .left .button-infak{
+    color: #45474B;
+    background: #d9d9d9;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 15px 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+
+  .zakat .container .left .button-zakat{
+    color: #45474B;
+    background:#FFBB0C;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 15px 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+
+  .right .judul {
+    display: flex;
+    align-items: center;
+    padding-bottom: 30px;
+  }
+
+  .right .judul i {
+    margin-right: 10px;
+    font-size: 40px;
+    color: #28a745;
+  }
+
+  .right .judul h3 {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #777676;
+    font-weight: 800;
+  }
+
+  .right .button {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 40px;
+  }
+
+  .right .button-infak {
+    color: #ffffff;
+    background: #1D7E05;
+    padding: 10px 40px;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 10px;
+  }
+
+  .input-group {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 20px
+  }
+  
+  #currency-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  
+  #infak-amount {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-left: none;
+    font-size: 16px;
+    flex: 1;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  
+  #total-infak {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #28a745;
+  }
+  
+  #infak-type {
+    margin-top: 10px;
+    padding: 10px;
+    color: #777676;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .total-amount {
+    font-size: 24px;
+    font-weight: bold;
+  }
   

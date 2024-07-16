@@ -65,23 +65,23 @@
       <div class="row gy-4 mt-5">
         <div class="col-xl-4 col-md-6">
           <div class="icon-box">
-            <h4 class="title"><a href="#" class="stretched-link">Infak</a></h4>
+            <h4 class="title"><a href="/donasi-infak" class="stretched-link">Infak</a></h4>
             <p>Bersyukur atas rizki, berbagi kebahagian dengan sesama muslim.</p>
             <a class="btn-btn-primary" href="/donasi-infak" role="button">Infak</a>
           </div>
         </div>
         <div class="col-xl-4 col-md-6">
           <div class="icon-box">
-            <h4 class="title"><a href="#" class="stretched-link">Zakat</a></h4>
+            <h4 class="title"><a href="/donasi-zakat" class="stretched-link">Zakat</a></h4>
             <p>Menyempurnakan rukun islam, mensucikan harta dan mententramkan jiwa.</p>
-            <a class="btn-btn-primary" href="#" role="button">Zakat</a>
+            <a class="btn-btn-primary" href="/donasi-zakat" role="button">Zakat</a>
           </div>
         </div>
         <div class="col-xl-4 col-md-6">
           <div class="icon-box">
-            <h4 class="title"><a href="#" class="stretched-link">Program</a></h4>
+            <h4 class="title"><a href="#program" class="stretched-link">Program</a></h4>
             <p>Rumah amal masjid jamik USK menyediakan beberapa program donasi.</p>
-            <a class="btn-btn-primary" href="#" role="button">Program</a>
+            <a class="btn-btn-primary" href="#program" role="button">Program</a>
           </div>
         </div>
       </div>
