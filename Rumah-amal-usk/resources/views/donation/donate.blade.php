@@ -184,6 +184,8 @@
                     </div>
                 <div id="payment-details" class="mt-3"></div>
                 <div id="payment-method-warning" class="text-danger" style="display: none;">Silakan pilih metode pembayaran</div>
+                <div id="alfamart-warning" class="text-danger" style="display: none;">Donasi melalui Alfamart minimal Rp. 10.000</div>
+                <div id="indomaret-warning" class="text-danger" style="display: none;">Donasi melalui Indomaret minimal Rp. 10.000</div>
                 <div class="form-check mt-3">
                     <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
                     <label class="form-check-label" for="terms">Saya setuju dengan syarat dan ketentuan yang berlaku</label>
@@ -378,6 +380,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitButton = document.querySelector('button[type="submit"]');
     const amountWarning = document.getElementById('amount-warning');
     const paymentMethodWarning = document.getElementById('payment-method-warning');
+    const alfamartWarning = document.getElementById('alfamart-warning');
+    const indomaretWarning = document.getElementById('indomaret-warning');
     const pricing = {
         QRIS: { fee: 0.007, fixed: false },
         SHOPEEPAY: { fee: 0.02, fixed: false },
@@ -397,9 +401,19 @@ document.addEventListener('DOMContentLoaded', function() {
         let validAmount = amount >= 1000;
         let validPayment = true;
 
+        alfamartWarning.style.display = 'none';
+        indomaretWarning.style.display = 'none';
+
         if (selectedPaymentMethod === 'ALFAMART' || selectedPaymentMethod === 'INDOMARET') {
             const methodConfig = pricing[selectedPaymentMethod];
             validPayment = amount >= methodConfig.min && amount <= methodConfig.max;
+            if (!validPayment) {
+                if (selectedPaymentMethod === 'ALFAMART') {
+                    alfamartWarning.style.display = 'block';
+                } else if (selectedPaymentMethod === 'INDOMARET') {
+                    indomaretWarning.style.display = 'block';
+                }
+            }
         }
 
         if (selectedPaymentMethod === '') {
@@ -501,6 +515,19 @@ document.addEventListener('DOMContentLoaded', function() {
             if (methodName === 'ALFAMART' || methodName === 'INDOMARET') {
                 const methodConfig = pricing[methodName];
                 validPayment = amount >= methodConfig.min && amount <= methodConfig.max;
+                if (!validPayment) {
+                    if (methodName === 'ALFAMART') {
+                        alfamartWarning.style.display = 'block';
+                    } else if (methodName === 'INDOMARET') {
+                        indomaretWarning.style.display = 'block';
+                    }
+                } else {
+                    alfamartWarning.style.display = 'none';
+                    indomaretWarning.style.display = 'none';
+                }
+            } else {
+                alfamartWarning.style.display = 'none';
+                indomaretWarning.style.display = 'none';
             }
 
             if (validPayment) {
@@ -517,6 +544,8 @@ document.addEventListener('DOMContentLoaded', function() {
             updateAllPricingDetails();
         } else {
             amountWarning.style.display = 'block';
+            alfamartWarning.style.display = 'none';
+            indomaretWarning.style.display = 'none';
         }
         checkSubmitButtonState();
     });
