@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title', 'Donasi-infak | Rumah Amal USK')
+@section('title', 'Donasi-Zakat | Rumah Amal USK')
 
 @section('content')
 
@@ -14,14 +14,14 @@
       <div class="container">
         <ol>
           <li><a href="/">Home</a></li>
-          <li class="current">Infak</li>
+          <li class="current">Zakat</li>
         </ol>
       </div>
     </nav>
   </div><!-- End Page Title -->
 
   <!-- Section -->
-  <section id="infak" class="infak section">
+  <section id="zakat" class="zakat section">
     <div class="container">
       <div class="left">
         <a class="button-infak" href="/donasi-infak" role="button">Infak</a>
@@ -29,23 +29,23 @@
       </div>
       <div class="right">
         <div class="judul">
-          <i class="bi bi-cash-coin"></i>
-          <h3>Ayo Mulai Berinfak!</h3>
+          <i class="bi bi-cash"></i>
+          <h3>Ayo Bayar Zakat!</h3>
         </div>
 
         <div>
-          <p>Silakan isi jumlah infakmu. Insya Allah berkah.</p>
-        </div>
-
-        <div>
-          <label for="infak-type">Pilih Jenis Infak:</label>
+          <label for="infak-type">Pilih Jenis Zakat:</label>
           <select id="infak-type" onchange="updateTotal()">
-            <option value="">--Pilih Jenis Infak--</option>
-            <option value="Infak Anak Yatim">Infak Anak Yatim</option>
-            <option value="Infak Pembangunan Masjid">Infak Pembangunan Masjid</option>
-            <option value="Infak Pendidikan">Infak Pendidikan</option>
-            <option value="Infak Kesehatan">Infak Kesehatan</option>
+            <option value="">--Pilih Jenis Zakat--</option>
+            <option value="Zakat Maal">Maal</option>
+            <option value="Zakat Fitrah">Fitrah</option>
+            <option value="Zakat Emas">Emas</option>
+            <option value="Zakat Perniagaan">Perniagaan</option>
           </select>
+        </div>
+
+        <div>
+          <p>Coba masukkan jumlah hartamu dan kalkulator kami akan menghitung jumlah zakatnya.</p>
         </div>
 
         <div class="input-group">
@@ -53,10 +53,14 @@
           <input type="number" id="infak-amount" placeholder="Masukkan jumlah" oninput="updateTotal()">
         </div>
 
+        <div>
+          <p>Pastikan harta Anda memenuhi syarat untuk berzakat / sudah nishab (senilai 85 gram emas)</p>
+        </div>
+        
         <p id="total-infak"></p>
 
         <div class="button">
-          <a class="button-infak" href="/donate" role="button">Infak</a>
+          <a class="button-infak" href="/donate" role="button">Bayar Zakat</a>
         </div>
       </div>
     </div>
@@ -73,7 +77,7 @@
         const totalInfak = document.getElementById('total-infak');
 
         if (amount) {
-            totalInfak.textContent = `Jumlah total infakmu adalah Rp. ${amount} untuk ${infakType}`;
+            totalInfak.textContent = `Jumlah total Zakatmu adalah Rp. ${amount} untuk ${infakType}`;
         } else {
             totalInfak.textContent = '';
         }
