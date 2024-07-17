@@ -94,3 +94,7 @@ Route::get('/donasi-infak', function () {
 Route::get('/donasi-zakat', function () {
     return view('donation/donasi-zakat');
 });
+
+Route::get('/detail-campaign', function () {
+    return view('campaign/detail-campaign');
+});

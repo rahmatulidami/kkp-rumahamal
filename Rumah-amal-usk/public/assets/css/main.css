@@ -2606,7 +2606,7 @@ section,
   }
   
 
-  /*--------------------------------------------------------------
+/*--------------------------------------------------------------
 # Zakat Section
 --------------------------------------------------------------*/
 .zakat .container {
@@ -2745,3 +2745,133 @@ section,
     font-weight: bold;
   }
   
+
+/*--------------------------------------------------------------
+# Campaign-detail Section
+--------------------------------------------------------------*/
+.campaign-detail .container {
+    display: flex;
+    padding-top: 70px;
+  }
+  
+  .campaign-detail .left {
+    flex: 2; 
+    background-color: #ffffff; 
+    padding: 20px; 
+  }
+  .campaign-detail .left img {
+    border-radius: 20px;
+  }
+
+  
+  .campaign-detail .right {
+    flex: 2; 
+    padding: 40px; 
+    background-color: #ffffff;
+    box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    border-radius: 20px;
+    border: solid 1px rgba(0, 86, 33, 0.1);
+  }
+
+  .campaign-detail-info h4{
+    font-size: 26px;
+    font-weight: 900;
+  }
+
+  .campaign-detail-info a{
+    color: #45474B;
+  }
+  
+  .campaign-detail .progress-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 10px;
+  }
+  
+  .campaign-detail .progress {
+    width: 100%;
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  .campaign-detail .progress-bar {
+    height: 100%;
+    background-color: #FFBB0C;
+  }
+  
+  .campaign-detail .progress-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px;
+  }
+  
+  .campaign-detail .progress-start,
+  .progress-end {
+    display: flex;
+    flex-direction: column;
+  }
+ 
+  .campaign-detail .progress-end {
+    text-align: right;
+  }
+
+  .campaign-detail .progress-start {
+    text-align: left;
+  }
+
+  .campaign-detail .amount {
+    font-size: 14px;
+    color: #1D7E05;
+    font-weight: 600;
+    margin-top: 5px;
+  }
+
+  .campaign-detail .days-left {
+    font-size: 14px;
+    color: #6c757d;
+    margin-top: 5px;
+  }
+
+  .campaign-detail .Durasi {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 20px 10px;
+  }
+
+  .campaign-detail .sisa-hari {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+  }
+
+  .campaign-detail .jumlah {
+    font-size: 14px;
+    color: #1D7E05;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+
+  .campaign-detail  .button-selengkapnya{
+    color: #f2f9f9;
+    background: #1D7E05;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 5px 20px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
