@@ -2427,14 +2427,16 @@ section,
 # Visi Section
 --------------------------------------------------------------*/
 
-
-.visi .visi-ra {
-    background-color: #1D7E05;
+.visi .icon-boxes .container .row {
+    display: flex;
+    justify-content: center;
 }
 
-.visi .misi-ra {
-    background-color: #FFBB0C;
+.visi .icon-boxes .container .row .visi-box {
+    background: color-mix(in srgb, #1D7E05, transparent 30%);
+    color: #FFF;
 }
+
 
 .visi-box {
     padding: 30px 20px;
@@ -2452,7 +2454,15 @@ section,
 }
 
 .visi-box p {
-    color: #45474B;
+    color: #fff;
+     
+}
+
+.visi-box h4 {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    padding-bottom: 20px;
      
 }
 
@@ -2470,6 +2480,22 @@ section,
 .visi-box:hover {
     background-color: color-mix(in srgb, #F5F7F8, white 10%);
 }
+
+/*--------------------------------------------------------------
+# Misi Section
+--------------------------------------------------------------*/
+
+
+
+/*--------------------------------------------------------------
+# Struktur Organisasi Section
+--------------------------------------------------------------*/
+.struktur-organisasi .gambar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /*--------------------------------------------------------------
 # Infak Section
