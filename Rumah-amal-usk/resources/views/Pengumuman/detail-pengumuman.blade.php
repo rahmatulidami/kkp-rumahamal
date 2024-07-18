@@ -98,6 +98,15 @@
                     <li><a href="#">Tips</a></li>
                     <li><a href="#">Marketing</a></li>
                   </ul>
+
+                  <div class="share-buttons">
+                      <a href="#" id="share-instagram" title="Share on Instagram"><i class="bi bi-instagram"></i></a>
+                      <a href="#" id="share-whatsapp" title="Share on WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                      <a href="#" id="share-facebook" title="Share on Facebook"><i class="bi bi-facebook"></i></a>
+                      <a href="#" id="copy-link" title="Copy Link"><i class="bi bi-clipboard"></i></a>
+                  </div>
+                  <p id="share-instructions" style="display: none;">URL copied!</p>
+
                 </div><!-- End meta bottom -->
 
               </article>
@@ -349,3 +358,53 @@
 
   </main>
 @endsection
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const currentUrl = window.location.href;
+      const instagramShareButton = document.getElementById('share-instagram');
+      const whatsappShareButton = document.getElementById('share-whatsapp');
+      const facebookShareButton = document.getElementById('share-facebook');
+      const copyLinkButton = document.getElementById('copy-link');
+      const shareInstructions = document.getElementById('share-instructions');
+
+      instagramShareButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          navigator.clipboard.writeText(currentUrl).then(function() {
+              shareInstructions.style.display = 'block';
+              setTimeout(function() {
+                  shareInstructions.style.display = 'none';
+              }, 5000);
+          }).catch(function(err) {
+              console.error('Could not copy text: ', err);
+          });
+      });
+
+      whatsappShareButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          const textToShare = encodeURIComponent('Check out this blog: ' + currentUrl);
+          const whatsappUrl = `https://api.whatsapp.com/send?text=${textToShare}`;
+          window.open(whatsappUrl, '_blank');
+      });
+
+      facebookShareButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+          window.open(facebookUrl, '_blank');
+      });
+
+      copyLinkButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          navigator.clipboard.writeText(currentUrl).then(function() {
+              shareInstructions.style.display = 'block';
+              setTimeout(function() {
+                  shareInstructions.style.display = 'none';
+              }, 5000);
+          }).catch(function(err) {
+              console.error('Could not copy text: ', err);
+          });
+      });
+  });
+
+
+</script>

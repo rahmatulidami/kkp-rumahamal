@@ -1989,6 +1989,51 @@ section,
     padding-left: 5px;
 }
 
+#share-instagram {
+    background-color: #E4405F;
+    border-radius: 10px;
+}
+
+#share-whatsapp {
+    background-color: #25D366;
+    border-radius: 10px;
+}
+
+#share-facebook {
+    background-color: #1877F2 ;
+    border-radius: 10px;
+}
+
+#copy-link {
+    background-color: #e3e3e3 ;
+    border-radius: 10px;
+}
+
+.share-buttons {
+    margin-top: 15px;
+}
+
+.share-buttons a {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+.share-buttons .bi {
+    font-size: 24px; /* Adjust the size as needed */
+}
+
+#share-instructions {
+    margin-top: 10px;
+    color: green;
+    font-weight: bold;
+}
+
 /*--------------------------------------------------------------
 # Blog Author Section
 --------------------------------------------------------------*/
@@ -2900,4 +2945,49 @@ section,
     padding: 5px 20px;
     border-radius: 10px;
     transition: 0.3s;
+}
+
+.detail-filters li {
+    cursor: pointer;
+}
+.filter-active {
+    font-weight: bold;
+}
+
+.detail-filters {
+    padding: 40px;
+    margin: 0 auto;
+    list-style: none;
+    text-align: left;
+}
+
+.detail-filters li {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 10px;
+    line-height: 1;
+    transition: all 0.3s ease-in-out;
+}
+
+.detail-filters li:hover,
+.detail-filters li.filter-active {
+    color: #1D7E05;
+}
+
+.detail-filters li:first-child {
+    margin-left: 0;
+}
+
+.detail-filters li:last-child {
+    margin-right: 0;
+}
+
+@media (max-width: 575px) {
+    .detail-filters li {
+        font-size: 14px;
+        margin: 0 5px;
+    }
 }
