@@ -56,10 +56,10 @@
   </section>
   <!-- End Hero Section -->
   
-<section id="icon-boxed" class="icon-boxes">
+  <section id="icon-boxed" class="icon-boxes section">
   <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
     <div class="container position-relative">
-      <div class="row gy-4 mt-5">
+      <div class="row gy-4">
         <div class="col-xl-4 col-md-6">
           <div class="icon-box">
             <h4 class="title"><a href="/donasi-infak" class="stretched-link">Infak</a></h4>
@@ -85,7 +85,6 @@
     </div>
   </div>
 </section>
-
 
 <!-- Portfolio Section -->
 <section id="campaign-unggulan" class="campaign-unggulan section">
