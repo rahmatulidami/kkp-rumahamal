@@ -1989,6 +1989,16 @@ section,
     padding-left: 5px;
 }
 
+.share-container {
+    display: flex;
+    align-items: center;
+}
+
+.share-container i {
+    margin-right: 8px; 
+    size: 2px;
+}
+
 #share-instagram {
     background-color: #E4405F;
     border-radius: 10px;
