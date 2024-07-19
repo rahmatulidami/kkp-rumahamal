@@ -104,14 +104,17 @@
                   
                   <div class="share-buttons">
                     <div class="share-container">
-                    <p>Bagikan:</p>
+                      <p>Bagikan:</p>
                     </div>
+                    
+                    <div>
                       <a href="#" id="share-instagram" title="Share on Instagram"><i class="bi bi-instagram"></i></a>
                       <a href="#" id="share-whatsapp" title="Share on WhatsApp"><i class="bi bi-whatsapp"></i></a>
                       <a href="#" id="share-facebook" title="Share on Facebook"><i class="bi bi-facebook"></i></a>
                       <a href="#" id="copy-link" title="Copy Link"><i class="bi bi-link-45deg"></i></a>
+                    </div>
+                    <p id="share-instructions" style="display: none;">URL copied!</p>
                   </div>
-                  <p id="share-instructions" style="display: none;">URL copied!</p>
 
                 </div><!-- End meta bottom -->
 
