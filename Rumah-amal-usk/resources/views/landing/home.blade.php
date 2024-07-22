@@ -558,13 +558,13 @@
     <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
       <ul class="program-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-        <li data-filter="*" class="filter-active">All</li>
-        <li data-filter=".filter-app">BPRA-UKT</li>
-        <li data-filter=".filter-product">Program</li>
-        <li data-filter=".filter-branding">Branding</li>
-        <li data-filter=".filter-books">Books</li>
-        <li data-filter=".filter-branding">Branding</li>
-        <li data-filter=".filter-books">Books</li>
+        <li data-filter="*" class="filter-active">ALL</li>
+        <li data-filter=".filter-app">PENDIDIKAN</li>
+        <li data-filter=".filter-product">PEMBERDAYAAN</li>
+        <li data-filter=".filter-branding">SOSIAL & KEMANUSIAAN</li>
+        <li data-filter=".filter-books">SYIAR & QURBAN</li>
+        <li data-filter=".filter-books">KEMITRAAN</li>
+        <li data-filter=".filter-books">FASILITATOR & RELAWAN</li>
       </ul> <!-- End program Filters -->
 
       <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200">
@@ -600,10 +600,6 @@
   </div>
 
 </section><!-- /Program Section -->
-
-
-
-
 
 <!-- Call To Action Section -->
 <section id="call-to-action" class="call-to-action section dark-background">

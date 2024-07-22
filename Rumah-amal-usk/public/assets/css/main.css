@@ -2457,7 +2457,6 @@ section,
 /* Program Section Background */
 #program {
     background-color: #FFBB0C;
-    padding: 40px 0;
 }
 
 .program .program-filters {
@@ -2465,33 +2464,29 @@ section,
     margin: 0 auto;
     list-style: none;
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }
 
 .program .program-filters li {
     cursor: pointer;
-    display: inline-block;
     padding: 10px 15px;
     font-size: 18px;
     font-weight: 500;
-    margin: 0 10px;
+    margin: 5px;
     line-height: 1;
     transition: all 0.3s ease-in-out;
     background-color: #ffffff;
     border-radius: 5px;
+    flex: 1 1 auto;
 }
 
 .program .program-filters li:hover,
 .program .program-filters li.filter-active {
     color: #ffffff;
-    background-color: #333333;
-}
-
-.program .program-filters li:first-child {
-    margin-left: 0;
-}
-
-.program .program-filters li:last-child {
-    margin-right: 0;
+    background-color: #1D7E05;
 }
 
 @media (max-width: 575px) {
@@ -2505,15 +2500,8 @@ section,
         padding: 10px 30px;
         margin: 10px 0;
         width: 100%; 
-        max-width: 300px;; 
+        max-width: 100%;
         box-sizing: border-box;
-    }
-}
-
-@media (max-width: 768px) {
-    .program .program-filters li {
-        font-size: 14px;
-        margin: 10px;
     }
 }
 
@@ -2522,12 +2510,14 @@ section,
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: relative;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
-    margin-bottom: 20px;
+    padding-top: 56.25%;
+    border-radius: 20px;
+    margin-bottom: 20px; 
 }
 
 .program .program-content img {
     position: absolute;
+    border-radius: 20px;
     top: 0;
     left: 0;
     width: 100%;
@@ -2539,6 +2529,7 @@ section,
 .program .program-content:hover img {
     transform: scale(1.1);
 }
+
 
 /*--------------------------------------------------------------
 # Visi Section
