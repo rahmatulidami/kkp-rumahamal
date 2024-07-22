@@ -545,60 +545,65 @@
 
 </section><!-- /Recent Posts Section -->
 
-<!-- Program Section -->
 <section id="program" class="program section">
 
-<!-- Section Title -->
-<div class="container section-title" data-aos="fade-up">
-  <h2>PROGRAM RUMAH AMAL USK</h2>
-  <p>Masjid Jamik Universitas Syiah Kuala</p>
-</div><!-- End Section Title -->
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>PROGRAM RUMAH AMAL USK</h2>
+    <p>Masjid Jamik Universitas Syiah Kuala</p>
+  </div><!-- End Section Title -->
 
-<div class="container">
+  <div class="container">
 
-  <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+    <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
-    <ul class="program-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-      <li data-filter="*" class="filter-active">All</li>
-      <li data-filter=".filter-app">BPRA-UKT</li>
-      <li data-filter=".filter-product">program</li>
-      <li data-filter=".filter-branding">program</li>
-      <li data-filter=".filter-books">program</li>
-    </ul> <!-- End program Filters -->
+      <ul class="program-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+        <li data-filter="*" class="filter-active">All</li>
+        <li data-filter=".filter-app">BPRA-UKT</li>
+        <li data-filter=".filter-product">Program</li>
+        <li data-filter=".filter-branding">Branding</li>
+        <li data-filter=".filter-books">Books</li>
+        <li data-filter=".filter-branding">Branding</li>
+        <li data-filter=".filter-books">Books</li>
+      </ul> <!-- End program Filters -->
 
-    <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+      <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200">
 
-      <div class="col-lg-4 col-md-6 program-item isotope-item filter-app">
-        <div class="program-content h-100">
-          <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
-        </div>
-      </div><!-- End program Item -->
+        <div class="col-lg-3 col-md-6 program-item isotope-item filter-app">
+          <div class="program-content h-100">
+            <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
+          </div>
+        </div><!-- End program Item -->
 
-      <div class="col-lg-4 col-md-6 program-item isotope-item filter-product">
-        <div class="program-content h-100">
-          <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
-        </div>
-      </div><!-- End program Item -->
+        <div class="col-lg-3 col-md-6 program-item isotope-item filter-product">
+          <div class="program-content h-100">
+            <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
+          </div>
+        </div><!-- End program Item -->
 
-      <div class="col-lg-4 col-md-6 program-item isotope-item filter-app">
-        <div class="program-content h-100">
-          <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
-        </div>
-      </div><!-- End program Item -->
+        <div class="col-lg-3 col-md-6 program-item isotope-item filter-app">
+          <div class="program-content h-100">
+            <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
+          </div>
+        </div><!-- End program Item -->
 
-      <div class="col-lg-4 col-md-6 program-item isotope-item filter-product">
-        <div class="program-content h-100">
-          <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
-        </div>
-      </div><!-- End program Item -->
+        <div class="col-lg-3 col-md-6 program-item isotope-item filter-product">
+          <div class="program-content h-100">
+            <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
+          </div>
+        </div><!-- End program Item -->
 
-    </div><!-- End program Container -->
+      </div><!-- End program Container -->
+
+    </div>
 
   </div>
 
-</div>
+</section><!-- /Program Section -->
 
-</section><!-- /Porogram Section -->
+
+
+
 
 <!-- Call To Action Section -->
 <section id="call-to-action" class="call-to-action section dark-background">

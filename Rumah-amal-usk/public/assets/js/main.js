@@ -144,53 +144,36 @@
     /**
      * Init isotope layout and filters
      */
-    document
-        .querySelectorAll(".isotope-layout")
-        .forEach(function (isotopeItem) {
-            let layout = isotopeItem.getAttribute("data-layout") ?? "masonry";
-            let filter = isotopeItem.getAttribute("data-default-filter") ?? "*";
-            let sort =
-                isotopeItem.getAttribute("data-sort") ?? "original-order";
+    document.querySelectorAll(".isotope-layout").forEach(function (isotopeItem) {
+        let layout = isotopeItem.getAttribute("data-layout") ?? "masonry";
+        let filter = isotopeItem.getAttribute("data-default-filter") ?? "*";
+        let sort = isotopeItem.getAttribute("data-sort") ?? "original-order";
 
-            let initIsotope;
-            imagesLoaded(
-                isotopeItem.querySelector(".isotope-container"),
-                function () {
-                    initIsotope = new Isotope(
-                        isotopeItem.querySelector(".isotope-container"),
-                        {
-                            itemSelector: ".isotope-item",
-                            layoutMode: layout,
-                            filter: filter,
-                            sortBy: sort,
-                        }
-                    );
-                }
-            );
-
-            isotopeItem
-                .querySelectorAll(".isotope-filters li")
-                .forEach(function (filters) {
-                    filters.addEventListener(
-                        "click",
-                        function () {
-                            isotopeItem
-                                .querySelector(
-                                    ".isotope-filters .filter-active"
-                                )
-                                .classList.remove("filter-active");
-                            this.classList.add("filter-active");
-                            initIsotope.arrange({
-                                filter: this.getAttribute("data-filter"),
-                            });
-                            if (typeof aosInit === "function") {
-                                aosInit();
-                            }
-                        },
-                        false
-                    );
-                });
+        let initIsotope;
+        imagesLoaded(isotopeItem.querySelector(".isotope-container"), function () {
+            initIsotope = new Isotope(isotopeItem.querySelector(".isotope-container"), {
+                itemSelector: ".isotope-item",
+                layoutMode: layout,
+                filter: filter,
+                sortBy: sort,
+            });
         });
+
+        isotopeItem.querySelectorAll(".isotope-filters li").forEach(function (filters) {
+            filters.addEventListener("click", function () {
+                isotopeItem.querySelector(".isotope-filters .filter-active").classList.remove("filter-active");
+                this.classList.add("filter-active");
+                let filterValue = this.getAttribute("data-filter");
+                console.log("Filtering for: ", filterValue); // Debug message
+                initIsotope.arrange({
+                    filter: filterValue,
+                });
+                if (typeof aosInit === "function") {
+                    aosInit();
+                }
+            });
+        });
+    });
 
     /**
      * Frequently Asked Questions Toggle
@@ -207,13 +190,13 @@
      /**
    * Hero carousel indicators
    */
-    let heroCarouselIndicators = select("#hero-carousel-indicators")
-    let heroCarouselItems = select('#heroCarousel .carousel-item', true)
+    let heroCarouselIndicators = document.querySelector("#hero-carousel-indicators");
+    let heroCarouselItems = document.querySelectorAll('#heroCarousel .carousel-item');
 
     heroCarouselItems.forEach((item, index) => {
         (index === 0) ?
         heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "' class='active'></li>":
-        heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "'></li>"
+        heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "'></li>";
     });
 
     /**

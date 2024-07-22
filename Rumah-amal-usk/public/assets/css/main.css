@@ -2454,8 +2454,10 @@ section,
 /*--------------------------------------------------------------
 # Program Section
 --------------------------------------------------------------*/
-#program{
+/* Program Section Background */
+#program {
     background-color: #FFBB0C;
+    padding: 40px 0;
 }
 
 .program .program-filters {
@@ -2468,17 +2470,20 @@ section,
 .program .program-filters li {
     cursor: pointer;
     display: inline-block;
-    padding: 0;
+    padding: 10px 15px;
     font-size: 18px;
     font-weight: 500;
     margin: 0 10px;
     line-height: 1;
     transition: all 0.3s ease-in-out;
+    background-color: #ffffff;
+    border-radius: 5px;
 }
 
 .program .program-filters li:hover,
 .program .program-filters li.filter-active {
     color: #ffffff;
+    background-color: #333333;
 }
 
 .program .program-filters li:first-child {
@@ -2490,39 +2495,49 @@ section,
 }
 
 @media (max-width: 575px) {
+    .program .program-filters {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .program .program-filters li {
+        font-size: 12px;
+        padding: 10px 30px;
+        margin: 10px 0;
+        width: 100%; 
+        max-width: 300px;; 
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 768px) {
     .program .program-filters li {
         font-size: 14px;
-        margin: 0 5px;
+        margin: 10px;
     }
 }
 
 .program .program-content {
     background-color: var(--surface-color);
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-    height: 100%;
     overflow: hidden;
+    position: relative;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    margin-bottom: 20px;
 }
 
 .program .program-content img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     transition: 0.3s;
-    position: relative;
-    z-index: 1;
 }
 
-.program .program-content .program-info {
-    background-color: var(--background-color);
-    border-top: 1px solid
-        color-mix(in srgb, var(--default-color), transparent 90%);
-    padding: 25px 20px;
-    position: relative;
-    z-index: 2;
-}
-
-.program .program-content .program-info p {
-    color: color-mix(in srgb, var(--default-color), transparent 30%);
-    font-size: 14px;
-    margin-bottom: 0;
-    padding-right: 50px;
+.program .program-content:hover img {
+    transform: scale(1.1);
 }
 
 /*--------------------------------------------------------------
