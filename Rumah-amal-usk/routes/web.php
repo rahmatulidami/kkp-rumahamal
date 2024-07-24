@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,10 @@ Route::get('/failure', function () {
 
 Route::post('/xendit-callback', [DonationController::class, 'handleXenditCallback']);
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
-});
+// Route::middleware(['auth', 'admin'])->group(function () {
+//     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+// });
+// Route::resource('categories', CategoryController::class);
 
 
 Route::get('/berita', function () {
@@ -47,7 +49,7 @@ Route::get('/detail-berita', function () {
 });
 
 Route::get('/admin', function () {
-    return view('admin/index');
+    return view('admin.index');
 });
 
 Route::get('/pengumuman', function () {
@@ -74,9 +76,16 @@ Route::get('/profil', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
 
-route::get('post', [HomeController::class, 'post'])->middleware(['auth', 'admin']);
+    // Route untuk CRUD kategori
+    Route::resource('admin/categories', CategoryController::class);
+    Route::delete('admin/categories/reset', [CategoryController::class, 'reset'])->name('categories.reset');
+
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
