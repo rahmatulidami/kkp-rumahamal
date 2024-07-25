@@ -5,6 +5,7 @@ use App\Http\Controllers\DonationController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,7 +85,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Route untuk CRUD kategori
     Route::resource('admin/categories', CategoryController::class);
     Route::delete('admin/categories/reset', [CategoryController::class, 'reset'])->name('categories.reset');
-
+    Route::resource('admin/posts', PostController::class);
 });
 
 Route::middleware('auth')->group(function () {

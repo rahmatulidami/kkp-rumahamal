@@ -20,10 +20,8 @@
     <!-- Vendor CSS Files -->
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet"> --}}
-
+    <link rel="stylesheet" href="/assets/ckeditor/style.css">
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.css">
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style-admin.css') }}" rel="stylesheet">
   </head>
@@ -104,13 +102,13 @@
     <!-- End Dashboard Nav -->
 
     <li class="nav-item">
-      <a class="nav-link " href="/admin/categories">
+      <a class="nav-link collapsed" href="/admin/categories">
         <i class="bi bi-tags-fill"></i>
         <span>Categories</span>
       </a>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="/admin/posts">
+      <a class="nav-link" href="#">
         <i class="bi bi-newspaper"></i>
         <span>Post</span>
       </a>

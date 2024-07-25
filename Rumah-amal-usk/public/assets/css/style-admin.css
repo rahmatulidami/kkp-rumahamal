@@ -17,6 +17,9 @@ body {
   font-family: "Open Sans", sans-serif;
   background: #f6f9ff;
   color: #444444;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 a {
@@ -45,6 +48,8 @@ h6 {
   margin-top: 60px;
   padding: 20px 30px;
   transition: all 0.3s;
+  flex: 1;
+  padding-bottom: 60px;
 }
 
 @media (max-width: 1199px) {
@@ -749,8 +754,9 @@ h6 {
 }
 
 .sidebar-nav .nav-content a:hover,
-.sidebar-nav .nav-content a.active {
-  color: #4154f1;
+.sidebar-nav .nav-link.active {
+    background-color: #f6f9ff;
+    color: #4154f1;
 }
 
 .sidebar-nav .nav-content a.active i {
@@ -1214,10 +1220,10 @@ h6 {
 # Footer
 --------------------------------------------------------------*/
 .footer {
-  padding: 20px 0;
-  font-size: 14px;
-  transition: all 0.3s;
-  border-top: 1px solid #cddfff;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 .footer .copyright {

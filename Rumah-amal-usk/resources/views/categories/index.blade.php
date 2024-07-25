@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('categories.layout')
 
 @section('content')
 <main id="main" class="main">
