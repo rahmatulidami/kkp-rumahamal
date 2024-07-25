@@ -108,7 +108,7 @@
       </a>
 
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="/admin/posts">
         <i class="bi bi-newspaper"></i>
         <span>Post</span>
       </a>

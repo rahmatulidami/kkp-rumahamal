@@ -1,6 +1,7 @@
 @extends('posts.layout')
 
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="container">
     <h1>Create Post</h1>
 
@@ -13,8 +14,10 @@
 
         <div class="form-group">
             <label for="thumbnail">Thumbnail</label>
+            <div class="d-flex justify-content-center">
+            <img id="thumbnail-preview" src="#" alt="Thumbnail Preview" style="display: none; max-width:100%; margin-bottom:10px; border-radius:15px;">
+            </div>
             <input type="file" name="thumbnail" id="thumbnail" class="form-control" required>
-            <img id="thumbnail-preview" src="#" alt="Thumbnail Preview" style="display: none; max-width: 200px;">
         </div>
 
         <div class="form-group">
@@ -48,7 +51,7 @@
         <button type="submit" class="btn btn-primary">Save Post</button>
     </form>
 </div>
-
+</main>
 <script type="importmap">
 {
     "imports": {
@@ -93,21 +96,7 @@ items.forEach(item => {
     });
 });
 
-let editor;
-ClassicEditor
-    .create(document.querySelector('#content-editor'), editorConfig)
-    .then(newEditor => {
-        editor = newEditor;
-    })
-    .catch(error => {
-        console.error(error);
-    });
 
-document.getElementById('postForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    document.getElementById('content').value = editor.getData();
-    this.submit();
-});
 </script>
 
 <style>

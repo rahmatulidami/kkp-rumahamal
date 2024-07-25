@@ -88,6 +88,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/posts', PostController::class);
 });
 
+Route::post('/upload', [App\Http\Controllers\UploadController::class, 'upload'])->name('upload');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

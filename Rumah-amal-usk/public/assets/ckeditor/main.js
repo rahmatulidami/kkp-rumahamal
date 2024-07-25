@@ -345,6 +345,14 @@ const editorConfig = {
 			}
 		]
 	},
+    simpleUpload: {
+
+        uploadUrl: '/upload',
+
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    },
 	table: {
 		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
 	}

@@ -25,9 +25,9 @@
                     <td>{{ $post->updated_at }}</td>
                     <td>{{ implode(', ', $post->categories->pluck('name')->toArray()) }}</td>
                     <td>
-                        <div class="btn-group">
+                        <div class="btn-group d-flex justify-content-between pe-3">
                             <button type="button" class="btn btn-info" onclick="previewPost('{{ route('posts.show', $post->id) }}')">Preview</button>
-                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning rounded">Edit</a>
                             <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
