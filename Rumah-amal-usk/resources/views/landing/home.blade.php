@@ -110,7 +110,7 @@
 
     <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
       <div class="campaign-unggulan-content h-100">
-          <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
+          <a href="/detail-campaign"><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
               <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
               <div class="progress-container">
@@ -146,7 +146,7 @@
 
   <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
       <div class="campaign-unggulan-content h-100">
-          <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
+          <a href="/detail-campaign"><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
               <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
               <div class="progress-container">
@@ -181,7 +181,7 @@
 
   <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
       <div class="campaign-unggulan-content h-100">
-          <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
+          <a href="/detail-campaign"><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
               <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
               <div class="progress-container">
@@ -216,7 +216,7 @@
 
   <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
       <div class="campaign-unggulan-content h-100">
-          <a href=""><img src="assets/img/campaign/palestine.png" alt=""></a>
+          <a href="/detail-campaign"><img src="assets/img/campaign/palestine.png" alt=""></a>
           <div class="campaign-unggulan-info">
               <h4><a href="campaign-unggulan-details.html" title="More Details">Peduli Palestine</a></h4>
               <div class="progress-container">

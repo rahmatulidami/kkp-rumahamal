@@ -36,8 +36,6 @@
       <div class="container position-relative d-flex align-items-center justify-content-between">
         <a href="/" class="logo d-flex align-items-center">
           <img src="assets/img/logorumah.png" alt="">
-          <!-- <h1 class="sitename">RumahAmal</h1> -->
-          <!-- <span>.</span> -->
         </a>
 
         <nav id="navmenu" class="navmenu">

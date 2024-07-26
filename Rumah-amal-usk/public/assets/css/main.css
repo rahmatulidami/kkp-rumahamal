@@ -990,7 +990,6 @@ section,
 --------------------------------------------------------------*/
 .section-title {
     text-align: center;
-    padding-bottom: 20px;
     position: relative;
 }
 
@@ -1019,6 +1018,13 @@ section,
     margin-bottom: 0;
 }
 
+@media (max-width: 750px) {
+    .section-title h2 {
+        font-size: 24px;
+        font-weight: 700;
+        position: relative;
+    }
+}
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
