@@ -1348,6 +1348,10 @@ section,
     transition: 0.3s;
 }
 
+.campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info .btn-btn-primary:hover {
+    background: color-mix(in srgb,#1D7E05, transparent 20%);
+}
+
 .campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h4 {
     font-size: 18px;
     font-weight: 600;
@@ -1447,21 +1451,37 @@ section,
     margin-top: 5px;
   }
 
-  .campaign-unggulan .button-selengkapnya{
+  .campaign-unggulan .button-wrapper {
+    text-align: center; 
+    margin-top: 30px; 
+}
+
+.campaign-unggulan .button-selengkapnya {
     color: #f2f9f9;
     background: #1D7E05;
     font-family: var(--heading-font);
     font-weight: 700;
-    margin-top: 20px;
-    font-size: 14px;
+    font-size: 18px; 
+    display: inline-block; 
     align-items: center;
     justify-content: center;
-    letter-spacing: 1px;
-    display: flex;
-    padding: 5px 20px;
+    padding: 10px 100px; 
     border-radius: 10px;
     transition: 0.3s;
 }
+
+.campaign-unggulan .button-selengkapnya:hover {
+    background: color-mix(in srgb,#1D7E05, transparent 20%);
+}
+
+@media (max-width: 768px) {
+    .campaign-unggulan .button-selengkapnya {
+        font-size: 12px;
+        width: 100%; 
+        box-sizing: border-box;
+    }
+}
+
 
 /*--------------------------------------------------------------
 # Pengumuman Section
@@ -1520,21 +1540,37 @@ section,
     margin-bottom: 0;
 }
 
-.pengumuman .btn-btn-primary{
+.pengumuman .button-wrapper {
+    text-align: center; 
+    margin-top: 30px; 
+}
+
+.pengumuman .button-selengkapnya {
     color: #f2f9f9;
     background: #1D7E05;
     font-family: var(--heading-font);
     font-weight: 700;
-    margin-top: 20px;
-    font-size: 14px;
+    font-size: 18px; 
+    display: inline-block; 
     align-items: center;
     justify-content: center;
-    letter-spacing: 1px;
-    display: flex;
-    padding: 5px 15px;
+    padding: 10px 100px;
     border-radius: 10px;
     transition: 0.3s;
 }
+
+.pengumuman .button-selengkapnya:hover {
+    background: color-mix(in srgb,#1D7E05, transparent 20%);
+}
+
+@media (max-width: 768px) {
+    .pengumuman .button-selengkapnya {
+        font-size: 12px;
+        width: 100%; 
+        box-sizing: border-box;
+    }
+}
+
   
 /*--------------------------------------------------------------
 # Recent Posts Section
@@ -1593,21 +1629,37 @@ section,
     margin-bottom: 0;
 }
 
-.recent-posts .btn-btn-primary{
+.recent-posts .button-wrapper {
+    text-align: center; 
+    margin-top: 30px; 
+}
+
+.recent-posts .button-selengkapnya {
     color: #f2f9f9;
     background: #1D7E05;
     font-family: var(--heading-font);
     font-weight: 700;
-    margin-top: 20px;
-    font-size: 14px;
+    font-size: 18px; 
+    display: inline-block; 
     align-items: center;
     justify-content: center;
-    letter-spacing: 1px;
-    display: flex;
-    padding: 5px 15px;
+    padding: 10px 100px;
     border-radius: 10px;
     transition: 0.3s;
 }
+
+.recent-posts .button-selengkapnya:hover {
+    background: color-mix(in srgb,#1D7E05, transparent 20%);
+}
+
+@media (max-width: 768px) {
+    .recent-posts .button-selengkapnya {
+        font-size: 12px;
+        width: 100%; 
+        box-sizing: border-box;
+    }
+}
+
 
 /*--------------------------------------------------------------
 # Profil Section
@@ -2493,54 +2545,28 @@ section,
 # Program Section
 --------------------------------------------------------------*/
 /* Program Section Background */
-#program {
-    background-color: #FFBB0C;
-}
-
-.program .program-filters {
-    padding: 0 0 20px 0;
-    margin: 0 auto;
-    list-style: none;
-    text-align: center;
+.program-filters {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+    margin-bottom: 30px;
 }
 
-.program .program-filters li {
-    cursor: pointer;
-    padding: 10px 15px;
-    font-size: 18px;
-    font-weight: 500;
-    margin: 5px;
-    line-height: 1;
-    transition: all 0.3s ease-in-out;
-    background-color: #ffffff;
+#filter-select {
+    width: 100%; 
+    padding: 10px;
+    font-size: 16px;
     border-radius: 5px;
-    flex: 1 1 auto;
+    border: 1px solid #ccc;
+    outline: none;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.program .program-filters li:hover,
-.program .program-filters li.filter-active {
-    color: #ffffff;
-    background-color: #1D7E05;
-}
-
-@media (max-width: 575px) {
-    .program .program-filters {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .program .program-filters li {
-        font-size: 12px;
-        padding: 10px 30px;
-        margin: 10px 0;
-        width: 100%; 
-        max-width: 100%;
-        box-sizing: border-box;
-    }
+#filter-select:focus {
+    border-color: #1D7E05;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
 }
 
 .program .program-content {

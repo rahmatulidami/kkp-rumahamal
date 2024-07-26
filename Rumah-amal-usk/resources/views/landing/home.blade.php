@@ -321,7 +321,9 @@
 
   </div>
 
-  <a class="button-selengkapnya" href="/campaign" role="button">Selengkapnya</a>
+  <div class="button-wrapper">
+      <a class="button-selengkapnya" href="/campaign" role="button">Selengkapnya</a>
+  </div>
 
 </div>
 
@@ -447,7 +449,10 @@
       </article>
       
     </div><!-- End post list item -->
-    <a class="btn-btn-primary" href="/pengumuman" role="button">Selengkapnya</a>
+
+    <div class="button-wrapper">
+      <a class="button-selengkapnya" href="/detail-pengumuman" role="button">Pengumuman Lainnya</a>
+    </div>
   </div><!-- End recent posts list -->
 
 </div>
@@ -538,7 +543,9 @@
       </article>
       
     </div><!-- End post list item -->
-    <a class="btn-btn-primary" href="/berita" role="button">Selengkapnya</a>
+    <div class="button-wrapper">
+      <a class="button-selengkapnya" href="/detail-berita" role="button">Berita Lainnya</a>
+    </div>
   </div><!-- End recent posts list -->
 
 </div>
@@ -557,15 +564,18 @@
 
     <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
-      <ul class="program-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-        <li data-filter="*" class="filter-active">ALL</li>
-        <li data-filter=".filter-app">PENDIDIKAN</li>
-        <li data-filter=".filter-product">PEMBERDAYAAN</li>
-        <li data-filter=".filter-branding">SOSIAL & KEMANUSIAAN</li>
-        <li data-filter=".filter-books">SYIAR & QURBAN</li>
-        <li data-filter=".filter-books">KEMITRAAN</li>
-        <li data-filter=".filter-books">FASILITATOR & RELAWAN</li>
-      </ul> <!-- End program Filters -->
+      <div class="program-filters" data-aos="fade-up" data-aos-delay="100">
+          <select id="filter-select" class="isotope-filters">
+              <option value="*" class="filter-active">ALL</option>
+              <option value=".filter-app">PENDIDIKAN</option>
+              <option value=".filter-product">PEMBERDAYAAN</option>
+              <option value=".filter-branding">SOSIAL & KEMANUSIAAN</option>
+              <option value=".filter-books">SYIAR & QURBAN</option>
+              <option value=".filter-books">KEMITRAAN</option>
+              <option value=".filter-books">FASILITATOR & RELAWAN</option>
+          </select>
+      </div>
+
 
       <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200">
 

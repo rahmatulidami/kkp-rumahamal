@@ -154,14 +154,11 @@
      */
     new PureCounter();
 
-    /**
-     * Init isotope layout and filters
-     */
     document.querySelectorAll(".isotope-layout").forEach(function (isotopeItem) {
         let layout = isotopeItem.getAttribute("data-layout") ?? "masonry";
         let filter = isotopeItem.getAttribute("data-default-filter") ?? "*";
         let sort = isotopeItem.getAttribute("data-sort") ?? "original-order";
-
+    
         let initIsotope;
         imagesLoaded(isotopeItem.querySelector(".isotope-container"), function () {
             initIsotope = new Isotope(isotopeItem.querySelector(".isotope-container"), {
@@ -171,22 +168,19 @@
                 sortBy: sort,
             });
         });
-
-        isotopeItem.querySelectorAll(".isotope-filters li").forEach(function (filters) {
-            filters.addEventListener("click", function () {
-                isotopeItem.querySelector(".isotope-filters .filter-active").classList.remove("filter-active");
-                this.classList.add("filter-active");
-                let filterValue = this.getAttribute("data-filter");
-                console.log("Filtering for: ", filterValue); // Debug message
-                initIsotope.arrange({
-                    filter: filterValue,
-                });
-                if (typeof aosInit === "function") {
-                    aosInit();
-                }
+    
+        document.getElementById('filter-select').addEventListener('change', function () {
+            let filterValue = this.value;
+            console.log("Filtering for: ", filterValue); // Debug message
+            initIsotope.arrange({
+                filter: filterValue,
             });
+            if (typeof aosInit === "function") {
+                aosInit();
+            }
         });
     });
+    
 
     /**
      * Frequently Asked Questions Toggle
