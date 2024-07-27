@@ -30,58 +30,55 @@
 
 <body class="index-page" style="user-select: none;">
 
-  <header id="header" class="header fixed-top">
-    <div class="branding d-flex align-items-cente">
-
-      <div class="container position-relative d-flex align-items-center justify-content-between">
-        <a href="/" class="logo d-flex align-items-center">
-          <img src="assets/img/logorumah.png" alt="">
-        </a>
-
-        <nav id="navmenu" class="navmenu">
-          <ul>
-            <li><a href="/" class="active">Beranda<br></a></li>
-            <li><a href="{{ url('/') }}#about">Profil</a></li>
-            <li class="dropdown"><a href=""><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="{{ url('/') }}#program">Program</a></li>
-                <li><a href="{{ url('/') }}#campaign-unggulan">Campaign</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href=""><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="{{ url('/') }}#recent-posts">Berita</a></li>
-                <li><a href="{{ url('/') }}#pengumuman">Pengumuman</a></li>
-                <li><a href="{{ url('/') }}#">Dokumen</a></li>
-              </ul>
-            </li>
-            <li><a href="{{ url('/') }}#">Galeri</a></li>
-            <li class="language-switcher">
-              <a href="?lang=id" class="language-link">
-                <img src="assets/img/flag-ID.png" alt="Indonesian Flag" class="flag-icon">
-                <span>ID</span>
-                <i class="bi bi-chevron-down toggle-dropdown"></i>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="?lang=en" class="language-link">
-                    <img src="assets/img/flag-EN.jpg" alt="English Flag" class="flag-icon">
-                    <span>EN</span>
-                  </a></li>
-              </ul>
-            </li>
-            <li>
-                <button id="login-button" class="btn btn-primary">Login</button>
-            </li>
-          </ul>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
-
-
-      </div>
-
+<header id="header" class="header fixed-top">
+    <div class="branding d-flex align-items-center">
+        <div class="container position-relative d-flex align-items-center justify-content-between">
+            <a href="/" class="logo d-flex align-items-center">
+                <img src="assets/img/logorumah.png" alt="">
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="/" class="active">Beranda</a></li>
+                    <li><a href="{{ url('/') }}#about">Profil</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdownmenu"><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="{{ url('/') }}#program" class="dropdownitemm">Program</a></li>
+                            <li><a href="{{ url('/') }}#campaign-unggulan" class="dropdownitemm">Campaign</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdownmenu"><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="{{ url('/') }}#recent-posts" class="dropdownitemm">Berita</a></li>
+                            <li><a href="{{ url('/') }}#pengumuman" class="dropdownitemm">Pengumuman</a></li>
+                            <li><a href="{{ url('/') }}#" class="dropdownitemm">Dokumen</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ url('/') }}#">Galeri</a></li>
+                    <li class="language-switcher">
+                        <a href="javascript:void(0)" class="language-link">
+                            <img src="assets/img/flag-ID.png" alt="Indonesian Flag" class="flag-icon">
+                            <span>ID</span>
+                            <i class="bi bi-chevron-down toggle-dropdown"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="?lang=en" class="language-link">
+                                <img src="assets/img/flag-EN.jpg" alt="English Flag" class="flag-icon">
+                                <span>EN</span>
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <button id="login-button" class="btn btn-primary">Login</button>
+                    </li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
     </div>
+</header>
 
-  </header>
 
   @yield('content')
 
