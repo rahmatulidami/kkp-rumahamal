@@ -69,7 +69,7 @@
                             </a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="login-button">
                         <button id="login-button" class="btn btn-primary">Login</button>
                     </li>
                 </ul>

@@ -514,7 +514,7 @@ h6 {
     }
 
     #login-button:hover {
-        background-color: color-mix(in srgb, #1D7E05, transparent 70%);
+        background: #FFBB0C;
     }
       
 }
@@ -685,6 +685,12 @@ h6 {
         display: block;
     }
 
+    .login-button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     #login-button {
         background-color: #1D7E05;
         color: white;
@@ -699,7 +705,7 @@ h6 {
     }
 
     #login-button:hover {
-        background-color: color-mix(in srgb, #1D7E05, transparent 70%);
+        background: #FFBB0C;
     }
 }
 
@@ -1373,7 +1379,7 @@ section,
 }
 
 .campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info .btn-btn-primary:hover {
-    background: color-mix(in srgb,#1D7E05, transparent 20%);
+    background: #FFBB0C;
 }
 
 .campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h4 {
@@ -1495,7 +1501,7 @@ section,
 }
 
 .campaign-unggulan .button-selengkapnya:hover {
-    background: color-mix(in srgb,#1D7E05, transparent 20%);
+    background: #FFBB0C;
 }
 
 @media (max-width: 768px) {
@@ -1584,7 +1590,7 @@ section,
 }
 
 .pengumuman .button-selengkapnya:hover {
-    background: color-mix(in srgb,#1D7E05, transparent 20%);
+    background: #FFBB0C;
 }
 
 @media (max-width: 768px) {
@@ -1673,7 +1679,7 @@ section,
 }
 
 .recent-posts .button-selengkapnya:hover {
-    background: color-mix(in srgb,#1D7E05, transparent 20%);
+    background: #FFBB0C;
 }
 
 @media (max-width: 768px) {

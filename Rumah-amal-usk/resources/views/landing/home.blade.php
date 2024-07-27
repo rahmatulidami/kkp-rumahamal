@@ -98,14 +98,6 @@
 
   <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
-    <!-- <ul class="campaign-unggulan-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-      <li data-filter="*" class="filter-active">All</li>
-      <li data-filter=".filter-app">App</li>
-      <li data-filter=".filter-product">Product</li>
-      <li data-filter=".filter-branding">Branding</li>
-      <li data-filter=".filter-books">Books</li>
-    </ul>End campaign-unggulan Filters -->
-
     <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
     <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-product">
@@ -567,37 +559,37 @@
       <div class="program-filters" data-aos="fade-up" data-aos-delay="100">
           <select id="filter-select" class="isotope-filters">
               <option value="*" class="filter-active">ALL</option>
-              <option value=".filter-app">PENDIDIKAN</option>
-              <option value=".filter-product">PEMBERDAYAAN</option>
-              <option value=".filter-branding">SOSIAL & KEMANUSIAAN</option>
-              <option value=".filter-books">SYIAR & QURBAN</option>
-              <option value=".filter-books">KEMITRAAN</option>
-              <option value=".filter-books">FASILITATOR & RELAWAN</option>
+              <option value=".filter-pendidikan">PENDIDIKAN</option>
+              <option value=".filter-pemberdayaan">PEMBERDAYAAN</option>
+              <option value=".filter-sosial">SOSIAL & KEMANUSIAAN</option>
+              <option value=".filter-syiar">SYIAR & QURBAN</option>
+              <option value=".filter-kemitraan">KEMITRAAN</option>
+              <option value=".filter-fasilitator">FASILITATOR & RELAWAN</option>
           </select>
       </div>
 
 
       <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200">
 
-        <div class="col-lg-3 col-md-6 program-item isotope-item filter-app">
+        <div class="col-lg-3 col-md-6 program-item isotope-item filter-pendidikan">
           <div class="program-content h-100">
             <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
           </div>
         </div><!-- End program Item -->
 
-        <div class="col-lg-3 col-md-6 program-item isotope-item filter-product">
+        <div class="col-lg-3 col-md-6 program-item isotope-item filter-pemberdayaan">
           <div class="program-content h-100">
             <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
           </div>
         </div><!-- End program Item -->
 
-        <div class="col-lg-3 col-md-6 program-item isotope-item filter-app">
+        <div class="col-lg-3 col-md-6 program-item isotope-item filter-sosial">
           <div class="program-content h-100">
             <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
           </div>
         </div><!-- End program Item -->
 
-        <div class="col-lg-3 col-md-6 program-item isotope-item filter-product">
+        <div class="col-lg-3 col-md-6 program-item isotope-item filter-syiar">
           <div class="program-content h-100">
             <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
           </div>
@@ -615,7 +607,6 @@
 <section id="call-to-action" class="call-to-action section dark-background">
   <div class="container">
     <div class="content row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
-      <div class="col-xl-10">
         <div class="row d-flex flex-wrap">
           <div class="col-md-8 text-center p-2">
             <div class="video-container">
@@ -628,7 +619,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </section><!-- /Call To Action Section -->
