@@ -284,7 +284,7 @@ h6 {
 }
 
 .header .logo img {
-    max-height: 70px;
+    max-height: 50px;
     margin-right: 8px;
 }
 
@@ -328,7 +328,7 @@ h6 {
 
     .navmenu > ul > li {
         white-space: nowrap;
-        padding: 20px 25px;
+        padding: 8px 25px;
     }
 
     .navmenu > ul > li:last-child {
@@ -414,12 +414,22 @@ h6 {
       .navmenu .dropdown ul a i {
         font-size: 12px;
       }
-    
-      .navmenu .dropdown ul a:hover,
-      .navmenu .dropdown ul .active:hover,
-      .navmenu .dropdown ul li:hover>a {
-        color: var(--nav-dropdown-hover-color);
+
+      .navmenu .navmenu .dropdown-active .dropdownitemm.active,
+      .navmenu .dropdownitemm.active  {
+          background-color: #1D7E05;
+          color: #FFF;
       }
+
+    .navmenu .dropdown ul li:hover {
+        background-color: #1D7E05;
+    }
+
+    .navmenu .dropdown ul li a:hover {
+        color: #fff; /* Mengubah warna teks menjadi putih untuk kontras */
+    }
+
+
     
       .navmenu .dropdown:hover>ul {
         opacity: 1;
@@ -491,6 +501,21 @@ h6 {
       .language-switcher .dropdown-menu li a:hover {
         background-color: #f1f1f1;
       }
+
+      #login-button {
+        background-color: #1D7E05;
+        color: white;
+        border: none;
+        padding: 10px 30px;
+        border-radius: 5px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    #login-button:hover {
+        background: #FFBB0C;
+    }
       
 }
 
@@ -597,6 +622,20 @@ h6 {
         background-color: rgba(33, 37, 41, 0.03);
     }
 
+    .navmenu .navmenu .dropdown-active .dropdownitemm.active,
+    .navmenu .dropdownitemm.active  {
+        background-color: #1D7E05;
+        color: #fff;
+    }
+    
+    .navmenu .dropdown ul li:hover {
+        background-color: #1D7E05;
+    }
+
+    .navmenu .dropdown ul li a:hover {
+        color: #fff; 
+    }
+
     .language-switcher {
         display: flex;
         align-items: center;
@@ -644,6 +683,29 @@ h6 {
 
     .mobile-nav-active .navmenu > ul {
         display: block;
+    }
+
+    .login-button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #login-button {
+        background-color: #1D7E05;
+        color: white;
+        border: none;
+        margin-left: 20px;
+        margin-top: 60px;
+        padding: 10px 30px;
+        border-radius: 5px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    #login-button:hover {
+        background: #FFBB0C;
     }
 }
 
@@ -958,7 +1020,6 @@ section,
 --------------------------------------------------------------*/
 .section-title {
     text-align: center;
-    padding-bottom: 20px;
     position: relative;
 }
 
@@ -987,16 +1048,23 @@ section,
     margin-bottom: 0;
 }
 
+@media (max-width: 750px) {
+    .section-title h2 {
+        font-size: 24px;
+        font-weight: 700;
+        position: relative;
+    }
+}
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
-#hero .hero-slider {
-    margin-top: 60px;
-}
+/* #hero .hero-slider {
+    margin-top: 40px;
+} */
 
 #hero .hero-slider img {
     width: 100%;
-    height: 500px;
+    height: 600px;
     object-fit: cover; 
 }
 
@@ -1310,6 +1378,10 @@ section,
     transition: 0.3s;
 }
 
+.campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info .btn-btn-primary:hover {
+    background: #FFBB0C;
+}
+
 .campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h4 {
     font-size: 18px;
     font-weight: 600;
@@ -1409,21 +1481,37 @@ section,
     margin-top: 5px;
   }
 
-  .campaign-unggulan .button-selengkapnya{
+  .campaign-unggulan .button-wrapper {
+    text-align: center; 
+    margin-top: 30px; 
+}
+
+.campaign-unggulan .button-selengkapnya {
     color: #f2f9f9;
     background: #1D7E05;
     font-family: var(--heading-font);
     font-weight: 700;
-    margin-top: 20px;
-    font-size: 14px;
+    font-size: 18px; 
+    display: inline-block; 
     align-items: center;
     justify-content: center;
-    letter-spacing: 1px;
-    display: flex;
-    padding: 5px 20px;
+    padding: 10px 100px; 
     border-radius: 10px;
     transition: 0.3s;
 }
+
+.campaign-unggulan .button-selengkapnya:hover {
+    background: #FFBB0C;
+}
+
+@media (max-width: 768px) {
+    .campaign-unggulan .button-selengkapnya {
+        font-size: 12px;
+        width: 100%; 
+        box-sizing: border-box;
+    }
+}
+
 
 /*--------------------------------------------------------------
 # Pengumuman Section
@@ -1482,21 +1570,37 @@ section,
     margin-bottom: 0;
 }
 
-.pengumuman .btn-btn-primary{
+.pengumuman .button-wrapper {
+    text-align: center; 
+    margin-top: 30px; 
+}
+
+.pengumuman .button-selengkapnya {
     color: #f2f9f9;
     background: #1D7E05;
     font-family: var(--heading-font);
     font-weight: 700;
-    margin-top: 20px;
-    font-size: 14px;
+    font-size: 18px; 
+    display: inline-block; 
     align-items: center;
     justify-content: center;
-    letter-spacing: 1px;
-    display: flex;
-    padding: 5px 15px;
+    padding: 10px 100px;
     border-radius: 10px;
     transition: 0.3s;
 }
+
+.pengumuman .button-selengkapnya:hover {
+    background: #FFBB0C;
+}
+
+@media (max-width: 768px) {
+    .pengumuman .button-selengkapnya {
+        font-size: 12px;
+        width: 100%; 
+        box-sizing: border-box;
+    }
+}
+
   
 /*--------------------------------------------------------------
 # Recent Posts Section
@@ -1555,21 +1659,37 @@ section,
     margin-bottom: 0;
 }
 
-.recent-posts .btn-btn-primary{
+.recent-posts .button-wrapper {
+    text-align: center; 
+    margin-top: 30px; 
+}
+
+.recent-posts .button-selengkapnya {
     color: #f2f9f9;
     background: #1D7E05;
     font-family: var(--heading-font);
     font-weight: 700;
-    margin-top: 20px;
-    font-size: 14px;
+    font-size: 18px; 
+    display: inline-block; 
     align-items: center;
     justify-content: center;
-    letter-spacing: 1px;
-    display: flex;
-    padding: 5px 15px;
+    padding: 10px 100px;
     border-radius: 10px;
     transition: 0.3s;
 }
+
+.recent-posts .button-selengkapnya:hover {
+    background: #FFBB0C;
+}
+
+@media (max-width: 768px) {
+    .recent-posts .button-selengkapnya {
+        font-size: 12px;
+        width: 100%; 
+        box-sizing: border-box;
+    }
+}
+
 
 /*--------------------------------------------------------------
 # Profil Section
@@ -2455,54 +2575,28 @@ section,
 # Program Section
 --------------------------------------------------------------*/
 /* Program Section Background */
-#program {
-    background-color: #FFBB0C;
-}
-
-.program .program-filters {
-    padding: 0 0 20px 0;
-    margin: 0 auto;
-    list-style: none;
-    text-align: center;
+.program-filters {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+    margin-bottom: 30px;
 }
 
-.program .program-filters li {
-    cursor: pointer;
-    padding: 10px 15px;
-    font-size: 18px;
-    font-weight: 500;
-    margin: 5px;
-    line-height: 1;
-    transition: all 0.3s ease-in-out;
-    background-color: #ffffff;
+#filter-select {
+    width: 100%; 
+    padding: 10px;
+    font-size: 16px;
     border-radius: 5px;
-    flex: 1 1 auto;
+    border: 1px solid #ccc;
+    outline: none;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.program .program-filters li:hover,
-.program .program-filters li.filter-active {
-    color: #ffffff;
-    background-color: #1D7E05;
-}
-
-@media (max-width: 575px) {
-    .program .program-filters {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .program .program-filters li {
-        font-size: 12px;
-        padding: 10px 30px;
-        margin: 10px 0;
-        width: 100%; 
-        max-width: 100%;
-        box-sizing: border-box;
-    }
+#filter-select:focus {
+    border-color: #1D7E05;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
 }
 
 .program .program-content {
@@ -2611,15 +2705,49 @@ section,
 .infak .container {
     display: flex;
     padding-top: 70px;
-  }
-  
-  .infak .left {
+}
+
+.infak .left {
     flex: 1; 
     background-color: #ffffff; 
-    padding: 20px; 
-  }
-  
-  .infak .right {
+    padding: 40px; 
+    display: flex;
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+.infak .left .buttons-container {
+    display: flex;
+    gap: 10px; 
+    flex-wrap: wrap; 
+}
+
+.infak .left .button-infak,
+.infak .left .button-zakat {
+    color: #45474B;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 15px 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+    text-align: center; 
+}
+
+.infak .left .button-infak {
+    background: #FFBB0C;
+}
+
+.infak .left .button-zakat {
+    background: #d9d9d9;
+}
+
+/* CSS lainnya tetap sama */
+.infak .right {
     flex: 3; 
     padding: 40px; 
     background-color: #ffffff;
@@ -2627,82 +2755,50 @@ section,
     transition: all 0.3s ease-in-out;
     border-radius: 20px;
     border: solid 1px rgba(0, 86, 33, 0.1);
-  }
-  
-  .infak .container .left .button-infak{
-    color: #45474B;
-    background: #FFBB0C;
-    font-family: var(--heading-font);
-    font-weight: 700;
-    margin-top: 20px;
-    font-size: 25px;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 1px;
-    display: flex;
-    padding: 15px 10px;
-    border-radius: 10px;
-    transition: 0.3s;
-  }
+}
 
-  .infak .container .left .button-zakat{
-    color: #45474B;
-    background:#d9d9d9;
-    font-family: var(--heading-font);
-    font-weight: 700;
-    margin-top: 20px;
-    font-size: 25px;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 1px;
-    display: flex;
-    padding: 15px 10px;
-    border-radius: 10px;
-    transition: 0.3s;
-  }
-
-  .right .judul {
+.right .judul {
     display: flex;
     align-items: center;
     padding-bottom: 30px;
-  }
+}
 
-  .right .judul i {
+.right .judul i {
     margin-right: 10px;
     font-size: 40px;
     color: #28a745;
-  }
+}
 
-  .right .judul h3 {
+.right .judul h3 {
     margin-right: 10px;
     font-size: 20px;
     color: #777676;
     font-weight: 800;
-  }
+}
 
-  .right .button {
+.right .button {
     display: flex;
     justify-content: flex-end;
     padding-top: 40px;
-  }
+}
 
-  .right .button-infak {
+.right .button-infak {
     color: #ffffff;
     background: #1D7E05;
     padding: 10px 40px;
     font-size: 20px;
     font-weight: 700;
     border-radius: 10px;
-  }
+}
 
-  .input-group {
+.input-group {
     display: flex;
     align-items: center;
     margin-top: 10px;
-    padding-top: 20px
-  }
-  
-  #currency-button {
+    padding-top: 20px;
+}
+
+#currency-button {
     background-color: #28a745;
     color: white;
     border: none;
@@ -2711,9 +2807,9 @@ section,
     font-size: 16px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-  }
-  
-  #infak-amount {
+}
+
+#infak-amount {
     padding: 10px;
     border: 1px solid #ccc;
     border-left: none;
@@ -2721,15 +2817,15 @@ section,
     flex: 1;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-  }
-  
-  #total-infak {
+}
+
+#total-infak {
     margin-top: 10px;
     font-size: 16px;
     color: #28a745;
-  }
-  
-  #infak-type {
+}
+
+#infak-type {
     margin-top: 10px;
     padding: 10px;
     color: #777676;
@@ -2737,8 +2833,59 @@ section,
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-  }
-  
+}
+
+/* Media queries */
+@media (min-width: 1200px) {
+    .infak .container {
+        flex-direction: row;
+    }
+
+    .infak .left {
+        width: 25%; 
+    }
+
+    .infak .right {
+        width: 70%; 
+    }
+
+    .right .judul h3 {
+        font-size: 2rem;
+    }
+
+    .input-group input {
+        width: 80%;
+    }
+}
+
+@media (max-width: 1199px) {
+    .infak .container {
+        flex-direction: column;
+    }
+
+    .infak .left {
+        padding: 20px;
+        width: 100%; 
+        flex-direction: row; 
+    }
+
+    .infak .right {
+        width: 100%;
+    }
+
+    .right .judul h3 {
+        font-size: 1.5rem;
+    }
+
+    .input-group input {
+        width: 100%;
+    }
+
+    .infak .left .button-infak,
+    .infak .left .button-zakat {
+        padding: 10px 30px;
+    }
+}
 
 /*--------------------------------------------------------------
 # Zakat Section
@@ -2746,15 +2893,48 @@ section,
 .zakat .container {
     display: flex;
     padding-top: 70px;
-  }
-  
-  .zakat .left {
+}
+
+.zakat .left {
     flex: 1; 
     background-color: #ffffff; 
-    padding: 20px; 
-  }
-  
-  .zakat .right {
+    padding: 40px; 
+    display: flex;
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+.zakat .left .buttons-container {
+    display: flex;
+    gap: 10px; 
+    flex-wrap: wrap; 
+}
+
+.zakat .left .button-infak,
+.zakat .left .button-zakat {
+    color: #45474B;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 15px 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+    text-align: center; 
+}
+
+.zakat .left .button-infak {
+    background: #d9d9d9;
+}
+
+.zakat .left .button-zakat {
+    background: #FFBB0C;
+}
+
+.zakat .right {
     flex: 3; 
     padding: 40px; 
     background-color: #ffffff;
@@ -2762,82 +2942,50 @@ section,
     transition: all 0.3s ease-in-out;
     border-radius: 20px;
     border: solid 1px rgba(0, 86, 33, 0.1);
-  }
-  
-  .zakat .container .left .button-infak{
-    color: #45474B;
-    background: #d9d9d9;
-    font-family: var(--heading-font);
-    font-weight: 700;
-    margin-top: 20px;
-    font-size: 25px;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 1px;
-    display: flex;
-    padding: 15px 10px;
-    border-radius: 10px;
-    transition: 0.3s;
-  }
+}
 
-  .zakat .container .left .button-zakat{
-    color: #45474B;
-    background:#FFBB0C;
-    font-family: var(--heading-font);
-    font-weight: 700;
-    margin-top: 20px;
-    font-size: 25px;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 1px;
-    display: flex;
-    padding: 15px 10px;
-    border-radius: 10px;
-    transition: 0.3s;
-  }
-
-  .right .judul {
+.right .judul {
     display: flex;
     align-items: center;
     padding-bottom: 30px;
-  }
+}
 
-  .right .judul i {
+.right .judul i {
     margin-right: 10px;
     font-size: 40px;
     color: #28a745;
-  }
+}
 
-  .right .judul h3 {
+.right .judul h3 {
     margin-right: 10px;
     font-size: 20px;
     color: #777676;
     font-weight: 800;
-  }
+}
 
-  .right .button {
+.right .button {
     display: flex;
     justify-content: flex-end;
     padding-top: 40px;
-  }
+}
 
-  .right .button-infak {
+.right .button-zakat {
     color: #ffffff;
     background: #1D7E05;
     padding: 10px 40px;
     font-size: 20px;
     font-weight: 700;
     border-radius: 10px;
-  }
+}
 
-  .input-group {
+.input-group {
     display: flex;
     align-items: center;
     margin-top: 10px;
-    padding-top: 20px
-  }
-  
-  #currency-button {
+    padding-top: 20px;
+}
+
+#currency-button {
     background-color: #28a745;
     color: white;
     border: none;
@@ -2846,9 +2994,9 @@ section,
     font-size: 16px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-  }
-  
-  #infak-amount {
+}
+
+#zakat-amount {
     padding: 10px;
     border: 1px solid #ccc;
     border-left: none;
@@ -2856,15 +3004,15 @@ section,
     flex: 1;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-  }
-  
-  #total-infak {
+}
+
+#total-zakat {
     margin-top: 10px;
     font-size: 16px;
     color: #28a745;
-  }
-  
-  #infak-type {
+}
+
+#zakat-type {
     margin-top: 10px;
     padding: 10px;
     color: #777676;
@@ -2872,13 +3020,60 @@ section,
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-  }
-  
-  .total-amount {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
+}
+
+/* Untuk layar dengan lebar minimum 1200px */
+@media (min-width: 1200px) {
+    .zakat .container {
+        flex-direction: row;
+    }
+
+    .zakat .left {
+        width: 25%; 
+    }
+
+    .zakat .right {
+        width: 70%; 
+    }
+
+    .right .judul h3 {
+        font-size: 2rem;
+    }
+
+    .input-group input {
+        width: 80%;
+    }
+}
+
+/* Untuk layar dengan lebar maksimum 1199px */
+@media (max-width: 1199px) {
+    .zakat .container {
+        flex-direction: column;
+    }
+
+    .zakat .left {
+        padding: 20px;
+        width: 100%; 
+        flex-direction: row; 
+    }
+
+    .zakat .right {
+        width: 100%;
+    }
+
+    .right .judul h3 {
+        font-size: 1.5rem;
+    }
+
+    .input-group input {
+        width: 100%;
+    }
+
+    .zakat .left .button-infak,
+    .zakat .left .button-zakat {
+        padding: 10px 30px;
+    }
+}
 
 /*--------------------------------------------------------------
 # Campaign-detail Section

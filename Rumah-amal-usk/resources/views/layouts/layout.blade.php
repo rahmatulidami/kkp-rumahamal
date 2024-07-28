@@ -18,7 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
@@ -30,57 +30,55 @@
 
 <body class="index-page" style="user-select: none;">
 
-  <header id="header" class="header fixed-top">
-    <div class="branding d-flex align-items-cente">
-
-      <div class="container position-relative d-flex align-items-center justify-content-between">
-        <a href="/" class="logo d-flex align-items-center">
-          <img src="assets/img/logorumah.png" alt="">
-          <!-- <h1 class="sitename">RumahAmal</h1> -->
-          <!-- <span>.</span> -->
-        </a>
-
-        <nav id="navmenu" class="navmenu">
-          <ul>
-            <li><a href="/" class="active">Beranda<br></a></li>
-            <li><a href="{{ url('/') }}#about">Profil</a></li>
-            <li class="dropdown"><a href=""><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="{{ url('/') }}#program">Program</a></li>
-                <li><a href="{{ url('/') }}#campaign-unggulan">Campaign</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href=""><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="{{ url('/') }}#recent-posts">Berita</a></li>
-                <li><a href="{{ url('/') }}#pengumuman">Pengumuman</a></li>
-                <li><a href="{{ url('/') }}#">Dokumen</a></li>
-              </ul>
-            </li>
-            <li><a href="{{ url('/') }}#">Galeri</a></li>
-            <li class="language-switcher">
-              <a href="?lang=id" class="language-link">
-                <img src="assets/img/flag-ID.png" alt="Indonesian Flag" class="flag-icon">
-                <span>ID</span>
-                <i class="bi bi-chevron-down toggle-dropdown"></i>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="?lang=en" class="language-link">
-                    <img src="assets/img/flag-EN.jpg" alt="English Flag" class="flag-icon">
-                    <span>EN</span>
-                  </a></li>
-              </ul>
-            </li>
-          </ul>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
-
-
-      </div>
-
+<header id="header" class="header fixed-top">
+    <div class="branding d-flex align-items-center">
+        <div class="container position-relative d-flex align-items-center justify-content-between">
+            <a href="/" class="logo d-flex align-items-center">
+                <img src="assets/img/logorumah.png" alt="">
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="/" class="active">Beranda</a></li>
+                    <li><a href="{{ url('/') }}#about">Profil</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdownmenu"><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="{{ url('/') }}#program" class="dropdownitemm">Program</a></li>
+                            <li><a href="{{ url('/') }}#campaign-unggulan" class="dropdownitemm">Campaign</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdownmenu"><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="{{ url('/') }}#recent-posts" class="dropdownitemm">Berita</a></li>
+                            <li><a href="{{ url('/') }}#pengumuman" class="dropdownitemm">Pengumuman</a></li>
+                            <li><a href="{{ url('/') }}#" class="dropdownitemm">Dokumen</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ url('/') }}#">Galeri</a></li>
+                    <li class="language-switcher">
+                        <a href="javascript:void(0)" class="language-link">
+                            <img src="assets/img/flag-ID.png" alt="Indonesian Flag" class="flag-icon">
+                            <span>ID</span>
+                            <i class="bi bi-chevron-down toggle-dropdown"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="?lang=en" class="language-link">
+                                <img src="assets/img/flag-EN.jpg" alt="English Flag" class="flag-icon">
+                                <span>EN</span>
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="login-button">
+                        <button id="login-button" class="btn btn-primary">Login</button>
+                    </li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
     </div>
+</header>
 
-  </header>
 
   @yield('content')
 
@@ -120,8 +118,8 @@
             <div class="col-lg-4 col-md-6 footer-links location-container">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.062950078828!2d95.3687264!3d5.5709969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304037d79398cc65%3A0x164fb653d9c4a1f7!2sRumah%20Amal%20Masjid%20Jamik%20USK!5e0!3m2!1sen!2sid!4v1688584573276!5m2!1sen!2sid"
-                    width="400px"
-                    height="300px"
+                    width="100%"
+                    height="100%"
                     style="border:0; border-radius: 15px;"
                     allowfullscreen=""
                     loading="lazy"
