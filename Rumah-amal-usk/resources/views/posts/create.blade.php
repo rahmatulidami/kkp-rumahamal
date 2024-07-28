@@ -5,7 +5,7 @@
 <div class="container">
     <h1>Create Post</h1>
 
-    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" id="postForm">
+    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="title">Title</label>
@@ -15,15 +15,15 @@
         <div class="form-group">
             <label for="thumbnail">Thumbnail</label>
             <div class="d-flex justify-content-center">
-            <img id="thumbnail-preview" src="#" alt="Thumbnail Preview" style="display: none; max-width:100%; margin-bottom:10px; border-radius:15px;">
-            </div>
+                <img id="thumbnail-preview" src="#" alt="Thumbnail Preview" style="display: none; max-width:100%; margin-bottom:10px; border-radius:15px;">
+                </div>
             <input type="file" name="thumbnail" id="thumbnail" class="form-control" required>
+            <img id="thumbnail-preview" src="#" alt="Thumbnail Preview" style="display: none; max-width: 200px;">
         </div>
 
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea name="content" id="content" class="form-control" style="display:none;"></textarea>
-            <div id="content-editor"></div>
+            <textarea name="content" id="content" class="form-control ckeditor"></textarea>
         </div>
 
         <div class="form-group">
@@ -48,17 +48,26 @@
             </ul>
         </div>
 
+        <div class="form-group">
+            <label for="tags">Tags</label>
+            <div class="tags-input">
+                <ul id="tags"></ul>
+                <input type="text" id="input-tag" placeholder="Enter tag name" />
+            </div>
+            <input type="hidden" name="tags" id="tags-hidden">
+        </div>
+
         <button type="submit" class="btn btn-primary">Save Post</button>
     </form>
 </div>
-</main>
+
 <script type="importmap">
-{
-    "imports": {
-        "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.js",
-        "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/42.0.1/"
+    {
+        "imports": {
+            "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.js",
+            "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/42.0.1/"
+        }
     }
-}
 </script>
 <script type="module" src="{{ URL::asset('assets/ckeditor/main.js') }}"></script>
 <script>
@@ -88,15 +97,46 @@ items.forEach(item => {
         let checked = document.querySelectorAll(".checked"),
             btnText = document.querySelector(".btn-text");
 
-        if(checked && checked.length > 0){
+        if (checked && checked.length > 0) {
             btnText.innerText = `${checked.length} Selected`;
-        }else{
+        } else {
             btnText.innerText = "Select Categories";
         }
     });
 });
 
+const tags = document.getElementById('tags');
+    const input = document.getElementById('input-tag');
+    const hiddenInput = document.getElementById('tags-hidden');
 
+    input.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            const tagContent = input.value.trim();
+
+            if (tagContent !== '') {
+                const tag = document.createElement('li');
+                tag.innerText = tagContent;
+                tag.innerHTML += '<button class="delete-button">X</button>';
+                tags.appendChild(tag);
+                input.value = '';
+                updateHiddenInput();
+            }
+        }
+    });
+
+    tags.addEventListener('click', function(event) {
+        if (event.target.classList.contains('delete-button')) {
+            event.target.parentNode.remove();
+            updateHiddenInput();
+        }
+    });
+
+    function updateHiddenInput() {
+        const tagsArray = Array.from(tags.children).map(tag => tag.innerText.replace('X', '').trim());
+        hiddenInput.value = tagsArray.join(',');
+        console.log('Tags:', hiddenInput.value); // Debugging output
+    }
 </script>
 
 <style>
@@ -207,6 +247,51 @@ items.forEach(item => {
 
 .item.checked .check-icon {
     transform: scale(1);
+}
+
+.tags-input {
+    display: inline-block;
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    box-shadow: 2px 2px 5px #00000033;
+    width: 100%;
+}
+
+.tags-input ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tags-input li {
+    display: inline-block;
+    background-color: #f2f2f2;
+    color: #333;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.tags-input input[type="text"] {
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.tags-input input[type="text"]:focus {
+    outline: none;
+}
+
+.tags-input .delete-button {
+    background-color: transparent;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    margin-left: 5px;
 }
 </style>
 @endsection

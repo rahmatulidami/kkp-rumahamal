@@ -55,7 +55,7 @@
       </div>
   </section>
   <!-- End Hero Section -->
-  
+
   <section id="icon-boxed" class="icon-boxes section">
   <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
     <div class="container position-relative">
@@ -128,7 +128,7 @@
                           <div class="jumlah">Rp. 3.000.000</div>
                       </div>
                   </div>
-                  
+
               </div>
               <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
@@ -164,7 +164,7 @@
                           <div class="jumlah">Rp. 3.000.000</div>
                       </div>
                   </div>
-                  
+
               </div>
               <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
@@ -199,7 +199,7 @@
                           <div class="jumlah">Rp. 3.000.000</div>
                       </div>
                   </div>
-                  
+
               </div>
               <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
@@ -234,7 +234,7 @@
                           <div class="jumlah">Rp. 3.000.000</div>
                       </div>
                   </div>
-                  
+
               </div>
               <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
@@ -269,7 +269,7 @@
                           <div class="jumlah">Rp. 3.000.000</div>
                       </div>
                   </div>
-                  
+
               </div>
               <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
@@ -304,7 +304,7 @@
                           <div class="jumlah">Rp. 3.000.000</div>
                       </div>
                   </div>
-                  
+
               </div>
               <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
           </div>
@@ -439,7 +439,7 @@
         </div>
 
       </article>
-      
+
     </div><!-- End post list item -->
 
     <div class="button-wrapper">
@@ -456,92 +456,88 @@
 
 <!-- Section Title -->
 <div class="container section-title" data-aos="fade-up">
-  <h2>BERITA TERKINI</h2>
-</div><!-- End Section Title -->
+    <h2>BERITA TERKINI</h2>
+  </div><!-- End Section Title -->
 
-<div class="container">
+  <div class="container">
 
-  <div class="row gy-4">
+    <div class="row gy-4">
+      @foreach($posts as $post)
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
+          <article>
+            <div class="post-img">
+              <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->title }}" class="img-fluid">
+            </div>
 
-    <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-      <article>
+            <p class="post-category">{{ implode(', ', $post->categories->pluck('name')->toArray()) }}</p>
 
-        <div class="post-img">
-          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
-        </div>
+            <h2 class="title">
+              <a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
+            </h2>
 
-        <p class="post-category">Politics</p>
+            <div class="d-flex align-items-center">
+              <div class="post-meta">
+                <p class="post-date">
+                  <time datetime="{{ $post->created_at->toDateString() }}">{{ $post->created_at->format('M j, Y') }}</time>
+                </p>
+              </div>
+            </div>
+          </article>
+        </div><!-- End post list item -->
+      @endforeach
 
-        <h2 class="title">
-          <a href="/detail-berita">Dolorum optio tempore voluptas dignissimos</a>
-        </h2>
+      <div class="button-wrapper">
+        <a class="button-selengkapnya" href="{{ route('posts.index') }}" role="button">Berita Lainnya</a>
+      </div>
+    </div><!-- End recent posts list -->
 
-        <div class="d-flex align-items-center">
-          <div class="post-meta">
-            <p class="post-date">
-              <time datetime="2022-01-01">Jan 1, 2022</time>
-            </p>
-          </div>
-        </div>
+  </div><!-- End container -->
 
-      </article>
-    </div><!-- End post list item -->
+  @push('styles')
+  <style>
+    .post-img img {
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
 
-    <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-      <article>
+    .post-category {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 10px;
+    }
 
-        <div class="post-img">
-          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
-        </div>
+    .title a {
+      color: #333;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+    }
 
-        <p class="post-category">Sports</p>
+    .title a:hover {
+      text-decoration: underline;
+    }
 
-        <h2 class="title">
-          <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
-        </h2>
+    .post-meta .post-date {
+      font-size: 14px;
+      color: #999;
+    }
 
-        <div class="d-flex align-items-center">
-          <div class="post-meta">
-            <p class="post-date">
-              <time datetime="2022-01-01">Jun 5, 2022</time>
-            </p>
-          </div>
-        </div>
+    .button-selengkapnya {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: #6e93f7;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-      </article>
-    </div><!-- End post list item -->
-
-    <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-      <article>
-
-        <div class="post-img">
-          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
-        </div>
-
-        <p class="post-category">Entertainment</p>
-
-        <h2 class="title">
-          <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
-        </h2>
-
-        <div class="d-flex align-items-center">
-         <div class="post-meta">
-           <p class="post-date">
-              <time datetime="2022-01-01">Jun 22, 2022</time>
-            </p>
-          </div>
-        </div>
-
-      </article>
-      
-    </div><!-- End post list item -->
-    <div class="button-wrapper">
-      <a class="button-selengkapnya" href="/detail-berita" role="button">Berita Lainnya</a>
-    </div>
-  </div><!-- End recent posts list -->
-
-</div>
-
+    .button-selengkapnya:hover {
+      background-color: #5a7df3;
+    }
+  </style>
+  @endpush
 </section><!-- /Recent Posts Section -->
 
 <section id="program" class="program section">
@@ -625,7 +621,7 @@
 
 <!-- Clients Section -->
      <!-- Section Title -->
-     
+
     <section id="clients" class="clients section">
     <div class="container section-title" data-aos="fade-up">
       <h2>MITRA RUMAH AMAL USK</h2>

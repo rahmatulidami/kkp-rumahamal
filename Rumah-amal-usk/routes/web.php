@@ -89,6 +89,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/posts', PostController::class);
 });
 
+Route::get('/', [PostController::class, 'landing_page'])->name('landing.home');
 Route::post('/upload', [App\Http\Controllers\UploadController::class, 'upload'])->name('upload');
 
 Route::middleware('auth')->group(function () {
