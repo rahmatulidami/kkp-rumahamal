@@ -16,6 +16,7 @@
         </div>
     </div>
 </div>
+
   <!-- Section -->
   <section id="galeri" class="galeri section">
     <div class="container">

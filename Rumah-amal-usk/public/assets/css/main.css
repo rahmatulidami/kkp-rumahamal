@@ -3228,58 +3228,47 @@ section,
     transition: 0.3s;
 }
 
-.detail-filters li {
-    cursor: pointer;
-}
-
-.filter-active {
-    font-weight: bold;
+.filter {
+    margin-bottom: 20px;
+    margin-left: 40px;
 }
 
 .detail-filters {
-    padding: 10px 60px;
-    margin: 0 auto;
-    list-style: none;
-    text-align: left;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 .detail-filters li {
+    display: inline-block; 
+    margin-right: 15px;
     cursor: pointer;
-    display: inline-block;
-    padding: 0;
-    font-size: 18px;
-    font-weight: 500;
-    margin: 0 10px;
-    line-height: 1;
-    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    color: #555;
+    padding: 5px 10px; 
+    transition: color 0.3s; 
 }
 
-.detail-filters li:hover,
+.detail-filters li:hover {
+    color: #1D7E05; 
+}
+
 .detail-filters li.filter-active {
-    color: #1D7E05;
+    color: #1D7E05; 
 }
 
-.detail-filters li:first-child {
-    margin-left: 0;
+.filter-divider {
+    border: none;
+    border-top: 2px solid #ddd;
+    margin: 10px 0;
 }
 
-.detail-filters li:last-child {
-    margin-right: 0;
-}
 
 @media (max-width: 575px) {
     .detail-filters li {
         font-size: 14px;
         margin: 0 5px;
     }
-}
-
-.donatur .para-donatur {
-    background-color: #ffffff;
-    padding: 20px;
-    box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    border: solid 1px rgba(0, 86, 33, 0.1);
 }
 
 .share-buttons {
@@ -3312,3 +3301,119 @@ section,
     color: #fff; 
     font-size: 22px;
 }
+
+
+.detail .container {
+    padding: 40px; 
+    background-color: #ffffff;
+    box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    border-radius: 20px;
+    border: solid 1px rgba(0, 86, 33, 0.1);
+}
+
+.detail-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #1D7E05;
+}
+
+.detail-description {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+    color: #444;
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.detail-description p {
+    margin: 10px 0;
+}
+
+.detail-description br {
+    line-height: 1.8;
+}
+
+.donatur .container {
+    padding: 5px 20px; 
+}
+
+.donatur .para-donatur {
+    background-color: color-mix(in srgb, #d9d9d9 , transparent 70%);
+    padding: 20px 40px;
+    box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border: solid 1px rgba(0, 86, 33, 0.1);
+}
+
+.top-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.donation-date, .donation-category {
+    font-size: 14px;
+    color: #555;
+}
+
+.icon-and-details {
+    display: flex;
+    align-items: center;
+}
+
+.bi-person-square {
+    font-size: 4rem;
+    margin-right: 20px; 
+    color: #b4b4b4;
+}
+
+.details {
+    flex: 1;
+}
+
+.donor-name, .donation-amount {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.donor-name {
+    font-weight: bold;
+}
+
+.donation-amount {
+    margin-top: 5px;
+    color: #1D7E05;
+}
+
+.donor-list {
+    max-height: 400px; 
+    overflow-y: auto; 
+    padding-right: 15px; 
+    margin-bottom: 20px;
+}
+
+/* Filter-Campaign */
+#campaign-unggulan .program-filters {
+    display: flex;
+    justify-content: flex-end; 
+    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    width: 30%; 
+}
+
+
+@media (max-width: 575px) {
+    #campaign-unggulan .program-filters {
+        width: 100%; 
+        justify-content: center; 
+    }
+}
+
