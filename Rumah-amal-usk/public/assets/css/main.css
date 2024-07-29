@@ -3398,3 +3398,22 @@ section,
     padding-right: 15px; 
     margin-bottom: 20px;
 }
+
+/* Filter-Campaign */
+#campaign-unggulan .program-filters {
+    display: flex;
+    justify-content: flex-end; 
+    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    width: 30%; 
+}
+
+
+@media (max-width: 575px) {
+    #campaign-unggulan .program-filters {
+        width: 100%; 
+        justify-content: center; 
+    }
+}
+
