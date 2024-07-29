@@ -27,7 +27,7 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <!-- Blog Posts Section -->
+    <!-- campaign Section -->
     <section id="campaign-unggulan" class="campaign-unggulan section">
 <div class="container">
 

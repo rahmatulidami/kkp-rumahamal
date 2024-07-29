@@ -62,29 +62,75 @@
     <ul class="detail-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
         <li data-filter="detail" class="filter-active">Detail</li>
         <li data-filter="donatur">Donatur</li>
-    </ul> 
+    </ul>
+    <hr class="filter-divider">
 </div>
 
+
 <section class="detail" id="detail-section">
-        <!-- Content for Detail section -->
     <div class="container">
-        <h3>Peduli Palestina</h3>
-            <p>Kira-kira mereka ngapain ya??
-                <br>Jadi, berdasarkan Hadis Riwayat Bukhari dan Muslim dari Abu Hurairah, Rasulullah pernah bersabda bahwa: 
-                <br>“Setiap awal pagi saat matahari terbit, Allah menurunkan dua malaikat ke bumi. Lalu salah satu berkata: “Ya Allah, berilah karunia kepada orang yang menginfakkan hartanya. Ganti kepada orang yang membelanjakan hartanya karena Allah. Malaikat yang satu berkata: “Ya Allah binasakanlah orang-orang yang bakhil/kikir”.
-                <br>Ternyata itu sahabat. Para malaikat-Nya sengaja turun ke bumi untuk turut mendoakan hamba favoritnya Allah yang memulai aktivitas pagi dengan “bersedekah”. Dan turunnya ga tanggung-tanggung loh: “tiap awal pagi”.
-                <br>Jadi, mari maksimalkan setiap pagi kita dengan salah satu amalan baik yakni “sedekah subuh”. Malaikat nungguin kita nih! Yuk sahabat, kita sambut kedatangan mereka dan karunia pagi dariNya setiap waktu subuh. Infak yang sahbaat berikan insya Allah akan dipergunakan untuk keperluan dakwah dan kegiatan sosial. </p>
+        <h3 class="detail-title">Peduli Palestina</h3>
+        <p class="detail-description">
+            Kira-kira mereka ngapain ya??
+            <br><br>
+            Jadi, berdasarkan Hadis Riwayat Bukhari dan Muslim dari Abu Hurairah, Rasulullah pernah bersabda bahwa:
+            <br><br>
+            “Setiap awal pagi saat matahari terbit, Allah menurunkan dua malaikat ke bumi. Lalu salah satu berkata: “Ya Allah, berilah karunia kepada orang yang menginfakkan hartanya. Ganti kepada orang yang membelanjakan hartanya karena Allah. Malaikat yang satu berkata: “Ya Allah binasakanlah orang-orang yang bakhil/kikir”.
+            <br><br>
+            Ternyata itu sahabat. Para malaikat-Nya sengaja turun ke bumi untuk turut mendoakan hamba favoritnya Allah yang memulai aktivitas pagi dengan “bersedekah”. Dan turunnya ga tanggung-tanggung loh: “tiap awal pagi”.
+            <br><br>
+            Jadi, mari maksimalkan setiap pagi kita dengan salah satu amalan baik yakni “sedekah subuh”. Malaikat nungguin kita nih! Yuk sahabat, kita sambut kedatangan mereka dan karunia pagi dariNya setiap waktu subuh. Infak yang sahabat berikan insya Allah akan dipergunakan untuk keperluan dakwah dan kegiatan sosial.
+        </p>
     </div>
 </section>
 
 <section class="donatur" id="donatur-section" style="display: none;">
-        <!-- Content for Donatur section -->
     <div class="container">
         <div class="para-donatur">
-            <p>comingsoon</p>
+            <div class="top-info">
+                <p class="donation-date"><strong>Tanggal Donasi: </strong>25 Juli 2024</p>
+                <p class="donation-category"><strong>Kategori: </strong>Kemanusiaan</p>
+            </div>
+            <div class="icon-and-details">
+                <i class="bi bi-person-square"></i>
+                <div class="details">
+                    <p class="donor-name">John Doe</p>
+                    <p class="donation-amount"><strong>Rp. 1.000.000</strong></p>
+                </div>
+            </div>
         </div>
+
+        <div class="para-donatur">
+            <div class="top-info">
+                <p class="donation-date"><strong>Tanggal Donasi: </strong>25 Juli 2024</p>
+                <p class="donation-category"><strong>Kategori: </strong>Kemanusiaan</p>
+            </div>
+            <div class="icon-and-details">
+                <i class="bi bi-person-square"></i>
+                <div class="details">
+                    <p class="donor-name">John Doe</p>
+                    <p class="donation-amount"><strong>Rp. 1.000.000</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="para-donatur">
+            <div class="top-info">
+                <p class="donation-date"><strong>Tanggal Donasi: </strong>25 Juli 2024</p>
+                <p class="donation-category"><strong>Kategori: </strong>Kemanusiaan</p>
+            </div>
+            <div class="icon-and-details">
+                <i class="bi bi-person-square"></i>
+                <div class="details">
+                    <p class="donor-name">John Doe</p>
+                    <p class="donation-amount"><strong>Rp. 1.000.000</strong></p>
+                </div>
+            </div>
+        </div>
+        <!-- Add more donors as needed -->
     </div>
 </section>
+
 
 
 </main>
@@ -92,7 +138,7 @@
 @endsection
 
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     // Current URL for sharing
     const currentUrl = window.location.href;
     
@@ -118,7 +164,7 @@
 
     whatsappShareButton.addEventListener('click', function(e) {
         e.preventDefault();
-        const textToShare = encodeURIComponent('Check out this blog: ' + currentUrl);
+        const textToShare = encodeURIComponent('Check out this campaign: ' + currentUrl);
         const whatsappUrl = `https://api.whatsapp.com/send?text=${textToShare}`;
         window.open(whatsappUrl, '_blank');
     });
@@ -141,31 +187,28 @@
         });
     });
 
-    // Filter functionality
+    // Filter functionality with localStorage to persist state
     const filters = document.querySelectorAll('.detail-filters li');
     const detailSection = document.getElementById('detail-section');
     const donaturSection = document.getElementById('donatur-section');
+    const activeFilter = localStorage.getItem('activeFilter') || 'detail';
+
+    function showSection(filter) {
+        filters.forEach(f => f.classList.remove('filter-active'));
+        document.querySelector(`[data-filter="${filter}"]`).classList.add('filter-active');
+        detailSection.style.display = filter === 'detail' ? 'block' : 'none';
+        donaturSection.style.display = filter === 'donatur' ? 'block' : 'none';
+    }
 
     filters.forEach(filter => {
         filter.addEventListener('click', function() {
-            // Remove active class from all filters
-            filters.forEach(f => f.classList.remove('filter-active'));
-            // Add active class to the clicked filter
-            this.classList.add('filter-active');
-
-            // Hide all sections
-            detailSection.style.display = 'none';
-            donaturSection.style.display = 'none';
-
-            // Show the selected section
             const filterValue = this.getAttribute('data-filter');
-            if (filterValue === 'detail') {
-                detailSection.style.display = 'block';
-            } else if (filterValue === 'donatur') {
-                donaturSection.style.display = 'block';
-            }
+            showSection(filterValue);
+            localStorage.setItem('activeFilter', filterValue);
         });
     });
-});
 
+    // Show the saved or default section on page load
+    showSection(activeFilter);
+});
 </script>
