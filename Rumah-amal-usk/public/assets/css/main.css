@@ -3391,3 +3391,10 @@ section,
     margin-top: 5px;
     color: #1D7E05;
 }
+
+.donor-list {
+    max-height: 400px; 
+    overflow-y: auto; 
+    padding-right: 15px; 
+    margin-bottom: 20px;
+}

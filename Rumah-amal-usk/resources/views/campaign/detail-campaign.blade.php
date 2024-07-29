@@ -86,6 +86,35 @@
 
 <section class="donatur" id="donatur-section" style="display: none;">
     <div class="container">
+    <div class="donor-list">
+        <div class="para-donatur">
+            <div class="top-info">
+                <p class="donation-date"><strong>Tanggal Donasi: </strong>25 Juli 2024</p>
+                <p class="donation-category"><strong>Kategori: </strong>Kemanusiaan</p>
+            </div>
+            <div class="icon-and-details">
+                <i class="bi bi-person-square"></i>
+                <div class="details">
+                    <p class="donor-name">John Doe</p>
+                    <p class="donation-amount"><strong>Rp. 1.000.000</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="para-donatur">
+            <div class="top-info">
+                <p class="donation-date"><strong>Tanggal Donasi: </strong>25 Juli 2024</p>
+                <p class="donation-category"><strong>Kategori: </strong>Kemanusiaan</p>
+            </div>
+            <div class="icon-and-details">
+                <i class="bi bi-person-square"></i>
+                <div class="details">
+                    <p class="donor-name">John Doe</p>
+                    <p class="donation-amount"><strong>Rp. 1.000.000</strong></p>
+                </div>
+            </div>
+        </div>
+
         <div class="para-donatur">
             <div class="top-info">
                 <p class="donation-date"><strong>Tanggal Donasi: </strong>25 Juli 2024</p>
@@ -128,6 +157,7 @@
             </div>
         </div>
         <!-- Add more donors as needed -->
+        </div>
     </div>
 </section>
 
