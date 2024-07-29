@@ -55,7 +55,7 @@
                             <li><a href="{{ url('/') }}#" class="dropdownitemm">Dokumen</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{ url('/') }}#">Galeri</a></li>
+                    <li><a href="/galeri">Galeri</a></li>
                     <li class="language-switcher">
                         <a href="javascript:void(0)" class="language-link">
                             <img src="assets/img/flag-ID.png" alt="Indonesian Flag" class="flag-icon">
