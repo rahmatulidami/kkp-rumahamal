@@ -63,6 +63,10 @@ Route::get('/galeri', function () {
     return view('galeri/galeri');
 });
 
+Route::get('/dokumen', function () {
+    return view('galeri/dokumen');
+});
+
 Route::get('/campaign', function () {
     return view('campaign/campaign');
 });

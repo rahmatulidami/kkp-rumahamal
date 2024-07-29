@@ -52,7 +52,7 @@
                         <ul>
                             <li><a href="{{ url('/') }}#recent-posts" class="dropdownitemm">Berita</a></li>
                             <li><a href="{{ url('/') }}#pengumuman" class="dropdownitemm">Pengumuman</a></li>
-                            <li><a href="{{ url('/') }}#" class="dropdownitemm">Dokumen</a></li>
+                            <li><a href="/dokumen" class="dropdownitemm">Dokumen</a></li>
                         </ul>
                     </li>
                     <li><a href="/galeri">Galeri</a></li>
