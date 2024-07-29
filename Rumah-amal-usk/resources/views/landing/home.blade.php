@@ -357,141 +357,92 @@
 
     </section><!-- /About Section -->
 
-  <!-- Pengumuman Section -->
-<section id="pengumuman" class="pengumuman section">
+    <!-- Pengumuman Section -->
+    <section id="pengumuman" class="pengumuman section">
 
-<!-- Section Title -->
-<div class="container section-title" data-aos="fade-up">
-  <h2>PENGUMUMAN</h2>
-</div><!-- End Section Title -->
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+        <h2>PENGUMUMAN</h2>
+        </div><!-- End Section Title -->
 
-<div class="container">
+        <div class="container">
 
-  <div class="row gy-4">
+        <div class="row gy-4">
+            @foreach($pengumumanPosts as $post)
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
+                <article>
+                <div class="post-img">
+                    <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->title }}" class="img-fluid">
+                </div>
 
-    <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-      <article>
+                <p class="post-category">{{ $post->categories->pluck('name')->implode(', ') }}</p>
 
-        <div class="post-img">
-          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
-        </div>
+                <h2 class="title">
+                    <a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
+                </h2>
 
-        <p class="post-category">Politics</p>
+                <div class="d-flex align-items-center">
+                    <div class="post-meta">
+                    <p class="post-date">
+                        <time datetime="{{ $post->created_at->toDateString() }}">{{ $post->created_at->format('M j, Y') }}</time>
+                    </p>
+                    </div>
+                </div>
+                </article>
+            </div><!-- End post list item -->
+            @endforeach
 
-        <h2 class="title">
-          <a href="/detail-pengumuman">Dolorum optio tempore voluptas dignissimos</a>
-        </h2>
+            <div class="button-wrapper">
+            <a class="button-selengkapnya" href="{{ url('/pengumuman') }}"  role="button">Pengumuman Lainnya</a>
+            </div>
+        </div><!-- End recent posts list -->
 
-        <div class="d-flex align-items-center">
-          <div class="post-meta">
-            <p class="post-date">
-              <time datetime="2022-01-01">Jan 1, 2022</time>
-            </p>
-          </div>
-        </div>
+        </div><!-- End container -->
+    </section><!-- End Pengumuman Section -->
 
-      </article>
-    </div><!-- End post list item -->
-
-    <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-      <article>
-
-        <div class="post-img">
-          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
-        </div>
-
-        <p class="post-category">Sports</p>
-
-        <h2 class="title">
-          <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
-        </h2>
-
-        <div class="d-flex align-items-center">
-          <div class="post-meta">
-            <p class="post-date">
-              <time datetime="2022-01-01">Jun 5, 2022</time>
-            </p>
-          </div>
-        </div>
-
-      </article>
-    </div><!-- End post list item -->
-
-    <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-      <article>
-
-        <div class="post-img">
-          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
-        </div>
-
-        <p class="post-category">Entertainment</p>
-
-        <h2 class="title">
-          <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
-        </h2>
-
-        <div class="d-flex align-items-center">
-          <div class="post-meta">
-            <p class="post-date">
-              <time datetime="2022-01-01">Jun 22, 2022</time>
-            </p>
-          </div>
-        </div>
-
-      </article>
-
-    </div><!-- End post list item -->
-
-    <div class="button-wrapper">
-      <a class="button-selengkapnya" href="/detail-pengumuman" role="button">Pengumuman Lainnya</a>
-    </div>
-  </div><!-- End recent posts list -->
-
-</div>
-
-</section><!-- Pengumuman Section -->
 
 <!-- Recent Posts Section -->
 <section id="recent-posts" class="recent-posts section">
 
-<!-- Section Title -->
-<div class="container section-title" data-aos="fade-up">
-    <h2>BERITA TERKINI</h2>
-  </div><!-- End Section Title -->
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>BERITA TERKINI</h2>
+      </div><!-- End Section Title -->
 
-  <div class="container">
+      <div class="container">
 
-    <div class="row gy-4">
-      @foreach($posts as $post)
-        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
-          <article>
-            <div class="post-img">
-              <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->title }}" class="img-fluid">
-            </div>
+        <div class="row gy-4">
+          @foreach($beritaPosts as $post)
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
+              <article>
+                <div class="post-img">
+                  <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->title }}" class="img-fluid">
+                </div>
 
-            <p class="post-category">{{ implode(', ', $post->categories->pluck('name')->toArray()) }}</p>
+                <p class="post-category">{{ $post->categories->pluck('name')->implode(', ') }}</p>
 
-            <h2 class="title">
-              <a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
-            </h2>
+                <h2 class="title">
+                  <a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
+                </h2>
 
-            <div class="d-flex align-items-center">
-              <div class="post-meta">
-                <p class="post-date">
-                  <time datetime="{{ $post->created_at->toDateString() }}">{{ $post->created_at->format('M j, Y') }}</time>
-                </p>
-              </div>
-            </div>
-          </article>
-        </div><!-- End post list item -->
-      @endforeach
+                <div class="d-flex align-items-center">
+                  <div class="post-meta">
+                    <p class="post-date">
+                      <time datetime="{{ $post->created_at->toDateString() }}">{{ $post->created_at->format('M j, Y') }}</time>
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div><!-- End post list item -->
+          @endforeach
 
-      <div class="button-wrapper">
-        <a class="button-selengkapnya" href="{{ route('posts.index') }}" role="button">Berita Lainnya</a>
-      </div>
-    </div><!-- End recent posts list -->
+          <div class="button-wrapper">
+            <a class="button-selengkapnya" href="{{ url('/berita') }}" role="button">Berita Lainnya</a>
+          </div>
+        </div><!-- End recent posts list -->
 
-  </div><!-- End container -->
+      </div><!-- End container -->
+  </section><!-- End Recent Posts Section -->
 
   @push('styles')
   <style>
@@ -538,7 +489,7 @@
     }
   </style>
   @endpush
-</section><!-- /Recent Posts Section -->
+
 
 <section id="program" class="program section">
 

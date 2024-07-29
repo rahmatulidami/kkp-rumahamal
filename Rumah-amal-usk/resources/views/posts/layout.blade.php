@@ -24,7 +24,10 @@
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.css">
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style-admin.css') }}" rel="stylesheet">
-  </head>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script>
+
+</head>
 
 <body style="user-select: none;">
 

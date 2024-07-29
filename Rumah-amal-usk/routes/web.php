@@ -42,25 +42,25 @@ Route::post('/xendit-callback', [DonationController::class, 'handleXenditCallbac
 // Route::resource('categories', CategoryController::class);
 
 
-Route::get('/berita', function () {
-    return view('berita/berita');
-});
+// Route::get('/berita', function () {
+//     return view('berita/berita');
+// });
 
-Route::get('/detail-berita', function () {
-    return view('berita/detail-berita');
-});
+// Route::get('/detail-berita', function () {
+//     return view('berita/detail-berita');
+// });
 
 Route::get('/admin', function () {
     return view('admin.index');
 });
 
-Route::get('/pengumuman', function () {
-    return view('pengumuman/pengumuman');
-});
+// Route::get('/pengumuman', function () {
+//     return view('pengumuman/pengumuman');
+// });
 
-Route::get('/detail-pengumuman', function () {
-    return view('pengumuman/detail-pengumuman');
-});
+// Route::get('/detail-pengumuman', function () {
+//     return view('pengumuman/detail-pengumuman');
+// });
 
 Route::get('/galeri', function () {
     return view('galeri/galeri');
@@ -89,8 +89,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/posts', PostController::class);
 });
 
-Route::get('/', [PostController::class, 'landing_page'])->name('landing.home');
+Route::get('/', [PostController::class, 'landingPage'])->name('landing.home');
 Route::post('/upload', [App\Http\Controllers\UploadController::class, 'upload'])->name('upload');
+
+// Halaman untuk menampilkan semua berita
+Route::get('/berita', [PostController::class, 'showBerita'])->name('posts.berita');
+
+// Halaman untuk menampilkan semua pengumuman
+Route::get('/pengumuman', [PostController::class, 'showPengumuman'])->name('posts.pengumuman');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

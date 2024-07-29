@@ -15,10 +15,39 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
-    public function landing_page()
+    public function landingPage()
     {
-        $posts = Post::with('categories')->latest()->take(6)->get(); // Ambil 6 post terbaru
-        return view('landing.home', compact('posts'));
+        $pengumumanPosts = Post::whereHas('categories', function ($query) {
+            $query->where('name', '1');
+        })->latest()->limit(6)->get();
+
+        $beritaPosts = Post::whereHas('categories', function ($query) {
+            $query->where('name', 'Pendidikan');
+        })->latest()->limit(6)->get();
+
+        return view('landing.home', compact('pengumumanPosts', 'beritaPosts'));
+    }
+
+    public function showBerita()
+    {
+        // Ambil posts dengan kategori 'Berita', urutkan berdasarkan tanggal terbaru, dan paginate dengan 6 posts per halaman
+        $posts = Post::whereHas('categories', function ($query) {
+            $query->where('name', 'Pendidikan'); // Pastikan 'Berita' adalah nama kategori yang benar
+        })->orderBy('created_at', 'desc') // Urutkan berdasarkan tanggal terbaru
+          ->paginate(6);
+
+        return view('posts.show', ['posts' => $posts, 'type' => 'Berita']);
+    }
+
+    public function showPengumuman()
+    {
+        // Ambil posts dengan kategori 'Pengumuman', urutkan berdasarkan tanggal terbaru, dan paginate dengan 6 posts per halaman
+        $posts = Post::whereHas('categories', function ($query) {
+            $query->where('name', 'Pengumuman'); // Pastikan 'Pengumuman' adalah nama kategori yang benar
+        })->orderBy('created_at', 'desc') // Urutkan berdasarkan tanggal terbaru
+          ->paginate(6);
+
+        return view('posts.show', ['posts' => $posts, 'type' => 'Pengumuman']);
     }
 
 
