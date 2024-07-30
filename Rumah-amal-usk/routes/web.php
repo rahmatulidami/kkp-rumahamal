@@ -47,9 +47,8 @@ Route::get('/admin', function () {
     return view('admin/index');
 });
 
-Route::get('/pengumuman', function () {
-    return view('pengumuman/pengumuman');
-});
+Route::get('pengumuman', [BeritaController::class, 'pengumuman'])->name('pengumuman');
+
 
 Route::get('/detail-pengumuman', function () {
     return view('pengumuman/detail-pengumuman');

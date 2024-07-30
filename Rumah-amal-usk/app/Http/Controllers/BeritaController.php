@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class BeritaController extends Controller
 {
+    // Category ID for Pengumuman
+    private $pengumumanCategoryId = 87;
+
     public function index()
     {
         // Fetch categories
@@ -21,20 +25,27 @@ class BeritaController extends Controller
         // Decode JSON response into an array
         $posts = $response->json();
 
-        // Extract image URL and map categories
-        foreach ($posts as &$post) {
+        // Filter out posts with the 'Pengumuman' category
+        $beritaPosts = array_filter($posts, function ($post) {
+            return !in_array($this->pengumumanCategoryId, $post['categories'] ?? []);
+        });
+
+        // Extract image URL and map categories for berita posts
+        foreach ($beritaPosts as &$post) {
             $post['image_url'] = $this->extractImageUrl($post['content']['rendered']);
+            $post['content']['rendered'] = $this->sanitizeContent($post['content']['rendered']);
+            $post['title']['rendered'] = $this->cleanTitle($post['title']['rendered']);
             $post['categories'] = array_map(function($categoryId) use ($categoryMap) {
                 return $categoryMap[$categoryId] ?? 'Uncategorized';
             }, $post['categories'] ?? []);
         }
 
-        // Paginate data
+        // Paginate berita posts
         $currentPage = request()->get('page', 1);
         $perPage = 12;
         $offset = ($currentPage - 1) * $perPage;
-        $totalPosts = count($posts);
-        $posts = array_slice($posts, $offset, $perPage);
+        $totalPosts = count($beritaPosts);
+        $beritaPosts = array_slice($beritaPosts, $offset, $perPage);
 
         $pagination = [
             'current_page' => $currentPage,
@@ -42,7 +53,69 @@ class BeritaController extends Controller
         ];
 
         // Send data to the view
-        return view('berita.berita', compact('posts', 'pagination'));
+        return view('berita.berita', compact('beritaPosts', 'pagination'));
+    }
+
+    public function pengumuman()
+    {
+        // Fetch categories
+        $categories = $this->fetchCategories();
+        $categoryMap = array_column($categories, 'name', 'id');
+
+        // Fetch posts
+        $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/posts', [
+            'per_page' => 100,
+        ]);
+
+        // Log response status and body for debugging
+        Log::info('API Response Status: ' . $response->status());
+        Log::info('API Response Body: ' . $response->body());
+
+        // Initialize posts array
+        $posts = [];
+
+        // Check if the response is successful and contains data
+        if ($response->successful()) {
+            // Decode JSON response into an array
+            $posts = $response->json();
+
+            // Fetch Pengumuman posts
+            $pengumumanPosts = array_filter($posts, function ($post) {
+                return in_array($this->pengumumanCategoryId, $post['categories'] ?? []);
+            });
+
+            // Extract image URL and map categories for pengumuman posts
+            foreach ($pengumumanPosts as &$post) {
+                $post['image_url'] = $this->extractImageUrl($post['content']['rendered']);
+                $post['content']['rendered'] = $this->sanitizeContent($post['content']['rendered']);
+                $post['title']['rendered'] = $this->cleanTitle($post['title']['rendered']);
+                $post['categories'] = array_map(function($categoryId) use ($categoryMap) {
+                    return $categoryMap[$categoryId] ?? 'Uncategorized';
+                }, $post['categories'] ?? []);
+            }
+
+            // Paginate pengumuman posts
+            $currentPage = request()->get('page', 1);
+            $perPage = 12;
+            $offset = ($currentPage - 1) * $perPage;
+            $totalPosts = count($pengumumanPosts);
+            $pengumumanPosts = array_slice($pengumumanPosts, $offset, $perPage);
+
+            $pagination = [
+                'current_page' => $currentPage,
+                'total_pages' => ceil($totalPosts / $perPage),
+            ];
+        } else {
+            // Log error response
+            Log::error('API Response Error: ' . $response->body());
+
+            // Handle error
+            $pengumumanPosts = [];
+            $pagination = [];
+        }
+
+        // Send data to the view
+        return view('pengumuman.pengumuman', compact('pengumumanPosts', 'pagination'));
     }
 
     private function fetchCategories()
@@ -51,11 +124,11 @@ class BeritaController extends Controller
         
         $categories = $response->json();
         
-        // Map categories to get the necessary fields
+        // Map categories to get the necessary fields and decode HTML entities in names
         return array_map(function ($category) {
             return [
                 'id' => $category['id'],
-                'name' => $category['name'],
+                'name' => htmlspecialchars_decode($category['name']),
                 'slug' => $category['slug'],
             ];
         }, $categories);
@@ -65,5 +138,27 @@ class BeritaController extends Controller
     {
         preg_match('/<img[^>]+src="([^">]+)"/', $content, $matches);
         return $matches[1] ?? url('assets/img/default.jpeg');
+    }
+
+    private function sanitizeContent($content)
+    {
+        // Decode HTML entities
+        $content = htmlspecialchars_decode($content);
+        
+        // Strip unwanted HTML tags
+        $content = strip_tags($content, '<p><a><b><i><u><strong><em><br>');
+        
+        // Replace &amp; with &
+        $content = str_replace('&amp;', '&', $content);
+        
+        return $content;
+    }
+
+    private function cleanTitle($title)
+    {
+        // Remove patterns like #3huruf; and similar
+        $title = preg_replace('/#\d+huruf;/', '', $title);
+        $title = html_entity_decode($title);
+        return trim($title);
     }
 }

@@ -31,7 +31,7 @@
     <section id="blog-posts" class="blog-posts section">
         <div class="container">
             <div class="row gy-4">
-                @foreach($posts as $post)
+              @foreach($beritaPosts as $post)
                     <div class="col-lg-4">
                         <article>
                             @if($post['image_url'])
@@ -39,7 +39,7 @@
                                     <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" style="width: 100%; height: auto;">
                                 </div>
                             @endif
-                            <p class="post-category">{{ $post['categories'][0] ?? 'Uncategorized' }}</p>
+                            <p class="post-category">{{ implode(', ', $post['categories']) }}</p>
                             <h2 class="title">
                                 <a href="{{ $post['link'] }}">{{ $post['title']['rendered'] }}</a>
                             </h2>
