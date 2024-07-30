@@ -87,6 +87,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/categories', CategoryController::class);
     Route::delete('admin/categories/reset', [CategoryController::class, 'reset'])->name('categories.reset');
     Route::resource('admin/posts', PostController::class);
+    // routes/web.php
+
+// Rute untuk menghapus post
+    Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+
 });
 
 Route::get('/', [PostController::class, 'landingPage'])->name('landing.home');
@@ -94,9 +99,13 @@ Route::post('/upload', [App\Http\Controllers\UploadController::class, 'upload'])
 
 // Halaman untuk menampilkan semua berita
 Route::get('/berita', [PostController::class, 'showBerita'])->name('posts.berita');
+Route::get('/berita/{title}', [PostController::class, 'showByTitle'])->name('posts.showByTitle');
 
 // Halaman untuk menampilkan semua pengumuman
 Route::get('/pengumuman', [PostController::class, 'showPengumuman'])->name('posts.pengumuman');
+Route::get('/pengumuman/{title}', [PostController::class, 'showByTitle'])->name('posts.showByTitle');
+
+// web.php
 
 
 Route::middleware('auth')->group(function () {

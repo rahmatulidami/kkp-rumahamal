@@ -39,6 +39,17 @@ class PostController extends Controller
         return view('posts.show', ['posts' => $posts, 'type' => 'Berita']);
     }
 
+    public function showByTitle($type, $title)
+    {
+        $post = Post::where('title', $title)
+                    ->whereHas('categories', function ($query) use ($type) {
+                        $query->where('name', $type);
+                    })
+                    ->firstOrFail(); // Mengambil post berdasarkan title dan type
+
+        return view('posts.show-detail', compact('post'));
+    }
+
     public function showPengumuman()
     {
         // Ambil posts dengan kategori 'Pengumuman', urutkan berdasarkan tanggal terbaru, dan paginate dengan 6 posts per halaman
@@ -53,49 +64,78 @@ class PostController extends Controller
 
     public function create()
     {
-        // Ambil semua kategori untuk menampilkan pilihan kategori di form
         $categories = Category::all();
-        return view('posts.create', compact('categories'));
+        return view('posts.create', ['categories' => $categories]);
     }
 
+    // Menyimpan post baru ke database
     public function store(Request $request)
     {
-        // Validasi dan simpan post baru
         $request->validate([
             'title' => 'required|string|max:255',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'content' => 'required',
-            'categories' => 'required|array',
+            'categories' => 'array',
+            'categories.*' => 'exists:categories,id',
         ]);
 
-        // Simpan file thumbnail
-        $thumbnailPath = $request->file('thumbnail')->store('thumbnails', 'public');
+        $post = new Post();
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
 
-        // Simpan data post
-        $post = Post::create([
-            'title' => $request->input('title'),
-            'thumbnail' => $thumbnailPath,
-            'content' => $request->input('content'),
-        ]);
-
-        // Sinkronisasi kategori
-        $post->categories()->sync($request->input('categories'));
-
-        // Sinkronisasi tags
-        $tags = explode(',', $request->input('tags'));
-        $tagIds = [];
-
-        if ($tags) {
-            foreach ($tags as $tagName) {
-                $tag = Tag::firstOrCreate(['name' => trim($tagName)]);
-                $tagIds[] = $tag->id;
-            }
+        if ($request->hasFile('thumbnail')) {
+            $file = $request->file('thumbnail');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public', $filename);
+            $post->thumbnail = $filename;
         }
 
-        $post->tags()->sync($tagIds);
+        $post->save();
+
+        $post->categories()->sync($request->input('categories'));
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
 
-    // Metode lain seperti edit, update, destroy...
+    // Menampilkan form untuk mengedit post
+    public function edit($id)
+    {
+        $post = Post::findOrFail($id);
+        $categories = Category::all();
+        return view('posts.create', ['post' => $post, 'categories' => $categories]);
+    }
+
+    // Mengupdate post yang ada
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'content' => 'required',
+            'categories' => 'array',
+            'categories.*' => 'exists:categories,id',
+        ]);
+
+        $post = Post::findOrFail($id);
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+
+        if ($request->hasFile('thumbnail')) {
+            // Hapus thumbnail lama jika ada
+            if ($post->thumbnail) {
+                Storage::delete('public/' . $post->thumbnail);
+            }
+
+            $file = $request->file('thumbnail');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public', $filename);
+            $post->thumbnail = $filename;
+        }
+
+        $post->save();
+
+        $post->categories()->sync($request->input('categories'));
+
+        return redirect()->route('posts.index')->with('success', 'Post updated successfully.');
+    }
 }

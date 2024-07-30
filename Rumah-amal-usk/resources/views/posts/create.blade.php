@@ -3,27 +3,34 @@
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="container">
-    <h1>Create Post</h1>
+    <h1>{{ isset($post) ? 'Edit Post' : 'Create Post' }}</h1>
 
-    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ isset($post) ? route('posts.update', $post->id) : route('posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+        @if (isset($post))
+            @method('PUT')
+        @endif
+
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" class="form-control" required>
+            <input type="text" name="title" id="title" class="form-control" value="{{ isset($post) ? $post->title : '' }}" required>
         </div>
 
         <div class="form-group">
             <label for="thumbnail">Thumbnail</label>
             <div class="d-flex justify-content-center">
-                <img id="thumbnail-preview" src="#" alt="Thumbnail Preview" style="display: none; max-width:100%; margin-bottom:10px; border-radius:15px;">
-                </div>
-            <input type="file" name="thumbnail" id="thumbnail" class="form-control" required>
-            <img id="thumbnail-preview" src="#" alt="Thumbnail Preview" style="display: none; max-width: 200px;">
+                @if (isset($post) && $post->thumbnail)
+                    <img id="thumbnail-preview" src="{{ asset('storage/' . $post->thumbnail) }}" alt="Thumbnail Preview" style="max-width: 200px; margin-bottom:10px; border-radius:15px;">
+                @else
+                    <img id="thumbnail-preview" src="#" alt="Thumbnail Preview" style="display: none; max-width: 200px;">
+                @endif
+            </div>
+            <input type="file" name="thumbnail" id="thumbnail" class="form-control">
         </div>
 
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea name="content" id="content" class="form-control ckeditor"></textarea>
+            <textarea name="content" id="content" class="form-control ckeditor">{{ isset($post) ? $post->content : '' }}</textarea>
         </div>
 
         <div class="form-group">
@@ -37,12 +44,12 @@
 
             <ul class="list-items">
                 @foreach($categories as $category)
-                    <li class="item">
+                    <li class="item {{ isset($post) && $post->categories->contains($category->id) ? 'checked' : '' }}">
                         <span class="checkbox">
                             <i class="fa-solid fa-check check-icon"></i>
                         </span>
                         <span class="item-text">{{ $category->name }}</span>
-                        <input type="checkbox" name="categories[]" value="{{ $category->id }}" style="display: none;">
+                        <input type="checkbox" name="categories[]" value="{{ $category->id }}" {{ isset($post) && $post->categories->contains($category->id) ? 'checked' : '' }} style="display: none;">
                     </li>
                 @endforeach
             </ul>
@@ -51,13 +58,19 @@
         <div class="form-group">
             <label for="tags">Tags</label>
             <div class="tags-input">
-                <ul id="tags"></ul>
+                <ul id="tags">
+                    @if (isset($post))
+                        @foreach($post->tags as $tag)
+                            <li>{{ $tag->name }}<button class="delete-button">X</button></li>
+                        @endforeach
+                    @endif
+                </ul>
                 <input type="text" id="input-tag" placeholder="Enter tag name" />
             </div>
-            <input type="hidden" name="tags" id="tags-hidden">
+            <input type="hidden" name="tags" id="tags-hidden" value="{{ isset($post) ? $post->tags->pluck('name')->implode(',') : '' }}">
         </div>
 
-        <button type="submit" class="btn btn-primary">Save Post</button>
+        <button type="submit" class="btn btn-primary">{{ isset($post) ? 'Update Post' : 'Save Post' }}</button>
     </form>
 </div>
 
@@ -106,37 +119,37 @@ items.forEach(item => {
 });
 
 const tags = document.getElementById('tags');
-    const input = document.getElementById('input-tag');
-    const hiddenInput = document.getElementById('tags-hidden');
+const input = document.getElementById('input-tag');
+const hiddenInput = document.getElementById('tags-hidden');
 
-    input.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            const tagContent = input.value.trim();
+input.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        const tagContent = input.value.trim();
 
-            if (tagContent !== '') {
-                const tag = document.createElement('li');
-                tag.innerText = tagContent;
-                tag.innerHTML += '<button class="delete-button">X</button>';
-                tags.appendChild(tag);
-                input.value = '';
-                updateHiddenInput();
-            }
-        }
-    });
-
-    tags.addEventListener('click', function(event) {
-        if (event.target.classList.contains('delete-button')) {
-            event.target.parentNode.remove();
+        if (tagContent !== '') {
+            const tag = document.createElement('li');
+            tag.innerText = tagContent;
+            tag.innerHTML += '<button class="delete-button">X</button>';
+            tags.appendChild(tag);
+            input.value = '';
             updateHiddenInput();
         }
-    });
-
-    function updateHiddenInput() {
-        const tagsArray = Array.from(tags.children).map(tag => tag.innerText.replace('X', '').trim());
-        hiddenInput.value = tagsArray.join(',');
-        console.log('Tags:', hiddenInput.value); // Debugging output
     }
+});
+
+tags.addEventListener('click', function(event) {
+    if (event.target.classList.contains('delete-button')) {
+        event.target.parentNode.remove();
+        updateHiddenInput();
+    }
+});
+
+function updateHiddenInput() {
+    const tagsArray = Array.from(tags.children).map(tag => tag.innerText.replace('X', '').trim());
+    hiddenInput.value = tagsArray.join(',');
+    console.log('Tags:', hiddenInput.value); // Debugging output
+}
 </script>
 
 <style>
