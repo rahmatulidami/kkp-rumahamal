@@ -851,6 +851,11 @@ h6 {
     .footer .footer-links {
         display: none;
     }
+
+    .footer .footer-about .img img {
+        max-height: 70px;
+        padding: 15px;
+    }
 }
 
 /*--------------------------------------------------------------
@@ -945,7 +950,7 @@ h6 {
 }
 
 .page-title .heading {
-    padding: 150px 0 0 0;
+    padding: 100px 0 0 0;
     border-top: 1px solid
         color-mix(in srgb, #45474B, transparent 90%);
 }
@@ -988,6 +993,12 @@ h6 {
     display: inline-block;
     padding-right: 10px;
     color: color-mix(in srgb, var(--default-color), transparent 50%);
+}
+
+@media (max-width: 750px) {
+    .page-title .heading h1 {
+        font-size: 28px;
+    }
 }
 
 /*--------------------------------------------------------------
