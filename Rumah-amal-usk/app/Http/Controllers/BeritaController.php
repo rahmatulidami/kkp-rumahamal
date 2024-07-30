@@ -63,8 +63,7 @@ class BeritaController extends Controller
 
     private function extractImageUrl($content)
     {
-        // Extract the first image URL from the rendered content using regex
         preg_match('/<img[^>]+src="([^">]+)"/', $content, $matches);
-        return $matches[1] ?? null;
+        return $matches[1] ?? url('assets/img/default.jpeg');
     }
 }
