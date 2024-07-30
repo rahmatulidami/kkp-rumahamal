@@ -22,61 +22,95 @@ class HomeController extends Controller
             }
         }
 
-        // Fetch categories and latest 3 posts from the API
+        // Fetch categories and posts from the API
         $categories = $this->fetchCategories();
-        $latestPosts = $this->fetchLatestPosts();
+        $allPosts = $this->fetchAllPosts();
 
-        // Map category IDs to names
+        // Check if categories and posts are arrays
+        if (!is_array($categories) || !is_array($allPosts)) {
+            abort(500, 'Invalid data received from API.');
+        }
+
+        // Map category IDs to names and decode HTML entities
         $categoryMap = array_column($categories, 'name', 'id');
+        $categoryMap = array_map('html_entity_decode', $categoryMap);
 
-        // Replace category IDs in posts with category names
-        foreach ($latestPosts as &$post) {
-            $post['categories'] = array_map(function($categoryId) use ($categoryMap) {
-                return $categoryMap[$categoryId] ?? 'Uncategorized';
-            }, $post['categories']);
+        // Filter and sort posts
+        $pengumumanPosts = array_filter($allPosts, function($post) {
+            return is_array($post) && in_array(87, $post['categories'] ?? []);
+        });
+
+        $beritaPosts = array_filter($allPosts, function($post) {
+            return is_array($post) && !in_array(87, $post['categories'] ?? []);
+        });
+
+        usort($pengumumanPosts, fn($a, $b) => strtotime($b['date'] ?? '1970-01-01') - strtotime($a['date'] ?? '1970-01-01'));
+        usort($beritaPosts, fn($a, $b) => strtotime($b['date'] ?? '1970-01-01') - strtotime($a['date'] ?? '1970-01-01'));
+
+        $latestPengumumanPosts = array_slice($pengumumanPosts, 0, 3);
+        $latestBeritaPosts = array_slice($beritaPosts, 0, 3);
+
+        // Replace category IDs with names and decode HTML entities
+        foreach ($latestPengumumanPosts as &$post) {
+            $post['categories'] = array_map(fn($id) => $categoryMap[$id] ?? 'Uncategorized', $post['categories'] ?? []);
+        }
+
+        foreach ($latestBeritaPosts as &$post) {
+            $post['categories'] = array_map(fn($id) => $categoryMap[$id] ?? 'Uncategorized', $post['categories'] ?? []);
         }
 
         // Return the home view with the latest posts and categories
-        return view('landing.home', ['latestPosts' => $latestPosts]);
+        return view('landing.home', [
+            'latestPengumumanPosts' => $latestPengumumanPosts,
+            'latestBeritaPosts' => $latestBeritaPosts
+        ]);
     }
 
     private function fetchCategories()
     {
         $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/categories');
         
+        // Check if response is an array
         $categories = $response->json();
+        if (!is_array($categories)) {
+            abort(500, 'Failed to fetch categories.');
+        }
         
         // Map categories to get the necessary fields
         return array_map(function ($category) {
             return [
-                'id' => $category['id'],
-                'name' => $category['name'],
-                'slug' => $category['slug'],
+                'id' => $category['id'] ?? 0,
+                'name' => $category['name'] ?? 'Unknown',
+                'slug' => $category['slug'] ?? '',
             ];
         }, $categories);
     }
 
-    private function fetchLatestPosts()
+    private function fetchAllPosts()
     {
-        $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/posts', ['per_page' => 3]);
+        $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/posts', ['per_page' => 100]);
 
-        $latestPosts = $response->json();
+        // Check if response is an array
+        $posts = $response->json();
+        if (!is_array($posts)) {
+            abort(500, 'Failed to fetch posts.');
+        }
 
         // Process the posts to include necessary fields
         return array_map(function ($post) {
             return [
                 'image_url' => $this->extractImageUrl($post),
                 'categories' => $post['categories'] ?? [],
-                'title' => $post['title']['rendered'] ?? '',
+                'title' => $post['title'] ?? [],
                 'link' => $post['link'] ?? '',
                 'date' => $post['date'] ?? ''
             ];
-        }, $latestPosts);
+        }, $posts);
     }
 
     private function extractImageUrl($post)
     {
-        if (isset($post['content']['rendered'])) {
+        if (isset($post['content']['rendered']) && is_string($post['content']['rendered'])) {
             $content = $post['content']['rendered'];
             preg_match('/<img[^>]+src="([^">]+)"/', $content, $matches);
             return $matches[1] ?? null;
