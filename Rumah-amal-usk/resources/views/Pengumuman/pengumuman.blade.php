@@ -39,7 +39,9 @@
                                     <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" style="width: 100%; height: auto;">
                                 </div>
                             @endif
-                            <p class="post-category">{{ $post['categories'][0] ?? 'Uncategorized' }}</p>
+                            <p class="post-category">
+                                {{ end($post['categories']) ?? 'Uncategorized' }}
+                            </p>
                             <h2 class="title">
                               <a href="{{ $post['link'] }}">{{ $post['title']['rendered'] }}</a>
                             </h2>

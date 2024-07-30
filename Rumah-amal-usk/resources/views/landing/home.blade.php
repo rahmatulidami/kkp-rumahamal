@@ -373,7 +373,9 @@
                                 <img src="{{ $post['image_url'] }}" alt="" class="img-fluid">
                             </div>
                         @endif
-                        <p class="post-category">{{ implode(', ', $post['categories'] ?? []) }}</p>
+                        <p class="post-category">
+                            {{ end($post['categories']) ?? 'Uncategorized' }}
+                        </p>
                         <h2 class="title">
                             @if(isset($post['link']) && isset($post['title']) && is_array($post['title']))
                                 <a href="{{ $post['link'] }}">{{ $post['title']['rendered'] ?? 'No Title' }}</a>

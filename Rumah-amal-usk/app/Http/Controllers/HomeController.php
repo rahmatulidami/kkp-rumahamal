@@ -53,10 +53,12 @@ class HomeController extends Controller
         // Replace category IDs with names and decode HTML entities
         foreach ($latestPengumumanPosts as &$post) {
             $post['categories'] = array_map(fn($id) => $categoryMap[$id] ?? 'Uncategorized', $post['categories'] ?? []);
+            $post['title']['rendered'] = str_replace('&amp;', '&', $post['title']['rendered'] ?? 'Untitled');
         }
 
         foreach ($latestBeritaPosts as &$post) {
             $post['categories'] = array_map(fn($id) => $categoryMap[$id] ?? 'Uncategorized', $post['categories'] ?? []);
+            $post['title']['rendered'] = str_replace('&amp;', '&', $post['title']['rendered'] ?? 'Untitled');
         }
 
         // Return the home view with the latest posts and categories
@@ -113,9 +115,9 @@ class HomeController extends Controller
         if (isset($post['content']['rendered']) && is_string($post['content']['rendered'])) {
             $content = $post['content']['rendered'];
             preg_match('/<img[^>]+src="([^">]+)"/', $content, $matches);
-            return $matches[1] ?? null;
+            return $matches[1] ?? url('assets/img/default.jpeg');
         }
 
-        return null;
+        return url('assets/img/default.jpeg');
     }
 }
