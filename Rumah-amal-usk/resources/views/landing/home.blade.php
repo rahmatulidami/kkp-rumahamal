@@ -373,7 +373,7 @@
                                 <img src="{{ $post['image_url'] }}" alt="" class="img-fluid">
                             </div>
                         @endif
-                        <p class="post-category">{{ $post['categories'][0] ?? 'Uncategorized' }}</p>
+                        <p class="post-category">{{ implode(', ', $post['categories'] ?? []) }}</p>
                         <h2 class="title">
                             @if(isset($post['link']) && isset($post['title']) && is_array($post['title']))
                                 <a href="{{ $post['link'] }}">{{ $post['title']['rendered'] ?? 'No Title' }}</a>
@@ -403,6 +403,9 @@
 
 <!-- Recent Posts Section -->
 <section id="recent-posts" class="recent-posts section">
+    <div class="container section-title" data-aos="fade-up">
+        <h2>BERITA TERKINI</h2>
+    </div>
     <div class="container">
         <div class="row gy-4">
             @foreach($latestBeritaPosts as $post)
