@@ -443,7 +443,7 @@
     </div><!-- End post list item -->
 
     <div class="button-wrapper">
-      <a class="button-selengkapnya" href="/detail-pengumuman" role="button">Pengumuman Lainnya</a>
+      <a class="button-selengkapnya" href="/pengumuman" role="button">Pengumuman Lainnya</a>
     </div>
   </div><!-- End recent posts list -->
 
@@ -536,7 +536,7 @@
       
     </div><!-- End post list item -->
     <div class="button-wrapper">
-      <a class="button-selengkapnya" href="/detail-berita" role="button">Berita Lainnya</a>
+      <a class="button-selengkapnya" href="/berita" role="button">Berita Lainnya</a>
     </div>
   </div><!-- End recent posts list -->
 
@@ -626,61 +626,59 @@
 <!-- Clients Section -->
      <!-- Section Title -->
      
-    <section id="clients" class="clients section">
+     <section id="clients" class="clients section">
     <div class="container section-title" data-aos="fade-up">
-      <h2>MITRA RUMAH AMAL USK</h2>
+        <h2>MITRA RUMAH AMAL USK</h2>
     </div>
-      <div class="container">
-
+    <div class="container">
         <div class="swiper init-swiper">
-          <script type="application/json" class="swiper-config">
+            <script type="application/json" class="swiper-config">
             {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 2,
-                  "spaceBetween": 40
+                "loop": true,
+                "speed": 600,
+                "autoplay": {
+                    "delay": 5000
                 },
-                "480": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 60
+                "slidesPerView": "auto",
+                "pagination": {
+                    "el": ".swiper-pagination",
+                    "type": "bullets",
+                    "clickable": true
                 },
-                "640": {
-                  "slidesPerView": 4,
-                  "spaceBetween": 80
-                },
-                "992": {
-                  "slidesPerView": 6,
-                  "spaceBetween": 120
+                "breakpoints": {
+                    "320": {
+                        "slidesPerView": 4,
+                        "spaceBetween": 10 
+                    },
+                    "480": {
+                        "slidesPerView": 4,
+                        "spaceBetween": 20 
+                    },
+                    "640": {
+                        "slidesPerView": 5,
+                        "spaceBetween": 30
+                    },
+                    "992": {
+                        "slidesPerView": 6,
+                        "spaceBetween": 60
+                    }
                 }
-              }
             }
-          </script>
-          <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
-          </div>
+            </script>
+            <div class="swiper-wrapper align-items-center">
+                <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
+            </div>
         </div>
-
-      </div>
-
-    </section><!-- /Clients Section -->
+    </div>
+</section>
+<!-- /Clients Section -->
   </main>
 
   @endsection

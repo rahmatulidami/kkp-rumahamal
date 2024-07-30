@@ -1228,10 +1228,19 @@ section,
 
 .clients .swiper-slide img {
     transition: 0.3s;
+    width: 100%; 
 }
 
-.clients .swiper-slide img:hover {
-    transform: scale(1.1);
+@media (max-width: 768px) {
+    .clients .swiper-slide img {
+        width: 70%; 
+    }
+}
+
+@media (max-width: 480px) {
+    .clients .swiper-slide img {
+        width: 50%; 
+    }
 }
 
 /*--------------------------------------------------------------
