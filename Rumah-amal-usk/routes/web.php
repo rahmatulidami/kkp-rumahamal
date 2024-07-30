@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BeritaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,10 +17,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('landing/home');
-});
+route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/donate', [DonationController::class, 'index']);
 Route::post('/donate', [DonationController::class, 'store']);
@@ -39,9 +37,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 
-Route::get('/berita', function () {
-    return view('berita/berita');
-});
+Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
 
 Route::get('/detail-berita', function () {
     return view('berita/detail-berita');

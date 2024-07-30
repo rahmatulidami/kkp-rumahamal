@@ -453,96 +453,35 @@
 
 <!-- Recent Posts Section -->
 <section id="recent-posts" class="recent-posts section">
-
-<!-- Section Title -->
-<div class="container section-title" data-aos="fade-up">
-  <h2>BERITA TERKINI</h2>
-</div><!-- End Section Title -->
-
-<div class="container">
-
-  <div class="row gy-4">
-
-    <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-      <article>
-
-        <div class="post-img">
-          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
+    <div class="container">
+        <div class="row gy-4">
+            @foreach($latestPosts as $post)
+                <div class="col-lg-4">
+                    <article>
+                        @if($post['image_url'])
+                            <div class="post-img">
+                                <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" style="width: 100%; height: auto;">
+                            </div>
+                        @endif
+                        <p class="post-category">{{ implode(', ', $post['categories']) }}</p>
+                        <h2 class="title">
+                            <a href="{{ $post['link'] }}">{{ $post['title'] }}</a>
+                        </h2>
+                        <div class="d-flex align-items-center">
+                            <p class="post-date">
+                                <time datetime="{{ $post['date'] }}">{{ \Carbon\Carbon::parse($post['date'])->format('M d, Y') }}</time>
+                            </p>
+                        </div>
+                    </article>
+                </div><!-- End post list item -->
+            @endforeach
         </div>
-
-        <p class="post-category">Politics</p>
-
-        <h2 class="title">
-          <a href="/detail-berita">Dolorum optio tempore voluptas dignissimos</a>
-        </h2>
-
-        <div class="d-flex align-items-center">
-          <div class="post-meta">
-            <p class="post-date">
-              <time datetime="2022-01-01">Jan 1, 2022</time>
-            </p>
-          </div>
+        <div class="button-wrapper">
+            <a class="button-selengkapnya" href="/berita" role="button">Berita Lainnya</a>
         </div>
-
-      </article>
-    </div><!-- End post list item -->
-
-    <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-      <article>
-
-        <div class="post-img">
-          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
-        </div>
-
-        <p class="post-category">Sports</p>
-
-        <h2 class="title">
-          <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
-        </h2>
-
-        <div class="d-flex align-items-center">
-          <div class="post-meta">
-            <p class="post-date">
-              <time datetime="2022-01-01">Jun 5, 2022</time>
-            </p>
-          </div>
-        </div>
-
-      </article>
-    </div><!-- End post list item -->
-
-    <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-      <article>
-
-        <div class="post-img">
-          <img src="assets/img/campaign/palestine.png" alt="" class="img-fluid">
-        </div>
-
-        <p class="post-category">Entertainment</p>
-
-        <h2 class="title">
-          <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
-        </h2>
-
-        <div class="d-flex align-items-center">
-         <div class="post-meta">
-           <p class="post-date">
-              <time datetime="2022-01-01">Jun 22, 2022</time>
-            </p>
-          </div>
-        </div>
-
-      </article>
-      
-    </div><!-- End post list item -->
-    <div class="button-wrapper">
-      <a class="button-selengkapnya" href="/berita" role="button">Berita Lainnya</a>
     </div>
-  </div><!-- End recent posts list -->
+</section>
 
-</div>
-
-</section><!-- /Recent Posts Section -->
 
 <section id="program" class="program section">
 
