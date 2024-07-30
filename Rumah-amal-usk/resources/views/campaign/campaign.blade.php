@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title', 'Campaign')
+@section('title', 'Campaign | Rumah Amal USK')
 
 @section('content')
 

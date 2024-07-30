@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title', 'Donasi')
+@section('title', 'Donasi | Rumah Amal USK')
 
 @section('content')
 <section>
@@ -252,9 +252,9 @@
     }
 }
 
-.category-logos {
+/* .category-logos {
     width:
-}
+} */
 
 /* #category-label {
     font-weight: 400;
