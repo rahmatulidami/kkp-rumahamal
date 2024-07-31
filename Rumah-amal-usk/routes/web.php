@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BeritaController;
 use Illuminate\Support\Facades\Route;
@@ -51,9 +52,8 @@ Route::get('/admin', function () {
 Route::get('pengumuman', [BeritaController::class, 'pengumuman'])->name('pengumuman');
 
 
-Route::get('/detail-pengumuman', function () {
-    return view('pengumuman/detail-pengumuman');
-});
+Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
+
 
 Route::get('/galeri', function () {
     return view('galeri/galeri');

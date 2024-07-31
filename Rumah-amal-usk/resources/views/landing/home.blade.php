@@ -377,11 +377,7 @@
                             {{ end($post['categories']) ?? 'Uncategorized' }}
                         </p>
                         <h2 class="title">
-                            @if(isset($post['link']) && isset($post['title']) && is_array($post['title']))
-                                <a href="{{ $post['link'] }}">{{ $post['title']['rendered'] ?? 'No Title' }}</a>
-                            @else
-                                <span>No Title</span>
-                            @endif
+                            <a href="{{ route('pengumuman.show', ['id' => $post['id']]) }}">{{ $post['title']['rendered'] }}</a>
                         </h2>
                         <div class="d-flex align-items-center">
                             <p class="post-date">

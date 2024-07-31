@@ -43,7 +43,7 @@
                                 {{ end($post['categories']) ?? 'Uncategorized' }}
                             </p>
                             <h2 class="title">
-                              <a href="{{ $post['link'] }}">{{ $post['title']['rendered'] }}</a>
+                                <a href="{{ route('pengumuman.show', ['id' => $post['id']]) }}">{{ $post['title']['rendered'] }}</a>
                             </h2>
                             <div class="d-flex align-items-center">
                                 <p class="post-date">
