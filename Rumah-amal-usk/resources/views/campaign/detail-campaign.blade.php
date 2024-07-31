@@ -97,7 +97,6 @@
 <!-- Donatur Section -->
 <section class="donatur" id="donatur-section" style="display: none;">
     <div class="container">
-        <h3 class="donatur-title">Donatur</h3>
         <div class="donor-list">
             @if(isset($campaign['donors']) && is_array($campaign['donors']))
                 @foreach($campaign['donors'] as $donor)

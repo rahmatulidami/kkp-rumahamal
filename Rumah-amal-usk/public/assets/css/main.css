@@ -963,7 +963,7 @@ h6 {
 
 .page-title nav {
     background-color: color-mix(in srgb, var(--background-color), transparent 92%);
-    padding: 20px 0;
+    padding: 10px 0;
     color: #FFBB0C;
 }
 
@@ -997,7 +997,7 @@ h6 {
 
 @media (max-width: 750px) {
     .breadcrumbs ol{
-        padding: 30px;
+        padding: 10px;
     }
 
     .page-title .heading h1 {
@@ -2955,7 +2955,6 @@ section,
 .campaign-detail .container {
     display: flex;
     flex-wrap: wrap;
-    padding-top: 20px;
 }
 
 .campaign-detail .campaign-detail-info {
@@ -2971,7 +2970,7 @@ section,
 }
 
 .campaign-detail .campaign-detail-info .left img {
-    border-radius: 20px;
+    border-radius: 10px;
     width: 100%; 
     height: auto;
 }
@@ -2984,7 +2983,7 @@ section,
     }
     .campaign-detail .campaign-detail-info .left {
         max-width: 50%;
-        padding-right: 10px; 
+        padding-right: 20px; 
     }
     .campaign-detail .campaign-detail-info .right {
         max-width: 50%;
@@ -2993,10 +2992,17 @@ section,
 }
 
 .campaign-detail-info .right h4 {
-    font-size: 26px;
-    font-weight: 900;
+    font-size: 24px;
+    font-weight: 800;
 }
 
+.campaign-detail-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  
 .campaign-detail-info .right{
     background-color: #ffffff;
     box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.1);
@@ -3203,6 +3209,9 @@ section,
     line-height: 2;
 }
 
+.donatur {
+    padding: 0;
+}
 .donatur .container {
     padding: 5px 20px; 
 }
@@ -3280,6 +3289,13 @@ section,
         width: 100%; 
         justify-content: center; 
     }
+    .detail {
+        padding: 20px;
+    }
+    .detail .container {
+        padding: 15px;
+    }
+    
 }
 
 
