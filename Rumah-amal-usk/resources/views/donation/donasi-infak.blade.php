@@ -27,10 +27,14 @@
           <label for="infak-type">Pilih Jenis Infak:</label>
           <select id="infak-type" onchange="updateTotal()">
             <option value="">--Pilih Jenis Infak--</option>
+            <option value="Infak">Infak</option>
             <option value="Infak Anak Yatim">Infak Anak Yatim</option>
             <option value="Infak Pembangunan Masjid">Infak Pembangunan Masjid</option>
             <option value="Infak Pendidikan">Infak Pendidikan</option>
-            <option value="Infak Kesehatan">Infak Kesehatan</option>
+            <option value="Infak Sembako">Infak Sembako</option>
+            <option value="Infak Kemanusiaan">Infak Kemanusiaan</option>
+            <option value="Tabungan Qurban">Tabungan Qurban</option>
+            
           </select>
         </div>
 
