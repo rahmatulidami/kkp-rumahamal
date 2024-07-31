@@ -34,25 +34,9 @@
 
               <h3 class="title">{{ $berita['title']['rendered'] }}</h3>
 
-              <div class="post-img">
-                <img src="{{ $mainImage }}" alt="{{ $berita['title']['rendered'] }}" class="img-fluid" style="width: 100%; height: auto;">
+              <div class="content" style="max-width: 100%; height: auto;">
+                  {!! $berita['content']['rendered'] !!}
               </div>
-
-              <!-- <div class="post-content">
-                {!! $filteredContent !!}
-              </div> -->
-
-              <div class="meta-top">
-                <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#">{{ $berita['author'] }}</a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="{{ $berita['date'] }}">{{ \Carbon\Carbon::parse($berita['date'])->format('M d, Y') }}</time></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#">{{ $comment_count }} Comments</a></li>
-                </ul>
-              </div><!-- End meta top -->
-
-              <div class="content">
-                {!! $berita['content']['rendered'] !!}
-              </div><!-- End post content -->
 
               <div class="meta-bottom">
                 <i class="bi bi-folder"></i>
