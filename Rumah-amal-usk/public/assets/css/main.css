@@ -3365,15 +3365,13 @@ section,
     color: #1D7E05;
 }
 
-
-
-.detail-description p {
+.detail p {
     margin: 10px 0;
     text-align: justify;
 }
 
-.detail-description br {
-    line-height: 1.8;
+.detail br {
+    line-height: 2;
 }
 
 .donatur .container {

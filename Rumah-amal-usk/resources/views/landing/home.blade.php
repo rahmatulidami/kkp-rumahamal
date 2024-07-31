@@ -113,7 +113,7 @@
                     <div class="Durasi">
                       <div class="sisa-hari">
                         <span>Durasi</span>
-                        <div class="days-left">{{ $campaign['acf']['lama_campaign'] ?? 'N/A' }}</div>
+                        <div class="days-left">{{ $campaign['acf']['lama_campaign'] ?? 'N/A' }} hari</div>
                       </div>
                     </div>
 

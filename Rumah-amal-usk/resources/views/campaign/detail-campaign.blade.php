@@ -36,7 +36,7 @@
                     <div class="Durasi">
                         <div class="sisa-hari">
                             <span>Durasi</span>
-                            <div class="days-left">{{ $campaign['acf']['lama_campaign'] ?? 'N/A' }}</div>
+                            <div class="days-left">{{ $campaign['acf']['lama_campaign'] ?? 'N/A' }} hari</div>
                         </div>
                     </div>
 
@@ -142,7 +142,7 @@
                     <div class="Durasi">
                       <div class="sisa-hari">
                         <span>Durasi</span>
-                        <div class="days-left">{{ $campaign['acf']['lama_campaign'] ?? 'N/A' }}</div>
+                        <div class="days-left">{{ $campaign['acf']['lama_campaign'] ?? 'N/A' }} hari</div>
                       </div>
                     </div>
 
@@ -185,6 +185,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const facebookShareButton = document.getElementById('share-facebook');
     const copyLinkButton = document.getElementById('copy-link');
     const shareInstructions = document.getElementById('share-instructions');
+    const detailSection = document.getElementById('detail-section');
+    const donaturSection = document.getElementById('donatur-section');
+    const detailFilterButton = document.querySelector('li[data-filter="detail"]');
+    const donaturFilterButton = document.querySelector('li[data-filter="donatur"]');
 
     instagramShareButton.addEventListener('click', function(event) {
         event.preventDefault();
@@ -213,6 +217,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 2000);
         });
     });
+
+    // Filter functionality
+    detailFilterButton.addEventListener('click', function() {
+        detailSection.style.display = 'block';
+        donaturSection.style.display = 'none';
+        detailFilterButton.classList.add('filter-active');
+        donaturFilterButton.classList.remove('filter-active');
+    });
+
+    donaturFilterButton.addEventListener('click', function() {
+        detailSection.style.display = 'none';
+        donaturSection.style.display = 'block';
+        donaturFilterButton.classList.add('filter-active');
+        detailFilterButton.classList.remove('filter-active');
+    });
 });
 </script>
-
