@@ -6,55 +6,45 @@
 
 <main class="main">
 
-  <!-- Hero Section -->
-  <section id="hero">
+<!-- Hero Section -->
+<section id="hero">
     <div class="hero-slider swiper init-swiper">
-      <script type="application/json" class="swiper-config">
+        <script type="application/json" class="swiper-config">
         {
-          "loop": true,
-          "speed": 600,
-          "autoplay": {
-            "delay": 5000
-          },
-          "slidesPerView": "auto",
-          "navigation": {
-            "nextEl": ".swiper-button-next",
-            "prevEl": ".swiper-button-prev"
-          },
-          "pagination": {
-            "el": ".swiper-pagination",
-            "type": "bullets",
-            "clickable": true
-          }
+            "loop": true,
+            "speed": 600,
+            "autoplay": {
+                "delay": 5000
+            },
+            "slidesPerView": 1,
+            "spaceBetween": 0,
+            "navigation": {
+                "nextEl": ".swiper-button-next",
+                "prevEl": ".swiper-button-prev"
+            },
+            "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+            }
         }
-      </script>
+        </script>
         <div class="swiper-wrapper align-items-center">
-
-          <div class="swiper-slide">
-            <img src="assets/img/campaign/palestine.png" alt="">
-          </div>
-
-          <div class="swiper-slide">
-            <img src="assets/img/campaign/palestine.png" alt="">
-          </div>
-
-          <div class="swiper-slide">
-            <img src="assets/img/campaign/palestine.png" alt="">
-          </div>
-
-          <div class="swiper-slide">
-            <img src="assets/img/campaign/palestine.png" alt="">
-          </div>
-
-          </div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-pagination"></div>
-          </div>
+            @foreach($latestPosts as $post)
+                <div class="swiper-slide">
+                    <div class="image-container">
+                    <a href="{{ route('berita.show', ['id' => $post['id']]) }}"><img src="{{ $post['image_url'] }}" alt="{{ $post['title']['rendered'] ?? 'Post Image' }}"></a>
+                    </div>
+                </div>
+            @endforeach
         </div>
-      </div>
-  </section>
-  <!-- End Hero Section -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+<!-- End Hero Section -->
+
   
   <section id="icon-boxed" class="icon-boxes section">
   <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">

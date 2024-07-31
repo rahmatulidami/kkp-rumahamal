@@ -25,13 +25,11 @@ class HomeController extends Controller
 
         // Fetch categories and posts from the API
         $categories = $this->fetchCategories();
-        $allPosts = $this->fetchAllPosts();
-
-        // Fetch and process campaigns
+        $latestPosts = $this->fetchAllPosts();
         $campaigns = $this->fetchAndProcessCampaigns();
 
         // Check if categories and posts are arrays
-        if (!is_array($categories) || !is_array($allPosts)) {
+        if (!is_array($categories) || !is_array($latestPosts)) {
             abort(500, 'Invalid data received from API.');
         }
 
@@ -40,11 +38,11 @@ class HomeController extends Controller
         $categoryMap = array_map('html_entity_decode', $categoryMap);
 
         // Filter and sort posts
-        $pengumumanPosts = array_filter($allPosts, function($post) {
+        $pengumumanPosts = array_filter($latestPosts, function($post) {
             return is_array($post) && in_array(87, $post['categories'] ?? []);
         });
 
-        $beritaPosts = array_filter($allPosts, function($post) {
+        $beritaPosts = array_filter($latestPosts, function($post) {
             return is_array($post) && !in_array(87, $post['categories'] ?? []);
         });
 
@@ -67,6 +65,7 @@ class HomeController extends Controller
 
         // Return the home view with the latest posts, categories, and campaigns
         return view('landing.home', [
+            'latestPosts' => $latestPosts,
             'latestPengumumanPosts' => $latestPengumumanPosts,
             'latestBeritaPosts' => $latestBeritaPosts,
             'campaigns' => $campaigns
@@ -76,13 +75,13 @@ class HomeController extends Controller
     private function fetchCategories()
     {
         $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/categories');
-        
+
         // Check if response is an array
         $categories = $response->json();
         if (!is_array($categories)) {
             abort(500, 'Failed to fetch categories.');
         }
-        
+
         // Map categories to get the necessary fields
         return array_map(function ($category) {
             return [
@@ -95,15 +94,13 @@ class HomeController extends Controller
 
     private function fetchAllPosts()
     {
-        $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/posts', ['per_page' => 100]);
+        $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/posts', ['per_page' => 6, 'orderby' => 'date', 'order' => 'desc']);
 
-        // Check if response is an array
         $posts = $response->json();
         if (!is_array($posts)) {
             abort(500, 'Failed to fetch posts.');
         }
 
-        // Process the posts to include necessary fields
         return array_map(function ($post) {
             return [
                 'id' => $post['id'] ?? 0,
