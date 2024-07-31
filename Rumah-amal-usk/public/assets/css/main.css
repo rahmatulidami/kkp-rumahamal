@@ -2053,8 +2053,7 @@ section,
     margin-right: auto; 
     max-width: 100%;
     height: auto;
-    border-radius: 20px;
-    max-width: 600px; 
+    border-radius: 5px;
 }
 
 /* Media query for screens smaller than 767px */
