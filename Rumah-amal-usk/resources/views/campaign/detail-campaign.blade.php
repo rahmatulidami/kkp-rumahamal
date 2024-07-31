@@ -10,11 +10,6 @@
 <div class="page-title">
     <div class="heading">
         <div class="container">
-            <div class="row d-flex justify-content-center text-center">
-                <div class="col-lg-8">
-                    <h1>{{ $campaign['title']['rendered'] }}</h1>
-                </div>
-            </div>
         </div>
     </div>
     <nav class="breadcrumbs">

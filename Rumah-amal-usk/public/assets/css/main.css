@@ -1409,7 +1409,6 @@ section,
 .campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h4 {
     font-size: 18px;
     font-weight: 600;
-    padding-right: 50px;
 }
 
 .campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h4 a {
@@ -3127,7 +3126,7 @@ section,
 .campaign-detail .container {
     display: flex;
     flex-wrap: wrap;
-    padding-top: 70px;
+    padding-top: 20px;
 }
 
 .campaign-detail .campaign-detail-info {
@@ -3366,18 +3365,11 @@ section,
     color: #1D7E05;
 }
 
-.detail-description {
-    font-size: 16px;
-    line-height: 1.6;
-    text-align: justify;
-    color: #444;
-    background-color: #fff;
-    padding: 20px;
-    margin-top: 10px;
-}
+
 
 .detail-description p {
     margin: 10px 0;
+    text-align: justify;
 }
 
 .detail-description br {
