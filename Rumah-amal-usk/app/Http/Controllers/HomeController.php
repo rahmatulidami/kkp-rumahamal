@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
+use DOMDocument;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,9 @@ class HomeController extends Controller
         // Fetch categories and posts from the API
         $categories = $this->fetchCategories();
         $allPosts = $this->fetchAllPosts();
+
+        // Fetch and process campaigns
+        $campaigns = $this->fetchAndProcessCampaigns();
 
         // Check if categories and posts are arrays
         if (!is_array($categories) || !is_array($allPosts)) {
@@ -61,10 +65,11 @@ class HomeController extends Controller
             $post['title']['rendered'] = str_replace('&amp;', '&', $post['title']['rendered'] ?? 'Untitled');
         }
 
-        // Return the home view with the latest posts and categories
+        // Return the home view with the latest posts, categories, and campaigns
         return view('landing.home', [
             'latestPengumumanPosts' => $latestPengumumanPosts,
-            'latestBeritaPosts' => $latestBeritaPosts
+            'latestBeritaPosts' => $latestBeritaPosts,
+            'campaigns' => $campaigns
         ]);
     }
 
@@ -109,6 +114,51 @@ class HomeController extends Controller
                 'date' => $post['date'] ?? ''
             ];
         }, $posts);
+    }
+
+    private function fetchAndProcessCampaigns()
+    {
+        $response = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan');
+
+        // Check if the response is valid
+        if (!$response->ok()) {
+            abort(500, 'Failed to fetch campaigns.');
+        }
+
+        $campaigns = $response->json();
+
+        // Check if campaigns is an array
+        if (!is_array($campaigns)) {
+            abort(500, 'Invalid data format for campaigns.');
+        }
+
+        // Process campaigns to extract image URLs and other details
+        $processedCampaigns = array_map(function ($campaign) {
+            $terkumpul = $campaign['acf']['dana_terkumpul'] ?? 0;
+            $dibutuhkan = $campaign['acf']['jumlah_dana'] ?? 1; // Avoid division by zero
+            $percentage = ($dibutuhkan > 0) ? ($terkumpul / $dibutuhkan) * 100 : 0;
+            $category = strtolower($campaign['type'] ?? 'uncategorized');
+
+            // Extract image URL from content.rendered
+            $doc = new DOMDocument();
+            libxml_use_internal_errors(true);
+            $doc->loadHTML($campaign['content']['rendered']);
+            libxml_clear_errors();
+            $imgTags = $doc->getElementsByTagName('img');
+            $image = $imgTags->length > 0 ? $imgTags->item(0)->getAttribute('src') : '';
+
+            // Add new fields to the campaign array
+            $campaign['terkumpul'] = $terkumpul;
+            $campaign['dibutuhkan'] = $dibutuhkan;
+            $campaign['percentage'] = $percentage;
+            $campaign['category'] = $category;
+            $campaign['image'] = $image;
+
+            return $campaign;
+        }, $campaigns);
+
+        // Slice to get the first 6 campaigns
+        return array_slice($processedCampaigns, 0, 6);
     }
 
     private function extractImageUrl($post)

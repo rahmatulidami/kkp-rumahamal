@@ -1003,14 +1003,6 @@ h6 {
     .page-title .heading h1 {
         font-size: 28px;
     }
-
-    .page-title nav ol a {
-        font-size: 10px;
-    }
-
-    .page-title nav ol .current {
-        font-size: 8px;
-    }
 }
 
 /*--------------------------------------------------------------
