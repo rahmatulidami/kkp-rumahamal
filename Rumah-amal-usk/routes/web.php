@@ -66,6 +66,8 @@ Route::get('/dokumen', function () {
 
 Route::get('/campaign', [CampaignController::class, 'index'])->name('campaign.index');
 
+Route::get('/campaign/{id}', [CampaignController::class, 'show'])->name('campaign.show');
+
 Route::get('/profil', function () {
     return view('profil/profil');
 });
@@ -95,6 +97,3 @@ Route::get('/donasi-zakat', function () {
     return view('donation/donasi-zakat');
 });
 
-Route::get('/detail-campaign', function () {
-    return view('campaign/detail-campaign');
-});

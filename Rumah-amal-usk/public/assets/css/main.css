@@ -3463,6 +3463,168 @@ section,
     }
 }
 
+
+.related-campaigns h3 {
+    font-weight: 700;
+}
+
+.related-campaigns .campaign-unggulan-content {
+    background-color: var(--surface-color);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.related-campaigns .campaign-unggulan-content img {
+    transition: 0.3s;
+    position: relative;
+    z-index: 1;
+    width: 100%; 
+    height: auto; 
+    aspect-ratio: 16 / 9; 
+    object-fit: cover;
+}
+
+.related-campaigns .campaign-unggulan-content .campaign-unggulan-info {
+    background-color: var(--background-color);
+    border-top: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 90%);
+    padding: 25px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.related-campaigns .campaign-unggulan-content .campaign-unggulan-info .btn-btn-primary{
+    color: #f2f9f9;
+    background: #1D7E05;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    margin-top: 20px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 5px 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.related-campaigns .campaign-unggulan-content .campaign-unggulan-info .btn-btn-primary:hover {
+    background: #FFBB0C;
+}
+
+.related-campaigns .campaign-unggulan-content .campaign-unggulan-info h4 {
+    font-size: 18px;
+    font-weight: 600;
+    padding-right: 50px;
+}
+
+.related-campaigns .campaign-unggulan-content .campaign-unggulan-info h4 a {
+    color: var(--heading-color);
+    transition: 0.3s;
+}
+
+.related-campaigns .campaign-unggulan-content .campaign-unggulan-info h4 a:hover {
+    color: var(--accent-color);
+}
+
+.related-campaigns .campaign-unggulan-content .campaign-unggulan-info p {
+    color: color-mix(in srgb, var(--default-color), transparent 30%);
+    font-size: 14px;
+    margin-bottom: 0;
+    padding-right: 50px;
+}
+
+.progress-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 10px;
+  }
+  
+  .progress {
+    width: 100%;
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    background-color: #FFBB0C;
+  }
+  
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px;
+  }
+  
+  .progress-start,
+  .progress-end {
+    display: flex;
+    flex-direction: column;
+  }
+ 
+  .progress-end {
+    text-align: right;
+  }
+
+  .progress-start {
+    text-align: left;
+  }
+
+  .amount {
+    font-size: 14px;
+    color: #1D7E05;
+    font-weight: 600;
+    margin-top: 5px;
+  }
+
+  .days-left {
+    font-size: 14px;
+    color: #6c757d;
+    margin-top: 5px;
+  }
+
+  .Durasi {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 20px 10px;
+  }
+
+.sisa-hari {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+  }
+
+  .jumlah {
+    font-size: 14px;
+    color: #1D7E05;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+
+  .campaign-unggulan .button-wrapper {
+    text-align: center; 
+    margin-top: 30px; 
+}
+
+@media (max-width: 768px) {
+    .related-campaigns .campaign-item .campaign-info h4 {
+        font-size: 16px;
+    }
+}
+
 /*--------------------------------------------------------------
 # Dokumen Section
 --------------------------------------------------------------*/
