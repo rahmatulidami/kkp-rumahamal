@@ -55,7 +55,7 @@
       </div>
   </section>
   <!-- End Hero Section -->
-  
+
   <section id="icon-boxed" class="icon-boxes section">
   <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
     <div class="container position-relative">
@@ -352,7 +352,7 @@
 
 <!-- Clients Section -->
      <!-- Section Title -->
-     
+
      <section id="clients" class="clients section">
     <div class="container section-title" data-aos="fade-up">
         <h2>MITRA RUMAH AMAL USK</h2>
@@ -375,11 +375,11 @@
                 "breakpoints": {
                     "320": {
                         "slidesPerView": 4,
-                        "spaceBetween": 10 
+                        "spaceBetween": 10
                     },
                     "480": {
                         "slidesPerView": 4,
-                        "spaceBetween": 20 
+                        "spaceBetween": 20
                     },
                     "640": {
                         "slidesPerView": 5,

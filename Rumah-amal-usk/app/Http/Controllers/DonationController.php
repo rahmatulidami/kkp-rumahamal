@@ -62,54 +62,64 @@ class DonationController extends Controller
             'payer_email' => $request->email,
             'should_send_email' => true,
             'payment_methods' => [$paymentMethod],
-            'success_redirect_url' => url('/success'),
-            'failure_redirect_url' => url('/failure'),
         ]);
 
         try {
             $result = $apiInstance->createInvoice($create_invoice_request);
 
-            // Create a temporary record in session
             session(['donation_data' => [
                 'name' => $name,
                 'email' => $request->email,
-                'amount' => $amount, // Store the original amount
+                'amount' => $amount,
                 'payment_method' => $paymentMethod,
-                'invoice_id' => $result['id'] // Store the Xendit invoice ID for reference
+                'invoice_id' => $result['id']
             ]]);
 
-            return redirect($result['invoice_url']);
+            return response()->json([
+                'invoice_url' => $result['invoice_url'],
+                'invoice_id' => $result['id']
+            ]);
         } catch (\Xendit\XenditSdkException $e) {
-            return back()->withErrors('Error creating invoice: ' . $e->getMessage());
+            return response()->json(['error' => 'Error creating invoice: ' . $e->getMessage()], 400);
         }
     }
 
-    public function handleXenditCallback(Request $request)
+    public function webhook(Request $request)
     {
-        $data = $request->all();
+        $payload = $request->all();
 
-        // Verify the callback is from Xendit
-        // You can use Xendit's SDK to verify the callback
-        // For simplicity, let's assume it's a valid callback
+        // Verify the webhook signature (implement this based on Xendit's documentation)
 
-        if (isset($data['status']) && $data['status'] == 'PAID') {
-            $donationData = session('donation_data');
-
-            if ($donationData && $donationData['invoice_id'] == $data['id']) {
-                // Save donation to the database
-                $donation = new Donation();
-                $donation->name = $donationData['name'];
-                $donation->email = $donationData['email'];
-                $donation->amount = $donationData['amount']; // Save the original amount
-                $donation->payment_method = $donationData['payment_method'];
-                $donation->invoice_id = $donationData['invoice_id']; // Save the Xendit invoice ID for reference
+        if ($payload['status'] == 'PAID') {
+            // Find the donation record and update it
+            $donation = Donation::where('invoice_id', $payload['external_id'])->first();
+            if ($donation) {
+                $donation->status = 'PAID';
                 $donation->save();
 
-                // Clear session data
-                session()->forget('donation_data');
+                // You can broadcast an event here to notify the frontend
+                // event(new DonationPaidEvent($donation));
             }
         }
 
-        return response()->json(['message' => 'Callback received']);
+        return response()->json(['success' => true]);
     }
+
+    public function checkStatus($invoiceId)
+    {
+        // Dalam implementasi sebenarnya, Anda perlu memeriksa status pembayaran di Xendit
+        // Untuk sementara, kita akan mensimulasikan pemeriksaan status
+        $donationData = session('donation_data');
+        if ($donationData && $donationData['invoice_id'] === $invoiceId) {
+            // Simulasi pembayaran berhasil setelah beberapa detik
+            sleep(5); // Simulasi delay
+            return response()->json([
+                'status' => 'PAID',
+                'name' => $donationData['name'],
+                'amount' => $donationData['amount'],
+            ]);
+        }
+        return response()->json(['error' => 'Donation not found'], 404);
+    }
+
 }
