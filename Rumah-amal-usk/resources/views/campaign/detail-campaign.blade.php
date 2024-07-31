@@ -78,8 +78,8 @@
 
 <div class="filter">
     <ul class="detail-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-        <li data-filter="detail" class="filter-active">Detail</li>
-        <li data-filter="donatur">Donatur</li>
+        <li data-filter="detail" class="filter-active"><a href="?section=detail">Detail</a></li>
+        <li data-filter="donatur"><a href="?section=donatur">Donatur</a></li>
     </ul>
     <hr class="filter-divider">
 </div>
@@ -95,31 +95,27 @@
 </section>
 
 <!-- Donatur Section -->
-<section class="donatur" id="donatur-section" style="display: none;">
+<section class="donatur" id="donatur-section" style="display: block;">
     <div class="container">
         <div class="donor-list">
-            @if(isset($campaign['donors']) && is_array($campaign['donors']))
-                @foreach($campaign['donors'] as $donor)
-                    @if(is_array($donor))
-                        <div class="para-donatur">
-                            <div class="top-info">
-                                <p class="donation-date"><strong>Tanggal Donasi: </strong>{{ $donor['date'] ?? 'N/A' }}</p>
-                                <p class="donation-category"><strong>Kategori: </strong>{{ $donor['category'] ?? 'N/A' }}</p>
-                            </div>
-                            <div class="icon-and-details">
-                                <i class="bi bi-person-square"></i>
-                                <div class="details">
-                                    <p class="donor-name">{{ $donor['name'] ?? 'Anonymous' }}</p>
-                                    <p class="donation-amount"><strong>Rp. {{ number_format($donor['amount'] ?? 0, 0, ',', '.') }}</strong></p>
-                                </div>
+            @if($donors->count() > 0)
+                @foreach($donors as $donor)
+                    <div class="para-donatur">
+                        <div class="top-info">
+                            <p class="donation-date"><strong>Tanggal Donasi: </strong>{{ $donor->created_at->format('d-m-Y') }}</p>
+                            <p class="donation-category"><strong>Kategori: </strong>{{ $donor->category ?? 'N/A' }}</p>
+                        </div>
+                        <div class="icon-and-details">
+                            <i class="bi bi-person-square"></i>
+                            <div class="details">
+                                <p class="donor-name">{{ $donor->name ?? 'Anonymous' }}</p>
+                                <p class="donation-amount"><strong>Rp. {{ number_format($donor->amount ?? 0, 0, ',', '.') }}</strong></p>
                             </div>
                         </div>
-                    @else
-                        <p>Invalid donor data format.</p>
-                    @endif
+                    </div>
                 @endforeach
             @else
-                <p>No donors found for this campaign.</p>
+                <p>No donors found.</p>
             @endif
         </div>
     </div>
@@ -178,6 +174,8 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const currentUrl = window.location.href;
+    const urlParams = new URLSearchParams(window.location.search);
+    const sectionParam = urlParams.get('section');
 
     const instagramShareButton = document.getElementById('share-instagram');
     const whatsappShareButton = document.getElementById('share-whatsapp');
@@ -217,19 +215,44 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Filter functionality
-    detailFilterButton.addEventListener('click', function() {
-        detailSection.style.display = 'block';
-        donaturSection.style.display = 'none';
-        detailFilterButton.classList.add('filter-active');
-        donaturFilterButton.classList.remove('filter-active');
-    });
-
-    donaturFilterButton.addEventListener('click', function() {
+    // Determine the initial state based on the URL parameter
+    if (sectionParam === 'donatur') {
         detailSection.style.display = 'none';
         donaturSection.style.display = 'block';
         donaturFilterButton.classList.add('filter-active');
+        donaturFilterButton.classList.remove('filter-inactive');
+        detailFilterButton.classList.add('filter-inactive');
         detailFilterButton.classList.remove('filter-active');
+    } else {
+        detailSection.style.display = 'block';
+        donaturSection.style.display = 'none';
+        detailFilterButton.classList.add('filter-active');
+        detailFilterButton.classList.remove('filter-inactive');
+        donaturFilterButton.classList.add('filter-inactive');
+        donaturFilterButton.classList.remove('filter-active');
+    }
+
+    // Filter functionality
+    detailFilterButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        detailSection.style.display = 'block';
+        donaturSection.style.display = 'none';
+        detailFilterButton.classList.add('filter-active');
+        detailFilterButton.classList.remove('filter-inactive');
+        donaturFilterButton.classList.add('filter-inactive');
+        donaturFilterButton.classList.remove('filter-active');
+        window.history.replaceState({}, '', '?section=detail');
+    });
+
+    donaturFilterButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        detailSection.style.display = 'none';
+        donaturSection.style.display = 'block';
+        donaturFilterButton.classList.add('filter-active');
+        donaturFilterButton.classList.remove('filter-inactive');
+        detailFilterButton.classList.add('filter-inactive');
+        detailFilterButton.classList.remove('filter-active');
+        window.history.replaceState({}, '', '?section=donatur');
     });
 });
 </script>

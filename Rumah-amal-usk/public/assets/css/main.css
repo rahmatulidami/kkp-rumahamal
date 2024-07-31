@@ -3144,13 +3144,14 @@ section,
     transition: color 0.3s; 
 }
 
-.detail-filters li:hover {
+.filter .detail-filters li a:hover {
     color: #1D7E05; 
 }
 
-.detail-filters li.filter-active {
+.detail-filters li.filter-active a {
     color: #1D7E05; 
 }
+
 
 .filter-divider {
     border: none;
@@ -3234,7 +3235,6 @@ section,
 .donatur .para-donatur {
     background-color: color-mix(in srgb, #d9d9d9 , transparent 70%);
     padding: 20px 40px;
-    box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     margin-bottom: 15px;
     border: solid 1px rgba(0, 86, 33, 0.1);
