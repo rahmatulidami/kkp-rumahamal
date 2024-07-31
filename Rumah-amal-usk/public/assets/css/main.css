@@ -1086,7 +1086,6 @@ section,
 .image-container {
     position: relative;
     width: 100%;
-    padding-top: 40%;
     overflow: hidden;
 }
 
