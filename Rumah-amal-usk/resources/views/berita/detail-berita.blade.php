@@ -136,7 +136,7 @@
       <div class="col-lg-4 sidebar">
         <div class="widgets-container">
 
-          <!-- Search Widget -->
+        <!-- Search Widget -->
           <div class="search-widget widget-item">
             <h3 class="widget-title">Search</h3>
             <form action="">
@@ -144,6 +144,7 @@
               <button type="submit" title="Search"><i class="bi bi-search"></i></button>
             </form>
           </div><!--/Search Widget -->
+
 
           <div class="recent-posts-widget widget-item">
               <h3 class="widget-title">Recent Posts</h3>
@@ -182,7 +183,28 @@
 document.addEventListener('DOMContentLoaded', function() {
   const copyLinkButton = document.getElementById('copy-link');
   const shareInstructions = document.getElementById('share-instructions');
-  copyLinkButton.addEventListener('click', function() {
+
+  const shareUrls = {
+    'share-whatsapp': 'https://api.whatsapp.com/send?text=',
+    'share-facebook': 'https://www.facebook.com/sharer/sharer.php?u='
+  };
+
+  Object.keys(shareUrls).forEach(shareId => {
+    document.getElementById(shareId).addEventListener('click', function(event) {
+      event.preventDefault();
+      const url = window.location.href;
+      const shareUrl = shareUrls[shareId] + encodeURIComponent(url);
+      window.open(shareUrl, '_blank');
+    });
+  });
+
+  document.getElementById('share-instagram').addEventListener('click', function(event) {
+    event.preventDefault();
+    window.open('https://www.instagram.com', '_blank');
+  });
+
+  copyLinkButton.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default anchor click behavior
     const url = window.location.href;
     navigator.clipboard.writeText(url)
       .then(() => {
@@ -197,5 +219,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+
 
 @endsection

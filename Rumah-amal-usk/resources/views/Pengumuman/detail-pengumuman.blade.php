@@ -125,7 +125,28 @@
 document.addEventListener('DOMContentLoaded', function() {
   const copyLinkButton = document.getElementById('copy-link');
   const shareInstructions = document.getElementById('share-instructions');
-  copyLinkButton.addEventListener('click', function() {
+
+  const shareUrls = {
+    'share-whatsapp': 'https://api.whatsapp.com/send?text=',
+    'share-facebook': 'https://www.facebook.com/sharer/sharer.php?u='
+  };
+
+  Object.keys(shareUrls).forEach(shareId => {
+    document.getElementById(shareId).addEventListener('click', function(event) {
+      event.preventDefault();
+      const url = window.location.href;
+      const shareUrl = shareUrls[shareId] + encodeURIComponent(url);
+      window.open(shareUrl, '_blank');
+    });
+  });
+
+  document.getElementById('share-instagram').addEventListener('click', function(event) {
+    event.preventDefault();
+    window.open('https://www.instagram.com', '_blank');
+  });
+
+  copyLinkButton.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default anchor click behavior
     const url = window.location.href;
     navigator.clipboard.writeText(url)
       .then(() => {
@@ -140,5 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+
+
 
 @endsection
