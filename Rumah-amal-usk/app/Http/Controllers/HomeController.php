@@ -101,6 +101,7 @@ class HomeController extends Controller
         // Process the posts to include necessary fields
         return array_map(function ($post) {
             return [
+                'id' => $post['id'] ?? 0,
                 'image_url' => $this->extractImageUrl($post),
                 'categories' => $post['categories'] ?? [],
                 'title' => $post['title'] ?? [],

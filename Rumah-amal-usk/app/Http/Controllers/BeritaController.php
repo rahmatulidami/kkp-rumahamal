@@ -166,46 +166,47 @@ class BeritaController extends Controller
     {
         // Fetch the post details
         $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/posts/' . $id);
-
+    
         if ($response->successful()) {
             $berita = $response->json();
-
+    
             // Extract images from the post content
             preg_match_all('/<img[^>]+src="([^">]+)"/', $berita['content']['rendered'], $matches);
             $images = array_unique($matches[1]);
-
+    
             // Set the main image
             $mainImage = $images[0] ?? asset('assets/img/default.jpeg');
-
+    
             // Remove the main image from the content
             $filteredContent = str_replace('<img src="' . $mainImage . '"', '', $berita['content']['rendered']);
-
+    
             // Fetch recent posts
             $recent_posts_response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/posts', [
                 'per_page' => 5,
             ]);
             $recent_posts = $recent_posts_response->json();
-
+    
             // Add image_url to each recent post
             foreach ($recent_posts as &$post) {
                 $post['image_url'] = $this->extractImageUrl($post['content']['rendered']) ?? asset('assets/img/default.jpeg');
             }
-
+    
             // Fetch all tags
             $tags_response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/tags');
             $tags = $tags_response->json();
-
+    
             // Fetch comments
             $comments_response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/comments', [
                 'post' => $id,
             ]);
             $comments = $comments_response->json();
-
+    
             $comment_count = $berita['comment_count'] ?? 0;
-
+    
             return view('berita.detail-berita', compact('berita', 'recent_posts', 'tags', 'mainImage', 'filteredContent', 'comment_count', 'comments'));
         } else {
             abort(404, 'Berita tidak ditemukan');
         }
     }
+    
 }
