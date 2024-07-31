@@ -10,15 +10,6 @@
   <div class="page-title">
     <div class="heading">
     </div>
-    <nav class="breadcrumbs">
-      <div class="container">
-        <ol>
-          <li><a href="/">Home</a></li>
-          <li><a href="/berita">Berita</a></li>
-          <li class="current">{{ $berita['title']['rendered'] }}</li>
-        </ol>
-      </div>
-    </nav>
   </div><!-- End Page Title -->
 
   <div class="container">
