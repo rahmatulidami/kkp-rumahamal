@@ -1226,18 +1226,19 @@ section,
 }
 
 .icon-box .btn-btn-primary {
-    color: #FFBB0C;
-    background: #ffffff;
+    color: #ff9d00; 
+    background: #F5F7F8;
     font-family: var(--heading-font);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 17px;
     letter-spacing: 1px;
     display: inline-block;
     padding: 10px 50px;
     border-radius: 20px;
     transition: 0.3s;
-    border: 2px solid #FFBB0C;
+    border: 1.5px solid #FFBB0C; 
 }
+
 
 .icon-box:hover {
     background-color: color-mix(in srgb, #F5F7F8, white 10%);
@@ -1425,17 +1426,17 @@ section,
     background: #FFBB0C;
 }
 
-.campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h4 {
+.campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h3 {
     font-size: 18px;
     font-weight: 600;
 }
 
-.campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h4 a {
+.campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h3 a {
     color: var(--heading-color);
     transition: 0.3s;
 }
 
-.campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h4 a:hover {
+.campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h3 a:hover {
     color: var(--accent-color);
 }
 
@@ -1574,8 +1575,8 @@ section,
 }
 
 .pengumuman .post-category {
-    font-size: 16px;
-    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    font-size: 14px;
+    color: color-mix(in srgb, var(#45474B), transparent 90%);
     margin-bottom: 10px;
 }
 
@@ -1608,7 +1609,7 @@ section,
 
 .pengumuman .post-date {
     font-size: 14px;
-    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    color: color-mix(in srgb, var(#878787), transparent 90%);
     margin-bottom: 0;
 }
 
@@ -1663,8 +1664,8 @@ section,
 }
 
 .recent-posts .post-category {
-    font-size: 16px;
-    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    font-size: 14px;
+    color: color-mix(in srgb, var(#45474B), transparent 90%);
     margin-bottom: 10px;
 }
 
@@ -1697,7 +1698,7 @@ section,
 
 .recent-posts .post-date {
     font-size: 14px;
-    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    color: color-mix(in srgb, var(#878787), transparent 90%);
     margin-bottom: 0;
 }
 
@@ -1784,8 +1785,8 @@ section,
 }
 
 .blog-posts .post-category {
-    font-size: 16px;
-    color: color-mix(in srgb, var(--default-color), transparent 40%);
+    font-size: 14px;
+    color: color-mix(in srgb, var(#45474B), transparent 90%);
     margin-bottom: 10px;
 }
 
@@ -1818,7 +1819,7 @@ section,
 
 .blog-posts .post-date {
     font-size: 14px;
-    color: color-mix(in srgb, var(--default-color), transparent 40%);
+    color: color-mix(in srgb, var(#878787), transparent 90%);
     margin-bottom: 0;
 }
 
@@ -2420,7 +2421,7 @@ section,
     display: block;
     font-style: italic;
     font-size: 8px;
-    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    color: color-mix(in srgb, var(#45474B), transparent 70%);
 }
 
 .tags-widget {
@@ -3167,6 +3168,10 @@ section,
 
 .detail-filters li.filter-active a {
     color: #1D7E05; 
+}
+
+.detail-filters li a {
+    color: #45474B; 
 }
 
 

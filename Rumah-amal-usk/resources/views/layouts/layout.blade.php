@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>@yield('title')</title>
-  <meta content="" name="description">
+  <meta content="Author: Rahmatul dan Ridho, website rumah amal usk" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
@@ -34,7 +34,7 @@
 <header id="header" class="header fixed-top">
     <div class="branding d-flex align-items-center">
         <div class="container position-relative d-flex align-items-center justify-content-between">
-            <a href="/" class="logo d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center" aria-label="Kembali ke beranda">
                 <img src="{{ asset('assets/img/logorumah.png') }}" alt="">
             </a>
             <nav id="navmenu" class="navmenu">
@@ -86,7 +86,7 @@
     <div class="container footer-top">
         <div class="row gy-4">
             <div class="col-lg-4 col-md-12 footer-about">
-                <a href="/" class="logo d-flex align-items-center">
+                <a href="/" class="logo d-flex align-items-center" aria-label="logo rumah amal">
                     <div class="img">
                         <img src="{{ asset('assets/img/logorumah.png') }}" alt="">
                     </div>
@@ -101,9 +101,9 @@
                 <p><strong>Email:</strong><span><a href="mailto:rumahamal@usk.ac.id"> rumahamal@usk.ac.id</a></span></p>
                 <p><strong>Tautan:</strong><span><a href="https://usk.ac.id/"> Universitas Syiah Kuala</a></span></p>
                 <div class="social-links d-flex mt-4">
-                    <a href="https://www.facebook.com/rumahamalusk/"><i class="bi bi-facebook"></i></a>
-                    <a href="https://www.tiktok.com/@rumahamal.usk"><i class="bi bi-tiktok"></i></i></a>
-                    <a href="https://www.instagram.com/rumahamal.usk/"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.facebook.com/rumahamalusk/" aria-label="facebook"><i class="bi bi-facebook" aria-hidden="true"></i></a>
+                    <a href="https://www.tiktok.com/@rumahamal.usk" aria-label="tiktok"><i class="bi bi-tiktok" aria-hidden="true"></i></i></a>
+                    <a href="https://www.instagram.com/rumahamal.usk/" aria-label="instagram"><i class="bi bi-instagram" aria-hidden="true"></i></a>
                 </div>
             </div>
 
@@ -124,6 +124,7 @@
                     allowfullscreen=""
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"
+                    title="GMAPS RA USK"
                 ></iframe>
             </div>
         </div>

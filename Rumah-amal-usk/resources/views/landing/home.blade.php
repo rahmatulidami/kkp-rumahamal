@@ -94,11 +94,11 @@
       @foreach ($campaigns as $campaign)
             <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-{{ $campaign['category'] }}">
               <div class="campaign-unggulan-content h-100">
-                <a href="{{ route('campaign.show', ['id' => $campaign['id']]) }}""><img src="{{ $campaign['image'] }}" alt=""></a>
+                <a href="{{ route('campaign.show', ['id' => $campaign['id']]) }}" aria-label="Detail campaign"><img src="{{ $campaign['image'] }}" alt=""></a>
                 <div class="campaign-unggulan-info">
-                <h4>
-                    <a href="{{ route('campaign.show', ['id' => $campaign['id']]) }}">{{ $campaign['title']['rendered'] }}</a>
-                </h4>
+                <h3>
+                    <a href="{{ route('campaign.show', ['id' => $campaign['id']]) }}" aria-label="Detail campaign">{{ $campaign['title']['rendered'] }}</a>
+                </h3>
                   <div class="progress-container">
                     <div class="Durasi">
                       <div class="sisa-hari">
@@ -266,7 +266,7 @@
   <div class="container">
     <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
       <div class="program-filters" data-aos="fade-up" data-aos-delay="100">
-        <select id="filter-select" class="isotope-filters">
+        <select id="filter-select" class="isotope-filters" aria-label="filter">
           <option value="*" class="filter-active">ALL</option>
           <option value=".filter-pendidikan">PENDIDIKAN</option>
           <option value=".filter-pemberdayaan">PEMBERDAYAAN</option>
@@ -320,12 +320,12 @@
         <div class="row d-flex flex-wrap">
           <div class="col-md-8 text-center p-2">
             <div class="video-container">
-              <iframe id="youtube-video" src="https://www.youtube.com/embed/C1Asqu3uHxs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe id="youtube-video" src="https://www.youtube.com/embed/C1Asqu3uHxs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Youtube RA USK"></iframe>
             </div>
           </div>
           <div class="col-md-4 text-center p-2">
             <div class="instagram-container">
-              <iframe src="https://www.instagram.com/rumahamal.usk/embed" frameborder="0"></iframe>
+              <iframe src="https://www.instagram.com/rumahamal.usk/embed" frameborder="0" title="Instagram RA USK"></iframe>
             </div>
           </div>
         </div>
