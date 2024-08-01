@@ -257,67 +257,61 @@
     </div>
 </section>
 
-
-
-
 <section id="program" class="program section">
-
-  <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
     <h2>PROGRAM RUMAH AMAL USK</h2>
     <p>Masjid Jamik Universitas Syiah Kuala</p>
-  </div><!-- End Section Title -->
-
-  <div class="container">
-
-    <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
-      <div class="program-filters" data-aos="fade-up" data-aos-delay="100">
-          <select id="filter-select" class="isotope-filters">
-              <option value="*" class="filter-active">ALL</option>
-              <option value=".filter-pendidikan">PENDIDIKAN</option>
-              <option value=".filter-pemberdayaan">PEMBERDAYAAN</option>
-              <option value=".filter-sosial">SOSIAL & KEMANUSIAAN</option>
-              <option value=".filter-syiar">SYIAR & QURBAN</option>
-              <option value=".filter-kemitraan">KEMITRAAN</option>
-              <option value=".filter-fasilitator">FASILITATOR & RELAWAN</option>
-          </select>
-      </div>
-
-
-      <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200">
-
-        <div class="col-lg-3 col-md-6 program-item isotope-item filter-pendidikan">
-          <div class="program-content h-100">
-            <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
-          </div>
-        </div><!-- End program Item -->
-
-        <div class="col-lg-3 col-md-6 program-item isotope-item filter-pemberdayaan">
-          <div class="program-content h-100">
-            <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
-          </div>
-        </div><!-- End program Item -->
-
-        <div class="col-lg-3 col-md-6 program-item isotope-item filter-sosial">
-          <div class="program-content h-100">
-            <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
-          </div>
-        </div><!-- End program Item -->
-
-        <div class="col-lg-3 col-md-6 program-item isotope-item filter-syiar">
-          <div class="program-content h-100">
-            <a href=""><img src="assets/img/RA-kegiatan.jpeg" class="img-fluid" alt=""></a>
-          </div>
-        </div><!-- End program Item -->
-
-      </div><!-- End program Container -->
-
-    </div>
-
   </div>
 
-</section><!-- /Program Section -->
+  <div class="container">
+    <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+      <div class="program-filters" data-aos="fade-up" data-aos-delay="100">
+        <select id="filter-select" class="isotope-filters">
+          <option value="*" class="filter-active">ALL</option>
+          <option value=".filter-pendidikan">PENDIDIKAN</option>
+          <option value=".filter-pemberdayaan">PEMBERDAYAAN</option>
+          <option value=".filter-sosial">SOSIAL & KEMANUSIAAN</option>
+          <option value=".filter-syiar">SYIAR & QURBAN</option>
+          <option value=".filter-kemitraan">KEMITRAAN</option>
+          <option value=".filter-fasilitator">FASILITATOR & RELAWAN</option>
+        </select>
+      </div>
+
+      <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200" id="program-items">
+        @foreach($programPosts as $post)
+          @php
+            // Extracting category names
+            $categories = array_column($post['categories'], 'name');
+            $filterClass = '';
+
+            // Mapping categories to filter classes
+            $filterClass = '';
+            if (in_array('Pendidikan', $categories)) $filterClass = 'filter-pendidikan';
+            elseif (in_array('Pemberdayaan', $categories)) $filterClass = 'filter-pemberdayaan';
+            elseif (in_array('Sosial & Kemanusiaan', $categories)) $filterClass = 'filter-sosial';
+            elseif (in_array('Syiar & Qurban', $categories)) $filterClass = 'filter-syiar';
+            elseif (in_array('Kemitraan', $categories)) $filterClass = 'filter-kemitraan';
+            elseif (in_array('Fasilitator & Relawan', $categories)) $filterClass = 'filter-fasilitator';
+
+            // Handling media and URLs safely
+            $imageUrl = isset($post['image_url']) ? $post['image_url'] : url('assets/img/default.jpeg');
+            $postLink = $post['link'] ?? '#';
+            $postTitle = $post['title'] ?? 'Untitled';
+          @endphp
+
+          <div class="col-lg-3 col-md-6 program-item isotope-item {{ $filterClass }}">
+            <div class="program-content h-100">
+            <a href="{{ route('pengumuman.show', ['id' => $post['id']]) }}"">
+                <img src="{{ $imageUrl }}" class="img-fluid" alt="{{ $postTitle }}">
+              </a>
+            </div>
+          </div>
+        @endforeach
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- Call To Action Section -->
 <section id="call-to-action" class="call-to-action section dark-background">

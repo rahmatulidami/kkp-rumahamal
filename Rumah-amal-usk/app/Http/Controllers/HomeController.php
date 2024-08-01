@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use DOMDocument;
 
 class HomeController extends Controller
@@ -27,6 +28,7 @@ class HomeController extends Controller
         $categories = $this->fetchCategories();
         $latestPosts = $this->fetchAllPosts();
         $campaigns = $this->fetchAndProcessCampaigns();
+        $programPosts = $this->fetchProgramPosts();
 
         // Check if categories and posts are arrays
         if (!is_array($categories) || !is_array($latestPosts)) {
@@ -63,12 +65,13 @@ class HomeController extends Controller
             $post['title']['rendered'] = str_replace('&amp;', '&', $post['title']['rendered'] ?? 'Untitled');
         }
 
-        // Return the home view with the latest posts, categories, and campaigns
+        // Return the home view with the latest posts, categories, campaigns, and program posts
         return view('landing.home', [
             'latestPosts' => $latestPosts,
             'latestPengumumanPosts' => $latestPengumumanPosts,
             'latestBeritaPosts' => $latestBeritaPosts,
-            'campaigns' => $campaigns
+            'campaigns' => $campaigns,
+            'programPosts' => $programPosts
         ]);
     }
 
@@ -158,6 +161,37 @@ class HomeController extends Controller
         return array_slice($processedCampaigns, 0, 6);
     }
 
+    private function fetchProgramPosts()
+    {
+        $response = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/posts/?per_page=100&_embed');
+
+        // Check if the response is valid
+        if (!$response->ok()) {
+            abort(500, 'Failed to fetch program posts.');
+        }
+
+        $posts = $response->json();
+
+        // Filter out posts with 'berita' or 'pengumuman' categories
+        $filteredPosts = array_filter($posts, function ($post) {
+            $categories = $post['categories'] ?? [];
+            // Only include posts that do not have category ID 87 or 52
+            return !in_array(87, $categories) && !in_array(52, $categories);
+        });
+
+        return array_map(function ($post) {
+            $imageUrl = $this->extractProgramImageUrl($post);
+            return [
+                'id' => $post['id'] ?? 0,
+                'image_url' => $imageUrl,
+                'categories' => $post['categories'] ?? [],
+                'title' => $post['title']['rendered'] ?? 'Untitled',
+                'link' => $post['link'] ?? '#',
+                'date' => $post['date'] ?? ''
+            ];
+        }, $filteredPosts);
+    }
+
     private function extractImageUrl($post)
     {
         if (isset($post['content']['rendered']) && is_string($post['content']['rendered'])) {
@@ -168,4 +202,48 @@ class HomeController extends Controller
 
         return url('assets/img/default.jpeg');
     }
+
+    private function extractProgramImageUrl($post)
+    {
+        // Check if featured_media is set and fetch the media details
+        if (isset($post['featured_media']) && is_numeric($post['featured_media'])) {
+            $mediaId = $post['featured_media'];
+            $mediaResponse = Http::get("https://rumahamal.usk.ac.id/wp-json/wp/v2/media/{$mediaId}");
+    
+            // Log the response for debugging
+            Log::info('Media Response: ', ['mediaId' => $mediaId, 'response' => $mediaResponse->json()]);
+    
+            // Check if the response is valid
+            if ($mediaResponse->ok()) {
+                $media = $mediaResponse->json();
+    
+                // Check if media details have a valid image URL in description.rendered
+                if (isset($media['description']['rendered'])) {
+                    $description = $media['description']['rendered'];
+    
+                    // Use DOMDocument to parse the description HTML and extract the image URL
+                    $doc = new DOMDocument();
+                    libxml_use_internal_errors(true);
+                    $doc->loadHTML($description);
+                    libxml_clear_errors();
+    
+                    $imgTags = $doc->getElementsByTagName('img');
+                    if ($imgTags->length > 0) {
+                        $imageUrl = $imgTags->item(0)->getAttribute('src');
+                        return $imageUrl;
+                    }
+                }
+            }
+        }
+    
+        // Fallback to guid.rendered if no valid image URL is found in media
+        if (isset($post['guid']['rendered'])) {
+            return $post['guid']['rendered'];
+        }
+    
+        // Return a default image if no valid image URL is found
+        return url('assets/img/default.jpeg');
+    }
+    
+    
 }
