@@ -70,7 +70,7 @@
                     </div>
                     <p id="share-instructions" style="display: none;">URL copied!</p>
                 </div>
-                <a class="button-selengkapnya" href="/donate" role="button">DONASI</a>
+                <a class="button-selengkapnya" href="{{ route('donate.show', ['id' => $campaign['id']]) }}" role="button">DONASI</a>
             </div>
         </div>
     </div>
@@ -163,7 +163,7 @@
                     </div>
 
                   </div>
-                  <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
+                  <a class="btn-btn-primary" href="{{ route('donate.show', ['id' => $campaign['id']]) }}" role="button">DONASI</a>
                 </div>
               </div>
             </div><!-- End campaign-unggulan Item -->

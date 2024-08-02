@@ -75,8 +75,9 @@ class DonationController extends Controller
                 'amount' => $amount,
                 'payment_method' => $paymentMethod,
                 'invoice_id' => $result['id'],
-                'campaign_name' => $request->input('campaign_name', 'General Donation') // Tambahkan ini
+                'campaign_name' => $request->input('campaign_name')
             ]]);
+            \Log::info('Session data:', session('donation_data'));
 
             return response()->json([
                 'invoice_url' => $result['invoice_url'],
@@ -89,6 +90,8 @@ class DonationController extends Controller
 
     public function notificationCallback(Request $request)
     {
+        $sessionData = session('donation_data', []);
+        \Log::info('Session data in callback:', $sessionData);
         // Mendapatkan token xendit dari header
         $xenditToken = $request->header('x-callback-token');
         $callbackToken = env('XENDIT_CALLBACK_TOKEN');

@@ -72,6 +72,7 @@ Route::get('/dokumen', function () {
 Route::get('/campaign', [CampaignController::class, 'index'])->name('campaign.index');
 
 Route::get('/campaign/{id}', [CampaignController::class, 'show'])->name('campaign.show');
+Route::get('/campaign/donate/{id}', [CampaignController::class, 'donate'])->name('donate.show');
 
 Route::get('/profil', function () {
     return view('profil/profil');

@@ -1,19 +1,27 @@
 @extends('layouts.layout')
 
-@section('title', 'Donasi | Rumah Amal USK')
+@section('title', $campaign['title']['rendered'])
 
 @section('content')
 <section>
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<link href="{{ asset('assets/css/donate-style.css') }}" rel="stylesheet">
+<script src="{{ asset('assets/js/donate-js.js') }}"></script>
 <div class="container mt-5" style="user-select: none;">
     <div class="row">
         <div class="col-12 col-lg-6 col-md-6 mb-3">
             <div class="card p-4 shadow-sm">
-                <h3 class="mb-3">Pembayaran</h3>
-                @yield('campaign')
+                <div class="campaign d-flex flex-row justify-content-between">
+                    <div class="d-flex column  align-items-center">
+                        <h4>{{ $campaign['title']['rendered']}}
+                        </h4>
+                    </div>
+                    <img src="{{ $campaign['image'] }}" alt="">
+                </div>
                 <form id="donationForm" method="POST" action="/donate">
                     @csrf
                     <input type="hidden" id="selected_payment_method" name="payment_method">
+                    <input type="hidden" id="campaign_name" name="campaign_name" value="{{ $campaign['title']['rendered'] }}">
                     <div class="mb-3">
                         <label for="amount" class="form-label">Jumlah Donasi</label>
                         <div class="input-group">
@@ -46,6 +54,7 @@
                         <label for="message" class="form-label">Pesan</label>
                         <textarea class="form-control" id="message" name="message" rows="3" placeholder="Tulis doa atau dukungan untuk project donasi ini"></textarea>
                     </div>
+                    {{-- <input type="text" class="form-control" id="CampaignName" name="CampaignName" placeholder="CampaignName" value="{{ $campaign['title']['rendered']}}"> --}}
                 </form>
             </div>
         </div>
@@ -63,15 +72,16 @@
                         </div>
                         <div class="category-content">
                             <div class="payment-method" data-method="QRIS" required>
-                                    <img src="assets/img/qris-logo.jpg" alt="QRIS" width="20%" class="me-1">
-                                        <div class="payment-content">
+                                    <img src="{{asset("assets/img/qris-logo.jpg")}}" alt="QRIS" height="20%" class="me-1">
+                                    {{-- <script src="{{ asset('assets/js/donate-js.js') }}"></script>     --}}
+                                    <div class="payment-content">
                                             <span class="fee"></span>
                                             <span class="price"></span>
                                         </div>
                                 </div>
                         </div>
                         <div class="bottom-logo">
-                            <img src="assets/img/qris-logo.jpg" alt="QRIS" class="me-1">
+                            <img src="{{asset("assets/img/qris-logo.jpg")}}" alt="QRIS" class="me-1">
                         </div>
                     </div>
                     <div class="payment-category" data-category="ewallet">
@@ -83,7 +93,7 @@
                         </div>
                         <div class="category-content">
                             <div class="payment-method" data-method="SHOPEEPAY">
-                                <img src="assets/img/shopeepay-logo.png" alt="SHOPEEPAY" class="me-1">
+                                <img src="{{asset("assets/img/shopeepay-logo.png")}}" alt="SHOPEEPAY" class="me-1">
                                 <div>
                                     <span>SHOPEEPAY</span>
                                     <span class="fee"></span>
@@ -91,7 +101,7 @@
                                 </div>
                             </div>
                             <div class="payment-method" data-method="DANA">
-                                <img src="assets/img/dana-logo.png" alt="Dana" class="me-1">
+                                <img src="{{asset("assets/img/dana-logo.png")}}" alt="Dana" class="me-1">
                                 <div>
                                     <span>Dana</span>
                                      <span class="fee"></span>
@@ -99,7 +109,7 @@
                                 </div>
                             </div>
                             <div class="payment-method" data-method="OVO">
-                                <img src="assets/img/ovo-logo.png" alt="OVO" class="me-1">
+                                <img src="{{asset("assets/img/ovo-logo.png")}}" alt="OVO" class="me-1">
                                 <div>
                                     <span>OVO</span>
                                      <span class="fee"></span>
@@ -108,9 +118,9 @@
                             </div>
                         </div>
                         <div class="bottom-logo">
-                                <img src="assets/img/shopeepay-logo.png" alt="SHOPEEPAY" class="me-1">
-                                <img src="assets/img/dana-logo.png" alt="DANA" class="me-1">
-                                <img src="assets/img/ovo-logo.png" alt="OVO" class="me-1">
+                                <img src="{{asset("assets/img/shopeepay-logo.png")}}" alt="SHOPEEPAY" class="me-1">
+                                <img src="{{asset("assets/img/dana-logo.png")}}" alt="DANA" class="me-1">
+                                <img src="{{asset("assets/img/ovo-logo.png")}}" alt="OVO" class="me-1">
                         </div>
                     </div>
                     <div class="payment-category" data-category="convenience-store">
@@ -122,7 +132,7 @@
                         </div>
                         <div class="category-content">
                             <div class="payment-method" data-method="ALFAMART">
-                                <img src="assets/img/alfamart-logo.png" alt="Alfamart" class="me-1">
+                                <img src="{{asset("assets/img/alfamart-logo.png")}}" alt="Alfamart" class="me-1">
                                 <div>
                                     <span>Alfamart</span>
                                      <span class="fee"></span>
@@ -130,7 +140,7 @@
                                 </div>
                             </div>
                             <div class="payment-method" data-method="INDOMARET">
-                                <img src="assets/img/indomaret-logo.png" alt="Indomaret" class="me-1">
+                                <img src="{{asset("assets/img/indomaret-logo.png")}}" alt="Indomaret" class="me-1">
                                 <div>
                                     <span>Indomaret</span>
                                      <span class="fee"></span>
@@ -139,8 +149,8 @@
                             </div>
                         </div>
                         <div class="bottom-logo">
-                            <img src="assets/img/alfamart-logo.png" alt="Alfamart" class="me-1">
-                            <img src="assets/img/indomaret-logo.png" alt="Indomaret">
+                            <img src="{{asset("assets/img/alfamart-logo.png")}}" alt="Alfamart" class="me-1">
+                            <img src="{{asset("assets/img/indomaret-logo.png")}}" alt="Indomaret">
                         </div>
                     </div>
                     </div>
@@ -153,7 +163,7 @@
                         </div>
                         <div class="category-content">
                             <div class="payment-method" data-method="BSI">
-                                <img src="assets/img/bsi-logo.png" alt="BSI" class="me-1">
+                                <img src="{{asset("assets/img/bsi-logo.png")}}" alt="BSI" class="me-1">
                                 <div>
                                     <span>BSI</span>
                                      <span class="fee"></span>
@@ -161,7 +171,7 @@
                                 </div>
                             </div>
                             <div class="payment-method" data-method="BNI">
-                                <img src="assets/img/bni-logo.png" alt="BNI" class="me-1">
+                                <img src="{{asset("assets/img/bni-logo.png")}}" alt="BNI" class="me-1">
                                 <div>
                                     <span>BNI</span>
                                     <span class="fee"></span>
@@ -169,7 +179,7 @@
                                 </div>
                             </div>
                             <div class="payment-method" data-method="MANDIRI">
-                                <img src="assets/img/mandiri-logo.png" alt="Mandiri" class="me-1">
+                                <img src="{{asset("assets/img/mandiri-logo.png")}}" alt="Mandiri" class="me-1">
                                 <div>
                                     <span>Mandiri</span>
                                     <span class="fee"></span>
@@ -178,9 +188,9 @@
                             </div>
                         </div>
                         <div class="bottom-logo">
-                            <img src="assets/img/bsi-logo.png" alt="BSI" class="me-1">
-                            <img src="assets/img/bni-logo.png" alt="BNI" class="me-1">
-                            <img src="assets/img/mandiri-logo.png" alt="Mandiri">
+                            <img src="{{asset("assets/img/bsi-logo.png")}}" alt="BSI" class="me-1">
+                            <img src="{{asset("assets/img/bni-logo.png")}}" alt="BNI" class="me-1">
+                            <img src="{{asset("assets/img/mandiri-logo.png")}}" alt="Mandiri">
                         </div>
                     </div>
                 <div id="payment-details" class="mt-3"></div>
@@ -221,9 +231,6 @@
 </div>
 
 </section>
-
-<link href="{{ asset('assets/css/donate-style.css') }}" rel="stylesheet">
-<script src="{{ asset('assets/js/donate-js.js') }}"></script>
 
 
 @endsection

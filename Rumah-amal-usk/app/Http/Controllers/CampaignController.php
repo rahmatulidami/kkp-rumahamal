@@ -48,49 +48,49 @@ class CampaignController extends Controller
         // Fetch data for a single campaign by ID
         $response = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan/' . $id);
         $campaign = $response->json();
-    
+
         if (!$campaign) {
             abort(404, 'Campaign not found');
         }
-    
+
         // Fetch donors data
         $donorsResponse = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_donors?campaign_id=' . $id);
         $donors = $donorsResponse->json();
-    
+
         // Fetch related campaigns
         $relatedCampaignsResponse = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan');
         $relatedCampaigns = $relatedCampaignsResponse->json();
-    
+
         // Remove the current campaign from the related campaigns array
         $relatedCampaigns = array_filter($relatedCampaigns, function($relatedCampaign) use ($id) {
             return $relatedCampaign['id'] != $id;
         });
-    
+
         // Limit related campaigns to 3
         $relatedCampaigns = array_slice($relatedCampaigns, 0, 3);
-    
+
         // Process the campaign
         $terkumpul = $campaign['acf']['dana_terkumpul'] ?? 0;
         $dibutuhkan = $campaign['acf']['jumlah_dana'] ?? 1;
         $percentage = ($dibutuhkan > 0) ? ($terkumpul / $dibutuhkan) * 100 : 0;
         $category = strtolower($campaign['type'] ?? 'uncategorized');
-    
+
         $doc = new DOMDocument();
         libxml_use_internal_errors(true);
         $doc->loadHTML($campaign['content']['rendered']);
         libxml_clear_errors();
-    
+
         // Extract image URL from content.rendered
         $imgTags = $doc->getElementsByTagName('img');
         $image = $imgTags->length > 0 ? $imgTags->item(0)->getAttribute('src') : '';
-    
+
         // Remove all image tags from the content
         $xpath = new \DOMXPath($doc);
         foreach ($xpath->query('//img') as $img) {
             $img->parentNode->removeChild($img);
         }
         $contentWithoutImages = $doc->saveHTML();
-    
+
         // Ensure donors key exists and is an array
         $campaign['terkumpul'] = $terkumpul;
         $campaign['dibutuhkan'] = $dibutuhkan;
@@ -99,14 +99,80 @@ class CampaignController extends Controller
         $campaign['image'] = $image;
         $campaign['donors'] = is_array($donors) ? $donors : [];
         $campaign['content']['rendered'] = $contentWithoutImages;
-    
+
         // Ensure each related campaign has a category key
         foreach ($relatedCampaigns as &$relatedCampaign) {
             $relatedCampaign['category'] = strtolower($relatedCampaign['type'] ?? 'uncategorized');
         }
-    
+
         // Pass campaign, donors, and related campaigns data to the view
         return view('campaign.detail-campaign', compact('campaign', 'relatedCampaigns'));
     }
-    
+
+    public function donate($id)
+    {
+        // Fetch data for a single campaign by ID
+        $response = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan/' . $id);
+        $campaign = $response->json();
+
+        if (!$campaign) {
+            abort(404, 'Campaign not found');
+        }
+
+        // Fetch donors data
+        $donorsResponse = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_donors?campaign_id=' . $id);
+        $donors = $donorsResponse->json();
+
+        // Fetch related campaigns
+        $relatedCampaignsResponse = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan');
+        $relatedCampaigns = $relatedCampaignsResponse->json();
+
+        // Remove the current campaign from the related campaigns array
+        $relatedCampaigns = array_filter($relatedCampaigns, function($relatedCampaign) use ($id) {
+            return $relatedCampaign['id'] != $id;
+        });
+
+        // Limit related campaigns to 3
+        $relatedCampaigns = array_slice($relatedCampaigns, 0, 3);
+
+        // Process the campaign
+        $terkumpul = $campaign['acf']['dana_terkumpul'] ?? 0;
+        $dibutuhkan = $campaign['acf']['jumlah_dana'] ?? 1;
+        $percentage = ($dibutuhkan > 0) ? ($terkumpul / $dibutuhkan) * 100 : 0;
+        $category = strtolower($campaign['type'] ?? 'uncategorized');
+
+        $doc = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $doc->loadHTML($campaign['content']['rendered']);
+        libxml_clear_errors();
+
+        // Extract image URL from content.rendered
+        $imgTags = $doc->getElementsByTagName('img');
+        $image = $imgTags->length > 0 ? $imgTags->item(0)->getAttribute('src') : '';
+
+        // Remove all image tags from the content
+        $xpath = new \DOMXPath($doc);
+        foreach ($xpath->query('//img') as $img) {
+            $img->parentNode->removeChild($img);
+        }
+        $contentWithoutImages = $doc->saveHTML();
+
+        // Ensure donors key exists and is an array
+        $campaign['terkumpul'] = $terkumpul;
+        $campaign['dibutuhkan'] = $dibutuhkan;
+        $campaign['percentage'] = $percentage;
+        $campaign['category'] = $category;
+        $campaign['image'] = $image;
+        $campaign['donors'] = is_array($donors) ? $donors : [];
+        $campaign['content']['rendered'] = $contentWithoutImages;
+
+        // Ensure each related campaign has a category key
+        foreach ($relatedCampaigns as &$relatedCampaign) {
+            $relatedCampaign['category'] = strtolower($relatedCampaign['type'] ?? 'uncategorized');
+        }
+
+        // Pass campaign, donors, and related campaigns data to the view
+        return view('campaign.donateCampaign', compact('campaign', 'relatedCampaigns'));
+    }
+
 }

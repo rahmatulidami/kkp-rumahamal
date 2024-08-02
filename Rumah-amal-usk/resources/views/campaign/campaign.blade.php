@@ -80,7 +80,7 @@
                     </div>
 
                   </div>
-                  <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
+                  <a class="btn-btn-primary" href="{{ route('donate.show', ['id' => $campaign['id']]) }}" role="button">DONASI</a>
                 </div>
               </div>
             </div><!-- End campaign-unggulan Item -->
