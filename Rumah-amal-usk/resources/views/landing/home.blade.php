@@ -285,7 +285,6 @@
             $filterClass = '';
 
             // Mapping categories to filter classes
-            $filterClass = '';
             if (in_array('Pendidikan', $categories)) $filterClass = 'filter-pendidikan';
             elseif (in_array('Pemberdayaan', $categories)) $filterClass = 'filter-pemberdayaan';
             elseif (in_array('Sosial & Kemanusiaan', $categories)) $filterClass = 'filter-sosial';
@@ -299,9 +298,9 @@
             $postTitle = $post['title'] ?? 'Untitled';
           @endphp
 
-          <div class="col-lg-3 col-md-6 program-item isotope-item {{ $filterClass }}">
+          <div class="col-lg-2-4 col-md-6 program-item isotope-item {{ $filterClass }}">
             <div class="program-content h-100">
-            <a href="{{ route('pengumuman.show', ['id' => $post['id']]) }}"">
+              <a href="{{ route('pengumuman.show', ['id' => $post['id']]) }}">
                 <img src="{{ $imageUrl }}" class="img-fluid" alt="{{ $postTitle }}">
               </a>
             </div>
