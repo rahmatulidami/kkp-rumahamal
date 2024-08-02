@@ -1926,10 +1926,16 @@ section,
     font-size: 14px;
 }
 
-.blog-details .content h3 {
+.blog-details .content h1,h2,h3{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.blog-details .article h3 {
     font-size: 22px;
     margin-top: 30px;
     font-weight: bold;
+    text-align: left;
 }
 
 .blog-details .content blockquote {
