@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\Donation;
 use Xendit\Configuration;
-use Xendit\Invoice\InvoiceApi;
 use Xendit\Invoice\CreateInvoiceRequest;
+use Xendit\Invoice\InvoiceApi;
+use Xendit\Invoice\InvoiceItem;
 
 class DonationController extends Controller
 {
@@ -72,7 +74,8 @@ class DonationController extends Controller
                 'email' => $request->email,
                 'amount' => $amount,
                 'payment_method' => $paymentMethod,
-                'invoice_id' => $result['id']
+                'invoice_id' => $result['id'],
+                'campaign_name' => $request->input('campaign_name', 'General Donation') // Tambahkan ini
             ]]);
 
             return response()->json([
@@ -84,42 +87,54 @@ class DonationController extends Controller
         }
     }
 
-    public function webhook(Request $request)
+    public function notificationCallback(Request $request)
     {
+        // Mendapatkan token xendit dari header
+        $xenditToken = $request->header('x-callback-token');
+        $callbackToken = env('XENDIT_CALLBACK_TOKEN');
+
+        // Verifikasi token
+        if ($xenditToken !== $callbackToken) {
+            return response()->json(['error' => 'Invalid callback token'], 401);
+        }
+
+        // Mendapatkan payload
         $payload = $request->all();
 
-        // Verify the webhook signature (implement this based on Xendit's documentation)
+        // Memeriksa apakah status pembayaran adalah PAID
+        if ($payload['status'] === 'PAID') {
+            try {
 
-        if ($payload['status'] == 'PAID') {
-            // Find the donation record and update it
-            $donation = Donation::where('invoice_id', $payload['external_id'])->first();
-            if ($donation) {
-                $donation->status = 'PAID';
+                $sessionData = session('donation_data', []);
+
+                // Menyimpan data ke database
+                $donation = new Donation();
+                $donation->payment_id = $payload['id'];
+                $donation->campaign_name = $sessionData['campaign_name'] ?? 'General Donation';
+                $donation->name = $sessionData['name'] ?? 'Hamba Allah';
+                $donation->email = $sessionData['email'] ?? $payload['payer_email'];
+                $donation->amount = $payload['amount'];
+                $donation->payment_method = $payload['payment_method'];
+                $donation->status = 'paid';
                 $donation->save();
 
-                // You can broadcast an event here to notify the frontend
-                // event(new DonationPaidEvent($donation));
+                // Anda bisa menambahkan logika tambahan di sini, seperti mengirim email terima kasih
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Payment processed and saved successfully'
+                ], 200);
+            } catch (\Exception $e) {
+                // Jika terjadi kesalahan saat menyimpan ke database
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Error saving payment data: ' . $e->getMessage()
+                ], 500);
             }
         }
 
-        return response()->json(['success' => true]);
-    }
-
-    public function checkStatus($invoiceId)
-    {
-        // Dalam implementasi sebenarnya, Anda perlu memeriksa status pembayaran di Xendit
-        // Untuk sementara, kita akan mensimulasikan pemeriksaan status
-        $donationData = session('donation_data');
-        if ($donationData && $donationData['invoice_id'] === $invoiceId) {
-            // Simulasi pembayaran berhasil setelah beberapa detik
-            sleep(5); // Simulasi delay
-            return response()->json([
-                'status' => 'PAID',
-                'name' => $donationData['name'],
-                'amount' => $donationData['amount'],
-            ]);
-        }
-        return response()->json(['error' => 'Donation not found'], 404);
+        // Menangani status lain jika diperlukan
+        return response()->json(['message' => 'Notification received'], 200);
     }
 
 }

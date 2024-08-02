@@ -24,10 +24,11 @@ route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/donate', [DonationController::class, 'index']);
 Route::post('/donate', [DonationController::class, 'store']);
+Route::post('/notification', [DonationController::class, 'notificationCallback'])->name('notification');
 
-Route::post('/xendit-webhook', [DonationController::class, 'webhook']);
+// Route::post('/xendit-webhook', [DonationController::class, 'webhook']);
 
-Route::get('/check-donation-status/{invoiceId}', [DonationController::class, 'checkStatus']);
+// Route::get('/check-donation-status/{invoiceId}', [DonationController::class, 'checkStatus']);
 
 Route::get('/success', function () {
     return view('donation/success');
