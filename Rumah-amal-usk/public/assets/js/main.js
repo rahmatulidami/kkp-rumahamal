@@ -311,4 +311,14 @@
     window.addEventListener("load", navmenuScrollspy);
     document.addEventListener("scroll", navmenuScrollspy);
 
+    // Menambahkan atribut loading="lazy" pada gambar
+    document.addEventListener("DOMContentLoaded", () => {
+        const images = document.querySelectorAll("img");
+        images.forEach(img => {
+            if (!img.hasAttribute("loading")) {
+                img.setAttribute("loading", "lazy");
+            }
+        });
+    });
+
 })();

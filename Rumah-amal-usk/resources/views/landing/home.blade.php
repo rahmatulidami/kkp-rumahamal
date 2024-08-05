@@ -33,7 +33,7 @@
             @foreach($latestPosts as $post)
                 <div class="swiper-slide">
                     <div class="image-container">
-                    <a href="{{ route('berita.show', ['id' => $post['id']]) }}"><img src="{{ $post['image_url'] }}" alt="{{ $post['title']['rendered'] ?? 'Post Image' }}"></a>
+                    <a href="{{ route('berita.show', ['id' => $post['id']]) }}"><img src="{{ $post['image_url'] }}" alt="{{ $post['title']['rendered'] ?? 'Post Image' }}" loading="lazy"></a>
                     </div>
                 </div>
             @endforeach
@@ -45,8 +45,8 @@
 </section>
 <!-- End Hero Section -->
 
-  
-  <section id="icon-boxed" class="icon-boxes section">
+<!-- icon zakat/infak Section -->  
+<section id="icon-boxed" class="icon-boxes section">
   <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
     <div class="container position-relative">
       <div class="row gy-4">
@@ -75,7 +75,7 @@
     </div>
   </div>
 </section>
-
+<!-- End icon zakat/infak Section -->  
 
 <!-- Campaign Section -->
 <section id="campaign-unggulan" class="campaign-unggulan section">
@@ -94,7 +94,7 @@
       @foreach ($campaigns as $campaign)
             <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-{{ $campaign['category'] }}">
               <div class="campaign-unggulan-content h-100">
-                <a href="{{ route('campaign.show', ['id' => $campaign['id']]) }}" aria-label="Detail campaign"><img src="{{ $campaign['image'] }}" alt=""></a>
+                <a href="{{ route('campaign.show', ['id' => $campaign['id']]) }}" aria-label="Detail campaign"><img src="{{ $campaign['image'] }}" alt="" loading="lazy"></a>
                 <div class="campaign-unggulan-info">
                 <h3>
                     <a href="{{ route('campaign.show', ['id' => $campaign['id']]) }}" aria-label="Detail campaign">{{ $campaign['title']['rendered'] }}</a>
@@ -141,7 +141,8 @@
 
   </div>
 
-</section><!-- /campaign Section -->
+</section>
+<!-- /campaign Section -->
 
 <!-- About Section -->
 <section id="about" class="about section">
@@ -155,8 +156,8 @@
 
   <div class="row gy-4">
     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-      <img src="assets/img/profil/usk.png" class="img-fluid rounded-4 mb-4" alt="">
-      <img src="assets/img/profil/mesjid-jamik.png" class="img-fluid rounded-4 mb-4" alt="">
+      <img src="assets/img/profil/usk.png" class="img-fluid rounded-4 mb-4" alt="" loading="lazy">
+      <img src="assets/img/profil/mesjid-jamik.png" class="img-fluid rounded-4 mb-4" alt="" loading="lazy">
     </div>
     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
       <div class="content ps-0 ps-lg-5">
@@ -167,7 +168,7 @@
         <a href="/profil">Selengkapnya</a>
 
         <div class="position-relative mt-4">
-          <img src="assets/img/profil/rek-rumahamal.png" class="img-fluid rounded-4" alt="">
+          <img src="assets/img/profil/rek-rumahamal.png" class="img-fluid rounded-4" alt="" loading="lazy">
         </div>
       </div>
     </div>
@@ -175,7 +176,8 @@
 
 </div>
 
-</section><!-- /About Section -->
+</section>
+<!-- /About Section -->
 
 <!-- Pengumuman Section -->
 <section id="pengumuman" class="pengumuman section">
@@ -190,7 +192,7 @@
                     <article>
                         @if(isset($post['image_url']) && $post['image_url'])
                             <div class="post-img">
-                                <img src="{{ $post['image_url'] }}" alt="" class="img-fluid">
+                                <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" loading="lazy">
                             </div>
                         @endif
                         <p class="post-category">
@@ -231,7 +233,7 @@
                     <article>
                         @if(isset($post['image_url']) && $post['image_url'])
                             <div class="post-img">
-                                <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" style="width: 100%; height: auto;">
+                                <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" style="width: 100%; height: auto;" loading="lazy">
                             </div>
                         @endif
                         <p class="post-category">{{ implode(', ', $post['categories'] ?? []) }}</p>
@@ -301,7 +303,7 @@
           <div class="col-lg-2-4 col-md-6 program-item isotope-item {{ $filterClass }}">
             <div class="program-content h-100">
               <a href="{{ route('pengumuman.show', ['id' => $post['id']]) }}">
-                <img src="{{ $imageUrl }}" class="img-fluid" alt="{{ $postTitle }}">
+                <img src="{{ $imageUrl }}" class="img-fluid" alt="{{ $postTitle }}" loading="lazy">
               </a>
             </div>
           </div>
@@ -375,14 +377,14 @@
             }
             </script>
             <div class="swiper-wrapper align-items-center">
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
             </div>
         </div>
     </div>

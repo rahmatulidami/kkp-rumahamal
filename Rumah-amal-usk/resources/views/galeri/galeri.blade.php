@@ -29,6 +29,7 @@
                     alt="Boat on Calm Water"
                     data-caption="Boat on Calm Water"
                     data-date="Uploaded on: 2023-07-25"
+                    loading="lazy"
                     />
                     <div class="caption">Boat on Calm Water</div>
                 </div>
@@ -40,6 +41,7 @@
                     alt="Wintry Mountain Landscape"
                     data-caption="Wintry Mountain Landscape"
                     data-date="Uploaded on: 2023-07-26"
+                    loading="lazy"
                     />
                     <div class="caption">Wintry Mountain Landscape</div>
                 </div>
@@ -53,6 +55,7 @@
                     alt="Mountains in the Clouds"
                     data-caption="Mountains in the Clouds"
                     data-date="Uploaded on: 2023-07-27"
+                    loading="lazy"
                     />
                     <div class="caption">Mountains in the Clouds</div>
                 </div>
@@ -64,6 +67,7 @@
                     alt="Boat on Calm Water"
                     data-caption="Boat on Calm Water"
                     data-date="Uploaded on: 2023-07-28"
+                    loading="lazy"
                     />
                     <div class="caption">Boat on Calm Water</div>
                 </div>
@@ -77,6 +81,7 @@
                     alt="Waves at Sea"
                     data-caption="Waves at Sea"
                     data-date="Uploaded on: 2023-07-29"
+                    loading="lazy"
                     />
                     <div class="caption">Waves at Sea</div>
                 </div>
@@ -88,6 +93,7 @@
                     alt="Yosemite National Park"
                     data-caption="Yosemite National Park"
                     data-date="Uploaded on: 2023-07-30"
+                    loading="lazy"
                     />
                     <div class="caption">Yosemite National Park</div>
                 </div>
