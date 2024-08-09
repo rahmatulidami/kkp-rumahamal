@@ -175,4 +175,57 @@ class CampaignController extends Controller
         return view('campaign.donateCampaign', compact('campaign', 'relatedCampaigns'));
     }
 
+    public function updateDanaTerkumpul($campaignId, $amount)
+    {
+        $response = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan/' . $campaignId);
+        $campaign = $response->json();
+
+        if (!$campaign) {
+            return false;
+        }
+
+        $currentDanaTerkumpul = $campaign['acf']['dana_terkumpul'] ?? 0;
+        $newDanaTerkumpul = $currentDanaTerkumpul + $amount;
+
+        $token = $this->getJWTToken();
+
+        if (!$token) {
+            \Log::error('Failed to get JWT token for updating dana terkumpul');
+            return false;
+        }
+
+        $updateResponse = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Content-Type' => 'application/json'
+        ])->post('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan/' . $campaignId, [
+            'acf' => [
+                'dana_terkumpul' => $newDanaTerkumpul
+            ]
+        ]);
+
+        if ($updateResponse->successful()) {
+            \Log::info("Dana terkumpul updated successfully for campaign $campaignId. New total: $newDanaTerkumpul");
+            return true;
+        } else {
+            \Log::error("Failed to update dana terkumpul for campaign $campaignId. Response: " . $updateResponse->body());
+            return false;
+        }
+    }
+
+    private function getJWTToken()
+    {
+        $response = Http::post('https://rumahamal.usk.ac.id/wp-json/jwt-auth/v1/token', [
+            'username' => env('WP_USERNAME'),
+            'password' => env('WP_PASSWORD')
+        ]);
+
+        if ($response->successful()) {
+            return $response->json()['token'];
+        }
+
+        \Log::error('Failed to get JWT token. Response: ' . $response->body());
+        return null;
+    }
+
+
 }
