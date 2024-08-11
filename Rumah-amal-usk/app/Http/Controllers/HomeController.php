@@ -98,12 +98,17 @@ class HomeController extends Controller
     private function fetchAllPosts()
     {
         $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/posts', ['per_page' => 6, 'orderby' => 'date', 'order' => 'desc']);
-
+    
         $posts = $response->json();
         if (!is_array($posts)) {
             abort(500, 'Failed to fetch posts.');
         }
-
+    
+        // Filter out posts with category ID 88
+        $posts = array_filter($posts, function ($post) {
+            return !in_array(88, $post['categories'] ?? []);
+        });
+    
         return array_map(function ($post) {
             return [
                 'id' => $post['id'] ?? 0,
@@ -115,6 +120,7 @@ class HomeController extends Controller
             ];
         }, $posts);
     }
+    
 
     private function fetchAndProcessCampaigns()
     {
@@ -164,21 +170,19 @@ class HomeController extends Controller
     private function fetchProgramPosts()
     {
         $response = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/posts/?per_page=100&_embed');
-
-        // Check if the response is valid
+    
         if (!$response->ok()) {
             abort(500, 'Failed to fetch program posts.');
         }
-
+    
         $posts = $response->json();
-
-        // Filter out posts with 'berita' or 'pengumuman' categories
+    
+        // Filter out posts with category ID 87, 52, or 88
         $filteredPosts = array_filter($posts, function ($post) {
             $categories = $post['categories'] ?? [];
-            // Only include posts that do not have category ID 87 or 52
-            return !in_array(87, $categories) && !in_array(52, $categories);
+            return !in_array(87, $categories) && !in_array(52, $categories) && !in_array(88, $categories);
         });
-
+    
         return array_map(function ($post) {
             $imageUrl = $this->extractProgramImageUrl($post);
             return [
@@ -191,6 +195,7 @@ class HomeController extends Controller
             ];
         }, $filteredPosts);
     }
+    
 
     private function extractImageUrl($post)
     {
