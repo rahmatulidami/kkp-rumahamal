@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
         if (Auth::id()) {
             $usertype = Auth::user()->usertype;
-
+    
             if ($usertype == 'user') {
                 return view('user.dashboard');
             } elseif ($usertype == 'admin') {
@@ -23,56 +23,96 @@ class HomeController extends Controller
                 return view('auth.login');
             }
         }
-
+    
         // Fetch categories and posts from the API
         $categories = $this->fetchCategories();
-        $latestPosts = $this->fetchAllPosts();
-        $campaigns = $this->fetchAndProcessCampaigns();
-        $programPosts = $this->fetchProgramPosts();
-
+    
+        // Fetch the latest 5 posts for the hero section without any category restrictions
+        $latestHeroPosts = $this->fetchAllPosts(5);
+    
+        // Fetch all posts for filtering into "Berita Terkini" and "Pengumuman"
+        $allPosts = $this->fetchAllPosts();
+    
         // Check if categories and posts are arrays
-        if (!is_array($categories) || !is_array($latestPosts)) {
+        if (!is_array($categories) || !is_array($allPosts) || !is_array($latestHeroPosts)) {
             abort(500, 'Invalid data received from API.');
         }
-
+    
         // Map category IDs to names and decode HTML entities
         $categoryMap = array_column($categories, 'name', 'id');
         $categoryMap = array_map('html_entity_decode', $categoryMap);
-
+    
         // Filter and sort posts
-        $pengumumanPosts = array_filter($latestPosts, function($post) {
+        $pengumumanPosts = array_filter($allPosts, function($post) {
             return is_array($post) && in_array(87, $post['categories'] ?? []);
         });
-
-        $beritaPosts = array_filter($latestPosts, function($post) {
-            return is_array($post) && !in_array(87, $post['categories'] ?? []);
+    
+        $beritaPosts = array_filter($allPosts, function($post) {
+            return is_array($post) && !in_array(87, $post['categories'] ?? []) && !in_array(88, $post['categories'] ?? []);
         });
-
+    
         usort($pengumumanPosts, fn($a, $b) => strtotime($b['date'] ?? '1970-01-01') - strtotime($a['date'] ?? '1970-01-01'));
         usort($beritaPosts, fn($a, $b) => strtotime($b['date'] ?? '1970-01-01') - strtotime($a['date'] ?? '1970-01-01'));
-
+    
         $latestPengumumanPosts = array_slice($pengumumanPosts, 0, 3);
         $latestBeritaPosts = array_slice($beritaPosts, 0, 3);
-
+    
         // Replace category IDs with names and decode HTML entities
         foreach ($latestPengumumanPosts as &$post) {
             $post['categories'] = array_map(fn($id) => $categoryMap[$id] ?? 'Uncategorized', $post['categories'] ?? []);
             $post['title']['rendered'] = str_replace('&amp;', '&', $post['title']['rendered'] ?? 'Untitled');
         }
-
+    
         foreach ($latestBeritaPosts as &$post) {
             $post['categories'] = array_map(fn($id) => $categoryMap[$id] ?? 'Uncategorized', $post['categories'] ?? []);
             $post['title']['rendered'] = str_replace('&amp;', '&', $post['title']['rendered'] ?? 'Untitled');
         }
-
+    
+        // Fetch campaigns and program posts
+        $campaigns = $this->fetchAndProcessCampaigns();
+        $programPosts = $this->fetchProgramPosts();
+    
         // Return the home view with the latest posts, categories, campaigns, and program posts
         return view('landing.home', [
-            'latestPosts' => $latestPosts,
+            'latestPosts' => $latestHeroPosts, // Use this for the hero section
             'latestPengumumanPosts' => $latestPengumumanPosts,
-            'latestBeritaPosts' => $latestBeritaPosts,
+            'latestBeritaPosts' => $latestBeritaPosts, // Use this for "Berita Terkini"
             'campaigns' => $campaigns,
             'programPosts' => $programPosts
         ]);
+    }
+    
+    private function fetchAllPosts($limit = null)
+    {
+        $params = ['orderby' => 'date', 'order' => 'desc'];
+        if ($limit) {
+            $params['per_page'] = $limit;
+        }
+    
+        $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/posts', $params);
+    
+        $posts = $response->json();
+        if (!is_array($posts)) {
+            abort(500, 'Failed to fetch posts.');
+        }
+    
+        // Filter out posts with category ID 88 (only if not fetching for hero section)
+        if (!$limit) {
+            $posts = array_filter($posts, function ($post) {
+                return !in_array(88, $post['categories'] ?? []);
+            });
+        }
+    
+        return array_map(function ($post) {
+            return [
+                'id' => $post['id'] ?? 0,
+                'image_url' => $this->extractImageUrl($post),
+                'categories' => $post['categories'] ?? [],
+                'title' => $post['title'] ?? [],
+                'link' => $post['link'] ?? '',
+                'date' => $post['date'] ?? ''
+            ];
+        }, $posts);
     }
 
     private function fetchCategories()
@@ -94,33 +134,6 @@ class HomeController extends Controller
             ];
         }, $categories);
     }
-
-    private function fetchAllPosts()
-    {
-        $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/posts', ['per_page' => 6, 'orderby' => 'date', 'order' => 'desc']);
-    
-        $posts = $response->json();
-        if (!is_array($posts)) {
-            abort(500, 'Failed to fetch posts.');
-        }
-    
-        // Filter out posts with category ID 88
-        $posts = array_filter($posts, function ($post) {
-            return !in_array(88, $post['categories'] ?? []);
-        });
-    
-        return array_map(function ($post) {
-            return [
-                'id' => $post['id'] ?? 0,
-                'image_url' => $this->extractImageUrl($post),
-                'categories' => $post['categories'] ?? [],
-                'title' => $post['title'] ?? [],
-                'link' => $post['link'] ?? '',
-                'date' => $post['date'] ?? ''
-            ];
-        }, $posts);
-    }
-    
 
     private function fetchAndProcessCampaigns()
     {
@@ -195,7 +208,6 @@ class HomeController extends Controller
             ];
         }, $filteredPosts);
     }
-    
 
     private function extractImageUrl($post)
     {
@@ -249,6 +261,4 @@ class HomeController extends Controller
         // Return a default image if no valid image URL is found
         return url('assets/img/default.jpeg');
     }
-    
-    
 }
