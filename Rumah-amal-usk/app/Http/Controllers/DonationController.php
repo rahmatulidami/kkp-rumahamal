@@ -9,7 +9,6 @@ use Xendit\Configuration;
 use Xendit\Invoice\CreateInvoiceRequest;
 use Xendit\Invoice\InvoiceApi;
 use Xendit\Invoice\InvoiceItem;
-use App\Http\Controllers\CampaignController;
 
 class DonationController extends Controller
 {
@@ -93,18 +92,25 @@ class DonationController extends Controller
     {
         $sessionData = session('donation_data', []);
         \Log::info('Session data in callback:', $sessionData);
-
+        // Mendapatkan token xendit dari header
         $xenditToken = $request->header('x-callback-token');
         $callbackToken = env('XENDIT_CALLBACK_TOKEN');
 
+        // Verifikasi token
         if ($xenditToken !== $callbackToken) {
             return response()->json(['error' => 'Invalid callback token'], 401);
         }
 
+        // Mendapatkan payload
         $payload = $request->all();
 
+        // Memeriksa apakah status pembayaran adalah PAID
         if ($payload['status'] === 'PAID') {
             try {
+
+                $sessionData = session('donation_data', []);
+
+                // Menyimpan data ke database
                 $donation = new Donation();
                 $donation->payment_id = $payload['id'];
                 $donation->campaign_name = $sessionData['campaign_name'] ?? 'General Donation';
@@ -115,27 +121,14 @@ class DonationController extends Controller
                 $donation->status = 'paid';
                 $donation->save();
 
-                // Update dana terkumpul di campaign
-                $campaignController = new CampaignController();
-                $campaignId = $sessionData['campaign_id'] ?? null;
-                if ($campaignId) {
-                    $donationAmount = $payload['amount'];
-                    $updateSuccess = $campaignController->updateDanaTerkumpul($campaignId, $donationAmount);
-                    if (!$updateSuccess) {
-                        \Log::error("Failed to update dana terkumpul for campaign $campaignId with amount $donationAmount");
-                    } else {
-                        \Log::info("Successfully updated dana terkumpul for campaign $campaignId with amount $donationAmount");
-                    }
-                } else {
-                    \Log::warning("No campaign_id found in session data for donation " . $donation->id);
-                }
+                // Anda bisa menambahkan logika tambahan di sini, seperti mengirim email terima kasih
 
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Payment processed and saved successfully'
                 ], 200);
             } catch (\Exception $e) {
-                \Log::error('Error processing donation: ' . $e->getMessage());
+                // Jika terjadi kesalahan saat menyimpan ke database
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Error saving payment data: ' . $e->getMessage()
@@ -143,6 +136,7 @@ class DonationController extends Controller
             }
         }
 
+        // Menangani status lain jika diperlukan
         return response()->json(['message' => 'Notification received'], 200);
     }
 
