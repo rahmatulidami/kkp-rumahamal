@@ -28,24 +28,38 @@ class DocumentController extends Controller
                 $links = $dom->getElementsByTagName('a');
                 $foundDocuments = false;
 
+                // Find all h3 tags with the class 'media-heading'
+                $xpath = new \DOMXPath($dom);
+                $headings = $xpath->query("//h3[@class='media-heading']");
+
+                // Create an array to store document names
+                $documentNames = [];
+
+                foreach ($headings as $heading) {
+                    $documentNames[] = trim($heading->nodeValue);
+                }
+
+                $documentIndex = 0;
+
                 foreach ($links as $link) {
                     $downloadUrl = $link->getAttribute('data-downloadurl');
 
                     if ($downloadUrl) {
                         $foundDocuments = true;
-                        $documentName = trim($link->nodeValue);
                         $fileType = pathinfo($downloadUrl, PATHINFO_EXTENSION);
 
                         // Set the icon URL based on the file type
                         $iconUrl = "https://rumahamal.usk.ac.id/wp-content/plugins/download-manager/assets/file-type-icons/{$fileType}.svg";
 
-                        // Append the document data to the list
+                        // Append the document data to the list, including the name from h3
                         $documents[] = [
-                            'name' => $documentName,
+                            'name' => $documentNames[$documentIndex] ?? 'Unknown', // Use 'Unknown' if no name is found
                             'type' => $fileType,
                             'icon' => $iconUrl,
                             'download' => $downloadUrl,
                         ];
+
+                        $documentIndex++;
                     }
                 }
 
