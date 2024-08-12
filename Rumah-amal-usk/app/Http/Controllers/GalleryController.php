@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
+use DOMDocument;
+use DOMElement;
 
 class GalleryController extends Controller
 {
@@ -16,7 +18,7 @@ class GalleryController extends Controller
         $content = $data['content']['rendered'];
 
         // Use DOMDocument to parse the HTML content
-        $dom = new \DOMDocument();
+        $dom = new DOMDocument();
         @$dom->loadHTML($content);
 
         $images = [];
@@ -26,19 +28,18 @@ class GalleryController extends Controller
             $href = $anchor->getAttribute('href'); // High-resolution image URL
             $imgTag = $anchor->getElementsByTagName('img')->item(0);
 
-            if ($imgTag) {
+            if ($imgTag instanceof DOMElement) {
                 $src = $imgTag->getAttribute('src');
                 $alt = $imgTag->getAttribute('alt');
                 $caption = '';
 
                 // Find the corresponding caption
-                // Check the sibling nodes for caption inside `gallery-caption__wrapper`
                 $nextElement = $anchor->nextSibling;
                 while ($nextElement) {
                     if ($nextElement->nodeType === XML_ELEMENT_NODE) {
                         if ($nextElement->nodeName === 'div' && $nextElement->getAttribute('class') === 'gallery-caption__wrapper') {
                             $captionTag = $nextElement->getElementsByTagName('dd')->item(0);
-                            if ($captionTag) {
+                            if ($captionTag instanceof DOMElement) {
                                 $caption = trim($captionTag->textContent);
                             }
                             break;
@@ -49,8 +50,7 @@ class GalleryController extends Controller
 
                 // Handle case where caption is directly in <dd> tags
                 if (empty($caption)) {
-                    $captionTags = $dom->getElementsByTagName('dd');
-                    foreach ($captionTags as $captionTag) {
+                    foreach ($dom->getElementsByTagName('dd') as $captionTag) {
                         if ($captionTag->getAttribute('class') === 'wp-caption-text gallery-caption') {
                             $caption = trim($captionTag->textContent);
                             break;

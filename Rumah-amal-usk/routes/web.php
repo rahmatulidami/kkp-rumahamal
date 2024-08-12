@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,9 +56,7 @@ Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])->name('pen
 
 Route::get('/galeri', [GalleryController::class, 'showGallery']);
 
-Route::get('/dokumen', function () {
-    return view('galeri/dokumen');
-});
+Route::get('/dokumen', [DocumentController::class, 'showDocuments']);
 
 Route::get('/campaign', [CampaignController::class, 'index'])->name('campaign.index');
 
