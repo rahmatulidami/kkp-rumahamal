@@ -17,14 +17,6 @@
                 </div>
             </div>
         </div>
-        <nav class="breadcrumbs">
-            <div class="container">
-                <ol>
-                    <li><a href="/">Home</a></li>
-                    <li class="current">Pengumuman</li>
-                </ol>
-            </div>
-        </nav>
     </div><!-- End Page Title -->
 
     <!-- Blog Posts Section -->

@@ -3,17 +3,20 @@
 
     // Fungsi untuk menambahkan kelas .scrolled ke body saat halaman digulir ke bawah
     function toggleScrolled() {
-        const selectBody = document.querySelector("body");
-        const selectHeader = document.querySelector("#header");
+        const body = document.querySelector("body");
+        const header = document.querySelector("#header");
         if (
-            !selectHeader ||
-            (!selectHeader.classList.contains("scroll-up-sticky") &&
-            !selectHeader.classList.contains("sticky-top") &&
-            !selectHeader.classList.contains("fixed-top"))
+            !header ||
+            (!header.classList.contains("scroll-up-sticky") &&
+            !header.classList.contains("sticky-top") &&
+            !header.classList.contains("fixed-top"))
         ) return;
-        window.scrollY > 100
-            ? selectBody.classList.add("scrolled")
-            : selectBody.classList.remove("scrolled");
+
+        if (window.scrollY > 100) {
+            body.classList.add("scrolled");
+        } else {
+            body.classList.remove("scrolled");
+        }
     }
 
     document.addEventListener("scroll", toggleScrolled);
@@ -37,20 +40,19 @@
     // Menyembunyikan navigasi mobile pada link halaman yang sama
     document.querySelectorAll("#navmenu a").forEach((navmenu) => {
         navmenu.addEventListener("click", (e) => {
-            if (document.querySelector(".mobile-nav-active")) {
-                if (navmenu.hash && navmenu.hash !== "#") {
-                    mobileNavToggle();
-                }
+            if (document.querySelector(".mobile-nav-active") && navmenu.hash && navmenu.hash !== "#") {
+                mobileNavToggle();
             }
         });
     });
 
     // Toggle dropdown navigasi mobile
     document.querySelectorAll(".navmenu .toggle-dropdown").forEach((dropdownToggle) => {
-        dropdownToggle.addEventListener("click", function (e) {
-            e.preventDefault(); // Mencegah perilaku default
-            this.parentNode.classList.toggle("active");
-            const nextDropdown = this.parentNode.nextElementSibling;
+        dropdownToggle.addEventListener("click", (e) => {
+            e.preventDefault();
+            const parent = dropdownToggle.parentNode;
+            parent.classList.toggle("active");
+            const nextDropdown = parent.nextElementSibling;
             if (nextDropdown) {
                 nextDropdown.classList.toggle("dropdown-active");
             }
@@ -60,11 +62,12 @@
 
     // Menangani klik pada menu dropdown
     document.querySelectorAll(".dropdownmenu").forEach((dropdownLink) => {
-        dropdownLink.addEventListener("click", function (e) {
-            if (window.innerWidth <= 992) { // Periksa apakah dalam mode mobile
-                e.preventDefault(); // Mencegah perilaku default
-                this.parentNode.classList.toggle("active");
-                const nextDropdown = this.nextElementSibling;
+        dropdownLink.addEventListener("click", (e) => {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                const parent = dropdownLink.parentNode;
+                parent.classList.toggle("active");
+                const nextDropdown = dropdownLink.nextElementSibling;
                 if (nextDropdown) {
                     nextDropdown.classList.toggle("dropdown-active");
                 }
@@ -74,18 +77,18 @@
 
     // Mengarahkan sesuai href pada item dropdown dan menambahkan kelas aktif
     document.querySelectorAll(".dropdownitemm").forEach((dropdownItem) => {
-        dropdownItem.addEventListener("click", function (e) {
+        dropdownItem.addEventListener("click", (e) => {
             // Hapus kelas aktif dari semua item
             document.querySelectorAll(".dropdownitemm").forEach((item) => {
                 item.classList.remove("active");
             });
 
             // Tambahkan kelas aktif pada item yang diklik
-            this.classList.add("active");
+            dropdownItem.classList.add("active");
 
             // Tutup dropdown pada desktop
             if (window.innerWidth > 992) {
-                const parentDropdown = this.closest(".dropdown");
+                const parentDropdown = dropdownItem.closest(".dropdown");
                 if (parentDropdown) {
                     parentDropdown.classList.remove("active");
                     const dropdownActive = parentDropdown.querySelector(".dropdown-active");
@@ -110,10 +113,10 @@
     }
 
     // Tombol login
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", () => {
         const loginButton = document.querySelector("#login-button");
         if (loginButton) {
-            loginButton.addEventListener("click", function() {
+            loginButton.addEventListener("click", () => {
                 window.location.href = "/login"; // Arahkan ke halaman login
             });
         }
@@ -124,9 +127,11 @@
 
     function toggleScrollTop() {
         if (scrollTop) {
-            window.scrollY > 100
-                ? scrollTop.classList.add("active")
-                : scrollTop.classList.remove("active");
+            if (window.scrollY > 100) {
+                scrollTop.classList.add("active");
+            } else {
+                scrollTop.classList.remove("active");
+            }
         }
     }
 
@@ -155,20 +160,38 @@
     window.addEventListener("load", aosInit);
 
     // Inisialisasi GLightbox
-    const glightbox = GLightbox({
+    GLightbox({
         selector: ".glightbox",
     });
 
     // Inisialisasi swiper sliders
     function initSwiper() {
-        document.querySelectorAll(".init-swiper").forEach(function (swiperElement) {
-            let config = JSON.parse(swiperElement.querySelector(".swiper-config").innerHTML.trim());
+        document.querySelectorAll(".init-swiper").forEach((swiperElement) => {
+            let config = JSON.parse(swiperElement.querySelector(".swiper-config").textContent.trim());
 
-            if (swiperElement.classList.contains("swiper-tab")) {
-                initSwiperWithCustomPagination(swiperElement, config);
-            } else {
-                new Swiper(swiperElement, config);
-            }
+            // Pastikan pagination hanya muncul satu kali per slide
+            config.pagination = {
+                el: '.swiper-pagination',
+                clickable: true,
+                renderBullet: function (index, className) {
+                    return '<span class="' + className + '"></span>';
+                },
+            };
+
+            const swiper = new Swiper(swiperElement, config);
+
+            // Menangani sinkronisasi antara slide dan pagination
+            swiper.on('slideChange', function () {
+                const bullets = document.querySelectorAll('.swiper-pagination .swiper-pagination-bullet');
+                const activeIndex = swiper.activeIndex;
+                bullets.forEach((bullet, index) => {
+                    if (index === activeIndex) {
+                        bullet.classList.add('swiper-pagination-bullet-active');
+                    } else {
+                        bullet.classList.remove('swiper-pagination-bullet-active');
+                    }
+                });
+            });
         });
     }
 
@@ -178,13 +201,13 @@
     new PureCounter();
 
     // Inisialisasi isotope layout
-    document.querySelectorAll(".isotope-layout").forEach(function (isotopeItem) {
-        let layout = isotopeItem.getAttribute("data-layout") ?? "masonry";
-        let filter = isotopeItem.getAttribute("data-default-filter") ?? "*";
-        let sort = isotopeItem.getAttribute("data-sort") ?? "original-order";
+    document.querySelectorAll(".isotope-layout").forEach((isotopeItem) => {
+        let layout = isotopeItem.getAttribute("data-layout") || "masonry";
+        let filter = isotopeItem.getAttribute("data-default-filter") || "*";
+        let sort = isotopeItem.getAttribute("data-sort") || "original-order";
 
         let iso;
-        imagesLoaded(isotopeItem.querySelectorAll(".isotope-item"), function () {
+        imagesLoaded(isotopeItem.querySelectorAll(".isotope-item"), () => {
             iso = new Isotope(isotopeItem.querySelector(".isotope-container"), {
                 itemSelector: ".isotope-item",
                 layoutMode: layout,
@@ -195,26 +218,26 @@
             // Filter handler
             const filterSelect = document.getElementById('filter-select');
             if (filterSelect) {
-                filterSelect.addEventListener('change', function () {
-                    const filterValue = this.value;
+                filterSelect.addEventListener('change', () => {
+                    const filterValue = filterSelect.value;
                     iso.arrange({ filter: filterValue });
                 });
             }
         });
 
         // Filter handler untuk item filter (jika ada)
-        isotopeItem.querySelectorAll(".isotope-filters li").forEach(function (filterItem) {
-            filterItem.addEventListener("click", function () {
+        isotopeItem.querySelectorAll(".isotope-filters li").forEach((filterItem) => {
+            filterItem.addEventListener("click", () => {
                 isotopeItem.querySelector(".isotope-filters .filter-active").classList.remove("filter-active");
-                this.classList.add("filter-active");
+                filterItem.classList.add("filter-active");
                 iso.arrange({
-                    filter: this.getAttribute("data-filter"),
+                    filter: filterItem.getAttribute("data-filter"),
                 });
 
                 if (typeof aosInit === "function") {
                     aosInit();
                 }
-            }, false);
+            });
         });
     });
 
@@ -240,11 +263,14 @@
 
     function toggleHighlight() {
         if (highlight) {
-            window.scrollY > 100
-                ? highlight.classList.add("active")
-                : highlight.classList.remove("active");
+            if (window.scrollY > 100) {
+                highlight.classList.add("active");
+            } else {
+                highlight.classList.remove("active");
+            }
         }
     }
+
     if (highlight) {
         highlight.addEventListener("click", (e) => {
             e.preventDefault();
@@ -284,5 +310,15 @@
     }
     window.addEventListener("load", navmenuScrollspy);
     document.addEventListener("scroll", navmenuScrollspy);
+
+    // Menambahkan atribut loading="lazy" pada gambar
+    document.addEventListener("DOMContentLoaded", () => {
+        const images = document.querySelectorAll("img");
+        images.forEach(img => {
+            if (!img.hasAttribute("loading")) {
+                img.setAttribute("loading", "lazy");
+            }
+        });
+    });
 
 })();

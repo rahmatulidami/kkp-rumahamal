@@ -16,20 +16,21 @@ class BeritaController extends Controller
         // Fetch categories
         $categories = $this->fetchCategories();
         $categoryMap = array_column($categories, 'name', 'id');
-
+    
         // Fetch posts
         $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/posts', [
             'per_page' => 100,
         ]);
-
+    
         // Decode JSON response into an array
         $posts = $response->json();
-
-        // Filter out posts with the 'Pengumuman' category
+    
+        // Filter out posts with category ID 88 and the 'Pengumuman' category
         $beritaPosts = array_filter($posts, function ($post) {
-            return !in_array($this->pengumumanCategoryId, $post['categories'] ?? []);
+            return !in_array($this->pengumumanCategoryId, $post['categories'] ?? []) 
+                && !in_array(88, $post['categories'] ?? []);
         });
-
+    
         // Extract image URL and map categories for berita posts
         foreach ($beritaPosts as &$post) {
             $post['image_url'] = $this->extractImageUrl($post['content']['rendered']);
@@ -39,22 +40,22 @@ class BeritaController extends Controller
                 return $categoryMap[$categoryId] ?? 'Uncategorized';
             }, $post['categories'] ?? []);
         }
-
+    
         // Paginate berita posts
         $currentPage = request()->get('page', 1);
         $perPage = 12;
         $offset = ($currentPage - 1) * $perPage;
         $totalPosts = count($beritaPosts);
         $beritaPosts = array_slice($beritaPosts, $offset, $perPage);
-
+    
         $pagination = [
             'current_page' => $currentPage,
             'total_pages' => ceil($totalPosts / $perPage),
         ];
-
+    
         // Send data to the view
         return view('berita.berita', compact('beritaPosts', 'pagination'));
-    }
+    }    
 
     public function pengumuman()
     {
@@ -186,6 +187,11 @@ class BeritaController extends Controller
             ]);
             $recent_posts = $recent_posts_response->json();
     
+            // Filter out posts with category ID 88
+            $recent_posts = array_filter($recent_posts, function ($post) {
+                return !in_array(88, $post['categories'] ?? []);
+            });
+    
             // Add image_url to each recent post
             foreach ($recent_posts as &$post) {
                 $post['image_url'] = $this->extractImageUrl($post['content']['rendered']) ?? asset('assets/img/default.jpeg');
@@ -207,6 +213,6 @@ class BeritaController extends Controller
         } else {
             abort(404, 'Berita tidak ditemukan');
         }
-    }
+    }    
     
 }

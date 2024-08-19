@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\AdminController;
@@ -8,6 +7,8 @@ use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/donate', [DonationController::class, 'index']);
 Route::post('/donate', [DonationController::class, 'store']);
@@ -44,7 +45,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 });
 
-
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
 
 Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
@@ -57,17 +57,11 @@ Route::get('/admin', function () {
 
 Route::get('pengumuman', [BeritaController::class, 'pengumuman'])->name('pengumuman');
 
-
 Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
 
+Route::get('/galeri', [GalleryController::class, 'showGallery']);
 
-Route::get('/galeri', function () {
-    return view('galeri/galeri');
-});
-
-Route::get('/dokumen', function () {
-    return view('galeri/dokumen');
-});
+Route::get('/dokumen', [DocumentController::class, 'showDocuments']);
 
 Route::get('/campaign', [CampaignController::class, 'index'])->name('campaign.index');
 
@@ -78,13 +72,9 @@ Route::get('/profil', function () {
     return view('profil/profil');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home.auth');
 
-route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
-
-route::get('post', [HomeController::class, 'post'])->middleware(['auth', 'admin']);
+Route::get('post', [HomeController::class, 'post'])->middleware(['auth', 'admin']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -94,7 +84,6 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
 Route::get('/donasi-infak', function () {
     return view('donation/donasi-infak');
 });
@@ -102,4 +91,3 @@ Route::get('/donasi-infak', function () {
 Route::get('/donasi-zakat', function () {
     return view('donation/donasi-zakat');
 });
-
