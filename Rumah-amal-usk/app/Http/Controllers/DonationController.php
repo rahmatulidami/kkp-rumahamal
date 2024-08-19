@@ -153,7 +153,7 @@ class DonationController extends Controller
 
         // Fetch current campaign data
         $response = Http::withBasicAuth($username, $password)
-            ->get("https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan/{$campaignId}");
+            ->get("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan/{$campaignId}");
 
         if ($response->successful()) {
             $campaign = $response->json();
@@ -162,7 +162,7 @@ class DonationController extends Controller
 
             // Update dana_terkumpul
             $updateResponse = Http::withBasicAuth($username, $password)
-                ->post("https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan/{$campaignId}", [
+                ->post("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan/{$campaignId}", [
                     'acf' => [
                         'dana_terkumpul' => $newDanaTerkumpul
                     ]
