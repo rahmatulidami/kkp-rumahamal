@@ -22,6 +22,7 @@
                     @csrf
                     <input type="hidden" id="selected_payment_method" name="payment_method">
                     <input type="hidden" id="campaign_name" name="campaign_name" value="{{ $campaign['title']['rendered'] }}">
+                    <input type="hidden" id="campaign_id" name="campaign_id" value="{{ $campaign['id']}}">
                     <div class="mb-3">
                         <label for="amount" class="form-label">Jumlah Donasi</label>
                         <div class="input-group">

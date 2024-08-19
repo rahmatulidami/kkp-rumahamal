@@ -9,6 +9,8 @@ use Xendit\Configuration;
 use Xendit\Invoice\CreateInvoiceRequest;
 use Xendit\Invoice\InvoiceApi;
 use Xendit\Invoice\InvoiceItem;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 class DonationController extends Controller
 {
@@ -75,7 +77,8 @@ class DonationController extends Controller
                 'amount' => $amount,
                 'payment_method' => $paymentMethod,
                 'invoice_id' => $result['id'],
-                'campaign_name' => $request->input('campaign_name')
+                'campaign_name' => $request->input('campaign_name'),
+                'campaign_id' => $request->input('campaign_id')
             ]]);
             \Log::info('Session data:', session('donation_data'));
 
@@ -121,6 +124,9 @@ class DonationController extends Controller
                 $donation->status = 'paid';
                 $donation->save();
 
+                if (isset($sessionData['campaign_id'])) {
+                    $this->updateCampaignDanaTerkumpul($sessionData['campaign_id'], $payload['amount']);
+                }
                 // Anda bisa menambahkan logika tambahan di sini, seperti mengirim email terima kasih
 
                 return response()->json([
@@ -139,5 +145,38 @@ class DonationController extends Controller
         // Menangani status lain jika diperlukan
         return response()->json(['message' => 'Notification received'], 200);
     }
+
+    private function updateCampaignDanaTerkumpul($campaignId, $amount)
+    {
+        $username = env('WP_API_USERNAME');
+        $password = env('WP_API_PASSWORD');
+
+        // Fetch current campaign data
+        $response = Http::withBasicAuth($username, $password)
+            ->get("https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan/{$campaignId}");
+
+        if ($response->successful()) {
+            $campaign = $response->json();
+            $currentDanaTerkumpul = $campaign['acf']['dana_terkumpul'] ?? 0;
+            $newDanaTerkumpul = $currentDanaTerkumpul + $amount;
+
+            // Update dana_terkumpul
+            $updateResponse = Http::withBasicAuth($username, $password)
+                ->post("https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan/{$campaignId}", [
+                    'acf' => [
+                        'dana_terkumpul' => $newDanaTerkumpul
+                    ]
+                ]);
+
+            if ($updateResponse->successful()) {
+                \Log::info("Dana terkumpul updated successfully for campaign {$campaignId}. New value: {$newDanaTerkumpul}");
+            } else {
+                \Log::error("Failed to update dana terkumpul for campaign {$campaignId}: " . $updateResponse->body());
+            }
+        } else {
+            \Log::error("Failed to fetch campaign data for ID {$campaignId}: " . $response->body());
+        }
+    }
+
 
 }
