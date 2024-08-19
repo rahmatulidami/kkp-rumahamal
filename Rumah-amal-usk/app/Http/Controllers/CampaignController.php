@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Models\Donation;
 use DOMDocument;
 
 class CampaignController extends Controller
@@ -53,9 +54,8 @@ class CampaignController extends Controller
             abort(404, 'Campaign not found');
         }
 
-        // Fetch donors data
-        $donorsResponse = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_donors?campaign_id=' . $id);
-        $donors = $donorsResponse->json();
+        // Fetch all donors from the database
+        $donors = Donation::all();
 
         // Fetch related campaigns
         $relatedCampaignsResponse = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan');
@@ -91,22 +91,16 @@ class CampaignController extends Controller
         }
         $contentWithoutImages = $doc->saveHTML();
 
-        // Ensure donors key exists and is an array
+        // Add necessary fields to the campaign
         $campaign['terkumpul'] = $terkumpul;
         $campaign['dibutuhkan'] = $dibutuhkan;
         $campaign['percentage'] = $percentage;
         $campaign['category'] = $category;
         $campaign['image'] = $image;
-        $campaign['donors'] = is_array($donors) ? $donors : [];
         $campaign['content']['rendered'] = $contentWithoutImages;
 
-        // Ensure each related campaign has a category key
-        foreach ($relatedCampaigns as &$relatedCampaign) {
-            $relatedCampaign['category'] = strtolower($relatedCampaign['type'] ?? 'uncategorized');
-        }
-
         // Pass campaign, donors, and related campaigns data to the view
-        return view('campaign.detail-campaign', compact('campaign', 'relatedCampaigns'));
+        return view('campaign.detail-campaign', compact('campaign', 'donors', 'relatedCampaigns'));
     }
 
     public function donate($id)
@@ -119,9 +113,8 @@ class CampaignController extends Controller
             abort(404, 'Campaign not found');
         }
 
-        // Fetch donors data
-        $donorsResponse = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_donors?campaign_id=' . $id);
-        $donors = $donorsResponse->json();
+        // Fetch all donors from the database
+        $donors = Donation::all();
 
         // Fetch related campaigns
         $relatedCampaignsResponse = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan');
@@ -157,13 +150,12 @@ class CampaignController extends Controller
         }
         $contentWithoutImages = $doc->saveHTML();
 
-        // Ensure donors key exists and is an array
+        // Add necessary fields to the campaign
         $campaign['terkumpul'] = $terkumpul;
         $campaign['dibutuhkan'] = $dibutuhkan;
         $campaign['percentage'] = $percentage;
         $campaign['category'] = $category;
         $campaign['image'] = $image;
-        $campaign['donors'] = is_array($donors) ? $donors : [];
         $campaign['content']['rendered'] = $contentWithoutImages;
 
         // Ensure each related campaign has a category key
@@ -174,5 +166,4 @@ class CampaignController extends Controller
         // Pass campaign, donors, and related campaigns data to the view
         return view('campaign.donateCampaign', compact('campaign', 'relatedCampaigns'));
     }
-
 }
