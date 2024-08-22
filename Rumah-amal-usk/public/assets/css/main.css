@@ -856,6 +856,10 @@ h6 {
         max-height: 70px;
         padding: 15px;
     }
+
+    .footer .copyright {
+        font-size: 10px;
+    }
 }
 
 /*--------------------------------------------------------------
@@ -1041,9 +1045,7 @@ section,
 .section-title h2 {
     font-size: 32px;
     font-weight: 700;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    position: relative;
+    margin-top: 40px;
 }
 
 .section-title h2:after {
@@ -1068,6 +1070,8 @@ section,
         font-size: 24px;
         font-weight: 700;
         position: relative;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
     }
 }
 /*--------------------------------------------------------------
@@ -1286,8 +1290,8 @@ section,
 }
 
 .call-to-action .container {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 40px;
+    padding-bottom: 10px;
     border-radius: 15px;
     overflow: hidden;
     position: relative;
@@ -3620,6 +3624,11 @@ section,
     cursor: pointer; 
 }
 
+.dokumen .btn:hover {
+    background-color: #1D7E05; 
+    color: #fff;
+}
+
 .dokumen .details {
     flex: 1;
 }
@@ -3638,53 +3647,18 @@ section,
 }
 
 @media (max-width: 575px) {
-    .dokumen .container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px; 
+    .dokumen .dokumen-name {
+        font-size: 10px;
+    }
+    
+    .dokumen .date {
+        font-size: 8px;
     }
 
     .dokumen .kumpulan-dokumen {
-        width: calc(33.333% - 10px);
-        padding: 5px;
-        margin-bottom: 15px;
+        padding: 5px 15px;
     }
-
-    .dokumen .dokumen-name,
-    .dokumen .date,
-    .dokumen .btn {
-        display: none;
-    }
-
-    .dokumen .icon-and-details {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .dokumen .details:hover .dokumen-name {
-        display: block;
-        position: absolute;
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 5px;
-        border-radius: 5px;
-        top: -30px;
-        left: 0;
-        width: 100%;
-        text-align: center;
-        z-index: 1;
-    }
-
-    .dokumen .details:hover .date {
-        display: block;
-        position: absolute;
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 5px;
-        border-radius: 5px;
-        top: -10px;
-        width: 100%;
-        text-align: center;
-        z-index: 1;
-    }
+    
 }
 
 
