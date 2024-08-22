@@ -12,7 +12,7 @@ class CampaignController extends Controller
     public function index()
     {
         // Fetch data from the API
-        $response = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan');
+        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan');
         $campaigns = $response->json();
 
         // Process campaigns to extract image URLs
@@ -47,7 +47,7 @@ class CampaignController extends Controller
     public function show($id)
     {
         // Fetch data for a single campaign by ID
-        $response = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan/' . $id);
+        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan/' . $id);
         $campaign = $response->json();
 
         if (!$campaign) {
@@ -58,7 +58,7 @@ class CampaignController extends Controller
         $donors = Donation::all();
 
         // Fetch related campaigns
-        $relatedCampaignsResponse = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan');
+        $relatedCampaignsResponse = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan');
         $relatedCampaigns = $relatedCampaignsResponse->json();
 
         // Remove the current campaign from the related campaigns array

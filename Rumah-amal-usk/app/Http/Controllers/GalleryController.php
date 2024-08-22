@@ -11,7 +11,7 @@ class GalleryController extends Controller
     public function showGallery()
     {
         // Fetch the JSON data from the API
-        $response = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/pages/4716');
+        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/pages/4716');
         $data = $response->json();
 
         // Extract the content

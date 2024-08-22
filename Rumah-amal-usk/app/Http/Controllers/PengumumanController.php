@@ -13,7 +13,7 @@ class PengumumanController extends Controller
     public function show($id)
     {
         // Fetch the post details
-        $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/posts/' . $id);
+        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts/' . $id);
     
         if ($response->successful()) {
             $pengumuman = $response->json();
@@ -29,7 +29,7 @@ class PengumumanController extends Controller
             $filteredContent = str_replace('<img src="' . $mainImage . '"', '', $pengumuman['content']['rendered']);
     
             // Fetch recent posts
-            $recent_posts_response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/posts', [
+            $recent_posts_response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
                 'per_page' => 5,
             ]);
             $recent_posts = $recent_posts_response->json();
@@ -40,7 +40,7 @@ class PengumumanController extends Controller
             }
     
             // Fetch all tags
-            $tags_response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/tags');
+            $tags_response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/tags');
             $tags = $tags_response->json();
     
             return view('pengumuman.detail-pengumuman', compact('pengumuman', 'recent_posts', 'tags', 'mainImage', 'filteredContent'));

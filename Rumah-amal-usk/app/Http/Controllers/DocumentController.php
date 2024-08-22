@@ -14,7 +14,7 @@ class DocumentController extends Controller
 
         while (true) {
             // Fetch data from API
-            $response = Http::get("https://rumahamal.usk.ac.id/wp-json/wp/v2/pages/4729?cp={$cp}");
+            $response = Http::get("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/pages/4729?cp={$cp}");
 
             if ($response->ok()) {
                 $data = $response->json();
@@ -49,7 +49,7 @@ class DocumentController extends Controller
                         $fileType = pathinfo($downloadUrl, PATHINFO_EXTENSION);
 
                         // Set the icon URL based on the file type
-                        $iconUrl = "https://rumahamal.usk.ac.id/wp-content/plugins/download-manager/assets/file-type-icons/{$fileType}.svg";
+                        $iconUrl = "https://rumahamal.usk.ac.id/api/wp-content/plugins/download-manager/assets/file-type-icons/{$fileType}.svg";
 
                         // Append the document data to the list, including the name from h3
                         $documents[] = [

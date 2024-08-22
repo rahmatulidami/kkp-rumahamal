@@ -89,7 +89,7 @@ class HomeController extends Controller
             $params['per_page'] = $limit;
         }
     
-        $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/posts', $params);
+        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', $params);
     
         $posts = $response->json();
         if (!is_array($posts)) {
@@ -117,7 +117,7 @@ class HomeController extends Controller
 
     private function fetchCategories()
     {
-        $response = Http::get('http://rumahamal.usk.ac.id/wp-json/wp/v2/categories');
+        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/categories');
 
         // Check if response is an array
         $categories = $response->json();
@@ -137,7 +137,7 @@ class HomeController extends Controller
 
     private function fetchAndProcessCampaigns()
     {
-        $response = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/campaign_unggulan');
+        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan');
 
         // Check if the response is valid
         if (!$response->ok()) {
@@ -182,7 +182,7 @@ class HomeController extends Controller
 
     private function fetchProgramPosts()
     {
-        $response = Http::get('https://rumahamal.usk.ac.id/wp-json/wp/v2/posts/?per_page=100&_embed');
+        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts/?per_page=100&_embed');
     
         if (!$response->ok()) {
             abort(500, 'Failed to fetch program posts.');
@@ -225,7 +225,7 @@ class HomeController extends Controller
         // Check if featured_media is set and fetch the media details
         if (isset($post['featured_media']) && is_numeric($post['featured_media'])) {
             $mediaId = $post['featured_media'];
-            $mediaResponse = Http::get("https://rumahamal.usk.ac.id/wp-json/wp/v2/media/{$mediaId}");
+            $mediaResponse = Http::get("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/media/{$mediaId}");
     
             // Log the response for debugging
             Log::info('Media Response: ', ['mediaId' => $mediaId, 'response' => $mediaResponse->json()]);
