@@ -1076,7 +1076,7 @@ section,
         font-size: 24px;
         font-weight: 700;
         position: relative;
-        margin-top: 40px;
+        margin-top: 80px;
     }
 }
 /*--------------------------------------------------------------
@@ -1350,6 +1350,10 @@ section,
 /*--------------------------------------------------------------
 # campaign-unggulan Section
 --------------------------------------------------------------*/
+.campaign-unggulan .section-title h2 {
+    margin-top: 20px;
+}
+
 .campaign-unggulan .campaign-unggulan-filters {
     padding: 0 0 20px 0;
     margin: 0 auto;
@@ -1385,6 +1389,10 @@ section,
     .campaign-unggulan .campaign-unggulan-filters li {
         font-size: 14px;
         margin: 0 5px;
+    }
+
+    .campaign-unggulan .section-title h2 {
+        margin-top: 20px;
     }
 }
 
