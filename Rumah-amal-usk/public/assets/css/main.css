@@ -60,6 +60,10 @@ body {
     font-family: var(--default-font);
 }
 
+h1, h2, h3, h4, h5, h6, p, span, div, li, ul, ol, a {
+    user-select: text;
+}
+
 a {
     color: var(--accent-color);
     text-decoration: none;
