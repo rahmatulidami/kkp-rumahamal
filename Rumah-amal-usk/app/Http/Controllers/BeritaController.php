@@ -145,21 +145,25 @@ class BeritaController extends Controller
     {
         // Decode HTML entities
         $content = htmlspecialchars_decode($content);
-        
+    
         // Strip unwanted HTML tags
         $content = strip_tags($content, '<p><a><b><i><u><strong><em><br>');
-        
-        // Replace &amp; with &
-        $content = str_replace('&amp;', '&', $content);
-        
+    
+        // Replace specific entities
+        $content = str_replace('&', '&amp;', $content);  // Replace & with &amp;
+        $content = str_replace("'", '&#8217;', $content); // Replace ' with &#8217;
+    
         return $content;
     }
-
+    
     private function cleanTitle($title)
     {
-        // Remove patterns like #3huruf; and similar
-        $title = preg_replace('/#\d+huruf;/', '', $title);
-        $title = html_entity_decode($title);
+        // Decode HTML entities
+        $title = html_entity_decode($title, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+        // Replace any remaining encoded apostrophe
+        $title = str_replace("&#8217;", "'", $title);
+
         return trim($title);
     }
 
@@ -170,6 +174,9 @@ class BeritaController extends Controller
     
         if ($response->successful()) {
             $berita = $response->json();
+    
+            // Clean the title
+            $berita['title']['rendered'] = $this->cleanTitle($berita['title']['rendered']);
     
             // Extract images from the post content
             preg_match_all('/<img[^>]+src="([^">]+)"/', $berita['content']['rendered'], $matches);
@@ -192,9 +199,10 @@ class BeritaController extends Controller
                 return !in_array(88, $post['categories'] ?? []);
             });
     
-            // Add image_url to each recent post
+            // Add image_url and clean titles of each recent post
             foreach ($recent_posts as &$post) {
                 $post['image_url'] = $this->extractImageUrl($post['content']['rendered']) ?? asset('assets/img/default.jpeg');
+                $post['title']['rendered'] = $this->cleanTitle($post['title']['rendered']); // Clean the title
             }
     
             // Fetch all tags
@@ -213,6 +221,6 @@ class BeritaController extends Controller
         } else {
             abort(404, 'Berita tidak ditemukan');
         }
-    }    
+    }
     
-}
+}    

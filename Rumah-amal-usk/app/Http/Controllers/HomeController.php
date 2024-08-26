@@ -60,12 +60,12 @@ class HomeController extends Controller
         // Replace category IDs with names and decode HTML entities
         foreach ($latestPengumumanPosts as &$post) {
             $post['categories'] = array_map(fn($id) => $categoryMap[$id] ?? 'Uncategorized', $post['categories'] ?? []);
-            $post['title']['rendered'] = str_replace('&amp;', '&', $post['title']['rendered'] ?? 'Untitled');
+            $post['title']['rendered'] = html_entity_decode($post['title']['rendered'] ?? 'Untitled', ENT_QUOTES, 'UTF-8');
         }
     
         foreach ($latestBeritaPosts as &$post) {
             $post['categories'] = array_map(fn($id) => $categoryMap[$id] ?? 'Uncategorized', $post['categories'] ?? []);
-            $post['title']['rendered'] = str_replace('&amp;', '&', $post['title']['rendered'] ?? 'Untitled');
+            $post['title']['rendered'] = html_entity_decode($post['title']['rendered'] ?? 'Untitled', ENT_QUOTES, 'UTF-8');
         }
     
         // Fetch campaigns and program posts

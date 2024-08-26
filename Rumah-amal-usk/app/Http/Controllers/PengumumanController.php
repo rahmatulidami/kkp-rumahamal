@@ -18,6 +18,9 @@ class PengumumanController extends Controller
         if ($response->successful()) {
             $pengumuman = $response->json();
     
+            // Clean the title
+            $pengumuman['title']['rendered'] = $this->cleanTitle($pengumuman['title']['rendered']);
+    
             // Extract images from the post content
             preg_match_all('/<img[^>]+src="([^">]+)"/', $pengumuman['content']['rendered'], $matches);
             $images = array_unique($matches[1]);
@@ -34,8 +37,9 @@ class PengumumanController extends Controller
             ]);
             $recent_posts = $recent_posts_response->json();
     
-            // Add image_url to each recent post
+            // Clean titles and add image_url to each recent post
             foreach ($recent_posts as &$post) {
+                $post['title']['rendered'] = $this->cleanTitle($post['title']['rendered']);
                 $post['image_url'] = $this->extractImageUrl($post['content']['rendered']) ?? asset('assets/img/default.jpeg');
             }
     
@@ -53,5 +57,19 @@ class PengumumanController extends Controller
     {
         preg_match('/<img[^>]+src="([^">]+)"/', $content, $matches);
         return $matches[1] ?? url('assets/img/default.jpeg');
+    }
+
+    private function cleanTitle($title)
+    {
+        // Decode HTML entities
+        $title = html_entity_decode($title, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+        // Replace any remaining encoded apostrophe
+        $title = str_replace("&#8217;", "'", $title);
+
+        // Replace &amp; with &
+        $title = str_replace("&amp;", "&", $title);
+
+        return trim($title);
     }
 }
