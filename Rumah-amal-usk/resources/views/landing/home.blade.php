@@ -10,30 +10,30 @@
 <section id="hero">
     <div class="hero-slider swiper init-swiper">
         <script type="application/json" class="swiper-config">
-        {
-            "loop": true,
-            "speed": 600,
-            "autoplay": {
-                "delay": 5000
-            },
-            "slidesPerView": 1,
-            "spaceBetween": 0,
-            "navigation": {
-                "nextEl": ".swiper-button-next",
-                "prevEl": ".swiper-button-prev"
-            },
-            "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-            }
-        }
+          {
+              "loop": true,
+              "speed": 600,
+              "autoplay": false,
+              "slidesPerView": 1,
+              "spaceBetween": 0,
+              "navigation": {
+                  "nextEl": ".swiper-button-next",
+                  "prevEl": ".swiper-button-prev"
+              },
+              "pagination": {
+                  "el": ".swiper-pagination",
+                  "type": "bullets",
+                  "clickable": true
+              }
+          }
         </script>
         <div class="swiper-wrapper align-items-center">
             @foreach($latestPosts as $post)
                 <div class="swiper-slide">
                     <div class="image-container">
-                    <a href="{{ route('berita.show', ['id' => $post['id']]) }}"><img src="{{ $post['image_url'] }}" alt="{{ $post['title']['rendered'] ?? 'Post Image' }}" loading="lazy"></a>
+                        <a href="{{ route('berita.show', ['id' => $post['id']]) }}">
+                            <img src="{{ $post['image_url'] }}" alt="{{ $post['title']['rendered'] ?? 'Post Image' }}" loading="lazy">
+                        </a>
                     </div>
                 </div>
             @endforeach
@@ -358,15 +358,15 @@
                 },
                 "breakpoints": {
                     "320": {
-                        "slidesPerView": 4,
+                        "slidesPerView": 6,
                         "spaceBetween": 10 
                     },
                     "480": {
-                        "slidesPerView": 4,
+                        "slidesPerView": 6,
                         "spaceBetween": 20 
                     },
                     "640": {
-                        "slidesPerView": 5,
+                        "slidesPerView": 6,
                         "spaceBetween": 30
                     },
                     "992": {
@@ -377,14 +377,12 @@
             }
             </script>
             <div class="swiper-wrapper align-items-center">
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
-                <div class="swiper-slide"><img src="assets/img/logorumah.png" class="img-fluid" alt="" loading="lazy"></div>
+				        <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/img/clients/RAsalman.png" class="img-fluid" alt="" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/img/clients/hi.png" class="img-fluid" alt="" loading="lazy"></div>
+				        <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy"></div>
+                <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy"></div>
             </div>
         </div>
     </div>

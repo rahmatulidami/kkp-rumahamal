@@ -28,7 +28,7 @@ class HomeController extends Controller
         $categories = $this->fetchCategories();
     
         // Fetch the latest 5 posts for the hero section without any category restrictions
-        $latestHeroPosts = $this->fetchAllPosts(5);
+        $latestHeroPosts = $this->fetchAllPosts(5, true);
     
         // Fetch all posts for filtering into "Berita Terkini" and "Pengumuman"
         $allPosts = $this->fetchAllPosts();
@@ -82,7 +82,7 @@ class HomeController extends Controller
         ]);
     }
     
-    private function fetchAllPosts($limit = null)
+    private function fetchAllPosts($limit = null, $heroOnly = false)
     {
         $params = ['orderby' => 'date', 'order' => 'desc'];
         if ($limit) {
@@ -96,13 +96,13 @@ class HomeController extends Controller
             abort(500, 'Failed to fetch posts.');
         }
     
-        // Filter out posts with category ID 88 (only if not fetching for hero section)
-        if (!$limit) {
+        // Filter posts based on category ID 101 for hero section
+        if ($heroOnly) {
             $posts = array_filter($posts, function ($post) {
-                return !in_array(88, $post['categories'] ?? []);
+                return in_array(101, $post['categories'] ?? []);
             });
         }
-    
+
         return array_map(function ($post) {
             return [
                 'id' => $post['id'] ?? 0,
