@@ -31,7 +31,7 @@
             @foreach($latestPosts as $post)
                 <div class="swiper-slide">
                     <div class="image-container">
-                        <a href="{{ route('berita.show', ['id' => $post['id']]) }}">
+                        <a href="{{ route('berita.show', ['slug' => $post['slug']]) }}">
                             <img src="{{ $post['image_url'] }}" alt="{{ $post['title']['rendered'] ?? 'Post Image' }}" loading="lazy">
                         </a>
                     </div>
@@ -94,10 +94,10 @@
       @foreach ($campaigns as $campaign)
             <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-{{ $campaign['category'] }}">
               <div class="campaign-unggulan-content h-100">
-                <a href="{{ route('campaign.show', ['id' => $campaign['id']]) }}" aria-label="Detail campaign"><img src="{{ $campaign['image'] }}" alt="" loading="lazy"></a>
+                <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}" aria-label="Detail campaign"><img src="{{ $campaign['image'] }}" alt="" loading="lazy"></a>
                 <div class="campaign-unggulan-info">
                 <h3>
-                    <a href="{{ route('campaign.show', ['id' => $campaign['id']]) }}" aria-label="Detail campaign">{{ $campaign['title']['rendered'] }}</a>
+                    <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}" aria-label="Detail campaign">{{ $campaign['title']['rendered'] }}</a>
                 </h3>
                   <div class="progress-container">
                     <div class="Durasi">
@@ -199,7 +199,7 @@
                             {{ end($post['categories']) ?? 'Uncategorized' }}
                         </p>
                         <h2 class="title">
-                            <a href="{{ route('pengumuman.show', ['id' => $post['id']]) }}">{{ $post['title']['rendered'] }}</a>
+                            <a href="{{ route('pengumuman.show', ['slug' => $post['slug']]) }}">{{ $post['title']['rendered'] }}</a>
                         </h2>
                         <div class="d-flex align-items-center">
                             <p class="post-date">
@@ -238,7 +238,7 @@
                         @endif
                         <p class="post-category">{{ implode(', ', $post['categories'] ?? []) }}</p>
                         <h2 class="title">
-                            <a href="{{ route('berita.show', ['id' => $post['id']]) }}">{{ $post['title']['rendered'] }}</a>
+                            <a href="{{ route('berita.show', ['slug' => $post['slug']]) }}">{{ $post['title']['rendered'] }}</a>
                         </h2>
                         <div class="d-flex align-items-center">
                             <p class="post-date">
@@ -258,61 +258,6 @@
         </div>
     </div>
 </section>
-
-<section id="program" class="program section">
-  <div class="container section-title" data-aos="fade-up">
-    <h2>PROGRAM RUMAH AMAL USK</h2>
-    <p>Masjid Jamik Universitas Syiah Kuala</p>
-  </div>
-
-  <div class="container">
-    <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-      <div class="program-filters" data-aos="fade-up" data-aos-delay="100">
-        <select id="filter-select" class="isotope-filters" aria-label="filter">
-          <option value="*" class="filter-active">ALL</option>
-          <option value=".filter-pendidikan">PENDIDIKAN</option>
-          <option value=".filter-pemberdayaan">PEMBERDAYAAN</option>
-          <option value=".filter-sosial">SOSIAL & KEMANUSIAAN</option>
-          <option value=".filter-syiar">SYIAR & QURBAN</option>
-          <option value=".filter-kemitraan">KEMITRAAN</option>
-          <option value=".filter-fasilitator">FASILITATOR & RELAWAN</option>
-        </select>
-      </div>
-
-      <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200" id="program-items">
-        @foreach($programPosts as $post)
-          @php
-            // Extracting category names
-            $categories = array_column($post['categories'], 'name');
-            $filterClass = '';
-
-            // Mapping categories to filter classes
-            if (in_array('Pendidikan', $categories)) $filterClass = 'filter-pendidikan';
-            elseif (in_array('Pemberdayaan', $categories)) $filterClass = 'filter-pemberdayaan';
-            elseif (in_array('Sosial & Kemanusiaan', $categories)) $filterClass = 'filter-sosial';
-            elseif (in_array('Syiar & Qurban', $categories)) $filterClass = 'filter-syiar';
-            elseif (in_array('Kemitraan', $categories)) $filterClass = 'filter-kemitraan';
-            elseif (in_array('Fasilitator & Relawan', $categories)) $filterClass = 'filter-fasilitator';
-
-            // Handling media and URLs safely
-            $imageUrl = isset($post['image_url']) ? $post['image_url'] : url('assets/img/default.jpeg');
-            $postLink = $post['link'] ?? '#';
-            $postTitle = $post['title'] ?? 'Untitled';
-          @endphp
-
-          <div class="col-lg-2-4 col-md-6 program-item isotope-item {{ $filterClass }}">
-            <div class="program-content h-100">
-              <a href="{{ route('pengumuman.show', ['id' => $post['id']]) }}">
-                <img src="{{ $imageUrl }}" class="img-fluid" alt="{{ $postTitle }}" loading="lazy">
-              </a>
-            </div>
-          </div>
-        @endforeach
-      </div>
-    </div>
-  </div>
-</section>
-
 
 <!-- Call To Action Section -->
 <section id="call-to-action" class="call-to-action section dark-background">

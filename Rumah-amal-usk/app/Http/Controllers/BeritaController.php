@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -11,26 +11,32 @@ class BeritaController extends Controller
     // Category ID for Pengumuman
     private $pengumumanCategoryId = 87;
 
+    // Cache time in minutes
+    private $cacheTime = 60;
+
     public function index()
     {
-        // Fetch categories
-        $categories = $this->fetchCategories();
+        // Fetch categories with caching
+        $categories = Cache::remember('categories', $this->cacheTime, function() {
+            return $this->fetchCategories();
+        });
+
         $categoryMap = array_column($categories, 'name', 'id');
-    
-        // Fetch posts
-        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
-            'per_page' => 100,
-        ]);
-    
-        // Decode JSON response into an array
-        $posts = $response->json();
-    
-        // Filter out posts with category ID 88 and the 'Pengumuman' category
+
+        // Fetch posts (cache for 60 minutes)
+        $posts = Cache::remember('posts', $this->cacheTime, function() {
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
+                'per_page' => 100,
+            ]);
+            return $response->json();
+        });
+
+        // Filter out posts with category ID 88 and 'Pengumuman'
         $beritaPosts = array_filter($posts, function ($post) {
-            return !in_array($this->pengumumanCategoryId, $post['categories'] ?? []) 
+            return !in_array($this->pengumumanCategoryId, $post['categories'] ?? [])
                 && !in_array(88, $post['categories'] ?? []);
         });
-    
+
         // Extract image URL and map categories for berita posts
         foreach ($beritaPosts as &$post) {
             $post['image_url'] = $this->extractImageUrl($post['content']['rendered']);
@@ -40,80 +46,66 @@ class BeritaController extends Controller
                 return $categoryMap[$categoryId] ?? 'Uncategorized';
             }, $post['categories'] ?? []);
         }
-    
+
         // Paginate berita posts
         $currentPage = request()->get('page', 1);
         $perPage = 12;
         $offset = ($currentPage - 1) * $perPage;
         $totalPosts = count($beritaPosts);
         $beritaPosts = array_slice($beritaPosts, $offset, $perPage);
-    
+
         $pagination = [
             'current_page' => $currentPage,
             'total_pages' => ceil($totalPosts / $perPage),
         ];
-    
+
         // Send data to the view
         return view('berita.berita', compact('beritaPosts', 'pagination'));
-    }    
+    }
 
     public function pengumuman()
     {
-        // Fetch categories
-        $categories = $this->fetchCategories();
+        // Fetch categories from cache
+        $categories = Cache::remember('categories', $this->cacheTime, function() {
+            return $this->fetchCategories();
+        });
+
         $categoryMap = array_column($categories, 'name', 'id');
 
-        // Fetch posts
-        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
-            'per_page' => 100,
-        ]);
+        // Fetch posts from cache
+        $posts = Cache::remember('posts', $this->cacheTime, function() {
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
+                'per_page' => 100,
+            ]);
+            return $response->json();
+        });
 
-        // Log response status and body for debugging
-        Log::info('API Response Status: ' . $response->status());
-        Log::info('API Response Body: ' . $response->body());
+        // Filter posts for 'Pengumuman' category
+        $pengumumanPosts = array_filter($posts, function ($post) {
+            return in_array($this->pengumumanCategoryId, $post['categories'] ?? []);
+        });
 
-        // Initialize posts array
-        $posts = [];
-
-        // Check if the response is successful and contains data
-        if ($response->successful()) {
-            // Decode JSON response into an array
-            $posts = $response->json();
-
-            // Fetch Pengumuman posts
-            $pengumumanPosts = array_filter($posts, function ($post) {
-                return in_array($this->pengumumanCategoryId, $post['categories'] ?? []);
-            });
-
-            // Extract image URL and map categories for pengumuman posts
-            foreach ($pengumumanPosts as &$post) {
-                $post['image_url'] = $this->extractImageUrl($post['content']['rendered']);
-                $post['content']['rendered'] = $this->sanitizeContent($post['content']['rendered']);
-                $post['title']['rendered'] = $this->cleanTitle($post['title']['rendered']);
-                $post['categories'] = array_map(function($categoryId) use ($categoryMap) {
-                    return $categoryMap[$categoryId] ?? 'Uncategorized';
-                }, $post['categories'] ?? []);
-            }
-
-            // Paginate pengumuman posts
-            $currentPage = request()->get('page', 1);
-            $perPage = 12;
-            $offset = ($currentPage - 1) * $perPage;
-            $totalPosts = count($pengumumanPosts);
-            $pengumumanPosts = array_slice($pengumumanPosts, $offset, $perPage);
-
-            $pagination = [
-                'current_page' => $currentPage,
-                'total_pages' => ceil($totalPosts / $perPage),
-            ];
-        } else {
-            // Log error response
-            Log::error('API Response Error: ' . $response->body());
-
-            // Handle error
-            $pengumumanPosts = [];
-            $pagination = [];
+        // Process posts for displaying
+        foreach ($pengumumanPosts as &$post) {
+            $post['image_url'] = $this->extractImageUrl($post['content']['rendered']);
+            $post['content']['rendered'] = $this->sanitizeContent($post['content']['rendered']);
+            $post['title']['rendered'] = $this->cleanTitle($post['title']['rendered']);
+            $post['categories'] = array_map(function($categoryId) use ($categoryMap) {
+                return $categoryMap[$categoryId] ?? 'Uncategorized';
+            }, $post['categories'] ?? []);
         }
+
+        // Paginate pengumuman posts
+        $currentPage = request()->get('page', 1);
+        $perPage = 12;
+        $offset = ($currentPage - 1) * $perPage;
+        $totalPosts = count($pengumumanPosts);
+        $pengumumanPosts = array_slice($pengumumanPosts, $offset, $perPage);
+
+        $pagination = [
+            'current_page' => $currentPage,
+            'total_pages' => ceil($totalPosts / $perPage),
+        ];
 
         // Send data to the view
         return view('pengumuman.pengumuman', compact('pengumumanPosts', 'pagination'));
@@ -123,16 +115,13 @@ class BeritaController extends Controller
     {
         $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/categories');
         
-        $categories = $response->json();
-        
-        // Map categories to get the necessary fields and decode HTML entities in names
         return array_map(function ($category) {
             return [
                 'id' => $category['id'],
                 'name' => htmlspecialchars_decode($category['name']),
                 'slug' => $category['slug'],
             ];
-        }, $categories);
+        }, $response->json());
     }
 
     private function extractImageUrl($content)
@@ -143,84 +132,68 @@ class BeritaController extends Controller
 
     private function sanitizeContent($content)
     {
-        // Decode HTML entities
         $content = htmlspecialchars_decode($content);
-    
-        // Strip unwanted HTML tags
         $content = strip_tags($content, '<p><a><b><i><u><strong><em><br>');
-    
-        // Replace specific entities
-        $content = str_replace('&', '&amp;', $content);  // Replace & with &amp;
-        $content = str_replace("'", '&#8217;', $content); // Replace ' with &#8217;
-    
-        return $content;
+        return str_replace(['&', "'"], ['&amp;', '&#8217;'], $content);
     }
-    
+
     private function cleanTitle($title)
     {
-        // Decode HTML entities
-        $title = html_entity_decode($title, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-
-        // Replace any remaining encoded apostrophe
-        $title = str_replace("&#8217;", "'", $title);
-
-        return trim($title);
+        return str_replace("&#8217;", "'", html_entity_decode(trim($title), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        // Fetch the post details
-        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts/' . $id);
-    
-        if ($response->successful()) {
-            $berita = $response->json();
-    
-            // Clean the title
-            $berita['title']['rendered'] = $this->cleanTitle($berita['title']['rendered']);
-    
-            // Extract images from the post content
-            preg_match_all('/<img[^>]+src="([^">]+)"/', $berita['content']['rendered'], $matches);
-            $images = array_unique($matches[1]);
-    
-            // Set the main image
-            $mainImage = $images[0] ?? asset('assets/img/default.jpeg');
-    
-            // Remove the main image from the content
-            $filteredContent = str_replace('<img src="' . $mainImage . '"', '', $berita['content']['rendered']);
-    
-            // Fetch recent posts
-            $recent_posts_response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
-                'per_page' => 5,
+        // Fetch the post by slug from the API and cache it
+        $berita = Cache::remember('post_' . $slug, $this->cacheTime, function() use ($slug) {
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
+                'slug' => $slug, // Menggunakan slug untuk mengambil post
             ]);
-            $recent_posts = $recent_posts_response->json();
     
-            // Filter out posts with category ID 88
-            $recent_posts = array_filter($recent_posts, function ($post) {
-                return !in_array(88, $post['categories'] ?? []);
-            });
+            $posts = $response->json();
     
-            // Add image_url and clean titles of each recent post
-            foreach ($recent_posts as &$post) {
-                $post['image_url'] = $this->extractImageUrl($post['content']['rendered']) ?? asset('assets/img/default.jpeg');
-                $post['title']['rendered'] = $this->cleanTitle($post['title']['rendered']); // Clean the title
-            }
+            // Pastikan kita mendapat hasil yang valid, API mengembalikan array posts
+            return !empty($posts) ? $posts[0] : null;
+        });
     
-            // Fetch all tags
-            $tags_response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/tags');
-            $tags = $tags_response->json();
-    
-            // Fetch comments
-            $comments_response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/comments', [
-                'post' => $id,
-            ]);
-            $comments = $comments_response->json();
-    
-            $comment_count = $berita['comment_count'] ?? 0;
-    
-            return view('berita.detail-berita', compact('berita', 'recent_posts', 'tags', 'mainImage', 'filteredContent', 'comment_count', 'comments'));
-        } else {
+        if (!$berita) {
             abort(404, 'Berita tidak ditemukan');
         }
+    
+        // Bersihkan judul dan ekstrak gambar utama
+        $berita['title']['rendered'] = $this->cleanTitle($berita['title']['rendered']);
+        $mainImage = $this->extractImageUrl($berita['content']['rendered']);
+    
+        // Ambil recent posts
+        $recent_posts = Cache::remember('recent_posts', $this->cacheTime, function() {
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', ['per_page' => 5]);
+            $posts = $response->json();
+    
+            return array_filter($posts, function ($post) {
+                return !in_array(88, $post['categories'] ?? []);
+            });
+        });
+    
+        foreach ($recent_posts as &$post) {
+            $post['image_url'] = $this->extractImageUrl($post['content']['rendered']);
+            $post['title']['rendered'] = $this->cleanTitle($post['title']['rendered']);
+        }
+    
+        // Ambil tags
+        $tags = Cache::remember('tags', $this->cacheTime, function() {
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/tags');
+            return $response->json();
+        });
+    
+        // Ambil comments
+        $comments = Cache::remember('comments_' . $berita['id'], $this->cacheTime, function() use ($berita) {
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/comments', ['post' => $berita['id']]);
+            return $response->json();
+        });
+    
+        $comment_count = $berita['comment_count'] ?? 0;
+    
+        return view('berita.detail-berita', compact('berita', 'recent_posts', 'tags', 'mainImage', 'comment_count', 'comments'));
     }
     
-}    
+}

@@ -130,9 +130,9 @@
             @foreach ($relatedCampaigns as $relatedCampaign)
             <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-{{ $campaign['category'] }}">
               <div class="campaign-unggulan-content h-100">
-                <a href="{{ route('campaign.show', ['id' => $campaign['id']]) }}" aria-label="Detail campaign"><img src="{{ $campaign['image'] }}" alt=""></a>
+                <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}" aria-label="Detail campaign"><img src="{{ $campaign['image'] }}" alt=""></a>
                 <div class="campaign-unggulan-info">
-                  <h4><a href="{{ route('campaign.show', ['id' => $campaign['id']]) }}" aria-label="Detail campaign">{{ $campaign['title']['rendered'] }}</a></h4>
+                  <h4><a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}" aria-label="Detail campaign">{{ $campaign['title']['rendered'] }}</a></h4>
                   <div class="progress-container">
                     <div class="Durasi">
                       <div class="sisa-hari">

@@ -33,7 +33,7 @@
                             @endif
                             <p class="post-category">{{ implode(', ', $post['categories']) }}</p>
                             <h2 class="title">
-                            <a href="{{ route('berita.show', ['id' => $post['id']]) }}">{{ $post['title']['rendered'] }}</a>
+                            <a href="{{ route('berita.show', $post['slug']) }}">{{ $post['title']['rendered'] }}</a>
                             </h2>
                             <div class="d-flex align-items-center">
                                 <p class="post-date">

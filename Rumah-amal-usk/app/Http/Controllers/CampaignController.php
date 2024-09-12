@@ -44,11 +44,14 @@ class CampaignController extends Controller
         return view('campaign.campaign', compact('processedCampaigns'));
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        // Fetch data for a single campaign by ID
-        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan/' . $id);
-        $campaign = $response->json();
+        // Fetch all campaigns to find the one with the matching slug
+        $allCampaignsResponse = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan');
+        $allCampaigns = $allCampaignsResponse->json();
+        
+        // Find the campaign with the matching slug
+        $campaign = collect($allCampaigns)->firstWhere('slug', $slug);
 
         if (!$campaign) {
             abort(404, 'Campaign not found');
@@ -62,8 +65,8 @@ class CampaignController extends Controller
         $relatedCampaigns = $relatedCampaignsResponse->json();
 
         // Remove the current campaign from the related campaigns array
-        $relatedCampaigns = array_filter($relatedCampaigns, function($relatedCampaign) use ($id) {
-            return $relatedCampaign['id'] != $id;
+        $relatedCampaigns = array_filter($relatedCampaigns, function($relatedCampaign) use ($slug) {
+            return $relatedCampaign['slug'] != $slug;
         });
 
         // Limit related campaigns to 3

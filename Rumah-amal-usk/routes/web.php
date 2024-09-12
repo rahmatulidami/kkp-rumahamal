@@ -42,7 +42,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
 
-Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
+Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
 
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
@@ -52,7 +52,7 @@ Route::get('/admin', function () {
 
 Route::get('pengumuman', [BeritaController::class, 'pengumuman'])->name('pengumuman');
 
-Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
+Route::get('/pengumuman/{slug}', [PengumumanController::class, 'show'])->name('pengumuman.show');
 
 Route::get('/galeri', [GalleryController::class, 'showGallery']);
 
@@ -60,7 +60,7 @@ Route::get('/dokumen', [DocumentController::class, 'showDocuments']);
 
 Route::get('/campaign', [CampaignController::class, 'index'])->name('campaign.index');
 
-Route::get('/campaign/{id}', [CampaignController::class, 'show'])->name('campaign.show');
+Route::get('/campaign/{slug}', [CampaignController::class, 'show'])->name('campaign.show');
 
 Route::get('/profil', function () {
     return view('profil/profil');
