@@ -44,7 +44,7 @@
         </div>
 
         <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200" id="program-items">
-          <!-- Data will be injected here by JavaScript -->
+            <p>Loading program ...</p>
         </div>
       </div>
     </div>
@@ -56,13 +56,17 @@
 
 <!-- JavaScript -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
   const programContainer = document.getElementById("program-items");
+  const loadingText = document.querySelector("#program-items p"); // Select the loading text element
 
   // Fetch program data from API
   fetch("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/program")
     .then(response => response.json())
     .then(data => {
+      // Remove existing content
+      programContainer.innerHTML = '';
+
       // Render programs
       data.forEach(post => {
         let filterClass = '';
@@ -115,6 +119,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const filterValue = this.value;
         iso.arrange({ filter: filterValue });
       });
+
+      // Hide loading text after data is successfully loaded
+      loadingText.style.display = "none";
     })
     .catch(error => {
       console.error('Error fetching program data:', error);

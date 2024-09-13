@@ -87,9 +87,9 @@ Route::get('/donasi-zakat', function () {
     return view('donation/donasi-zakat');
 });
 
-Route::get('/program', [ProgramController::class, 'index'])->name('program.index');
-
-// routes/web.php
+Route::get('/program', function () {
+    return view('program.program');
+})->name('program.program');
 
 Route::get('/program/{slug}', function () {
     return view('program.show');
