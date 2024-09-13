@@ -1079,6 +1079,19 @@ section,
         margin-top: 80px;
     }
 }
+
+.img-fluid {
+    width: 100%; /* or any specific value */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 800px; /* Ensure images do not stretch beyond this width */
+}
+
+/* If specific dimensions are needed */
+img.fixed-dimension {
+    width: 800px; /* Replace with actual width */
+    height: 600px; /* Replace with actual height */
+}
+
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
@@ -1091,6 +1104,7 @@ section,
     padding-top: 80px;
     height: auto; 
     display: block; 
+    z-index: 10;
 }
 
 /* Container for maintaining 16:9 aspect ratio */
@@ -3833,4 +3847,59 @@ section,
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Styling for the swiper-slide */
+.swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.loading-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ccc;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+/* Animation for the loading placeholder */
+@keyframes pulse {
+    0% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+
+.loading-placeholder::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc;
+    border-top-color: #FFBB0C;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Spinner animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
