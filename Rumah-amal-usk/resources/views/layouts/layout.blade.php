@@ -40,19 +40,19 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="/" class="active">Beranda</a></li>
-                    <li><a href="{{ url('/') }}#about">Profil</a></li>
+                    <li><a href="/profil">Profil</a></li>
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdownmenu"><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="/program" class="dropdownitemm">Program</a></li>
-                            <li><a href="{{ url('/') }}#campaign-unggulan" class="dropdownitemm">Campaign</a></li>
+                            <li><a href="/campaign" class="dropdownitemm">Campaign</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdownmenu"><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="{{ url('/') }}#recent-posts" class="dropdownitemm">Berita</a></li>
-                            <li><a href="{{ url('/') }}#pengumuman" class="dropdownitemm">Pengumuman</a></li>
+                            <li><a href="/berita" class="dropdownitemm">Berita</a></li>
+                            <li><a href="/pengumuman" class="dropdownitemm">Pengumuman</a></li>
                             <li><a href="/dokumen" class="dropdownitemm">Dokumen</a></li>
                         </ul>
                     </li>
