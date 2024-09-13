@@ -36,12 +36,8 @@
         <div class="program-filters" data-aos="fade-up" data-aos-delay="100">
           <select id="filter-select" class="isotope-filters">
             <option value="*" class="filter-active">ALL</option>
-            <option value=".filter-pendidikan">PENDIDIKAN</option>
-            <option value=".filter-pemberdayaan">PEMBERDAYAAN</option>
-            <option value=".filter-sosial">SOSIAL & KEMANUSIAAN</option>
-            <option value=".filter-syiar">SYIAR & QURBAN</option>
-            <option value=".filter-kemitraan">KEMITRAAN</option>
-            <option value=".filter-fasilitator">FASILITATOR & RELAWAN</option>
+            <option value=".filter-infak">INFAK</option>
+            <option value=".filter-zakat">ZAKAT</option>
           </select>
         </div>
 
