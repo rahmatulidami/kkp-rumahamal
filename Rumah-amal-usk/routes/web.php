@@ -9,6 +9,7 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -85,3 +86,11 @@ Route::get('/donasi-infak', function () {
 Route::get('/donasi-zakat', function () {
     return view('donation/donasi-zakat');
 });
+
+Route::get('/program', [ProgramController::class, 'index'])->name('program.index');
+
+// routes/web.php
+
+Route::get('/program/{slug}', function () {
+    return view('program.show');
+})->name('program.show');

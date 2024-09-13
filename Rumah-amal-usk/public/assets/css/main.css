@@ -2535,6 +2535,22 @@ section,
     transform: scale(1.1);
 }
 
+
+ 
+.program-image {
+    max-width: 30%; 
+    height: auto;
+    margin: 0 auto 20px; 
+    display: block;
+    border-radius: 10px; 
+}
+
+
+#program-content {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
 /* Responsive Layout for Smaller Screens */
 @media (min-width: 1200px) {
     .col-lg-2-4 {
@@ -2559,6 +2575,23 @@ section,
         width: 50%; 
     }
 }
+
+/* Program section */
+.program .container {
+    min-height: 400px; /* Atur tinggi minimum agar konten terlihat */
+    margin-bottom: 50px; /* Memberi ruang untuk footer */
+  }
+  
+  .program .program-item {
+    padding: 15px; /* Menambah padding untuk tiap item */
+  }
+  
+  .program img {
+    object-fit: cover; /* Pastikan gambar terpotong secara proporsional */
+    height: 200px; /* Sesuaikan tinggi gambar agar seragam */
+    width: 100%; /* Gambar memenuhi lebar kontainer */
+  }
+  
 
 /*--------------------------------------------------------------
 # Visi Section

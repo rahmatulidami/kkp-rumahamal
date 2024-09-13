@@ -44,7 +44,7 @@
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdownmenu"><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="{{ url('/') }}#program" class="dropdownitemm">Program</a></li>
+                            <li><a href="/program" class="dropdownitemm">Program</a></li>
                             <li><a href="{{ url('/') }}#campaign-unggulan" class="dropdownitemm">Campaign</a></li>
                         </ul>
                     </li>

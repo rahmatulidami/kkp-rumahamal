@@ -86,7 +86,7 @@
                 <div class="post-item">
                   <img src="{{ $recent['image_url'] ?? asset('assets/img/default.jpeg') }}" alt="{{ $recent['title']['rendered'] }}" class="img-fluid recent-post-img">
                   <div>
-                    <h4><a href="{{ route('pengumuman.show', $recent['id']) }}">{{ $recent['title']['rendered'] }}</a></h4>
+                    <h4><a href="{{ route('pengumuman.show', $recent['slug']) }}">{{ $recent['title']['rendered'] }}</a></h4>
                     <time datetime="{{ $recent['date'] }}">{{ \Carbon\Carbon::parse($recent['date'])->format('M d, Y') }}</time>
                   </div>
                 </div><!-- End post item -->
