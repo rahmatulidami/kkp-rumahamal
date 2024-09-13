@@ -56,7 +56,6 @@
 
 <!-- JavaScript -->
 <script>
-    // JavaScript to fetch program data and set correct link
 document.addEventListener("DOMContentLoaded", function () {
   const programContainer = document.getElementById("program-items");
 
@@ -87,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Get slug or ID to form link to internal program detail page
         const postSlug = post.slug || "";  // Use slug to form URL
         const postLink = `/program/${postSlug}`;  // Construct internal link
-        
+
         const postTitle = post.title.rendered || "Untitled";
 
         // Create HTML structure for the program post
@@ -103,6 +102,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Append the program item to the container
         programContainer.innerHTML += programItem;
+      });
+
+      // Initialize Isotope
+      const iso = new Isotope(programContainer, {
+        itemSelector: '.isotope-item',
+        layoutMode: 'masonry'
+      });
+
+      // Filter items on select change
+      document.getElementById('filter-select').addEventListener('change', function() {
+        const filterValue = this.value;
+        iso.arrange({ filter: filterValue });
       });
     })
     .catch(error => {
