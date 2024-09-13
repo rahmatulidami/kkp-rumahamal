@@ -26,14 +26,13 @@ class HomeController extends Controller
     
         // Fetch categories and posts from the API
         $categories = $this->fetchCategories();
-        $latestHeroPosts = $this->fetchAllPosts(5, true);
-        $allPosts = $this->fetchAllPosts();
+        $allPosts = $this->fetchAllPosts(); // Fetch all posts without filtering for hero
     
         // Log the fetched data
         Log::info('All Posts:', $allPosts);
         Log::info('Categories:', $categories);
     
-        if (!is_array($categories) || !is_array($allPosts) || !is_array($latestHeroPosts)) {
+        if (!is_array($categories) || !is_array($allPosts)) {
             abort(500, 'Invalid data received from API.');
         }
     
@@ -56,7 +55,7 @@ class HomeController extends Controller
         usort($pengumumanPosts, fn($a, $b) => strtotime($b['date'] ?? '1970-01-01') - strtotime($a['date'] ?? '1970-01-01'));
         usort($beritaPosts, fn($a, $b) => strtotime($b['date'] ?? '1970-01-01') - strtotime($a['date'] ?? '1970-01-01'));
     
-        // Fetch 6 latest Pengumuman and Berita posts
+        // Fetch 3 latest Pengumuman and Berita posts
         $latestPengumumanPosts = array_slice($pengumumanPosts, 0, 3);
         $latestBeritaPosts = array_slice($beritaPosts, 0, 3);
     
@@ -79,32 +78,18 @@ class HomeController extends Controller
     
         // Return the home view with the latest posts, categories, and campaigns
         return view('landing.home', [
-            'latestPosts' => $latestHeroPosts, // Use this for the hero section
             'latestPengumumanPosts' => $latestPengumumanPosts,
-            'latestBeritaPosts' => $latestBeritaPosts, // Use this for "Berita Terkini"
+            'latestBeritaPosts' => $latestBeritaPosts,
             'campaigns' => $campaigns
         ]);
     }    
 
-    private function fetchAllPosts($limit = null, $heroOnly = false)
+    private function fetchAllPosts()
     {
-        $params = ['orderby' => 'date', 'order' => 'desc'];
-        if ($limit) {
-            $params['per_page'] = $limit;
-        }
-
-        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', $params);
-
+        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', ['orderby' => 'date', 'order' => 'desc']);
         $posts = $response->json();
         if (!is_array($posts)) {
             abort(500, 'Failed to fetch posts.');
-        }
-
-        // Filter posts based on category ID 101 for hero section
-        if ($heroOnly) {
-            $posts = array_filter($posts, function ($post) {
-                return in_array(101, $post['categories'] ?? []);
-            });
         }
 
         return array_map(function ($post) {
@@ -123,14 +108,11 @@ class HomeController extends Controller
     private function fetchCategories()
     {
         $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/categories');
-
-        // Check if response is an array
         $categories = $response->json();
         if (!is_array($categories)) {
             abort(500, 'Failed to fetch categories.');
         }
 
-        // Map categories to get the necessary fields
         return array_map(function ($category) {
             return [
                 'id' => $category['id'] ?? 0,
@@ -143,27 +125,21 @@ class HomeController extends Controller
     private function fetchAndProcessCampaigns()
     {
         $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan');
-
-        // Check if the response is valid
         if (!$response->ok()) {
             abort(500, 'Failed to fetch campaigns.');
         }
 
         $campaigns = $response->json();
-
-        // Check if campaigns is an array
         if (!is_array($campaigns)) {
             abort(500, 'Invalid data format for campaigns.');
         }
 
-        // Process campaigns to extract image URLs and other details
         $processedCampaigns = array_map(function ($campaign) {
             $terkumpul = $campaign['acf']['dana_terkumpul'] ?? 0;
             $dibutuhkan = $campaign['acf']['jumlah_dana'] ?? 1; // Avoid division by zero
             $percentage = ($dibutuhkan > 0) ? ($terkumpul / $dibutuhkan) * 100 : 0;
             $category = strtolower($campaign['type'] ?? 'uncategorized');
 
-            // Extract image URL from content.rendered
             $doc = new DOMDocument();
             libxml_use_internal_errors(true);
             $doc->loadHTML($campaign['content']['rendered']);
@@ -171,7 +147,6 @@ class HomeController extends Controller
             $imgTags = $doc->getElementsByTagName('img');
             $image = $imgTags->length > 0 ? $imgTags->item(0)->getAttribute('src') : '';
 
-            // Add new fields to the campaign array
             $campaign['terkumpul'] = $terkumpul;
             $campaign['dibutuhkan'] = $dibutuhkan;
             $campaign['percentage'] = $percentage;
@@ -181,7 +156,6 @@ class HomeController extends Controller
             return $campaign;
         }, $campaigns);
 
-        // Slice to get the first 6 campaigns
         return array_slice($processedCampaigns, 0, 6);
     }
 

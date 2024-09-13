@@ -28,15 +28,7 @@
           }
         </script>
         <div class="swiper-wrapper align-items-center">
-            @foreach($latestPosts as $post)
-                <div class="swiper-slide">
-                    <div class="image-container">
-                        <a href="{{ route('berita.show', ['slug' => $post['slug']]) }}">
-                            <img src="{{ $post['image_url'] }}" alt="{{ $post['title']['rendered'] ?? 'Post Image' }}" loading="lazy">
-                        </a>
-                    </div>
-                </div>
-            @endforeach
+            <!-- Slides will be dynamically inserted here -->
         </div>
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
@@ -333,6 +325,88 @@
     </div>
 </section>
 <!-- /Clients Section -->
-  </main>
+</main>
 
-  @endsection
+<script>
+
+// Function to fetch carousel data
+async function fetchCarouselData() {
+    try {
+        const response = await fetch('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/carausel?_fields=id,slug,acf');
+        if (!response.ok) {
+            throw new Error('Failed to fetch carousel data.');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+}
+
+// Function to fetch post data by ID
+async function fetchPostData(postId) {
+    try {
+        const response = await fetch(`https://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts/${postId}`);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch post with ID ${postId}.`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+// Function to extract image URL from post content
+function extractImageUrl(content) {
+    const doc = new DOMParser().parseFromString(content, 'text/html');
+    const imgTag = doc.querySelector('img');
+    return imgTag ? imgTag.src : '';
+}
+
+// Function to initialize and populate the carousel
+async function initializeCarousel() {
+    // Fetch carousel data
+    const carouselItems = await fetchCarouselData();
+    
+    // Fetch post data for each carousel item
+    const posts = await Promise.all(carouselItems.map(async (item) => {
+        const postData = await fetchPostData(item.acf.post);
+        return {
+            id: item.id,
+            slug: item.slug,
+            image_url: extractImageUrl(postData?.content.rendered || ''), // Extract image URL from content
+            title: postData?.title.rendered || 'Untitled',
+            link: postData?.link || '',
+            priority: item.acf.priority
+        };
+    }));
+
+    // Sort posts by priority (lowest priority first)
+    posts.sort((a, b) => a.priority - b.priority);
+
+    // Populate the carousel
+    const swiperWrapper = document.querySelector('.swiper-wrapper');
+    swiperWrapper.innerHTML = posts.map(post => `
+        <div class="swiper-slide">
+            <div class="image-container">
+                <a href="${post.link}">
+                    <img src="${post.image_url}" alt="${post.title}" loading="lazy">
+                </a>
+            </div>
+        </div>
+    `).join('');
+
+    // Initialize Swiper
+    const swiperConfig = document.querySelector('.swiper-config').textContent;
+    const swiperOptions = JSON.parse(swiperConfig);
+    new Swiper('.hero-slider', swiperOptions);
+}
+
+// Call the function to initialize the carousel
+document.addEventListener('DOMContentLoaded', initializeCarousel);
+
+
+</script>
+
+@endsection
