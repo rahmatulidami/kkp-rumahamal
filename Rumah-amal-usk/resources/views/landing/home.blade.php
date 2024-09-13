@@ -329,10 +329,13 @@
 
 <script>
 
+// Base URL for the website
+const baseUrl = 'https://rumahamal.usk.ac.id';
+
 // Function to fetch carousel data
 async function fetchCarouselData() {
     try {
-        const response = await fetch('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/carausel?_fields=id,slug,acf');
+        const response = await fetch(`${baseUrl}/api/wp-json/wp/v2/carausel?_fields=id,slug,acf`);
         if (!response.ok) {
             throw new Error('Failed to fetch carousel data.');
         }
@@ -346,7 +349,7 @@ async function fetchCarouselData() {
 // Function to fetch post data by ID
 async function fetchPostData(postId) {
     try {
-        const response = await fetch(`https://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts/${postId}`);
+        const response = await fetch(`${baseUrl}/api/wp-json/wp/v2/posts/${postId}`);
         if (!response.ok) {
             throw new Error(`Failed to fetch post with ID ${postId}.`);
         }
@@ -372,12 +375,14 @@ async function initializeCarousel() {
     // Fetch post data for each carousel item
     const posts = await Promise.all(carouselItems.map(async (item) => {
         const postData = await fetchPostData(item.acf.post);
+        const postSlug = postData?.slug || ''; // Use slug for URL
+        const postLink = postSlug ? `${baseUrl}/pengumuman/${postSlug}` : ''; // Construct link based on slug
         return {
             id: item.id,
             slug: item.slug,
             image_url: extractImageUrl(postData?.content.rendered || ''), // Extract image URL from content
             title: postData?.title.rendered || 'Untitled',
-            link: postData?.link || '',
+            link: postLink,
             priority: item.acf.priority
         };
     }));
@@ -405,7 +410,6 @@ async function initializeCarousel() {
 
 // Call the function to initialize the carousel
 document.addEventListener('DOMContentLoaded', initializeCarousel);
-
 
 </script>
 
