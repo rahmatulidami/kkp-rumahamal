@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
         if (Auth::id()) {
             $usertype = Auth::user()->usertype;
-    
+
             if ($usertype == 'user') {
                 return view('user.dashboard');
             } elseif ($usertype == 'admin') {
@@ -23,70 +23,74 @@ class HomeController extends Controller
                 return view('auth.login');
             }
         }
-    
+
         // Fetch categories and posts from the API
         $categories = $this->fetchCategories();
         $allPosts = $this->fetchAllPosts(); // Fetch all posts without filtering for hero
-    
+
         // Log the fetched data
-        Log::info('All Posts:', $allPosts);
+        Log::info('All Posts Count:', [count($allPosts)]);
         Log::info('Categories:', $categories);
-    
+
         if (!is_array($categories) || !is_array($allPosts)) {
             abort(500, 'Invalid data received from API.');
         }
-    
+
         // Map category IDs to names and decode HTML entities
         $categoryMap = array_column($categories, 'name', 'id');
         $categoryMap = array_map('html_entity_decode', $categoryMap);
-    
-        // Filter and sort posts
+
+        // Filter posts without sorting, just get the first ones in the list
         $pengumumanPosts = array_filter($allPosts, function($post) {
-            return is_array($post) && in_array(87, $post['categories'] ?? []);
+            return is_array($post) && in_array(87, $post['categories'] ?? []); // Filter Pengumuman dengan kategori ID 87
         });
-    
+
         $beritaPosts = array_filter($allPosts, function($post) {
-            return is_array($post) && !in_array(87, $post['categories'] ?? []) && !in_array(88, $post['categories'] ?? []);
+            return is_array($post) && !in_array(87, $post['categories'] ?? []) && !in_array(88, $post['categories'] ?? []); // Filter Berita, eksklusif dari kategori ID 87 dan 88
         });
-    
-        Log::info('Filtered Pengumuman Posts:', $pengumumanPosts);
-        Log::info('Filtered Berita Posts:', $beritaPosts);
-    
-        usort($pengumumanPosts, fn($a, $b) => strtotime($b['date'] ?? '1970-01-01') - strtotime($a['date'] ?? '1970-01-01'));
-        usort($beritaPosts, fn($a, $b) => strtotime($b['date'] ?? '1970-01-01') - strtotime($a['date'] ?? '1970-01-01'));
-    
-        // Fetch 3 latest Pengumuman and Berita posts
-        $latestPengumumanPosts = array_slice($pengumumanPosts, 0, 3);
-        $latestBeritaPosts = array_slice($beritaPosts, 0, 3);
-    
-        Log::info('Sliced Pengumuman Posts:', $latestPengumumanPosts);
-        Log::info('Sliced Berita Posts:', $latestBeritaPosts);
-    
+
+        Log::info('Filtered Pengumuman Count:', [count($pengumumanPosts)]);
+        Log::info('Filtered Berita Count:', [count($beritaPosts)]);
+
+        // Tidak perlu mengurutkan berdasarkan tanggal, ambil langsung 6 berita dan 6 pengumuman pertama
+        $latestPengumumanPosts = array_slice($pengumumanPosts, 0, 6); // Ambil 6 pengumuman pertama
+        $latestBeritaPosts = array_slice($beritaPosts, 0, 6); // Ambil 6 berita pertama
+
+        Log::info('Sliced Pengumuman Posts Count:', [count($latestPengumumanPosts)]);
+        Log::info('Sliced Berita Posts Count:', [count($latestBeritaPosts)]);
+
         // Replace category IDs with names and decode HTML entities
         foreach ($latestPengumumanPosts as &$post) {
             $post['categories'] = array_map(fn($id) => $categoryMap[$id] ?? 'Uncategorized', $post['categories'] ?? []);
             $post['title']['rendered'] = html_entity_decode($post['title']['rendered'] ?? 'Untitled', ENT_QUOTES, 'UTF-8');
         }
-    
+
         foreach ($latestBeritaPosts as &$post) {
             $post['categories'] = array_map(fn($id) => $categoryMap[$id] ?? 'Uncategorized', $post['categories'] ?? []);
             $post['title']['rendered'] = html_entity_decode($post['title']['rendered'] ?? 'Untitled', ENT_QUOTES, 'UTF-8');
         }
-    
+
         // Fetch campaigns
         $campaigns = $this->fetchAndProcessCampaigns();
-    
+
         // Return the home view with the latest posts, categories, and campaigns
         return view('landing.home', [
             'latestPengumumanPosts' => $latestPengumumanPosts,
             'latestBeritaPosts' => $latestBeritaPosts,
             'campaigns' => $campaigns
         ]);
-    }    
+    }
 
+    // Method to fetch all posts from the API
     private function fetchAllPosts()
     {
-        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', ['orderby' => 'date', 'order' => 'desc']);
+        // Adding per_page to ensure fetching enough posts from API
+        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
+            'orderby' => 'date',
+            'order' => 'desc',
+            'per_page' => 20 // Increase per_page to ensure more posts are fetched
+        ]);
+
         $posts = $response->json();
         if (!is_array($posts)) {
             abort(500, 'Failed to fetch posts.');
@@ -105,6 +109,7 @@ class HomeController extends Controller
         }, $posts);
     }
 
+    // Method to fetch categories from the API
     private function fetchCategories()
     {
         $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/categories');
@@ -122,6 +127,7 @@ class HomeController extends Controller
         }, $categories);
     }
 
+    // Method to fetch campaigns and process them
     private function fetchAndProcessCampaigns()
     {
         $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan');
@@ -156,9 +162,10 @@ class HomeController extends Controller
             return $campaign;
         }, $campaigns);
 
-        return array_slice($processedCampaigns, 0, 6);
+        return array_slice($processedCampaigns, 0, 6); // Batasi hasil menjadi 6 campaign
     }
 
+    // Method to extract the image URL from the post content
     private function extractImageUrl($post)
     {
         if (isset($post['content']['rendered']) && is_string($post['content']['rendered'])) {
