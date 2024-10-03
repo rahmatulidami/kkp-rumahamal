@@ -122,38 +122,38 @@
 </section>
 
 
-<!-- Related Campaigns Section -->
-<section id="related-campaigns" class="related-campaigns section">
+<!-- Other Campaigns Section -->
+<section id="other-campaigns" class="other-campaigns section">
     <div class="container">
         <h3>Campaign Lainnya</h3>
         <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-            @foreach ($relatedCampaigns as $relatedCampaign)
-            <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-{{ $campaign['category'] }}">
+            @foreach ($otherCampaigns as $otherCampaign)
+            <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item">
               <div class="campaign-unggulan-content h-100">
-                <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}" aria-label="Detail campaign"><img src="{{ $campaign['image'] }}" alt=""></a>
+                <a href="{{ route('campaign.show', ['slug' => $otherCampaign['slug']]) }}" aria-label="Detail campaign"><img src="{{ $otherCampaign['image'] }}" alt=""></a>
                 <div class="campaign-unggulan-info">
-                  <h4><a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}" aria-label="Detail campaign">{{ $campaign['title']['rendered'] }}</a></h4>
+                  <h4><a href="{{ route('campaign.show', ['slug' => $otherCampaign['slug']]) }}" aria-label="Detail campaign">{{ $otherCampaign['title']['rendered'] }}</a></h4>
                   <div class="progress-container">
                     <div class="Durasi">
                       <div class="sisa-hari">
                         <span>Durasi</span>
-                        <div class="days-left">{{ $campaign['acf']['lama_campaign'] ?? 'N/A' }} hari</div>
+                        <div class="days-left">{{ $otherCampaign['acf']['lama_campaign'] ?? 'N/A' }} hari</div>
                       </div>
                     </div>
 
-                    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="{{ $campaign['percentage'] }}" aria-valuemin="0" aria-valuemax="100" style="--progress-percentage: {{ $campaign['percentage'] }}%;">
+                    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="{{ $otherCampaign['percentage'] }}" aria-valuemin="0" aria-valuemax="100" style="--progress-percentage: {{ $otherCampaign['percentage'] }}%;">
                       <div class="progress-bar" style="width: var(--progress-percentage);"></div>
                     </div>
 
                     <div class="progress-info">
                       <div class="progress-start">
                         <span>Terkumpul</span>
-                        <div class="amount">Rp. {{ number_format($campaign['terkumpul'], 0, ',', '.') }}</div>
+                        <div class="amount">Rp. {{ number_format($otherCampaign['terkumpul'], 0, ',', '.') }}</div>
                       </div>
 
                       <div class="progress-end">
                         <span>Dana dibutuhkan</span>
-                        <div class="jumlah">Rp. {{ number_format($campaign['dibutuhkan'], 0, ',', '.') }}</div>
+                        <div class="jumlah">Rp. {{ number_format($otherCampaign['dibutuhkan'], 0, ',', '.') }}</div>
                       </div>
                     </div>
 

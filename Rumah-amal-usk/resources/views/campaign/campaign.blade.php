@@ -44,7 +44,7 @@
         <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
           @foreach ($processedCampaigns as $campaign)
-            <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-{{ $campaign['category'] }}">
+            <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item">
               <div class="campaign-unggulan-content h-100">
               <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}""><img src="{{ $campaign['image'] }}" alt=""></a>
                 <div class="campaign-unggulan-info">

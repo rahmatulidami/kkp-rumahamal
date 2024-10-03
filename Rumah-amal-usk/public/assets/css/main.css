@@ -3422,11 +3422,11 @@ img.fixed-dimension {
 }
 
 
-.related-campaigns h3 {
+.other-campaigns h3 {
     font-weight: 700;
 }
 
-.related-campaigns .campaign-unggulan-content {
+.other-campaigns .campaign-unggulan-content {
     background-color: var(--surface-color);
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
     height: 100%;
@@ -3434,7 +3434,7 @@ img.fixed-dimension {
     overflow: hidden;
 }
 
-.related-campaigns .campaign-unggulan-content img {
+.other-campaigns .campaign-unggulan-content img {
     transition: 0.3s;
     position: relative;
     z-index: 1;
@@ -3444,7 +3444,7 @@ img.fixed-dimension {
     object-fit: cover;
 }
 
-.related-campaigns .campaign-unggulan-content .campaign-unggulan-info {
+.other-campaigns .campaign-unggulan-content .campaign-unggulan-info {
     background-color: var(--background-color);
     border-top: 1px solid
         color-mix(in srgb, var(--default-color), transparent 90%);
@@ -3453,7 +3453,7 @@ img.fixed-dimension {
     z-index: 2;
 }
 
-.related-campaigns .campaign-unggulan-content .campaign-unggulan-info .btn-btn-primary{
+.other-campaigns .campaign-unggulan-content .campaign-unggulan-info .btn-btn-primary{
     color: #f2f9f9;
     background: #1D7E05;
     font-family: var(--heading-font);
@@ -3469,26 +3469,26 @@ img.fixed-dimension {
     transition: 0.3s;
 }
 
-.related-campaigns .campaign-unggulan-content .campaign-unggulan-info .btn-btn-primary:hover {
+.other-campaigns .campaign-unggulan-content .campaign-unggulan-info .btn-btn-primary:hover {
     background: #FFBB0C;
 }
 
-.related-campaigns .campaign-unggulan-content .campaign-unggulan-info h4 {
+.other-campaigns .campaign-unggulan-content .campaign-unggulan-info h4 {
     font-size: 18px;
     font-weight: 600;
     padding-right: 50px;
 }
 
-.related-campaigns .campaign-unggulan-content .campaign-unggulan-info h4 a {
+.other-campaigns .campaign-unggulan-content .campaign-unggulan-info h4 a {
     color: var(--heading-color);
     transition: 0.3s;
 }
 
-.related-campaigns .campaign-unggulan-content .campaign-unggulan-info h4 a:hover {
+.other-campaigns .campaign-unggulan-content .campaign-unggulan-info h4 a:hover {
     color: var(--accent-color);
 }
 
-.related-campaigns .campaign-unggulan-content .campaign-unggulan-info p {
+.other-campaigns .campaign-unggulan-content .campaign-unggulan-info p {
     color: color-mix(in srgb, var(--default-color), transparent 30%);
     font-size: 14px;
     margin-bottom: 0;
@@ -3578,7 +3578,7 @@ img.fixed-dimension {
 }
 
 @media (max-width: 768px) {
-    .related-campaigns .campaign-item .campaign-info h4 {
+    .other-campaigns .campaign-item .campaign-info h4 {
         font-size: 16px;
     }
 }
