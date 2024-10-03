@@ -61,9 +61,9 @@
         </div>
         <div class="col-xl-4 col-md-6">
           <div class="icon-box">
-            <h4 class="title"><a href="#program" class="stretched-link">Program</a></h4>
+            <h4 class="title"><a href="/program" class="stretched-link">Program</a></h4>
             <p>Rumah amal masjid jamik USK menyediakan beberapa program donasi.</p>
-            <a class="btn-btn-primary" href="#program" role="button">Program</a>
+            <a class="btn-btn-primary" href="/program" role="button">Program</a>
           </div>
         </div>
       </div>
