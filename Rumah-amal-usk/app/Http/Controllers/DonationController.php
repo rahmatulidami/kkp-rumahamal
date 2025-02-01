@@ -3,16 +3,51 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use App\Models\Donation;
 use Xendit\Configuration;
 use Xendit\Invoice\InvoiceApi;
 use Xendit\Invoice\CreateInvoiceRequest;
+use DOMDocument;
 
 class DonationController extends Controller
 {
     public function index()
     {
         return view('donation/donate');
+    }
+
+    public function show($slug)
+    {
+        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan');
+        $campaigns = $response->json();
+
+        // Find the campaign with the matching slug
+        $campaign = collect($campaigns)->firstWhere('slug', $slug);
+
+        if (!$campaign) {
+            abort(404, 'Campaign not found');
+        }
+
+        $doc = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $doc->loadHTML($campaign['content']['rendered']);
+        libxml_clear_errors();
+
+        // Extract image URL from content.rendered
+        $imgTags = $doc->getElementsByTagName('img');
+        $image = $imgTags->length > 0 ? $imgTags->item(0)->getAttribute('src') : asset('path/to/default-image.jpg');
+
+        // Remove all image tags from the content
+        $xpath = new \DOMXPath($doc);
+        foreach ($xpath->query('//img') as $img) {
+            $img->parentNode->removeChild($img);
+        }
+        $contentWithoutImages = $doc->saveHTML();
+
+        $campaign['image'] = $image;
+
+        return view('donation.show', compact('campaign'));
     }
 
     public function store(Request $request)

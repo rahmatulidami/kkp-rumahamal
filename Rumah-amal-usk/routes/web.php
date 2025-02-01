@@ -26,6 +26,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/donate', [DonationController::class, 'index']);
 Route::post('/donate', [DonationController::class, 'store']);
+// Route::get('/donate/{id}', [DonationController::class, 'show'])->name('donate.show');
+Route::get('/donate/{slug}', [DonationController::class, 'show'])->name('donate.show');
 
 Route::get('/success', function () {
     return view('donation/success');

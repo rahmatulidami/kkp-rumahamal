@@ -40,7 +40,7 @@
 </section>
 <!-- End Hero Section -->
 
-<!-- icon zakat/infak Section -->  
+<!-- icon zakat/infak Section -->
 <section id="icon-boxed" class="icon-boxes section">
   <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
     <div class="container position-relative">
@@ -120,7 +120,7 @@
                     </div>
 
                   </div>
-                  <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
+                  <a class="btn-btn-primary" href="{{ route('donate.show', ['slug' => $campaign['slug']]) }}" role="button">DONASI</a>
                 </div>
               </div>
             </div><!-- End campaign-unggulan Item -->
@@ -277,7 +277,7 @@
 
 <!-- Clients Section -->
      <!-- Section Title -->
-     
+
      <section id="clients" class="clients section">
     <div class="container section-title" data-aos="fade-up">
         <h2>MITRA RUMAH AMAL USK</h2>
@@ -300,11 +300,11 @@
                 "breakpoints": {
                     "320": {
                         "slidesPerView": 6,
-                        "spaceBetween": 10 
+                        "spaceBetween": 10
                     },
                     "480": {
                         "slidesPerView": 6,
-                        "spaceBetween": 20 
+                        "spaceBetween": 20
                     },
                     "640": {
                         "slidesPerView": 6,
@@ -374,7 +374,7 @@
     async function initializeCarousel() {
         // Fetch carousel data
         const carouselItems = await fetchCarouselData();
-        
+
         // Fetch post data for each carousel item
         const posts = await Promise.all(carouselItems.map(async (item) => {
             const postData = await fetchPostData(item.acf.post);

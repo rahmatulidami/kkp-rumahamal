@@ -5,11 +5,16 @@
 @section('content')
 <section>
 <div class="container mt-5 pt-5" style="user-select: none;">
+    <div class="d-flex justify-content-start p-0 rounded mb-4">
+        <img class="w-25 rounded-start border" src="{{ $campaign['image'] }}" alt="{{ $campaign['title']['rendered'] }}">
+        <div class="d-flex flex-column justify-content-center text-center mx-auto border rounded-end w-100">
+            <label class="h1 h2-sm h3-md h4-lg">{{ $campaign['title']['rendered'] }}</label>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12 col-lg-6 col-md-6 mb-3 poppins-regular">
             <div class="card p-4 shadow-sm">
                 <h3 class="mb-3">Pembayaran</h3>
-                {{-- <p>Infaq</p> --}}
                 <form id="donationForm" method="POST" action="/donate">
                     @csrf
                     <input type="hidden" id="selected_payment_method" name="payment_method">
