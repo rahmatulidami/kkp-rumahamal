@@ -2,6 +2,18 @@
 
 @section('title', 'Detail-Campaign | Rumah Amal USK')
 
+@section('meta')
+    <!-- Meta tags -->
+    <meta name="description" content="{{ Str::limit(strip_tags($campaign['content']['rendered']), 150) }}">
+    <meta name="keywords" content="Rumah Amal, Berita, USK, Charity, News">
+    <meta property="og:title" content="{{ $campaign['title']['rendered'] }}" />
+    <meta property="og:description" content="{{ Str::limit(strip_tags($campaign['content']['rendered']), 150) }}" />
+    <meta property="og:image" content="{{ $image }}" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta name="twitter:card" content="summary_large_image">
+@endsection
+
+
 @section('content')
 
 <main class="main">

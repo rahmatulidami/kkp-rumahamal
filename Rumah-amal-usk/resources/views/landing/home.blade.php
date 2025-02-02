@@ -261,9 +261,9 @@
     <div class="content row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
         <div class="row d-flex flex-wrap">
           <div class="col-md-8 text-center p-2">
-            <div class="video-container">
-              <iframe id="youtube-video" src="https://www.youtube.com/embed/C1Asqu3uHxs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Youtube RA USK"></iframe>
-            </div>
+          <div class="video-container">
+              <iframe id="youtube-video" src="https://www.youtube.com/embed/jPpcdsT2kF4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Youtube RA USK"></iframe>
+          </div>
           </div>
           <div class="col-md-4 text-center p-2">
             <div class="instagram-container">

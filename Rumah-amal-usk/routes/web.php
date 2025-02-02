@@ -9,7 +9,6 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
 
 /*

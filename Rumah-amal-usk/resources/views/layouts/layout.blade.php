@@ -2,11 +2,9 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  @yield('meta')
+
   <title>@yield('title')</title>
-  <meta content="Author: Rahmatul dan Ridho, website rumah amal usk" name="description">
-  <meta content="" name="keywords">
 
   <!-- Favicons -->
   <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
@@ -25,7 +23,7 @@
   <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
 </head>
 

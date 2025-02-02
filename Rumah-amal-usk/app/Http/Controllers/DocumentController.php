@@ -36,30 +36,43 @@ class DocumentController extends Controller
                 $documentNames = [];
 
                 foreach ($headings as $heading) {
-                    $documentNames[] = trim($heading->nodeValue);
-                }
+                    // Decode HTML entities and trim the string
+                    $cleanedHeading = html_entity_decode(trim($heading->nodeValue), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    
+                    // Replace unwanted characters
+                    $cleanedHeading = str_replace(['â', '�'], '-', $cleanedHeading);
+                
+                    // Remove non-ASCII characters (e.g., boxes, invalid symbols)
+                    $cleanedHeading = preg_replace('/[^\x20-\x7E]/', '', $cleanedHeading);
+                
+                    // Add the cleaned name to the array
+                    $documentNames[] = $cleanedHeading;
+                }                
 
                 $documentIndex = 0;
 
                 foreach ($links as $link) {
-                    $downloadUrl = $link->getAttribute('data-downloadurl');
+                    // Ensure $link is a DOMElement and check if the attribute exists
+                    if ($link instanceof \DOMElement && $link->hasAttribute('data-downloadurl')) {
+                        $downloadUrl = $link->getAttribute('data-downloadurl');
 
-                    if ($downloadUrl) {
-                        $foundDocuments = true;
-                        $fileType = pathinfo($downloadUrl, PATHINFO_EXTENSION);
+                        if ($downloadUrl) {
+                            $foundDocuments = true;
+                            $fileType = pathinfo($downloadUrl, PATHINFO_EXTENSION);
 
-                        // Set the icon URL based on the file type
-                        $iconUrl = "https://rumahamal.usk.ac.id/api/wp-content/plugins/download-manager/assets/file-type-icons/{$fileType}.svg";
+                            // Set the icon URL based on the file type
+                            $iconUrl = "https://rumahamal.usk.ac.id/api/wp-content/plugins/download-manager/assets/file-type-icons/{$fileType}.svg";
 
-                        // Append the document data to the list, including the name from h3
-                        $documents[] = [
-                            'name' => $documentNames[$documentIndex] ?? 'Unknown', // Use 'Unknown' if no name is found
-                            'type' => $fileType,
-                            'icon' => $iconUrl,
-                            'download' => $downloadUrl,
-                        ];
+                            // Append the document data to the list, including the name from h3
+                            $documents[] = [
+                                'name' => $documentNames[$documentIndex] ?? 'Unknown', // Use 'Unknown' if no name is found
+                                'type' => $fileType,
+                                'icon' => $iconUrl,
+                                'download' => $downloadUrl,
+                            ];
 
-                        $documentIndex++;
+                            $documentIndex++;
+                        }
                     }
                 }
 

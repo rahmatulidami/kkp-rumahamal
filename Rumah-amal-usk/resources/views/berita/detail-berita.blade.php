@@ -2,6 +2,17 @@
 
 @section('title', 'Detail Berita | Rumah Amal USK')
 
+@section('meta')
+    <!-- Meta tags -->
+    <meta property="og:title" content="{{ $berita['title']['rendered'] }}" />
+    <meta property="og:description" content="{{ Str::limit(strip_tags($berita['content']['rendered']), 150) }}" />
+    <meta property="og:image" content="{{ $mainImage }}" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:type" content="article" />
+    <meta name="twitter:card" content="summary_large_image">
+
+@endsection
+
 @section('content')
 
 <main class="main">
