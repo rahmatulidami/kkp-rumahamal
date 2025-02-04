@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class PengumumanController extends Controller
 {
-    private $apiBaseUrl = 'http://rumahamal.usk.ac.id/api/wp-json/wp/v2';
+    private $apiBaseUrl = 'http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2';
     private $pengumumanCategoryId = 87; // Category ID for Pengumuman
 
     public function show($slug)
@@ -44,7 +44,7 @@ class PengumumanController extends Controller
             'per_page' => 5,
         ]);
         $recent_posts = $response->json();
-        
+
         foreach ($recent_posts as &$post) {
             $post['title']['rendered'] = $this->cleanTitle($post['title']['rendered']);
             $post['image_url'] = $this->extractImageUrl($post['content']['rendered']) ?? asset('assets/img/default.jpeg');

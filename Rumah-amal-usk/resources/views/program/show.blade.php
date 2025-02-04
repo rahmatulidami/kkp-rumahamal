@@ -60,7 +60,7 @@
     const slug = urlPath.split('/').pop();
 
     // Fetch program details based on the slug
-    fetch(`https://rumahamal.usk.ac.id/api/wp-json/wp/v2/program?slug=${slug}`)
+    fetch(`https://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/program?slug=${slug}`)
       .then(response => response.json())
       .then(data => {
         if (data.length > 0) {

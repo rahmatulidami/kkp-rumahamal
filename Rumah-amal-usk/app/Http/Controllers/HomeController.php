@@ -85,7 +85,7 @@ class HomeController extends Controller
     private function fetchAllPosts()
     {
         // Adding per_page to ensure fetching enough posts from API
-        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
+        $response = Http::get('http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/posts', [
             'orderby' => 'date',
             'order' => 'desc',
             'per_page' => 20 // Increase per_page to ensure more posts are fetched
@@ -112,7 +112,7 @@ class HomeController extends Controller
     // Method to fetch categories from the API
     private function fetchCategories()
     {
-        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/categories');
+        $response = Http::get('http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/categories');
         $categories = $response->json();
         if (!is_array($categories)) {
             abort(500, 'Failed to fetch categories.');
@@ -130,7 +130,7 @@ class HomeController extends Controller
     // Method to fetch campaigns and process them
     private function fetchAndProcessCampaigns()
     {
-        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan');
+        $response = Http::get('https://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/campaign_unggulan');
         if (!$response->ok()) {
             abort(500, 'Failed to fetch campaigns.');
         }

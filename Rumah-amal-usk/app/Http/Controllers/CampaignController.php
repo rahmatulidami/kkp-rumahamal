@@ -12,7 +12,7 @@ class CampaignController extends Controller
     public function index()
     {
         // Fetch data from the API
-        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan');
+        $response = Http::get('https://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/campaign_unggulan');
         $campaigns = $response->json();
 
         // Process campaigns to extract image URLs
@@ -47,7 +47,7 @@ class CampaignController extends Controller
     public function show($slug)
     {
         // Fetch all campaigns from the API
-        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan');
+        $response = Http::get('https://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/campaign_unggulan');
         $campaigns = $response->json();
 
         // Find the campaign with the matching slug
