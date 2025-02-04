@@ -28,7 +28,7 @@
         <div class="container">
             <ol>
                 <li><a href="/">Home</a></li>
-                <li><a href="/campaign">Campaign</a></li>
+                <li><a href="/campaign">Kampanye</a></li>
                 <li class="current">{{ $campaign['title']['rendered'] }}</li>
             </ol>
         </div>
@@ -99,7 +99,7 @@
 <!-- Detail Section -->
 <section class="detail" id="detail-section">
     <div class="container">
-        <h3 class="detail-title">Detail Campaign</h3>
+        <h3 class="detail-title">Detail Kampanye</h3>
         <p class="detail-description">
             {!! $campaign['content']['rendered'] !!}
         </p>

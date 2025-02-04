@@ -37,24 +37,24 @@
             </a>
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="/" class="active">Beranda</a></li>
-                    <li><a href="/profil">Profil</a></li>
+                    <li><a href="/" class="{{ Request::is('/') ? 'active' : '' }}">Beranda</a></li>
+                    <li><a href="/profil" class="{{ Request::is('profil') ? 'active' : '' }}">Profil</a></li>
                     <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropdownmenu"><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <a href="javascript:void(0)" class="dropdownmenu {{ Request::is('program') || Request::is('campaign') ? 'active' : '' }}"><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="/program" class="dropdownitemm">Program</a></li>
-                            <li><a href="/campaign" class="dropdownitemm">Campaign</a></li>
+                            <li><a href="/program" id="dropdownitemm" class="{{ Request::is('program') ? 'active' : '' }}">Program</a></li>
+                            <li><a href="/campaign" id="dropdownitemm" class="{{ Request::is('campaign') ? 'active' : '' }}">Kampanye</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropdownmenu"><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <a href="javascript:void(0)" class="dropdownmenu {{ Request::is('berita') || Request::is('pengumuman') || Request::is('dokumen') ? 'active' : '' }}"><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="/berita" class="dropdownitemm">Berita</a></li>
-                            <li><a href="/pengumuman" class="dropdownitemm">Pengumuman</a></li>
-                            <li><a href="/dokumen" class="dropdownitemm">Dokumen</a></li>
+                            <li><a href="/berita" id="dropdownitemm" class="{{ Request::is('berita') ? 'active' : '' }}">Berita</a></li>
+                            <li><a href="/pengumuman" id="dropdownitemm" class="{{ Request::is('pengumuman') ? 'active' : '' }}">Pengumuman</a></li>
+                            <li><a href="/dokumen" id="dropdownitemm" class="{{ Request::is('dokumen') ? 'active' : '' }}">Dokumen</a></li>
                         </ul>
                     </li>
-                    <li><a href="/galeri">Galeri</a></li>
+                    <li><a href="/galeri" class="{{ Request::is('galeri') ? 'active' : '' }}">Galeri</a></li>
                     <li class="language-switcher">
                         <a href="javascript:void(0)" class="language-link">
                             <img src="{{ asset('assets/img/flag-ID.png') }}" alt="Indonesian Flag" class="flag-icon">

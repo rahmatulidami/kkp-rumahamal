@@ -12,7 +12,7 @@
       <div class="container">
         <div class="row d-flex justify-content-center text-center">
           <div class="col-lg-8">
-            <h1>CAMPAIGN</h1>
+            <h1>KAMPANYE</h1>
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@
       <div class="container">
         <ol>
           <li><a href="/">Home</a></li>
-          <li class="current">Campaign</li>
+          <li class="current">Kampanye</li>
         </ol>
       </div>
     </nav>

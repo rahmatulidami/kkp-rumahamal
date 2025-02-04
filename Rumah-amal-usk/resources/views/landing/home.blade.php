@@ -78,7 +78,7 @@
 
   <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
-    <h2>CAMPAIGN UNGGULAN</h2>
+    <h2>KAMPANYE UNGGULAN</h2>
   </div><!-- End Section Title -->
 
   <div class="container">
@@ -200,7 +200,7 @@
                         <div class="d-flex align-items-center">
                             <p class="post-date">
                                 @if(isset($post['date']))
-                                    <time datetime="{{ $post['date'] }}">{{ \Carbon\Carbon::parse($post['date'])->format('M d, Y') }}</time>
+                                    <time datetime="{{ $post['date'] }}">{{ \Carbon\Carbon::parse($post['date'])->translatedFormat('d F Y') }}</time>
                                 @else
                                     <span>No Date</span>
                                 @endif
@@ -239,7 +239,7 @@
                         <div class="d-flex align-items-center">
                             <p class="post-date">
                                 @if(isset($post['date']))
-                                    <time datetime="{{ $post['date'] }}">{{ \Carbon\Carbon::parse($post['date'])->format('M d, Y') }}</time>
+                                    <time datetime="{{ $post['date'] }}">{{ \Carbon\Carbon::parse($post['date'])->translatedFormat('d F Y') }}</time>
                                 @else
                                     <span>No Date</span>
                                 @endif

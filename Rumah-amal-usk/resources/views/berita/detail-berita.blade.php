@@ -87,7 +87,7 @@
                   <div class="comment-img"><img src="{{ asset('storage/' . $comment['user_image']) }}" alt=""></div>
                   <div>
                     <h5><a href="#">{{ $comment['user_name'] }}</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                    <time datetime="{{ $comment['created_at'] }}">{{ \Carbon\Carbon::parse($comment['created_at'])->format('M d, Y') }}</time>
+                    <time datetime="{{ $comment['created_at'] }}">{{ \Carbon\Carbon::parse($comment['created_at'])->translatedFormat('d F Y') }}</time>
                     <p>{{ $comment['content'] }}</p>
                   </div>
                 </div>
@@ -156,7 +156,7 @@
                   <img src="{{ $recent['image_url'] ?? asset('assets/img/default.jpeg') }}" alt="{{ $recent['title']['rendered'] }}" class="img-fluid recent-post-img">
                   <div>
                     <h4><a href="{{ route('berita.show', $recent['slug']) }}">{{ $recent['title']['rendered'] }}</a></h4>
-                    <time datetime="{{ $recent['date'] }}">{{ \Carbon\Carbon::parse($recent['date'])->format('M d, Y') }}</time>
+                    <time datetime="{{ $recent['date'] }}">{{ \Carbon\Carbon::parse($recent['date'])->translatedFormat('d F Y') }}</time>
                   </div>
                 </div><!-- End post item -->
               @endforeach

@@ -39,7 +39,7 @@
                             </h2>
                             <div class="d-flex align-items-center">
                                 <p class="post-date">
-                                    <time datetime="{{ $post['date'] }}">{{ \Carbon\Carbon::parse($post['date'])->format('M d, Y') }}</time>
+                                    <time datetime="{{ $post['date'] }}">{{ \Carbon\Carbon::parse($post['date'])->translatedFormat('d F Y') }}</time>
                                 </p>
                             </div>
                         </article>

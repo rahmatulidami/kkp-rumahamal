@@ -419,8 +419,8 @@ h6 {
         font-size: 12px;
       }
 
-      .navmenu .navmenu .dropdown-active .dropdownitemm.active,
-      .navmenu .dropdownitemm.active  {
+      .navmenu .navmenu .dropdown-active #dropdownitemm.active,
+      .navmenu #dropdownitemm.active  {
           background-color: #1D7E05;
           color: #FFF;
       }
@@ -626,8 +626,8 @@ h6 {
         background-color: rgba(33, 37, 41, 0.03);
     }
 
-    .navmenu .navmenu .dropdown-active .dropdownitemm.active,
-    .navmenu .dropdownitemm.active  {
+    .navmenu .navmenu .dropdown-active #dropdownitemm.active,
+    .navmenu #dropdownitemm.active  {
         background-color: #1D7E05;
         color: #fff;
     }
@@ -1459,7 +1459,7 @@ img.fixed-dimension {
 
 .campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h3 {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h3 a {
@@ -2435,21 +2435,35 @@ img.fixed-dimension {
 }
 
 .recent-post-img {
-    width: 80px; 
-    height: 60px; 
+    width: 85px; 
+    height: 65px; 
     object-fit: cover; 
     margin-right: 10px; 
     border-radius: 10px;
 }
 
 .recent-posts-widget .post-item h4 {
-    font-size: 15px;
-    font-weight: bold;
+    font-size: 17px;
+    font-weight: 400;
     margin-bottom: 5px;
+    line-height: 1.0;
+    max-height: 3.6em; /* 1.2em (line-height) * 3 baris */
+    overflow: hidden;
+    display: -webkit-box; /* Wajib untuk -webkit-line-clamp */
+    -webkit-line-clamp: 3; /* Batasi 3 baris */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
 }
 
+.recent-posts-widget .post-item h4:hover {
+    color: var(--accent-color);
+}
+
+
 .recent-posts-widget .post-item h4 a {
-    font-size: 9px;
+    font-size: 12px;
+    font-weight: bold;
     color: var(--default-color);
     transition: 0.3s;
 }
