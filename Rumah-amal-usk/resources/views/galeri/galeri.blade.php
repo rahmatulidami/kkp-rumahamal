@@ -23,7 +23,7 @@
       <!-- Gallery -->
         <div class="row">
             @foreach ($images as $image)
-                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                <div class="col-lg-3 col-md-4 mb-4 mb-lg-0">
                     <div class="image-container">
                         <a href="{{ $image['href'] }}" class="gallery-link">
                             <img
