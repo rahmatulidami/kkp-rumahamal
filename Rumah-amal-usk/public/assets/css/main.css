@@ -3769,8 +3769,9 @@ img.fixed-dimension {
 }
 
 .galeri .gallery-image {
-    width: 100%;
-    height: auto;
+    width: 200px;
+    height: 170px;
+    object-fit: cover;
 }
 
 .popup-modal {
