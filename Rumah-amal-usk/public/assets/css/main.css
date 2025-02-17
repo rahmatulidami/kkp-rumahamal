@@ -3921,3 +3921,43 @@ img.fixed-dimension {
         transform: rotate(360deg);
     }
 }
+
+
+/*--------------------------------------------------------------
+# gallery-pagination Section
+--------------------------------------------------------------*/
+.gallery-pagination {
+    padding-top: 0;
+    color: color-mix(in srgb, var(--default-color), transparent 40%);
+}
+
+.gallery-pagination ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.gallery-pagination li {
+    margin: 0 5px;
+    transition: 0.3s;
+}
+
+.gallery-pagination li a {
+    color: color-mix(in srgb, var(--default-color), transparent 40%);
+    padding: 7px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-pagination li a.active,
+.gallery-pagination li a:hover {
+    background: var(--accent-color);
+    color: var(--contrast-color);
+}
+
+.gallery-pagination li a.active a,
+.gallery-pagination li a:hover a {
+    color: var(--contrast-color);
+}

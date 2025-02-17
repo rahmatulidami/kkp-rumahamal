@@ -7,7 +7,8 @@
   <title>@yield('title')</title>
 
   <!-- Favicons -->
-  <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+  <!-- <link href="{{ asset('assets/img/favicon.png') }}" rel="icon"> -->
+  <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
   <link href="{{ asset('assets/img/favicon.png') }}" rel="apple-touch-icon">
 
   <!-- Fonts -->
@@ -54,7 +55,7 @@
                             <li><a href="/dokumen" id="dropdownitemm" class="{{ Request::is('dokumen') ? 'active' : '' }}">Dokumen</a></li>
                         </ul>
                     </li>
-                    <li><a href="/galeri" class="{{ Request::is('galeri') ? 'active' : '' }}">Galeri</a></li>
+                    <li><a href="/dokumentasi" class="{{ Request::is('galeri') ? 'active' : '' }}">Galeri</a></li>
                     <li class="language-switcher">
                         <a href="javascript:void(0)" class="language-link">
                             <img src="{{ asset('assets/img/flag-ID.png') }}" alt="Indonesian Flag" class="flag-icon">

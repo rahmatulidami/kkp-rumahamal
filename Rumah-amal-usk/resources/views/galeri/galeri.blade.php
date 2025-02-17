@@ -43,6 +43,28 @@
     </div>
   </section> <!-- End Section -->
 
+
+    <!-- Pagination -->
+    <section id="gallery-pagination" class="gallery-pagination section">
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <ul>
+                @if($pagination['current_page'] > 1)
+                    <li><a href="{{ url('dokumentasi?page=' . ($pagination['current_page'] - 1)) }}"><i class="bi bi-chevron-left"></i></a></li>
+                @endif
+
+                @for($i = 1; $i <= $pagination['total_pages']; $i++)
+                    <li><a href="{{ url('dokumentasi?page=' . $i) }}" class="{{ $pagination['current_page'] == $i ? 'active' : '' }}">{{ $i }}</a></li>
+                @endfor
+
+                @if($pagination['current_page'] < $pagination['total_pages'])
+                    <li><a href="{{ url('dokumentasi?page=' . ($pagination['current_page'] + 1)) }}"><i class="bi bi-chevron-right"></i></a></li>
+                @endif
+            </ul>
+        </div>
+    </div>
+  </section><!-- /Pagination -->
+
   <!-- Popup Modal -->
   <div id="popup-modal" class="popup-modal">
     <div class="popup-modal-content">

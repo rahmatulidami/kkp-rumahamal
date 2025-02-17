@@ -54,7 +54,7 @@ Route::get('pengumuman', [BeritaController::class, 'pengumuman'])->name('pengumu
 
 Route::get('/pengumuman/{slug}', [PengumumanController::class, 'show'])->name('pengumuman.show');
 
-Route::get('/galeri', [GalleryController::class, 'showGallery']);
+Route::get('/dokumentasi', [GalleryController::class, 'showGallery'])->name('galeri.index');
 
 Route::get('/dokumen', [DocumentController::class, 'showDocuments']);
 
@@ -93,3 +93,8 @@ Route::get('/program', function () {
 Route::get('/program/{slug}', function () {
     return view('program.show');
 })->name('program.show');
+
+
+Route::get('/favicon.ico', function() {
+    return response()->file(public_path('favicon.ico'));
+});
