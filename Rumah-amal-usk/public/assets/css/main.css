@@ -2694,11 +2694,19 @@ img.fixed-dimension {
 /*--------------------------------------------------------------
 # Struktur Organisasi Section
 --------------------------------------------------------------*/
-.struktur-organisasi .gambar {
+.gambar {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; 
+    align-items: center; 
 }
+
+.gambar img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+    cursor: zoom-in;
+}
+
 
 
 /*--------------------------------------------------------------

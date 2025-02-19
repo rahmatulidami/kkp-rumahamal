@@ -11,9 +11,9 @@
     <div class="heading">
       <div class="container">
         <div class="row d-flex justify-content-center text-center">
-          <div class="col-lg-8">
+          <!-- <div class="col-lg-8">
             <h1>PROFIL</h1>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
