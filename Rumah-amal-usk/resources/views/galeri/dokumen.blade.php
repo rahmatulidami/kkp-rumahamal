@@ -23,8 +23,7 @@
                     <li class="current">Dokumen</li>
                 </ol>
             </div>
-            </nav>
-        </div>
+        </nav>
     </div>
 
     <!-- Filter and Search Section -->
@@ -62,87 +61,102 @@
                                 <p class="dokumen-name mb-0">{{ $document['name'] }}</p>
                             </div>
                         </div>
-                        <a href="{{ $document['download'] }}" class="btn btn-outline-secondary" download><i class="bi bi-download"></i></a>
+                        <button class="btn btn-outline-secondary download-button" data-url="{{ $document['download'] }}" data-name="{{ $document['name'] }}" data-bs-toggle="modal" data-bs-target="#downloadModal">
+                            <i class="bi bi-download"></i>
+                        </button>
                     </div>
                 </div>
             @endforeach
         </div>
     </section>
-    <!-- End Document Section -->
 
     <!-- Pagination -->
     <section id="gallery-pagination" class="gallery-pagination section">
-    <div class="container">
-        <div class="d-flex justify-content-center">
-            <ul>
-                @if($pagination['current_page'] > 1)
-                    <li><a href="{{ url('dokumen?page=' . ($pagination['current_page'] - 1)) }}"><i class="bi bi-chevron-left"></i></a></li>
-                @endif
+        <div class="container">
+            <div class="d-flex justify-content-center">
+                <ul>
+                    @if($pagination['current_page'] > 1)
+                        <li><a href="{{ url('dokumen?page=' . ($pagination['current_page'] - 1)) }}"><i class="bi bi-chevron-left"></i></a></li>
+                    @endif
 
-                @for($i = 1; $i <= $pagination['total_pages']; $i++)
-                    <li><a href="{{ url('dokumen?page=' . $i) }}" class="{{ $pagination['current_page'] == $i ? 'active' : '' }}">{{ $i }}</a></li>
-                @endfor
+                    @for($i = 1; $i <= $pagination['total_pages']; $i++)
+                        <li><a href="{{ url('dokumen?page=' . $i) }}" class="{{ $pagination['current_page'] == $i ? 'active' : '' }}">{{ $i }}</a></li>
+                    @endfor
 
-                @if($pagination['current_page'] < $pagination['total_pages'])
-                    <li><a href="{{ url('dokumen?page=' . ($pagination['current_page'] + 1)) }}"><i class="bi bi-chevron-right"></i></a></li>
-                @endif
-            </ul>
+                    @if($pagination['current_page'] < $pagination['total_pages'])
+                        <li><a href="{{ url('dokumen?page=' . ($pagination['current_page'] + 1)) }}"><i class="bi bi-chevron-right"></i></a></li>
+                    @endif
+                </ul>
+            </div>
+        </div>
+    </section><!-- /Pagination -->
+
+    <!-- Confirmation Modal -->
+    <div id="downloadModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Konfirmasi Unduhan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda ingin mengunduh berkas <strong id="modal-doc-name"></strong>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                    <a id="confirmDownload" class="btn btn-primary" target="_blank">Ya</a>
+                </div>
+            </div>
         </div>
     </div>
-  </section><!-- /Pagination -->
 
 </main>
 
 @endsection
 
-@section('scripts')
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const filterSelect = document.getElementById('filter-select');
-        const searchInput = document.getElementById('search-input');
-        const searchButton = document.getElementById('search-button');
-        const dokumenContainer = document.getElementById('dokumen-container');
-        const dokumenItems = Array.from(dokumenContainer.getElementsByClassName('kumpulan-dokumen'));
+document.addEventListener('DOMContentLoaded', function() {
+    const confirmDownload = document.getElementById('confirmDownload');
+    const modalDocName = document.getElementById('modal-doc-name');
 
-        function filterAndSort() {
-            const filterValue = filterSelect.value;
-            const searchValue = searchInput.value.toLowerCase();
+    document.querySelectorAll('.download-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const fileName = this.dataset.name;
+            const fileUrl = this.dataset.url;
 
-            let filteredItems = dokumenItems.filter(item => {
-                const name = item.dataset.name.toLowerCase();
-                return name.includes(searchValue);
-            });
+            console.log("Klik tombol unduh:", fileName, fileUrl); // Debugging log
 
-            if (filterValue.includes('name')) {
-                filteredItems = filteredItems.sort((a, b) => {
-                    const nameA = a.dataset.name.toLowerCase();
-                    const nameB = b.dataset.name.toLowerCase();
-                    return filterValue === 'name-asc' ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
-                });
-            } else if (filterValue.includes('date')) {
-                filteredItems = filteredItems.sort((a, b) => {
-                    const dateA = new Date(a.dataset.date);
-                    const dateB = new Date(b.dataset.date);
-                    return filterValue === 'date-asc' ? dateA - dateB : dateB - dateA;
-                });
-            } else if (filterValue.includes('type')) {
-                filteredItems = filteredItems.filter(item => item.dataset.type === filterValue.split('-')[1]);
-            }
-
-            dokumenContainer.innerHTML = '';
-            filteredItems.forEach(item => {
-                dokumenContainer.appendChild(item);
-            });
-        }
-
-        filterSelect.addEventListener('change', filterAndSort);
-        searchInput.addEventListener('input', filterAndSort);
-        searchButton.addEventListener('click', filterAndSort);
-        searchInput.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                filterAndSort();
-            }
+            modalDocName.innerText = fileName;
+            confirmDownload.setAttribute('data-url', fileUrl);
+            confirmDownload.setAttribute('data-name', fileName);
         });
     });
+
+    confirmDownload.addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah perilaku default
+
+        const fileUrl = this.getAttribute('data-url');
+        const fileName = this.getAttribute('data-name');
+
+        console.log("Mengunduh:", fileName, fileUrl); // Debugging log
+
+        if (!fileUrl) {
+            alert("URL file tidak ditemukan!");
+            return;
+        }
+
+        // Membuat elemen <a> untuk langsung mengunduh file
+        const a = document.createElement('a');
+        a.href = fileUrl;
+        a.download = fileName || 'dokumen';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    });
+});
+
 </script>
-@endsection
+
+
+
