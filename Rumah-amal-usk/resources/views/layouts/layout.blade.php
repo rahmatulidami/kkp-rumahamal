@@ -39,7 +39,8 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="/" class="{{ Request::is('/') ? 'active' : '' }}">Beranda</a></li>
-                    <li><a href="/profil" class="{{ Request::is('profil') ? 'active' : '' }}">Profil</a></li>
+                    <li><a href="/profil" class="{{ Request::is('profil') || Request::is('struktur') || Request::is('fokusprogram') || Request::is('visimisi') || Request::is('landasanutama') ? 'active' : '' }}">Profil</a></li>
+
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdownmenu {{ Request::is('program') || Request::is('campaign') ? 'active' : '' }}"><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>

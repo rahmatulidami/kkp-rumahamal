@@ -70,6 +70,18 @@ Route::get('/visimisi', function () {
     return view('profil/visi-misi');
 });
 
+Route::get('/struktur', function () {
+    return view('profil/struktur');
+});
+
+Route::get('/landasanutama', function () {
+    return view('profil/landasanutama');
+});
+
+Route::get('/fokusprogram', function () {
+    return view('profil/fokusprogram');
+});
+
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home.auth');
 
 Route::get('post', [HomeController::class, 'post'])->middleware(['auth', 'admin']);

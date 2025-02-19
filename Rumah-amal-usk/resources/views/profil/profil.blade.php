@@ -23,7 +23,6 @@
           <ol>
             <li><a href="/">Beranda</a></li>
             <li class="current">Profil</li>
-            <li><a href="/visimisi">Visi & Misi</a></li>
           </ol>
       </div>
     </nav>
@@ -50,11 +49,11 @@
         
         <div class="col-lg-4" data-aos="fade-up" data-aos-delay="250">
           <div class="menu-list">
-              <a href="#">Profil Singkat</a>
-              <a href="#">Visi dan Misi</a>
-              <a href="#">Landasan Utama</a>
-              <a href="#">Fokus Program</a>
-              <a href="#">Struktur Organisasi Rumah Amal USK</a>
+              <a href="/profil" class="active">Profil Singkat</a>
+              <a href="/visimisi">Visi dan Misi</a>
+              <a href="/landasanutama">Landasan Utama</a>
+              <a href="/fokusprogram">Fokus Program</a>
+              <a href="/struktur">Struktur Organisasi Rumah Amal USK</a>
           </div>
         </div>
       </div>
