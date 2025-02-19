@@ -20,7 +20,7 @@
     <nav class="breadcrumbs">
       <div class="container">
         <ol>
-          <li><a href="/">Home</a></li>
+          <li><a href="/">Beranda</a></li>
           <li class="current">Kampanye</li>
         </ol>
       </div>

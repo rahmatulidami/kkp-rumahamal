@@ -15,6 +15,16 @@
                 </div>
             </div>
         </div>
+
+        <nav class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">Beranda</a></li>
+                    <li class="current">Dokumen</li>
+                </ol>
+            </div>
+            </nav>
+        </div>
     </div>
 
     <!-- Filter and Search Section -->
@@ -59,6 +69,27 @@
         </div>
     </section>
     <!-- End Document Section -->
+
+    <!-- Pagination -->
+    <section id="gallery-pagination" class="gallery-pagination section">
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <ul>
+                @if($pagination['current_page'] > 1)
+                    <li><a href="{{ url('dokumen?page=' . ($pagination['current_page'] - 1)) }}"><i class="bi bi-chevron-left"></i></a></li>
+                @endif
+
+                @for($i = 1; $i <= $pagination['total_pages']; $i++)
+                    <li><a href="{{ url('dokumen?page=' . $i) }}" class="{{ $pagination['current_page'] == $i ? 'active' : '' }}">{{ $i }}</a></li>
+                @endfor
+
+                @if($pagination['current_page'] < $pagination['total_pages'])
+                    <li><a href="{{ url('dokumen?page=' . ($pagination['current_page'] + 1)) }}"><i class="bi bi-chevron-right"></i></a></li>
+                @endif
+            </ul>
+        </div>
+    </div>
+  </section><!-- /Pagination -->
 
 </main>
 

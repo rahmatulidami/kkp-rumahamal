@@ -20,7 +20,7 @@
     <nav class="breadcrumbs">
       <div class="container">
         <ol>
-          <li><a href="/">Home</a></li>
+          <li><a href="/">Beranda</a></li>
           <li class="current">Program</li>
         </ol>
       </div>
@@ -33,7 +33,7 @@
       <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
         <div class="program-filters" data-aos="fade-up" data-aos-delay="100">
           <select id="filter-select" class="isotope-filters" aria-label="filter">
-            <option value="*" class="filter-active">ALL</option>
+            <option value="*" class="filter-active">SEMUA</option>
             <option value=".filter-pendidikan">PENDIDIKAN</option>
             <option value=".filter-pemberdayaan">PEMBERDAYAAN</option>
             <option value=".filter-sosial">SOSIAL & KEMANUSIAAN</option>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200" id="program-items">
-            <p>Loading program ...</p>
+            <p> Sedang Memuat Program ...</p>
         </div>
       </div>
     </div>

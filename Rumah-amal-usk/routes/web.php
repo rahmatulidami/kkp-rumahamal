@@ -56,7 +56,7 @@ Route::get('/pengumuman/{slug}', [PengumumanController::class, 'show'])->name('p
 
 Route::get('/dokumentasi', [GalleryController::class, 'showGallery'])->name('galeri.index');
 
-Route::get('/dokumen', [DocumentController::class, 'showDocuments']);
+Route::get('/dokumen', [DocumentController::class, 'showDocuments'])->name('galeri.index');
 
 Route::get('/campaign', [CampaignController::class, 'index'])->name('campaign.index');
 
@@ -64,6 +64,10 @@ Route::get('/campaign/{slug}', [CampaignController::class, 'show'])->name('campa
 
 Route::get('/profil', function () {
     return view('profil/profil');
+});
+
+Route::get('/visimisi', function () {
+    return view('profil/visi-misi');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home.auth');

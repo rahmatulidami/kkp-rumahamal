@@ -17,6 +17,16 @@
                 </div>
             </div>
         </div>
+
+        <nav class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">Beranda</a></li>
+                    <li class="current">Pengumuman</li>
+                </ol>
+            </div>
+            </nav>
+        </div>
     </div><!-- End Page Title -->
 
     <!-- Blog Posts Section -->

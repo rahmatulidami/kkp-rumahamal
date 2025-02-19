@@ -83,55 +83,56 @@
 
 <footer id="footer" class="footer accent-background">
     <div class="container footer-top">
-        <div class="row gy-4">
-            <div class="col-lg-4 col-md-12 footer-about">
-                <a href="/" class="logo d-flex align-items-center" aria-label="logo rumah amal">
-                    <div class="img">
-                        <img src="{{ asset('assets/img/logorumah.png') }}" alt="">
-                    </div>
+        <div class="row gy-4 justify-content-between">
+            
+            <!-- About Section -->
+            <div class="col-lg-4 col-md-6 footer-about text-center text-md-start">
+                <a href="/" class="logo d-flex align-items-center justify-content-md-start justify-content-center" aria-label="logo rumah amal">
+                    <img src="{{ asset('assets/img/logorumah.png') }}" alt="Logo Rumah Amal" class="footer-logo">
                 </a>
-                <p>Lantai 1 Masjid Jamik USK <br> T. Nyak Arief, Kopelma Darussalam, Banda Aceh 21311</p>
-                <p class="mt-4"><strong>Phone:</strong> 
-                  <span>
-                    <a href="https://wa.me/628116888123">0811 6888 123</a>
-                  </span>
-                </p>
-                <p><strong>Email:</strong><span><a href="mailto:rumahamal@usk.ac.id"> rumahamal@usk.ac.id</a></span></p>
-                <p><strong>Tautan:</strong><span><a href="https://usk.ac.id/"> Universitas Syiah Kuala</a></span></p>
-                <div class="social-links d-flex mt-4">
-                    <a href="https://www.facebook.com/rumahamalusk/" aria-label="facebook"><i class="bi bi-facebook" aria-hidden="true"></i></a>
-                    <a href="https://www.tiktok.com/@rumahamal.usk" aria-label="tiktok"><i class="bi bi-tiktok" aria-hidden="true"></i></i></a>
-                    <a href="https://www.instagram.com/rumahamal.usk/" aria-label="instagram"><i class="bi bi-instagram" aria-hidden="true"></i></a>
+                <p class="footer-address">Lantai 1 Masjid Jamik USK <br> T. Nyak Arief, Kopelma Darussalam, Banda Aceh 21311</p>
+                <div class="jadwal mt-3">
+                    <h4><strong>Jam Operasional:</strong></h4>
+                    <p><i class="bi bi-clock"></i> Senin - Jum'at: 08.00 - 17.00</p>
+                    <p><i class="bi bi-clock"></i> Sabtu - Minggu: Tutup</p>
                 </div>
             </div>
+            
+            <!-- Contact Section -->
+            <div class="col-lg-4 col-md-6 footer-contact text-center text-md-start">
+                <h4><strong>Hubungi Kami:</strong></h4>
+                <p><strong>WA:</strong> <a href="https://wa.me/628116888123">0811 6888 123</a></p>
+                <p><strong>Email:</strong> <a href="mailto:rumahamal@usk.ac.id">rumahamal@usk.ac.id</a></p>
+                <p><strong>Tautan:</strong> <a href="https://usk.ac.id/">Universitas Syiah Kuala</a></p>
+                <div class="social-links d-flex justify-content-center justify-content-md-start mt-3">
+                    <a href="https://www.facebook.com/rumahamalusk/" aria-label="facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="https://www.tiktok.com/@rumahamal.usk" aria-label="tiktok"><i class="bi bi-tiktok"></i></a>
+                    <a href="https://www.instagram.com/rumahamal.usk/" aria-label="instagram"><i class="bi bi-instagram"></i></a>
+                </div>
 
-            <div class="col-lg-4 col-md-6 footer-links">
-              <div class="jadwal">
-                <p><strong>Jam Operasional:</strong></p>
-                <p class="mt-4"><i class="bi bi-clock"></i> <span>Mon - Fri: 8AM - 5PM</span></p>
-                <p><i class="bi bi-clock"></i> <span>Sat - Sun: Closed</span></p>
-              </div>  
+                <div class="mt-3 text-center">
+                    <a href="https://forms.gle/tVuo2prHcHjnZsWHA" class="keluhan-btn" target="_blank">
+                        Ajukan Keluhan
+                    </a>
+                </div>
             </div>
-
-            <div class="col-lg-4 col-md-6 footer-links location-container">
+            
+            <!-- Map Section -->
+            <div class="col-lg-4 col-md-12 footer-map text-center">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.062950078828!2d95.3687264!3d5.5709969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304037d79398cc65%3A0x164fb653d9c4a1f7!2sRumah%20Amal%20Masjid%20Jamik%20USK!5e0!3m2!1sen!2sid!4v1688584573276!5m2!1sen!2sid"
-                    width="100%"
-                    height="100%"
-                    style="border:0; border-radius: 15px;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    title="GMAPS RA USK"
-                ></iframe>
+                    width="100%" height="250px" style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade" title="GMAPS RA USK"></iframe>
             </div>
         </div>
     </div>
 
+    <!-- Copyright -->
     <div class="copyright text-center mt-4">
-        <p>© <span>Copyright</span> <a href="/" style="color: #45474B;"><strong class="px-1 sitename">Rumah Amal USK</strong></a><span>All Rights Reserved</span></p>
+        <p>&copy; <span>Copyright</span> <a href="/" class="sitename"><strong>Rumah Amal USK</strong></a> <span>All Rights Reserved</span></p>
     </div>
 </footer>
+
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
