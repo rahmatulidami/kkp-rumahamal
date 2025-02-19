@@ -1039,15 +1039,15 @@ section,
 }
 
 .img-fluid {
-    width: 100%; /* or any specific value */
-    height: auto; /* Maintain aspect ratio */
-    max-width: 800px; /* Ensure images do not stretch beyond this width */
+    width: 100%; 
+    height: auto; 
+    max-width: 800px; 
 }
 
-/* If specific dimensions are needed */
+
 img.fixed-dimension {
-    width: 800px; /* Replace with actual width */
-    height: 600px; /* Replace with actual height */
+    width: 800px;
+    height: 600px; 
 }
 
 /*--------------------------------------------------------------
@@ -1796,7 +1796,50 @@ img.fixed-dimension {
         background: #004400; /* Warna hijau gelap di sisi kiri */
     }
 
+    .rekening-container {
+        display: flex;
+        align-items: center;
+        background: white;
+        border-radius: 10px;
+        padding: 30px;
+        padding-left: 90px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    
+    .rekening-container:hover {
+        transform: scale(1.02);
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .rekening-container img {
+        box-shadow: none !important;
+        border: none !important;
+    }
 
+    .logo-bsi {
+        width: 100px;
+        height: auto;
+        margin-right: 15px;
+        padding: 0pc !important;
+        border: none;
+    }
+    
+    .rekening-info p {
+        margin: 5px 0;
+        font-size: 18px !important;
+    }
+    
+    .rekening-info p strong{
+        font-weight: 600;
+    }
+    
+
+    .bsi-bold {
+        font-weight: 700;
+        color: #005621;
+    }
+    
 /*--------------------------------------------------------------
 # Blog Posts Section
 --------------------------------------------------------------*/
@@ -2612,18 +2655,18 @@ img.fixed-dimension {
 
 /* Program section */
 .program .container {
-    min-height: 400px; /* Atur tinggi minimum agar konten terlihat */
-    margin-bottom: 50px; /* Memberi ruang untuk footer */
+    min-height: 400px; 
+    margin-bottom: 50px;
   }
   
   .program .program-item {
-    padding: 15px; /* Menambah padding untuk tiap item */
+    padding: 15px; 
   }
   
   .program img {
-    object-fit: cover; /* Pastikan gambar terpotong secara proporsional */
-    height: 200px; /* Sesuaikan tinggi gambar agar seragam */
-    width: 100%; /* Gambar memenuhi lebar kontainer */
+    object-fit: cover; 
+    height: 200px;
+    width: 1
   }
   
 
@@ -2686,9 +2729,109 @@ img.fixed-dimension {
 }
 
 /*--------------------------------------------------------------
-# Misi Section
+# Fokus Program
 --------------------------------------------------------------*/
+.fokus-box {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
+.title {
+    font-weight: 700;
+    font-size: 28px;
+    color: #005621;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.focus-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.focus-list li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+/* Animasi pada icon */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    80% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes rotateHover {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(15deg);
+    }
+}
+
+.icon-circle {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border: 3px solid #002d19;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+    
+    /* Animasi masuk */
+    animation: bounceIn 0.6s ease-in-out;
+}
+
+/* Hover efek */
+.icon-circle:hover {
+    animation: rotateHover 0.3s ease-in-out;
+    transform: rotate(15deg);
+}
+
+.icon-circle i {
+    font-size: 22px;
+    color: #002d19;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Efek hover pada ikon */
+.icon-circle:hover i {
+    transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+    .focus-list li {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .icon-circle {
+        width: 45px;
+        height: 45px;
+    }
+
+    .icon-circle i {
+        font-size: 20px;
+    }
+}
 
 
 /*--------------------------------------------------------------

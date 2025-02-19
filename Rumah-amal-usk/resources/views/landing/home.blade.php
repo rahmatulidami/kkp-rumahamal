@@ -164,7 +164,14 @@
         <a href="/profil">Selengkapnya</a>
 
         <div class="position-relative mt-4">
-          <img src="assets/img/profil/rek-rumahamal.png" class="img-fluid rounded-4" alt="" loading="lazy">
+          <div class="rekening-container">
+              <img src="assets/img/logobsi.png" alt="BSI Logo" class="logo-bsi">
+              <div class="rekening-info">
+                  <p><strong>Bank Syariah Indonesia (<span class="bsi-bold">BSI</span>)</strong></p>
+                  <p><strong>No. Rekening: <span class="bsi-bold">7099400409</span></strong></p>
+                  <p><strong>A.N.<span class="bsi-bold">Rumah Amal Masjid Jamik USK</span></strong></p>
+              </div>
+          </div>
         </div>
       </div>
     </div>

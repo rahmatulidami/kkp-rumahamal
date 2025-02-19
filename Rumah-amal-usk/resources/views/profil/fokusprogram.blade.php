@@ -11,9 +11,6 @@
     <div class="heading">
       <div class="container">
         <div class="row d-flex justify-content-center text-center">
-          <!-- <div class="col-lg-8">
-            <h1>PROFIL</h1>
-          </div> -->
         </div>
       </div>
     </div>
@@ -30,29 +27,55 @@
   </div>
   <!-- End Page Title -->
 
-    <!-- About Section -->
+  <!-- About Section -->
   <section id="about" class="about section">
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
-          <!-- <img src="assets/img/profil/usk.png" class="img-fluid rounded-4 mb-4" alt="Profil Image">
-          <div class="content">
-              <h3>RUMAH AMAL MASJID JAMIK USK</h3>
-              <p>
-              Rumah Amal Masjid Jamik Universitas Syiah Kuala adalah lembaga amil zakat, infaq dan shadaqah yang telah berdiri sejak 2016 untuk menghimpun dan menyalurkan dana (Zakat, Infaq dan Shadaqah).
-              <br><br>
-              Kami menyediakan sistem dan layanan yang memudahkan para muzakki atau donatur dalam menunaikan zakat, infaq, shadaqah, maupun wakaf dengan sebaik-baiknya. Menjadikan masjid sebagai pusat pemberdayaan ekonomi umat, Mendayagunakan dana zakat, infaq shadaqah maupun wakaf melalui program-program yang terasa manfaatnya, Mengangkat martabat mustahik, dan membahagiakan muzakki dan donatur.
-              <br><br>
-              Rumah Amal Masjid Jamik USK pada tahun 2023 telah menjalin kerjasama dengan lembaga Amil Zakat Nasional (LAZNAS) Rumah Amal Salman dengan Keputusan Mentri Agama Republik Indonesia No 854 Tahun 2023, sehingga Rumah Amal Masjid Jamik USK secara resmi menjadi bagian dari LAZNAS Rumah Amal Salman dengan Surat Keputusan Pengurus Rumah Amal Nomor 68 Tahun 2023.
-              </p>
-          </div> -->
+          <div class="fokus-box">
+              <h4 class="title">FOKUS PROGRAM</h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <ul class="focus-list">
+                    <li>
+                      <div class="icon-circle"><i class="fas fa-hand-holding-usd"></i></div>
+                      Peningkatan fundraising internal & eksternal
+                    </li>
+                    <li>
+                      <div class="icon-circle"><i class="fas fa-donate"></i></div>
+                      Penyaluran dana zakat, infaq, shadaqah & wakaf
+                    </li>
+                    <li>
+                      <div class="icon-circle"><i class="fas fa-graduation-cap"></i></div>
+                      Peningkatan kualitas pendidikan umat
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="focus-list">
+                    <li>
+                      <div class="icon-circle"><i class="fas fa-mosque"></i></div>
+                      Peningkatan kemandirian ekonomi masjid & jama’ah
+                    </li>
+                    <li>
+                      <div class="icon-circle"><i class="fas fa-briefcase"></i></div>
+                      Pemberdayaan ekonomi masyarakat muslim
+                    </li>
+                    <li>
+                      <div class="icon-circle"><i class="fas fa-bullhorn"></i></div>
+                      Pemberdayaan sosial & syi’ar dakwah
+                    </li>
+                  </ul>
+                </div>
+              </div>
+          </div>
         </div>
         
         <div class="col-lg-4" data-aos="fade-up" data-aos-delay="250">
           <div class="menu-list">
               <a href="/profil">Profil Singkat</a>
-              <a href="/visimisi" >Visi dan Misi</a>
-              <a href="/landasanutama" >Landasan Utama</a>
+              <a href="/visimisi">Visi dan Misi</a>
+              <a href="/landasanutama">Landasan Utama</a>
               <a href="/fokusprogram" class="active">Fokus Program</a>
               <a href="/struktur">Struktur Organisasi Rumah Amal USK</a>
           </div>
