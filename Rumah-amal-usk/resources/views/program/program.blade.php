@@ -46,6 +46,7 @@
         <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200" id="program-items">
             <p> Sedang Memuat Program ...</p>
         </div>
+        <p id="no-program-message" class="text-center alert alert-warning" style="display: none;">Kategori program yang dicari tidak ditemukan.</p>
       </div>
     </div>
   </section>
@@ -56,44 +57,52 @@
 
 <!-- JavaScript -->
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   const programContainer = document.getElementById("program-items");
-  const loadingText = document.querySelector("#program-items p"); // Select the loading text element
+  const loadingText = document.querySelector("#program-items p");
+  const noProgramMessage = document.getElementById("no-program-message");
 
-  // Fetch program data from API
+  // Fetch program data dari API
   fetch("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/program")
     .then(response => response.json())
     .then(data => {
-      // Remove existing content
+      // Hapus teks loading sebelum menampilkan program
+      loadingText.style.display = "none";
       programContainer.innerHTML = '';
 
-      // Render programs
+      if (data.length === 0) {
+        noProgramMessage.style.display = "block";
+        return;
+      } else {
+        noProgramMessage.style.display = "none";
+      }
+
+      // Render program
       data.forEach(post => {
         let filterClass = '';
         const categories = post.categories;
 
-        // Mapping categories to filter classes
+        // Mapping kategori ke filter class
         if (categories.includes(61)) filterClass = 'filter-pendidikan';
         else if (categories.includes(64)) filterClass = 'filter-pemberdayaan';
         else if (categories.includes(65)) filterClass = 'filter-sosial';
         else if (categories.includes(62)) filterClass = 'filter-syiar';
         else if (categories.includes(63)) filterClass = 'filter-kemitraan';
         else if (categories.includes(66)) filterClass = 'filter-fasilitator';
+        else filterClass = 'filter-none'; // Tambahkan ini jika kategori tidak cocok
 
-        // Extract image URL from the content
+        // Ambil gambar dari konten
         const parser = new DOMParser();
-        const contentHtml = post.content.rendered;
-        const doc = parser.parseFromString(contentHtml, "text/html");
+        const doc = parser.parseFromString(post.content.rendered, "text/html");
         const imgElement = doc.querySelector("img");
         const imageUrl = imgElement ? imgElement.src : "/assets/img/default.jpeg";
 
-        // Get slug or ID to form link to internal program detail page
-        const postSlug = post.slug || "";  // Use slug to form URL
-        const postLink = `/program/${postSlug}`;  // Construct internal link
-
+        // Buat URL ke halaman detail program
+        const postSlug = post.slug || "";
+        const postLink = `/program/${postSlug}`;
         const postTitle = post.title.rendered || "Untitled";
 
-        // Create HTML structure for the program post
+        // Buat HTML untuk setiap program
         const programItem = `
           <div class="col-lg-2-4 col-md-6 program-item isotope-item ${filterClass}">
             <div class="program-content h-100">
@@ -104,28 +113,41 @@
           </div>
         `;
 
-        // Append the program item to the container
+        // Tambahkan program ke dalam container
         programContainer.innerHTML += programItem;
       });
 
-      // Initialize Isotope
+      // Inisialisasi Isotope
       const iso = new Isotope(programContainer, {
         itemSelector: '.isotope-item',
         layoutMode: 'masonry'
       });
 
-      // Filter items on select change
+      // Event listener untuk filter
       document.getElementById('filter-select').addEventListener('change', function() {
         const filterValue = this.value;
         iso.arrange({ filter: filterValue });
-      });
 
-      // Hide loading text after data is successfully loaded
-      loadingText.style.display = "none";
+        // Tunggu sebentar sebelum mengecek jumlah elemen yang terlihat
+        setTimeout(() => {
+          let visibleItems = Array.from(document.querySelectorAll('.isotope-item')).filter(item => {
+            return item.getBoundingClientRect().height > 0;
+          });
+
+          console.log("Jumlah program yang terlihat:", visibleItems.length);
+
+          if (visibleItems.length === 0) {
+            noProgramMessage.style.display = "block";
+          } else {
+            noProgramMessage.style.display = "none";
+          }
+        }, 500);
+      });
     })
     .catch(error => {
       console.error('Error fetching program data:', error);
-      programContainer.innerHTML = "<p>Failed to load programs.</p>";
+      programContainer.innerHTML = "<p>Gagal memuat program.</p>";
+      noProgramMessage.style.display = "block";
     });
 });
 

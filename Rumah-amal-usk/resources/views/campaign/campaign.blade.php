@@ -37,6 +37,7 @@
         </form>
         
         <div class="row gy-4" id="campaign-container" data-aos="fade-up" data-aos-delay="200">
+        @if(count($processedCampaigns) > 0)
             @foreach ($processedCampaigns as $campaign)
                 <div class="col-lg-4 col-md-6 campaign-unggulan-item">
                     <div class="campaign-unggulan-content h-100">
@@ -77,6 +78,11 @@
                     </div>
                 </div>
             @endforeach
+          @else
+              <div class="col-12 text-center">
+                 <p class="alert alert-warning">Kampanye yang dicari tidak ditemukan.</p>
+              </div>
+          @endif  
         </div>
     </div>
 </section>
