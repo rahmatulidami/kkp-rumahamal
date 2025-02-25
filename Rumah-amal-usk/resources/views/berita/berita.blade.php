@@ -29,12 +29,25 @@
   </div>
     </div><!-- End Page Title -->
 
+    <!-- Search Section -->
+    <section id="search-section" class="search-section section">
+        <div class="container">
+            <form action="{{ route('berita') }}" method="GET" class="search-form">
+                <input type="text" name="search" id="search-input" class="form-control"
+                    placeholder="Cari berita berdasarkan judul..." value="{{ request('search') }}">
+                <button type="submit" class="btn btn-green">Cari</button>
+            </form>
+        </div>
+    </section>
+
+
+
     <!-- Blog Posts Section -->
     <section id="blog-posts" class="blog-posts section">
         <div class="container">
-            <div class="row gy-4">
+            <div class="row gy-4" id="blog-container">
               @foreach($beritaPosts as $post)
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 blog-post-item" data-title="{{ strtolower($post['title']['rendered']) }}">
                         <article>
                             @if($post['image_url'])
                                 <div class="post-img">

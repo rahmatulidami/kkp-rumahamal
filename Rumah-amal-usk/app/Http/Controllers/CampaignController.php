@@ -9,40 +9,48 @@ use DOMDocument;
 
 class CampaignController extends Controller
 {
-    public function index()
-    {
-        // Fetch data from the API
-        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan');
-        $campaigns = $response->json();
+    public function index(Request $request)
+{
+    // Fetch data from the API
+    $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/campaign_unggulan');
+    $campaigns = $response->json();
 
-        // Process campaigns to extract image URLs
-        $processedCampaigns = array_map(function ($campaign) {
-            $terkumpul = $campaign['acf']['dana_terkumpul'] ?? 0;
-            $dibutuhkan = $campaign['acf']['jumlah_dana'] ?? 1; // Avoid division by zero
-            $percentage = ($dibutuhkan > 0) ? ($terkumpul / $dibutuhkan) * 100 : 0;
+    // Ambil input pencarian dari query string
+    $search = $request->query('search');
 
-            // Extract image URL from content.rendered
-            $doc = new DOMDocument();
-            libxml_use_internal_errors(true); // Suppress errors due to malformed HTML
-            $doc->loadHTML($campaign['content']['rendered']);
-            libxml_clear_errors();
-            $imgTags = $doc->getElementsByTagName('img');
-
-            // If no image found, use a default image or handle it appropriately
-            $image = $imgTags->length > 0 ? $imgTags->item(0)->getAttribute('src') : asset('path/to/default-image.jpg');
-
-            // Add new fields to the campaign array
-            $campaign['terkumpul'] = $terkumpul;
-            $campaign['dibutuhkan'] = $dibutuhkan;
-            $campaign['percentage'] = $percentage;
-            $campaign['image'] = $image;
-
-            return $campaign;
-        }, $campaigns);
-
-        // Pass processed data to the view
-        return view('campaign.campaign', compact('processedCampaigns'));
+    // Filter berdasarkan judul jika ada input pencarian
+    if ($search) {
+        $campaigns = array_filter($campaigns, function ($campaign) use ($search) {
+            return stripos($campaign['title']['rendered'], $search) !== false;
+        });
     }
+
+    // Process campaigns to extract image URLs
+    $processedCampaigns = array_map(function ($campaign) {
+        $terkumpul = $campaign['acf']['dana_terkumpul'] ?? 0;
+        $dibutuhkan = $campaign['acf']['jumlah_dana'] ?? 1; // Avoid division by zero
+        $percentage = ($dibutuhkan > 0) ? ($terkumpul / $dibutuhkan) * 100 : 0;
+
+        // Extract image URL from content.rendered
+        $doc = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $doc->loadHTML($campaign['content']['rendered']);
+        libxml_clear_errors();
+        $imgTags = $doc->getElementsByTagName('img');
+        $image = $imgTags->length > 0 ? $imgTags->item(0)->getAttribute('src') : asset('path/to/default-image.jpg');
+
+        // Add new fields to the campaign array
+        $campaign['terkumpul'] = $terkumpul;
+        $campaign['dibutuhkan'] = $dibutuhkan;
+        $campaign['percentage'] = $percentage;
+        $campaign['image'] = $image;
+
+        return $campaign;
+    }, $campaigns);
+
+    return view('campaign.campaign', compact('processedCampaigns'));
+}
+
 
     public function show($slug)
     {

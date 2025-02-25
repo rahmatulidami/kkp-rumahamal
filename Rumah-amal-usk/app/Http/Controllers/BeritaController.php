@@ -14,8 +14,10 @@ class BeritaController extends Controller
     // Cache time in minutes
     private $cacheTime = 60;
 
-    public function index()
+    public function index(Request $request)
     {
+        $searchQuery = $request->get('search');
+
         // Fetch categories with caching
         $categories = Cache::remember('categories', $this->cacheTime, function() {
             return $this->fetchCategories();
@@ -36,6 +38,13 @@ class BeritaController extends Controller
             return !in_array($this->pengumumanCategoryId, $post['categories'] ?? [])
                 && !in_array(88, $post['categories'] ?? []);
         });
+
+        // Jika ada pencarian, filter berdasarkan judul
+        if (!empty($searchQuery)) {
+            $beritaPosts = array_filter($beritaPosts, function ($post) use ($searchQuery) {
+                return stripos($post['title']['rendered'], $searchQuery) !== false;
+            });
+        }
 
         // Extract image URL and map categories for berita posts
         foreach ($beritaPosts as &$post) {
@@ -60,11 +69,14 @@ class BeritaController extends Controller
         ];
 
         // Send data to the view
-        return view('berita.berita', compact('beritaPosts', 'pagination'));
+        return view('berita.berita', compact('beritaPosts', 'pagination', 'searchQuery'));
     }
 
-    public function pengumuman()
+
+    public function pengumuman(Request $request)
     {
+        $searchQuery = $request->get('search');
+
         // Fetch categories from cache
         $categories = Cache::remember('categories', $this->cacheTime, function() {
             return $this->fetchCategories();
@@ -84,6 +96,13 @@ class BeritaController extends Controller
         $pengumumanPosts = array_filter($posts, function ($post) {
             return in_array($this->pengumumanCategoryId, $post['categories'] ?? []);
         });
+
+        // Jika ada pencarian, filter berdasarkan judul
+        if (!empty($searchQuery)) {
+            $pengumumanPosts = array_filter($pengumumanPosts, function ($post) use ($searchQuery) {
+                return stripos($post['title']['rendered'], $searchQuery) !== false;
+            });
+        }
 
         // Process posts for displaying
         foreach ($pengumumanPosts as &$post) {
@@ -108,8 +127,9 @@ class BeritaController extends Controller
         ];
 
         // Send data to the view
-        return view('pengumuman.pengumuman', compact('pengumumanPosts', 'pagination'));
+        return view('pengumuman.pengumuman', compact('pengumumanPosts', 'pagination', 'searchQuery'));
     }
+
 
     private function fetchCategories()
     {

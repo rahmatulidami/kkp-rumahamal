@@ -29,6 +29,18 @@
         </div>
     </div><!-- End Page Title -->
 
+    
+    <!-- Search Section -->
+    <section id="search-section" class="search-section section">
+        <div class="container">
+            <form action="{{ route('pengumuman') }}" method="GET" class="search-form">
+                <input type="text" name="search" id="search-input" class="form-control"
+                    placeholder="Cari pengumuman berdasarkan judul..." value="{{ request('search') }}">
+                <button type="submit" class="btn btn-green">Cari</button>
+            </form>
+        </div>
+    </section>
+
     <!-- Blog Posts Section -->
     <section id="blog-posts" class="blog-posts section">
         <div class="container">

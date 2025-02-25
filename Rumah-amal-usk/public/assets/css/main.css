@@ -4110,3 +4110,36 @@ img.fixed-dimension {
 .gallery-pagination li a:hover a {
     color: var(--contrast-color);
 }
+
+
+/*--------------------------------------------------------------
+# search Section
+--------------------------------------------------------------*/
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    max-width: 500px; /* Sesuaikan dengan kebutuhan */
+    margin: auto;
+}
+
+.search-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-form .btn-green {
+    padding: 10px 15px;
+    background-color: #006400; /* Warna hijau tua */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-form .btn-green:hover {
+    background-color: #004d00; /* Warna hijau yang lebih gelap saat hover */
+}
