@@ -26,9 +26,18 @@ class PengumumanController extends Controller
             // Filter the content and remove the main image tag
             $filteredContent = $this->filterContent($pengumuman['content']['rendered'], $mainImage);
 
-            // Fetch recent posts and tags
+            // Fetch recent posts
             $recent_posts = $this->fetchRecentPosts();
-            $tags = $this->fetchAllTags();
+
+            // Fetch tags related only to this pengumuman
+            $pengumumanTags = $pengumuman['tags'] ?? [];
+
+            if (!empty($pengumumanTags)) {
+                $tagIds = implode(',', $pengumumanTags); // Convert array to "68,85,67"
+                $tags = $this->fetchFilteredTags($tagIds);
+            } else {
+                $tags = [];
+            }
 
             // Return the view with the necessary data
             return view('pengumuman.detail-pengumuman', compact('pengumuman', 'recent_posts', 'tags', 'mainImage', 'filteredContent'));
@@ -47,7 +56,6 @@ class PengumumanController extends Controller
 
     private function fetchRecentPosts()
     {
-        // Caching recent posts for performance optimization
         return Cache::remember('recent_posts', $this->cacheTime, function() {
             $response = Http::get("{$this->apiBaseUrl}/posts", [
                 'per_page' => 5,
@@ -63,25 +71,24 @@ class PengumumanController extends Controller
         });
     }
 
-    private function fetchAllTags()
+    private function fetchFilteredTags($tagIds)
     {
-        // Caching tags to improve performance
-        return Cache::remember('tags', $this->cacheTime, function() {
-            $response = Http::get("{$this->apiBaseUrl}/tags");
+        return Cache::remember('tags_' . $tagIds, $this->cacheTime, function() use ($tagIds) {
+            $response = Http::get("{$this->apiBaseUrl}/tags", [
+                'include' => $tagIds, // Fetch only relevant tags
+            ]);
             return $response->json();
         });
     }
 
     private function extractImageUrl($content)
     {
-        // Extract the first image URL from the content if available
         preg_match('/<img[^>]+src="([^">]+)"/', $content, $matches);
-        return $matches[1] ?? url('assets/img/default.jpeg'); // Fallback to default image if no image is found
+        return $matches[1] ?? url('assets/img/default.jpeg');
     }
 
     private function cleanTitle($title)
     {
-        // Clean unwanted characters from the title
         $title = html_entity_decode($title, ENT_QUOTES | ENT_HTML5, 'UTF-8');
         $title = str_replace(["&#8217;", "&amp;"], ["'", "&"], $title);
         return trim($title);
@@ -89,14 +96,12 @@ class PengumumanController extends Controller
 
     private function getMainImage($content)
     {
-        // Extract the main image from the content
         preg_match_all('/<img[^>]+src="([^">]+)"/', $content, $matches);
-        return $matches[1][0] ?? asset('assets/img/default.jpeg'); // Fallback to default image if no image is found
+        return $matches[1][0] ?? asset('assets/img/default.jpeg');
     }
 
     private function filterContent($content, $mainImage)
     {
-        // Remove the main image from the content to avoid duplicating it in the post body
         return str_replace('<img src="' . $mainImage . '"', '', $content);
     }
 }

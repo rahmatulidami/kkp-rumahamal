@@ -110,17 +110,15 @@
 
           </div><!--/Recent Posts Widget -->
 
-
-          <!-- Tags Widget -->
-          <div class="tags-widget widget-item">
+        <!-- Tags Widget -->
+        <div class="tags-widget widget-item">
             <h3 class="widget-title">Tags</h3>
             <ul class="tags">
-              @foreach($tags as $tag)
-                <li><a href="#">{{ $tag['name'] }}</a></li>
-              @endforeach
+                @foreach($tags as $tag)
+                    <li><a href="{{ route('pengumuman', ['tag' => $tag['id']]) }}">{{ $tag['name'] }}</a></li>
+                @endforeach
             </ul>
-          </div><!--/Tags Widget -->
-
+        </div><!--/Tags Widget -->
         </div><!--/widgets-container -->
       </div><!--/sidebar -->
 
