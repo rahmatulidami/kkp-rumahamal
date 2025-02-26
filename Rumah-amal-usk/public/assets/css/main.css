@@ -1576,6 +1576,7 @@ img.fixed-dimension {
     padding: 0;
     margin: 0 0 20px 0;
     font-family: Arial, Helvetica, sans-serif;
+    text-align: left !important;
 }
 
 .pengumuman .title a {
@@ -1661,12 +1662,13 @@ img.fixed-dimension {
 }
 
 .recent-posts .title {
-    font-size: 14px;
+    font-size: 14px !important;
     line-height: 1.5;
     font-weight: 700;
     padding: 0;
     margin: 0 0 20px 0;
     font-family: Arial, Helvetica, sans-serif;
+    text-align: left !important;
 }
 
 .recent-posts .title a {
@@ -1801,8 +1803,7 @@ img.fixed-dimension {
         align-items: center;
         background: white;
         border-radius: 10px;
-        padding: 30px;
-        padding-left: 90px;
+        padding: 20px;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     }
@@ -1865,11 +1866,11 @@ img.fixed-dimension {
 }
 
 .blog-posts .title {
-    font-size: 20px;
+    font-size: 14px !important;
     font-weight: 700;
     padding: 0;
     margin: 0 0 20px 0;
-    text-align: left;
+    text-align: left !important;
 }
 
 .blog-posts .title a {
