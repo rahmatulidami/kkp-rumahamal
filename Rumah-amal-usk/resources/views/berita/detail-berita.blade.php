@@ -66,7 +66,7 @@
                     <a href="#" id="share-facebook" title="Share on Facebook"><i class="bi bi-facebook"></i></a>
                     <a href="#" id="copy-link" title="Copy Link"><i class="bi bi-link-45deg"></i></a>
                   </div>
-                  <p id="share-instructions" style="display: none;">URL copied!</p>
+                  <p id="share-instructions" style="display: none;">URL disalin!</p>
                 </div>
 
               </div><!-- End meta bottom -->
@@ -79,7 +79,7 @@
         <!-- Blog Comments Section -->
         <section id="blog-comments" class="blog-comments section">
           <div class="container">
-            <h4 class="comments-count">{{ $comment_count }} Comments</h4>
+            <h4 class="comments-count">{{ $comment_count }} Komentar </h4>
 
             @foreach($comments as $comment)
               <div id="comment-{{ $comment['id'] }}" class="comment">
@@ -139,17 +139,18 @@
         <div class="widgets-container">
 
         <!-- Search Widget -->
-          <div class="search-widget widget-item">
-            <h3 class="widget-title">Search</h3>
-            <form action="">
-              <input type="text">
-              <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+        <div class="search-widget widget-item">
+            <h3 class="widget-title">Pencarian</h3>
+            <form action="{{ route('berita') }}" method="GET">
+                <input type="text" name="search" placeholder="Cari berita berdasarkan judul...." value="{{ request('search') }}">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
             </form>
-          </div><!--/Search Widget -->
+        </div>
+        <!--/Search Widget -->
 
 
           <div class="recent-posts-widget widget-item">
-              <h3 class="widget-title">Recent Posts</h3>
+              <h3 class="widget-title">Postingan Terkini</h3>
 
               @foreach($recent_posts as $recent)
                 <div class="post-item">

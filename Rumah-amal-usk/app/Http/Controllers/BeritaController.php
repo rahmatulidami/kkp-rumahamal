@@ -46,6 +46,7 @@ class BeritaController extends Controller
             });
         }
 
+
         // Extract image URL and map categories for berita posts
         foreach ($beritaPosts as &$post) {
             $post['image_url'] = $this->extractImageUrl($post['content']['rendered']);
