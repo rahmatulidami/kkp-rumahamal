@@ -30,7 +30,7 @@
         <div class="container">
             <ol>
                 <li><a href="/">Home</a></li>
-                <li><a href="/campaign">Campaign</a></li>
+                <li><a href="/campaign">Kampanye</a></li>
                 <li class="current">{{ $campaign['title']['rendered'] }}</li>
             </ol>
         </div>
@@ -101,7 +101,7 @@
 <!-- Detail Section -->
 <section class="detail" id="detail-section">
     <div class="container">
-        <h3 class="detail-title">Detail Campaign</h3>
+        <h3 class="detail-title">Detail Kampaye</h3>
         <p class="detail-description">
             {!! $campaign['content']['rendered'] !!}
         </p>
@@ -139,7 +139,7 @@
 <!-- Other Campaigns Section -->
 <section id="other-campaigns" class="other-campaigns section">
     <div class="container">
-        <h3>Campaign Lainnya</h3>
+        <h3>Kampaye Lainnya</h3>
         <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
             @foreach ($otherCampaigns as $otherCampaign)
             <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item">
