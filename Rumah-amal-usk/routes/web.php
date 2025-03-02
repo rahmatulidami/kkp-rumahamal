@@ -9,6 +9,7 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\FaqController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -114,3 +115,7 @@ Route::get('/program/{slug}', function () {
 Route::get('/favicon.ico', function() {
     return response()->file(public_path('favicon.ico'));
 });
+
+Route::get('/faq', [FaqController::class, 'index'])->name('bantuan.bantuan');
+Route::get('/faq/{id}', [FaqController::class, 'show'])->name('bantuan.show');
+

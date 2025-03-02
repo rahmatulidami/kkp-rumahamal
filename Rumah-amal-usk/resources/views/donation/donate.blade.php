@@ -3,7 +3,31 @@
 @section('title', 'Donasi | Rumah Amal USK')
 
 @section('content')
-<section>
+
+<main class="main">
+
+  <!-- Page Title -->
+  <div class="page-title">
+    <div class="heading">
+      <div class="container">
+        <div class="row d-flex justify-content-center text-center">
+        </div>
+      </div>
+    </div>
+
+    <nav class="breadcrumbs">
+      <div class="container">
+          <ol>
+            <li><a href="/">Beranda</a></li>
+            <li class="current">Pembayaran</li>
+          </ol>
+      </div>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+
+<section id="pembayaran">
 <div class="container mt-5" style="user-select: none;">
     <div class="row">
         <div class="col-12 col-lg-6 col-md-6 mb-3">
@@ -196,12 +220,17 @@
     </div>
 </div>
 </section>
+</main>
+
+@endsection
 
 <style>
 
-.body {
-    color: #45474B;
+section#pembayaran .container {
+    margin-top: 0 !important; /* Hilangkan margin atas */
+    padding-top: 0 !important; /* Hilangkan padding atas */
 }
+
 .payment {
     background-color: #ffffff;
     border-radius: 10px;
@@ -557,4 +586,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
-@endsection

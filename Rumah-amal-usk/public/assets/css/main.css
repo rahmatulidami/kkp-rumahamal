@@ -1416,7 +1416,7 @@ img.fixed-dimension {
 }
 
 .campaign-unggulan .campaign-unggulan-content .campaign-unggulan-info h3 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
 }
 
@@ -4152,3 +4152,90 @@ img.fixed-dimension {
 .search-form .btn-green:hover {
     background-color: #004d00; /* Warna hijau yang lebih gelap saat hover */
 }
+
+/*--------------------------------------------------------------
+# FAQ PAGE
+--------------------------------------------------------------*/
+.faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .faq-box {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+    transition: 0.3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .faq-box p {
+    font-size: 12px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .faq-box h4 {
+    font-size: 15px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+
+  .faq-box:hover {
+    background: #e9ecef;
+    transform: scale(1.05);
+  }
+
+  .faq-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .faq-detail-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+  }
+
+  .answer-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .btn-primary {
+    background: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    background: #0056b3;
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+  }
+  .search-btn {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+  }
+  .search-btn:hover {
+    background-color: darkgreen;
+  }
