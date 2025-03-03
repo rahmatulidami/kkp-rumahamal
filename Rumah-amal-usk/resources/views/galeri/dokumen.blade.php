@@ -33,6 +33,7 @@
                 <div class="col-lg-8">
                     <div class="input-group mb-3">
                         <select id="filter-select" class="form-select" aria-label="Filter Dokumen">
+                            <option value="all">Semua</option>
                             <option value="name-asc">A-Z</option>
                             <option value="name-desc">Z-A</option>
                             <option value="date-asc">Terlama</option>
@@ -41,7 +42,7 @@
                             <option value="type-doc">DOC</option>
                             <option value="type-csv">CSV</option>
                         </select>
-                        <input type="text" id="search-input" class="form-control" placeholder="Cari Dokumen...">
+                        <input type="text" id="search-input" class="form-control" placeholder="Cari Dokumen..." value="{{ request('search', '') }}">
                         <button class="btn btn-outline-secondary" id="search-button"><i class="bi bi-search"></i></button>
                     </div>
                 </div>
@@ -52,6 +53,7 @@
     <!-- Document Section -->
     <section id="dokumen" class="dokumen section">
         <div class="container" id="dokumen-container">
+        @if(count($documents) > 0)
             @foreach ($documents as $document)
                 <div class="kumpulan-dokumen" data-name="{{ $document['name'] }}" data-type="{{ $document['type'] }}">
                     <div class="icon-and-details d-flex align-items-center justify-content-between">
@@ -67,6 +69,12 @@
                     </div>
                 </div>
             @endforeach
+
+            @else
+                <div class="col-12 text-center">
+                    <p class="alert alert-warning">Dokumen yang dicari tidak ditemukan.</p>
+                </div>
+            @endif 
         </div>
     </section>
 
@@ -114,49 +122,73 @@
 
 @endsection
 
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const confirmDownload = document.getElementById('confirmDownload');
-    const modalDocName = document.getElementById('modal-doc-name');
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const filterSelect = document.getElementById('filter-select');
 
-    document.querySelectorAll('.download-button').forEach(button => {
+    // ✅ Ambil nilai dari URL jika ada
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchQuery = urlParams.get('search') || '';
+    const filterValue = urlParams.get('filter') || 'name-asc';
+
+    searchInput.value = searchQuery;
+    filterSelect.value = filterValue;
+
+    function updateURLAndReload() {
+        urlParams.set('search', searchInput.value.trim());
+        urlParams.set('filter', filterSelect.value);
+        urlParams.set('page', '1'); // Reset ke halaman pertama
+        window.location.href = window.location.pathname + '?' + urlParams.toString();
+    }
+
+    searchButton.addEventListener('click', updateURLAndReload);
+    filterSelect.addEventListener('change', updateURLAndReload);
+    searchInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            updateURLAndReload();
+        }
+    });
+
+    // 🔥 Event listener untuk tombol download
+    downloadButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const fileName = this.dataset.name;
-            const fileUrl = this.dataset.url;
+            const fileUrl = this.getAttribute('data-url');
+            const fileName = this.getAttribute('data-name');
 
-            console.log("Klik tombol unduh:", fileName, fileUrl); // Debugging log
-
-            modalDocName.innerText = fileName;
-            confirmDownload.setAttribute('data-url', fileUrl);
-            confirmDownload.setAttribute('data-name', fileName);
+            modalDocName.textContent = fileName;
+            confirmDownload.setAttribute('href', fileUrl);
         });
     });
 
+    // ✅ Unduh file langsung setelah klik "Ya" atau buka tab baru jika perlu
     confirmDownload.addEventListener('click', function(event) {
-        event.preventDefault(); // Mencegah perilaku default
+        event.preventDefault(); // Hindari navigasi langsung
+        const fileUrl = this.getAttribute('href');
 
-        const fileUrl = this.getAttribute('data-url');
-        const fileName = this.getAttribute('data-name');
+        if (fileUrl) {
+            // Cek apakah URL mengarah ke Google Drive atau penyimpanan lain yang perlu dibuka di tab baru
+            if (fileUrl.includes("drive.google.com") || fileUrl.includes("dropbox.com")) {
+                window.open(fileUrl, '_blank'); // Buka di tab baru
+            } else {
+                // Jika bukan dari Drive atau Dropbox, langsung unduh file
+                const a = document.createElement('a');
+                a.href = fileUrl;
+                a.download = fileUrl.split('/').pop(); // Ambil nama file dari URL
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
 
-        console.log("Mengunduh:", fileName, fileUrl); // Debugging log
-
-        if (!fileUrl) {
-            alert("URL file tidak ditemukan!");
-            return;
+            // Tutup modal setelah klik "Ya"
+            const modalElement = document.getElementById('downloadModal');
+            const modalInstance = bootstrap.Modal.getInstance(modalElement);
+            if (modalInstance) {
+                modalInstance.hide();
+            }
         }
-
-        // Membuat elemen <a> untuk langsung mengunduh file
-        const a = document.createElement('a');
-        a.href = fileUrl;
-        a.download = fileName || 'dokumen';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
     });
 });
 
 </script>
-
-
-

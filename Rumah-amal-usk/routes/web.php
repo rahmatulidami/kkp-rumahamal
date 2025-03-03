@@ -59,6 +59,7 @@ Route::get('/dokumentasi', [GalleryController::class, 'showGallery'])->name('gal
 
 Route::get('/dokumen', [DocumentController::class, 'showDocuments'])->name('galeri.index');
 
+
 Route::get('/campaign', [CampaignController::class, 'index'])->name('campaign.index');
 
 Route::get('/campaign/{slug}', [CampaignController::class, 'show'])->name('campaign.show');
