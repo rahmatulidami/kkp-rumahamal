@@ -4,13 +4,15 @@
 
 @section('meta')
     <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="{{ Str::limit(strip_tags($berita['content']['rendered']), 150) }}">
+    <meta name="keywords" content="Rumah Amal, Berita, USK, Charity, News">
     <meta property="og:title" content="{{ $berita['title']['rendered'] }}" />
     <meta property="og:description" content="{{ Str::limit(strip_tags($berita['content']['rendered']), 150) }}" />
     <meta property="og:image" content="{{ $mainImage }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
-    <meta property="og:type" content="article" />
     <meta name="twitter:card" content="summary_large_image">
-
 @endsection
 
 @section('content')

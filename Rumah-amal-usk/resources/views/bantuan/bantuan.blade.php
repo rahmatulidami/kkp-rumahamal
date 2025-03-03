@@ -33,8 +33,9 @@
   <section id="faq" class="faq-section mt-4">
     <div class="container">
       <div class="row" id="faqList">
+      @if(count($faqs) > 0)
         @foreach ($faqs as $key => $faq)
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4 faq-item">
             <div class="faq-box p-3 border rounded shadow-sm">
               <p class="faq-category text-danger">Rumah Amal USK</p>
               <a href="{{ route('bantuan.show', ['id' => $key]) }}" class="faq-link">
@@ -43,6 +44,14 @@
             </div>
           </div>
         @endforeach
+      @else
+        <div class="col-12 text-center" id="notFoundMessage">
+          <p class="alert alert-warning">Pertanyaan yang dicari tidak tersedia.</p>
+        </div>
+      @endif 
+      </div>
+      <div class="col-12 text-center" id="searchNotFoundMessage" style="display: none;">
+        <p class="alert alert-warning">Pertanyaan yang dicari tidak tersedia.</p>
       </div>
     </div>
   </section>
@@ -50,17 +59,22 @@
 
 <script>
   function searchFaqs() {
-    let searchQuery = document.getElementById('searchFaq').value.toLowerCase();
-    let faqs = document.querySelectorAll('.faq-box');
+    let searchQuery = document.getElementById('searchFaq').value.toLowerCase().trim();
+    let faqs = document.querySelectorAll('.faq-item');
+    let notFoundMessage = document.getElementById('searchNotFoundMessage');
+    let found = false;
     
     faqs.forEach(function(faq) {
       let question = faq.querySelector('.faq-question').textContent.toLowerCase();
       if (question.includes(searchQuery)) {
-        faq.parentElement.style.display = 'block';
+        faq.style.display = 'block';
+        found = true;
       } else {
-        faq.parentElement.style.display = 'none';
+        faq.style.display = 'none';
       }
     });
+    
+    notFoundMessage.style.display = found ? 'none' : 'block';
   }
 
   function handleKeyPress(event) {

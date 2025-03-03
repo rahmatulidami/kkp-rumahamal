@@ -4195,11 +4195,24 @@ img.fixed-dimension {
     font-weight: bold;
   }
 
-  .faq-detail-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 60vh;
+
+  /* Detail FAQ */
+
+  .answer-box h4 {
+    font-size: 26px;
+    font-weight: 800;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .answer-box h5 {
+    font-weight: 600;
+  }
+
+
+  .answer-box p, h5 {
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
   }
 
   .answer-box {
@@ -4210,16 +4223,38 @@ img.fixed-dimension {
     text-align: center;
   }
 
-  .btn-primary {
-    background: #007bff;
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 5px;
-    text-decoration: none;
+  .faq-step img {
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    display: flex;
+    justify-content: left;
   }
 
+  #buttonbantuan .btn-primary {
+    background: #1D7E05;
+    color: #fff;
+    font-weight: 700;
+    margin-top: 30px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    display: flex;
+    padding: 5px 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+    text-decoration: none;
+    width: fit-content;
+  }
+
+  .btn-primary i {
+    margin-right: 8px;
+}
+
+
   .btn-primary:hover {
-    background: #0056b3;
+    background: #004d00;
   }
 
   .search-input {
@@ -4228,6 +4263,7 @@ img.fixed-dimension {
     border: 1px solid #ccc;
     border-radius: 5px 0 0 5px;
   }
+
   .search-btn {
     background-color: green;
     color: white;
@@ -4236,6 +4272,7 @@ img.fixed-dimension {
     border-radius: 0 5px 5px 0;
     cursor: pointer;
   }
+  
   .search-btn:hover {
     background-color: darkgreen;
   }

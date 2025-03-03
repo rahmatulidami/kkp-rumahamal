@@ -109,7 +109,7 @@
                 <p><strong>WA:</strong> <a href="https://wa.me/628116888123">0811 6888 123</a></p>
                 <p><strong>Email:</strong> <a href="mailto:rumahamal@usk.ac.id">rumahamal@usk.ac.id</a></p>
                 <p><strong>Tautan:</strong> <a href="https://usk.ac.id/">Universitas Syiah Kuala</a></p>
-                <a href="/faq">FAQ</a>
+                <strong><a href="/faq">FAQ</a></strong>
                 <div class="social-links d-flex justify-content-center justify-content-md-start mt-3">
                     <a href="https://www.facebook.com/rumahamalusk/" aria-label="facebook"><i class="bi bi-facebook"></i></a>
                     <a href="https://www.tiktok.com/@rumahamal.usk" aria-label="tiktok"><i class="bi bi-tiktok"></i></a>

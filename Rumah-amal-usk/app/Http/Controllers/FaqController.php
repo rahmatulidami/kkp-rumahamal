@@ -23,7 +23,8 @@ class FaqController extends Controller
             'steps' => [
                 [
                     'text' => 'Buka halaman login di website kami.',
-                    'image' => 'images/login-step1.png'
+                    'image' => 'assets/img/faq/halamanhome.png'
+
                 ],
                 [
                     'text' => 'Masukkan email dan password Anda.',
