@@ -12,7 +12,7 @@ class DocumentController extends Controller
     {
         $documents = [];
         $cp = 0;
-        $maxPages = 5; // Batas maksimal request API
+        $maxPages = 10; // Batas maksimal request API
 
         while ($cp < $maxPages) {
             // Fetch data from API

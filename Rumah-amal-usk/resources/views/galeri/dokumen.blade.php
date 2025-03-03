@@ -50,26 +50,23 @@
         </div>
     </div>
 
-    <!-- Document Section -->
+<!-- Document Section -->
     <section id="dokumen" class="dokumen section">
         <div class="container" id="dokumen-container">
-        @if(count($documents) > 0)
-            @foreach ($documents as $document)
-                <div class="kumpulan-dokumen" data-name="{{ $document['name'] }}" data-type="{{ $document['type'] }}">
-                    <div class="icon-and-details d-flex align-items-center justify-content-between">
-                        <div class="details d-flex align-items-center">
-                            <img src="{{ $document['icon'] }}" alt="{{ $document['type'] }}" class="file-icon" />
-                            <div class="ml-3">
-                                <p class="dokumen-name mb-0">{{ $document['name'] }}</p>
+            @if(count($documents) > 0)
+                <div class="row">
+                    @foreach ($documents as $document)
+                        <div class="col-md-3 mb-4">
+                            <div class="kumpulan-dokumen p-3 border rounded d-flex flex-column align-items-center text-center" data-name="{{ $document['name'] }}" data-type="{{ $document['type'] }}" style="height: 250px;">
+                                <img src="{{ $document['icon'] }}" alt="{{ $document['type'] }}" class="file-icon mb-2" style="width: 60px; height: 60px;" />
+                                <p class="dokumen-name mb-2 font-weight-bold">{{ $document['name'] }}</p>
+                                <button class="btn btn-outline-secondary mt-auto download-button" data-url="{{ $document['download'] }}" data-name="{{ $document['name'] }}" data-bs-toggle="modal" data-bs-target="#downloadModal">
+                                    <i class="bi bi-download"></i> Download
+                                </button>
                             </div>
                         </div>
-                        <button class="btn btn-outline-secondary download-button" data-url="{{ $document['download'] }}" data-name="{{ $document['name'] }}" data-bs-toggle="modal" data-bs-target="#downloadModal">
-                            <i class="bi bi-download"></i>
-                        </button>
-                    </div>
+                    @endforeach
                 </div>
-            @endforeach
-
             @else
                 <div class="col-12 text-center">
                     <p class="alert alert-warning">Dokumen yang dicari tidak ditemukan.</p>
@@ -77,6 +74,7 @@
             @endif 
         </div>
     </section>
+
 
     <!-- Pagination -->
     <section id="gallery-pagination" class="gallery-pagination section">
@@ -127,6 +125,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
     const filterSelect = document.getElementById('filter-select');
+    const downloadButtons = document.querySelectorAll('.download-button');
+    const modalDocName = document.getElementById('modal-doc-name');
+    const confirmDownload = document.getElementById('confirmDownload');
 
     // ✅ Ambil nilai dari URL jika ada
     const urlParams = new URLSearchParams(window.location.search);
@@ -157,29 +158,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const fileUrl = this.getAttribute('data-url');
             const fileName = this.getAttribute('data-name');
 
+            // ✅ Set nama file di modal
             modalDocName.textContent = fileName;
             confirmDownload.setAttribute('href', fileUrl);
         });
     });
 
-    // ✅ Unduh file langsung setelah klik "Ya" atau buka tab baru jika perlu
+    // ✅ Unduh file langsung setelah klik "Ya"
     confirmDownload.addEventListener('click', function(event) {
-        event.preventDefault(); // Hindari navigasi langsung
-        const fileUrl = this.getAttribute('href');
+        event.preventDefault();
 
+        const fileUrl = confirmDownload.getAttribute('href');
         if (fileUrl) {
-            // Cek apakah URL mengarah ke Google Drive atau penyimpanan lain yang perlu dibuka di tab baru
-            if (fileUrl.includes("drive.google.com") || fileUrl.includes("dropbox.com")) {
-                window.open(fileUrl, '_blank'); // Buka di tab baru
-            } else {
-                // Jika bukan dari Drive atau Dropbox, langsung unduh file
-                const a = document.createElement('a');
-                a.href = fileUrl;
-                a.download = fileUrl.split('/').pop(); // Ambil nama file dari URL
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            }
+            const a = document.createElement('a');
+            a.href = fileUrl;
+            a.setAttribute('download', ''); // Menandai sebagai file yang bisa diunduh
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
 
             // Tutup modal setelah klik "Ya"
             const modalElement = document.getElementById('downloadModal');
@@ -189,6 +185,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-});
 
+    // ✅ Tambahan: Menutup modal jika di luar area modal diklik
+    document.addEventListener('click', function(event) {
+        const modalElement = document.getElementById('downloadModal');
+        if (modalElement && event.target === modalElement) {
+            const modalInstance = bootstrap.Modal.getInstance(modalElement);
+            if (modalInstance) {
+                modalInstance.hide();
+            }
+        }
+    });
+});
 </script>
