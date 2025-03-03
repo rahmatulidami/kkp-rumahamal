@@ -15,7 +15,7 @@ class DocumentController extends Controller
         $maxPages = 10; // Batas maksimal request API
 
         while ($cp < $maxPages) {
-            // Fetch data from API
+
             $response = Http::get("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/pages/4729?cp={$cp}");
 
             if (!$response->ok()) break; // Hentikan jika request gagal
@@ -25,11 +25,9 @@ class DocumentController extends Controller
             
             if (empty($htmlContent)) break; // Hentikan jika tidak ada konten
 
-            // Load HTML ke DOM parser
             $dom = new \DOMDocument();
             @$dom->loadHTML($htmlContent);
 
-            // Ambil semua elemen <a>
             $links = $dom->getElementsByTagName('a');
             $foundDocuments = false;
 
