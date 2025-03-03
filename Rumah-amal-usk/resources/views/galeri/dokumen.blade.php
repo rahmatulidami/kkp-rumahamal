@@ -28,9 +28,9 @@
 
     <!-- Filter and Search Section -->
     <div class="filter-section">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row d-flex justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-8 col-md-10 col-sm-12">
                     <div class="input-group mb-3">
                         <select id="filter-select" class="form-select" aria-label="Filter Dokumen">
                             <option value="all">Semua</option>
@@ -50,14 +50,14 @@
         </div>
     </div>
 
-<!-- Document Section -->
+    <!-- Document Section -->
     <section id="dokumen" class="dokumen section">
-        <div class="container" id="dokumen-container">
+        <div class="container-fluid" id="dokumen-container">
             @if(count($documents) > 0)
                 <div class="row">
                     @foreach ($documents as $document)
-                        <div class="col-md-3 mb-4">
-                            <div class="kumpulan-dokumen p-3 border rounded d-flex flex-column align-items-center text-center" data-name="{{ $document['name'] }}" data-type="{{ $document['type'] }}" style="height: 250px;">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                            <div class="kumpulan-dokumen p-3 border rounded d-flex flex-column align-items-center text-center shadow-sm" data-name="{{ $document['name'] }}" data-type="{{ $document['type'] }}" style="height: 200px;">
                                 <img src="{{ $document['icon'] }}" alt="{{ $document['type'] }}" class="file-icon mb-2" style="width: 60px; height: 60px;" />
                                 <p class="dokumen-name mb-2 font-weight-bold">{{ $document['name'] }}</p>
                                 <button class="btn btn-outline-secondary mt-auto download-button" data-url="{{ $document['download'] }}" data-name="{{ $document['name'] }}" data-bs-toggle="modal" data-bs-target="#downloadModal">
@@ -74,43 +74,52 @@
             @endif 
         </div>
     </section>
-
-
+    
     <!-- Pagination -->
     <section id="gallery-pagination" class="gallery-pagination section">
         <div class="container">
             <div class="d-flex justify-content-center">
-                <ul>
+                <ul class="pagination">
                     @if($pagination['current_page'] > 1)
-                        <li><a href="{{ url('dokumen?page=' . ($pagination['current_page'] - 1)) }}"><i class="bi bi-chevron-left"></i></a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url('dokumen?page=' . ($pagination['current_page'] - 1)) }}">
+                                <i class="bi bi-chevron-left"></i>
+                            </a>
+                        </li>
                     @endif
 
                     @for($i = 1; $i <= $pagination['total_pages']; $i++)
-                        <li><a href="{{ url('dokumen?page=' . $i) }}" class="{{ $pagination['current_page'] == $i ? 'active' : '' }}">{{ $i }}</a></li>
+                        <li class="page-item {{ $pagination['current_page'] == $i ? 'active' : '' }}">
+                            <a class="page-link" href="{{ url('dokumen?page=' . $i) }}">{{ $i }}</a>
+                        </li>
                     @endfor
 
                     @if($pagination['current_page'] < $pagination['total_pages'])
-                        <li><a href="{{ url('dokumen?page=' . ($pagination['current_page'] + 1)) }}"><i class="bi bi-chevron-right"></i></a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url('dokumen?page=' . ($pagination['current_page'] + 1)) }}">
+                                <i class="bi bi-chevron-right"></i>
+                            </a>
+                        </li>
                     @endif
                 </ul>
             </div>
         </div>
-    </section><!-- /Pagination -->
+    </section>
 
-    <!-- Confirmation Modal -->
-    <div id="downloadModal" class="modal fade" tabindex="-1">
+    <!-- Modal untuk konfirmasi download -->
+    <div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Konfirmasi Unduhan</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title" id="downloadModalLabel">Konfirmasi Download</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah Anda ingin mengunduh berkas <strong id="modal-doc-name"></strong>?</p>
+                    <p>Anda akan mengunduh file: <strong id="modal-doc-name"></strong></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                    <a id="confirmDownload" class="btn btn-primary" target="_blank">Ya</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <a id="confirmDownload" class="btn btn-primary" href="#" download>Download</a>
                 </div>
             </div>
         </div>

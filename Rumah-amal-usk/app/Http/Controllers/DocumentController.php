@@ -99,7 +99,7 @@ class DocumentController extends Controller
         });
 
         // Pagination
-        $perPage = 10;
+        $perPage = 12;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $documentsCollection = collect($documents);
         $currentPageDocuments = $documentsCollection->slice(($currentPage - 1) * $perPage, $perPage)->all();

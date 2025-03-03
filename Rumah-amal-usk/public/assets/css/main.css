@@ -3869,11 +3869,13 @@ img.fixed-dimension {
 
 
 .dokumen .btn {
-    font-size: 1.5rem; 
-    color: #333;
+    font-size: 12px; 
+    color: #fff;
     border: none; 
-    background-color: transparent; 
+    background-color: #006400; 
+    margin: 0% !important;
     cursor: pointer; 
+
 }
 
 .dokumen .btn:hover {
@@ -3887,10 +3889,19 @@ img.fixed-dimension {
 
 .dokumen .dokumen-name {
     margin: 0;
-    font-size: 18px;
+    font-size: 12px;
     color: #333;
     font-weight: bold;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Batasi hanya 2 baris */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 2.8em; /* Sesuaikan tinggi agar cukup untuk 2 baris */
+    line-height: 1.4em; /* Atur sesuai kebutuhan */
+    word-break: break-word;
 }
+
 
 .dokumen .date {
     margin-top: 5px;
@@ -3911,6 +3922,21 @@ img.fixed-dimension {
         padding: 5px 15px;
     }
     
+}
+
+/*--------------------------------------------------------------
+# Modal untuk konfirmasi download
+--------------------------------------------------------------*/
+.modal-footer #confirmDownload {
+    color: #fff;
+    border: none; 
+    background-color: #006400; 
+    cursor: pointer; 
+}
+
+.modal-footer #confirmDownload:hover {
+    background-color: #1D7E05; 
+    color: #fff;
 }
 
 
@@ -4130,6 +4156,25 @@ img.fixed-dimension {
 .gallery-pagination li a:hover a {
     color: var(--contrast-color);
 }
+
+.pagination li a {
+    color: color-mix(in srgb, var(--default-color), transparent 40%);
+    padding: 7px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none; 
+}
+
+.pagination li.active a {
+    background: var(--accent-color);
+    color: var(--contrast-color);
+}
+
+.pagination li a:hover {
+    background-color:var(--accent-color);
+}
+
 
 
 /*--------------------------------------------------------------
