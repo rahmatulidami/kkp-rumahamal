@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ✅ Ambil nilai dari URL jika ada
     const urlParams = new URLSearchParams(window.location.search);
     const searchQuery = urlParams.get('search') || '';
-    const filterValue = urlParams.get('filter') || 'name-asc';
+    const filterValue = urlParams.get('filter') || 'all';
 
     searchInput.value = searchQuery;
     filterSelect.value = filterValue;

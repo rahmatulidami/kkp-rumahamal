@@ -3797,6 +3797,17 @@ img.fixed-dimension {
 .filter-section .btn {
     flex: 0 0 auto; 
     min-width: 80px;
+    padding: 10px 15px;
+    background-color: #006400; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.filter-section .btn:hover {
+    background-color: #004d00; 
 }
 
 @media (max-width: 767px) {
