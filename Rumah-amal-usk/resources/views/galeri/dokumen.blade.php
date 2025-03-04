@@ -57,9 +57,13 @@
                 <div class="row">
                     @foreach ($documents as $document)
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                            <div class="kumpulan-dokumen p-3 border rounded d-flex flex-column align-items-center text-center shadow-sm" data-name="{{ $document['name'] }}" data-type="{{ $document['type'] }}" style="height: 300px;">
+                            <div class="kumpulan-dokumen p-3 border rounded d-flex flex-column align-items-center text-center shadow-sm" data-name="{{ $document['name'] }}" data-type="{{ $document['type'] }}" style="height: 330px;">
                             <img src="{{ asset('assets/img/icondokumen.png') }}" alt="{{ $document['type'] }}" class="file-icon mb-2" />
                                 <p class="dokumen-name mb-2 font-weight-bold">{{ $document['name'] }}</p>
+                                <div class="dokumen-info">
+                                    <p class="text-muted mb-1">Ukuran: {{ $document['size'] }}</p>
+                                    <p class="text-muted mb-2">Diunduh: {{ $document['downloads'] }}</p>
+                                </div>
                                 <div class="d-flex justify-content-end w-100">
                                     <button class="btn btn-outline-secondary download-button" data-url="{{ $document['download'] }}" data-name="{{ $document['name'] }}" data-bs-toggle="modal" data-bs-target="#downloadModal">
                                         <i class="bi bi-download"></i> Download

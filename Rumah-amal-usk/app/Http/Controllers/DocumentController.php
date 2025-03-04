@@ -43,7 +43,21 @@ class DocumentController extends Controller
                 $cleanedHeading = html_entity_decode(trim($heading->nodeValue), ENT_QUOTES | ENT_HTML5, 'UTF-8');
                 $cleanedHeading = str_replace(['â', '�'], '-', $cleanedHeading);
                 $cleanedHeading = preg_replace('/[^\x20-\x7E]/', '', $cleanedHeading);
-                $documentNames[] = $cleanedHeading;
+            
+                // Pisahkan judul, ukuran (KB), dan jumlah download
+                if (preg_match('/(.+?)\s(\d+\.\d+\s*(KB|MB))\s*(\d+)\s*downloads?/i', $cleanedHeading, $matches)) {
+                    $documentNames[] = [
+                        'title' => trim($matches[1]), // Judul dokumen
+                        'size' => $matches[2] ?? null, // Ukuran file (KB/MB)
+                        'downloads' => $matches[4] ?? '0', // Jumlah download
+                    ];                    
+                } else {
+                    $documentNames[] = [
+                        'title' => $cleanedHeading,
+                        'size' => null,
+                        'downloads' => null,
+                    ];
+                }
             }
             
             $documentIndex = 0;
@@ -53,13 +67,12 @@ class DocumentController extends Controller
                     if ($downloadUrl) {
                         $foundDocuments = true;
                         $fileType = pathinfo($downloadUrl, PATHINFO_EXTENSION);
-                        $defaultIconUrl = "https://rumahamal.usk.ac.id/api/wp-content/plugins/download-manager/assets/file-type-icons/default.svg";
-                        $iconUrl = "https://rumahamal.usk.ac.id/api/wp-content/plugins/download-manager/assets/file-type-icons/{$fileType}.svg";
                         
                         $documents[] = [
-                            'name' => $documentNames[$documentIndex] ?? 'Dokumen Tanpa Nama',
+                            'name' => $documentNames[$documentIndex]['title'] ?? 'Dokumen Tanpa Nama',
+                            'size' => $documentNames[$documentIndex]['size'] ?? 'Tidak diketahui',
+                            'downloads' => $documentNames[$documentIndex]['downloads'] ?? '0 downloads',
                             'type' => $fileType,
-                            'icon' => $iconUrl,
                             'download' => $downloadUrl,
                             'created_at' => now()->subDays(rand(1, 365)), // Dummy date untuk sorting
                         ];
@@ -67,6 +80,7 @@ class DocumentController extends Controller
                     }
                 }
             }
+            
 
             if (!$foundDocuments) break;
             $cp++;
