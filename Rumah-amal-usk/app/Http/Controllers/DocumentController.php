@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Collection;
+use Carbon\Carbon;
 
 class DocumentController extends Controller
 {
@@ -97,7 +100,7 @@ class DocumentController extends Controller
         });
 
         // Pagination
-        $perPage = 12;
+        $perPage = 8;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $documentsCollection = collect($documents);
         $currentPageDocuments = $documentsCollection->slice(($currentPage - 1) * $perPage, $perPage)->all();
