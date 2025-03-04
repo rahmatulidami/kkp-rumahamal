@@ -57,12 +57,15 @@
                 <div class="row">
                     @foreach ($documents as $document)
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                            <div class="kumpulan-dokumen p-3 border rounded d-flex flex-column align-items-center text-center shadow-sm" data-name="{{ $document['name'] }}" data-type="{{ $document['type'] }}" style="height: 200px;">
-                                <img src="{{ $document['icon'] }}" alt="{{ $document['type'] }}" class="file-icon mb-2" style="width: 60px; height: 60px;" />
+                            <div class="kumpulan-dokumen p-3 border rounded d-flex flex-column align-items-center text-center shadow-sm" data-name="{{ $document['name'] }}" data-type="{{ $document['type'] }}" style="height: 300px;">
+                            <img src="{{ asset('assets/img/icondokumen.png') }}" alt="{{ $document['type'] }}" class="file-icon mb-2" />
                                 <p class="dokumen-name mb-2 font-weight-bold">{{ $document['name'] }}</p>
-                                <button class="btn btn-outline-secondary mt-auto download-button" data-url="{{ $document['download'] }}" data-name="{{ $document['name'] }}" data-bs-toggle="modal" data-bs-target="#downloadModal">
-                                    <i class="bi bi-download"></i> Download
-                                </button>
+                                <div class="d-flex justify-content-end w-100">
+                                    <button class="btn btn-outline-secondary download-button" data-url="{{ $document['download'] }}" data-name="{{ $document['name'] }}" data-bs-toggle="modal" data-bs-target="#downloadModal">
+                                        <i class="bi bi-download"></i> Download
+                                    </button>
+                                </div>
+
                             </div>
                         </div>
                     @endforeach
