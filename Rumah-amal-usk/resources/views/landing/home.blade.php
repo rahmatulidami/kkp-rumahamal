@@ -2,6 +2,14 @@
 
 @section('title', 'Beranda | Rumah Amal USK')
 
+@section('meta')
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="Kami menyediakan sistem dan layanan yang memudahkan para muzakki atau donatur dalam menunaikan zakat, infaq, shadaqah, maupun wakaf dengan sebaik-baiknya.">
+
+@endsection
+
 @section('content')
 
 <main class="main">
@@ -269,12 +277,12 @@
         <div class="row d-flex flex-wrap">
           <div class="col-md-8 text-center p-2">
           <div class="video-container">
-              <iframe id="youtube-video" src="https://www.youtube.com/embed/jPpcdsT2kF4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Youtube RA USK"></iframe>
+              <iframe id="youtube-video" src="https://www.youtube.com/embed/jPpcdsT2kF4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Youtube RA USK" loading="lazy"></iframe>
           </div>
           </div>
           <div class="col-md-4 text-center p-2">
             <div class="instagram-container">
-              <iframe src="https://www.instagram.com/rumahamal.usk/embed" frameborder="0" title="Instagram RA USK"></iframe>
+            <iframe src="https://www.instagram.com/rumahamal.usk/embed" frameborder="0" title="Instagram RA USK" loading="lazy"></iframe>
             </div>
           </div>
         </div>

@@ -96,7 +96,7 @@
                 </a>
                 <p class="footer-address">Lantai 1 Masjid Jamik USK <br> T. Nyak Arief, Kopelma Darussalam, Banda Aceh 21311</p>
                 <div class="jadwal mt-3">
-                    <h4><strong>Jam Operasional:</strong></h4>
+                    <h1><strong>Jam Operasional:</strong></h1>
                     <p><i class="bi bi-clock"></i> Senin - Jum'at: 08.00 - 17.00</p>
                     <p><i class="bi bi-clock"></i> Sabtu - Minggu: Tutup</p>
                 </div>
@@ -105,7 +105,7 @@
             
             <!-- Contact Section -->
             <div class="col-lg-4 col-md-6 footer-contact text-center text-md-start">
-                <h4><strong>Hubungi Kami:</strong></h4>
+                <h1><strong>Hubungi Kami:</strong></h1>
                 <p><strong>WA:</strong> <a href="https://wa.me/628116888123">0811 6888 123</a></p>
                 <p><strong>Email:</strong> <a href="mailto:rumahamal@usk.ac.id">rumahamal@usk.ac.id</a></p>
                 <p><strong>Tautan:</strong> <a href="https://usk.ac.id/">Universitas Syiah Kuala</a></p>
