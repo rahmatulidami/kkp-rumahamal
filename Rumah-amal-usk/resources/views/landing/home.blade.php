@@ -16,6 +16,7 @@
 
 <!-- Hero Section -->
 <section id="hero">
+<div class="container-fluid">
     <div class="hero-slider swiper init-swiper">
         <script type="application/json" class="swiper-config">
           {
@@ -45,6 +46,7 @@
         <div class="swiper-button-next"></div>
         <div class="swiper-pagination"></div>
     </div>
+  </div>
 </section>
 <!-- End Hero Section -->
 

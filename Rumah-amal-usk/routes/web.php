@@ -120,3 +120,4 @@ Route::get('/favicon.ico', function() {
 Route::get('/faq', [FaqController::class, 'index'])->name('bantuan.bantuan');
 Route::get('/faq/{id}', [FaqController::class, 'show'])->name('bantuan.show');
 
+Route::get('/tag/{tag}', [BeritaController::class, 'tag'])->name('berita.tag');

@@ -34,7 +34,7 @@
 
     <!-- Filter and Search Section -->
     <div class="filter-section">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8 col-md-10 col-sm-12">
                     <div class="input-group mb-3">
@@ -58,7 +58,7 @@
 
     <!-- Document Section -->
     <section id="dokumen" class="dokumen section">
-        <div class="container-fluid" id="dokumen-container">
+        <div class="container" id="dokumen-container">
             @if(count($documents) > 0)
                 <div class="row">
                     @foreach ($documents as $document)

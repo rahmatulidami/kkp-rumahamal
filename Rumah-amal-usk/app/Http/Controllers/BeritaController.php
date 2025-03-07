@@ -66,7 +66,7 @@ class BeritaController extends Controller
     
         // Pagination
         $currentPage = request()->get('page', 1);
-        $perPage = 12;
+        $perPage = 9;
         $offset = ($currentPage - 1) * $perPage;
         $totalPosts = count($beritaPosts);
         $beritaPosts = array_slice($beritaPosts, $offset, $perPage);
@@ -131,7 +131,7 @@ class BeritaController extends Controller
     
         // Paginate pengumuman posts
         $currentPage = request()->get('page', 1);
-        $perPage = 12;
+        $perPage = 9;
         $offset = ($currentPage - 1) * $perPage;
         $totalPosts = count($pengumumanPosts);
         $pengumumanPosts = array_slice($pengumumanPosts, $offset, $perPage);
@@ -235,5 +235,66 @@ class BeritaController extends Controller
     
         return view('berita.detail-berita', compact('berita', 'recent_posts', 'filteredTags', 'mainImage', 'comment_count', 'comments'));
     }
-    
+
+
+    private function getTagName($tagId)
+    {
+        return Cache::remember("tag_name_{$tagId}", $this->cacheTime, function () use ($tagId) {
+            $response = Http::get("http://rumahamal.usk.ac.id/api/wp-json/wp/v2/tags/{$tagId}");
+            return $response->successful() ? $response->json()['name'] ?? 'Tanpa Tag' : 'Tanpa Tag';
+        });
+    }
+
+
+    public function tag($tag, Request $request)
+    {
+        $tagName = $this->getTagName($tag); // Ambil nama tag dari API
+
+        // Ambil daftar kategori dari cache
+        $categories = Cache::remember('categories', $this->cacheTime, function () {
+            return $this->fetchCategories();
+        });
+
+        $categoryMap = array_column($categories, 'name', 'id');
+
+        // Ambil semua berita dari cache
+        $posts = Cache::remember('posts', $this->cacheTime, function () {
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
+                'per_page' => 100,
+            ]);
+            return $response->json();
+        });
+
+        // Filter berita berdasarkan tag
+        $beritaPosts = array_filter($posts, function ($post) use ($tag) {
+            return in_array($tag, $post['tags'] ?? []);
+        });
+
+        // Proses post (ambil gambar, sanitasi konten, dll.)
+        foreach ($beritaPosts as &$post) {
+            $post['image_url'] = $this->extractImageUrl($post['content']['rendered']);
+            $post['content']['rendered'] = $this->sanitizeContent($post['content']['rendered']);
+            $post['title']['rendered'] = $this->cleanTitle($post['title']['rendered']);
+            $post['categories'] = array_map(function ($categoryId) use ($categoryMap) {
+                return $categoryMap[$categoryId] ?? 'Uncategorized';
+            }, $post['categories'] ?? []);
+        }
+
+        // Pagination
+        $currentPage = request()->get('page', 1);
+        $perPage = 9;
+        $offset = ($currentPage - 1) * $perPage;
+        $totalPosts = count($beritaPosts);
+        $beritaPosts = array_slice($beritaPosts, $offset, $perPage);
+
+        $pagination = [
+            'current_page' => $currentPage,
+            'total_pages' => ceil($totalPosts / $perPage),
+        ];
+
+        // Tampilkan template khusus untuk tag
+        return view('berita.tag', compact('beritaPosts', 'pagination', 'tag', 'tagName'));
+    }
+
+        
 }

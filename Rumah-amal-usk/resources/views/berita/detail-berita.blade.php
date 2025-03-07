@@ -172,7 +172,7 @@
             <h3 class="widget-title">Tags</h3>
             <ul class="tags">
                 @foreach($filteredTags as $tag)
-                    <li><a href="{{ route('berita', ['tag' => $tag['id']]) }}">{{ $tag['name'] }}</a></li>
+                    <li><a href="{{ route('berita.tag', ['tag' => $tag['id']]) }}">{{ $tag['name'] }}</a></li>
                 @endforeach
             </ul>
         </div><!--/Tags Widget -->
