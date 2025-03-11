@@ -135,7 +135,7 @@
 
     <!-- Copyright -->
     <div class="copyright text-center mt-4">
-        <p>&copy; <span>Copyright</span> <a href="/" class="sitename"><strong>Rumah Amal USK</strong></a> <span>All Rights Reserved</span></p>
+        <p><span>Copyright &copy; 2025</span> <a href="/" class="sitename"><strong>Rumah Amal USK.</strong></a> <span>All Rights Reserved</span></p>
     </div>
 </footer>
 
