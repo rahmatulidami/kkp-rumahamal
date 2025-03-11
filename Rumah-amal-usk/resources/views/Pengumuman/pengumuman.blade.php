@@ -17,34 +17,61 @@
                 </div>
             </div>
         </div>
+
+        <nav class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">Beranda</a></li>
+                    <li class="current">Pengumuman</li>
+                </ol>
+            </div>
+        </nav>
+    </div>
     </div><!-- End Page Title -->
+
+    <!-- Search Section -->
+    <section id="search-section" class="search-section section">
+        <div class="container">
+            <form action="{{ route('pengumuman') }}" method="GET" class="search-form">
+                <input type="text" name="search" id="search-input" class="form-control"
+                    placeholder="Cari pengumuman berdasarkan judul..." value="{{ request('search') }}">
+                <button type="submit" class="btn btn-green">Cari</button>
+            </form>
+        </div>
+    </section>
 
     <!-- Blog Posts Section -->
     <section id="blog-posts" class="blog-posts section">
         <div class="container">
             <div class="row gy-4">
-                @foreach($pengumumanPosts as $post)
-                    <div class="col-lg-4">
-                        <article>
-                            @if($post['image_url'])
-                                <div class="post-img">
-                                    <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" style="width: 100%; height: auto;">
-                                </div>
-                            @endif
-                            <p class="post-category">
-                                {{ end($post['categories']) ?? 'Uncategorized' }}
-                            </p>
-                            <h2 class="title">
-                                <a href="{{ route('pengumuman.show', ['slug' => $post['slug']]) }}">{{ $post['title']['rendered'] }}</a>
-                            </h2>
-                            <div class="d-flex align-items-center">
-                                <p class="post-date">
-                                    <time datetime="{{ $post['date'] }}">{{ \Carbon\Carbon::parse($post['date'])->format('M d, Y') }}</time>
+                @if(count($pengumumanPosts) > 0)
+                    @foreach($pengumumanPosts as $post)
+                        <div class="col-lg-4">
+                            <article>
+                                @if($post['image_url'])
+                                    <div class="post-img">
+                                        <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" style="width: 100%; height: auto;">
+                                    </div>
+                                @endif
+                                <p class="post-category">
+                                    {{ end($post['categories']) ?? 'Uncategorized' }}
                                 </p>
-                            </div>
-                        </article>
-                    </div><!-- End post list item -->
-                @endforeach
+                                <h2 class="title">
+                                    <a href="{{ route('pengumuman.show', ['slug' => $post['slug']]) }}">{{ $post['title']['rendered'] }}</a>
+                                </h2>
+                                <div class="d-flex align-items-center">
+                                    <p class="post-date">
+                                        <time datetime="{{ $post['date'] }}">{{ \Carbon\Carbon::parse($post['date'])->translatedFormat('d F Y') }}</time>
+                                    </p>
+                                </div>
+                            </article>
+                        </div><!-- End post list item -->
+                    @endforeach
+                @else
+                    <div class="col-12 text-center">
+                        <p class="alert alert-warning">Pengumuman yang dicari tidak ditemukan.</p>
+                    </div>
+                @endif
             </div>
         </div>
     </section><!-- /Blog Posts Section -->

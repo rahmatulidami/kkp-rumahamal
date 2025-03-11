@@ -12,35 +12,19 @@
             <div class="container">
                 <div class="row d-flex justify-content-center text-center">
                     <div class="col-lg-8">
-                        <h1>BERITA</h1>
                     </div>
                 </div>
             </div>
         </div>
-
-        <nav class="breadcrumbs">
-      <div class="container">
-          <ol>
-            <li><a href="/">Beranda</a></li>
-            <li class="current">Berita</li>
-          </ol>
-      </div>
-    </nav>
   </div>
     </div><!-- End Page Title -->
 
     <!-- Search Section -->
     <section id="search-section" class="search-section section">
         <div class="container">
-            <form action="{{ route('berita') }}" method="GET" class="search-form">
-                <input type="text" name="search" id="search-input" class="form-control"
-                    placeholder="Cari berita berdasarkan judul..." value="{{ request('search') }}">
-                <button type="submit" class="btn btn-green">Cari</button>
-            </form>
+        <h1 class="text-center mt-2">Menampilkan Postingan dengan tag: <strong>{{ $tagName }}</strong></h1>
         </div>
     </section>
-
-
 
     <!-- Blog Posts Section -->
     <section id="blog-posts" class="blog-posts section">
@@ -82,15 +66,15 @@
             <div class="d-flex justify-content-center">
                 <ul>
                     @if($pagination['current_page'] > 1)
-                        <li><a href="{{ url('berita?page=' . ($pagination['current_page'] - 1)) }}"><i class="bi bi-chevron-left"></i></a></li>
+                        <li><a href="{{ url('berita?page=' . ($pagination['current_page'] - 1) . '&tag=' . request('tag')) }}"><i class="bi bi-chevron-left"></i></a></li>
                     @endif
 
                     @for($i = 1; $i <= $pagination['total_pages']; $i++)
-                        <li><a href="{{ url('berita?page=' . $i) }}" class="{{ $pagination['current_page'] == $i ? 'active' : '' }}">{{ $i }}</a></li>
+                        <li><a href="{{ url('berita?page=' . $i . '&tag=' . request('tag')) }}" class="{{ $pagination['current_page'] == $i ? 'active' : '' }}">{{ $i }}</a></li>
                     @endfor
 
                     @if($pagination['current_page'] < $pagination['total_pages'])
-                        <li><a href="{{ url('berita?page=' . ($pagination['current_page'] + 1)) }}"><i class="bi bi-chevron-right"></i></a></li>
+                        <li><a href="{{ url('berita?page=' . ($pagination['current_page'] + 1) . '&tag=' . request('tag')) }}"><i class="bi bi-chevron-right"></i></a></li>
                     @endif
                 </ul>
             </div>

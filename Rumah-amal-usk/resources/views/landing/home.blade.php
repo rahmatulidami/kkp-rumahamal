@@ -2,12 +2,21 @@
 
 @section('title', 'Beranda | Rumah Amal USK')
 
+@section('meta')
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="Kami menyediakan sistem dan layanan yang memudahkan para muzakki atau donatur dalam menunaikan zakat, infaq, shadaqah, maupun wakaf dengan sebaik-baiknya.">
+
+@endsection
+
 @section('content')
 
 <main class="main">
 
 <!-- Hero Section -->
 <section id="hero">
+<div class="container-fluid">
     <div class="hero-slider swiper init-swiper">
         <script type="application/json" class="swiper-config">
           {
@@ -37,6 +46,7 @@
         <div class="swiper-button-next"></div>
         <div class="swiper-pagination"></div>
     </div>
+  </div>
 </section>
 <!-- End Hero Section -->
 
@@ -78,7 +88,7 @@
 
   <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
-    <h2>CAMPAIGN UNGGULAN</h2>
+    <h2>KAMPANYE UNGGULAN</h2>
   </div><!-- End Section Title -->
 
   <div class="container">
@@ -164,7 +174,14 @@
         <a href="/profil">Selengkapnya</a>
 
         <div class="position-relative mt-4">
-          <img src="assets/img/profil/rek-rumahamal.png" class="img-fluid rounded-4" alt="" loading="lazy">
+          <div class="rekening-container">
+              <img src="assets/img/logobsi.png" alt="BSI Logo" class="logo-bsi">
+              <div class="rekening-info">
+                  <p><strong>Bank Syariah Indonesia (<span class="bsi-bold">BSI</span>)</strong></p>
+                  <p><strong>No. Rekening: <span class="bsi-bold">7099400409</span></strong></p>
+                  <p><strong>A.N.<span class="bsi-bold">Rumah Amal Masjid Jamik USK</span></strong></p>
+              </div>
+          </div>
         </div>
       </div>
     </div>
@@ -200,7 +217,7 @@
                         <div class="d-flex align-items-center">
                             <p class="post-date">
                                 @if(isset($post['date']))
-                                    <time datetime="{{ $post['date'] }}">{{ \Carbon\Carbon::parse($post['date'])->format('M d, Y') }}</time>
+                                    <time datetime="{{ $post['date'] }}">{{ \Carbon\Carbon::parse($post['date'])->translatedFormat('d F Y') }}</time>
                                 @else
                                     <span>No Date</span>
                                 @endif
@@ -239,7 +256,7 @@
                         <div class="d-flex align-items-center">
                             <p class="post-date">
                                 @if(isset($post['date']))
-                                    <time datetime="{{ $post['date'] }}">{{ \Carbon\Carbon::parse($post['date'])->format('M d, Y') }}</time>
+                                    <time datetime="{{ $post['date'] }}">{{ \Carbon\Carbon::parse($post['date'])->translatedFormat('d F Y') }}</time>
                                 @else
                                     <span>No Date</span>
                                 @endif
@@ -261,13 +278,13 @@
     <div class="content row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
         <div class="row d-flex flex-wrap">
           <div class="col-md-8 text-center p-2">
-            <div class="video-container">
-              <iframe id="youtube-video" src="https://www.youtube.com/embed/C1Asqu3uHxs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Youtube RA USK"></iframe>
-            </div>
+          <div class="video-container">
+              <iframe id="youtube-video" src="https://www.youtube.com/embed/jPpcdsT2kF4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Youtube RA USK" loading="lazy"></iframe>
+          </div>
           </div>
           <div class="col-md-4 text-center p-2">
             <div class="instagram-container">
-              <iframe src="https://www.instagram.com/rumahamal.usk/embed" frameborder="0" title="Instagram RA USK"></iframe>
+            <iframe src="https://www.instagram.com/rumahamal.usk/embed" frameborder="0" title="Instagram RA USK" loading="lazy"></iframe>
             </div>
           </div>
         </div>

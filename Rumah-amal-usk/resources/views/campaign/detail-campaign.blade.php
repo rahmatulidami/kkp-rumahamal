@@ -1,5 +1,19 @@
 @extends('layouts.layout')
 
+@section('meta')
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="{{ Str::limit(strip_tags($campaign['content']['rendered']), 150) }}">
+    <meta name="keywords" content="Rumah Amal, Campaign, USK, Charity, News">
+    <meta property="og:title" content="{{ $campaign['title']['rendered'] }}" />
+    <meta property="og:description" content="{{ Str::limit(strip_tags($campaign['content']['rendered']), 150) }}" />
+    <meta property="og:image" content="{{ $campaign['image'] }}" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta name="twitter:card" content="summary_large_image">
+@endsection
+
+
 @section('title', 'Detail-Campaign | Rumah Amal USK')
 
 @section('content')
@@ -16,7 +30,7 @@
         <div class="container">
             <ol>
                 <li><a href="/">Home</a></li>
-                <li><a href="/campaign">Campaign</a></li>
+                <li><a href="/campaign">Kampanye</a></li>
                 <li class="current">{{ $campaign['title']['rendered'] }}</li>
             </ol>
         </div>
@@ -87,7 +101,7 @@
 <!-- Detail Section -->
 <section class="detail" id="detail-section">
     <div class="container">
-        <h3 class="detail-title">Detail Campaign</h3>
+        <h3 class="detail-title">Detail Kampaye</h3>
         <p class="detail-description">
             {!! $campaign['content']['rendered'] !!}
         </p>
@@ -125,7 +139,7 @@
 <!-- Other Campaigns Section -->
 <section id="other-campaigns" class="other-campaigns section">
     <div class="container">
-        <h3>Campaign Lainnya</h3>
+        <h3>Kampaye Lainnya</h3>
         <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
             @foreach ($otherCampaigns as $otherCampaign)
             <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item">
