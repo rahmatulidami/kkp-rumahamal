@@ -2,19 +2,6 @@
 
 @section('title', 'Detail Berita | Rumah Amal USK')
 
-@section('meta')
-    <!-- Meta tags -->
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta name="description" content="{{ Str::limit(strip_tags($berita['content']['rendered']), 150) }}">
-    <meta name="keywords" content="Rumah Amal, Berita, USK, Charity, News">
-    <meta property="og:title" content="{{ $berita['title']['rendered'] }}" />
-    <meta property="og:description" content="{{ Str::limit(strip_tags($berita['content']['rendered']), 150) }}" />
-    <meta property="og:image" content="{{ $mainImage }}" />
-    <meta property="og:url" content="{{ url()->current() }}" />
-    <meta name="twitter:card" content="summary_large_image">
-@endsection
-
 @section('content')
 
 <main class="main">
@@ -52,7 +39,7 @@
 
                 <i class="bi bi-tags"></i>
                 <ul class="tags">
-                  @foreach($filteredTags as $tag)
+                  @foreach($tags as $tag)
                     <li><a href="#">{{ $tag['name'] }}</a></li>
                   @endforeach
                 </ul>
@@ -68,7 +55,7 @@
                     <a href="#" id="share-facebook" title="Share on Facebook"><i class="bi bi-facebook"></i></a>
                     <a href="#" id="copy-link" title="Copy Link"><i class="bi bi-link-45deg"></i></a>
                   </div>
-                  <p id="share-instructions" style="display: none;">URL disalin!</p>
+                  <p id="share-instructions" style="display: none;">URL copied!</p>
                 </div>
 
               </div><!-- End meta bottom -->
@@ -81,7 +68,7 @@
         <!-- Blog Comments Section -->
         <section id="blog-comments" class="blog-comments section">
           <div class="container">
-            <h4 class="comments-count">{{ $comment_count }} Komentar </h4>
+            <h4 class="comments-count">{{ $comment_count }} Comments</h4>
 
             @foreach($comments as $comment)
               <div id="comment-{{ $comment['id'] }}" class="comment">
@@ -89,7 +76,7 @@
                   <div class="comment-img"><img src="{{ asset('storage/' . $comment['user_image']) }}" alt=""></div>
                   <div>
                     <h5><a href="#">{{ $comment['user_name'] }}</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                    <time datetime="{{ $comment['created_at'] }}">{{ \Carbon\Carbon::parse($comment['created_at'])->translatedFormat('d F Y') }}</time>
+                    <time datetime="{{ $comment['created_at'] }}">{{ \Carbon\Carbon::parse($comment['created_at'])->format('M d, Y') }}</time>
                     <p>{{ $comment['content'] }}</p>
                   </div>
                 </div>
@@ -141,25 +128,24 @@
         <div class="widgets-container">
 
         <!-- Search Widget -->
-        <div class="search-widget widget-item">
-            <h3 class="widget-title">Pencarian</h3>
-            <form action="{{ route('berita') }}" method="GET">
-                <input type="text" name="search" placeholder="Cari berita berdasarkan judul...." value="{{ request('search') }}">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+          <div class="search-widget widget-item">
+            <h3 class="widget-title">Search</h3>
+            <form action="">
+              <input type="text">
+              <button type="submit" title="Search"><i class="bi bi-search"></i></button>
             </form>
-        </div>
-        <!--/Search Widget -->
+          </div><!--/Search Widget -->
 
 
           <div class="recent-posts-widget widget-item">
-              <h3 class="widget-title">Postingan Terkini</h3>
+              <h3 class="widget-title">Recent Posts</h3>
 
               @foreach($recent_posts as $recent)
                 <div class="post-item">
                   <img src="{{ $recent['image_url'] ?? asset('assets/img/default.jpeg') }}" alt="{{ $recent['title']['rendered'] }}" class="img-fluid recent-post-img">
                   <div>
                     <h4><a href="{{ route('berita.show', $recent['slug']) }}">{{ $recent['title']['rendered'] }}</a></h4>
-                    <time datetime="{{ $recent['date'] }}">{{ \Carbon\Carbon::parse($recent['date'])->translatedFormat('d F Y') }}</time>
+                    <time datetime="{{ $recent['date'] }}">{{ \Carbon\Carbon::parse($recent['date'])->format('M d, Y') }}</time>
                   </div>
                 </div><!-- End post item -->
               @endforeach
@@ -167,16 +153,15 @@
           </div><!--/Recent Posts Widget -->
 
 
-        <!-- Tags Widget -->
-        <div class="tags-widget widget-item">
+          <!-- Tags Widget -->
+          <div class="tags-widget widget-item">
             <h3 class="widget-title">Tags</h3>
             <ul class="tags">
-                @foreach($filteredTags as $tag)
-                    <li><a href="{{ route('berita.tag', ['tag' => $tag['id']]) }}">{{ $tag['name'] }}</a></li>
-                @endforeach
+              @foreach($tags as $tag)
+                <li><a href="#">{{ $tag['name'] }}</a></li>
+              @endforeach
             </ul>
-        </div><!--/Tags Widget -->
-
+          </div><!--/Tags Widget -->
 
         </div><!--/widgets-container -->
       </div><!--/sidebar -->

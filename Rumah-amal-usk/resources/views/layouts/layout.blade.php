@@ -2,13 +2,14 @@
 <html lang="en">
 
 <head>
-  @yield('meta')
-
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>@yield('title')</title>
+  <meta content="Author: Rahmatul dan Ridho, website rumah amal usk" name="description">
+  <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <!-- <link href="{{ asset('assets/img/favicon.png') }}" rel="icon"> -->
-  <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+  <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
   <link href="{{ asset('assets/img/favicon.png') }}" rel="apple-touch-icon">
 
   <!-- Fonts -->
@@ -16,9 +17,6 @@
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-  <!-- Tambahkan ini di dalam <head> -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
- 
   <!-- Vendor CSS Files -->
   <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
@@ -27,7 +25,7 @@
   <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+  <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
 </head>
 
@@ -37,29 +35,28 @@
     <div class="branding d-flex align-items-center">
         <div class="container position-relative d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center" aria-label="Kembali ke beranda">
-                <img src="{{ asset('assets/img/logorumah.webp') }}" alt="">
+                <img src="{{ asset('assets/img/logorumah.png') }}" alt="">
             </a>
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="/" class="{{ Request::is('/') ? 'active' : '' }}">Beranda</a></li>
-                    <li><a href="/profil" class="{{ Request::is('profil') || Request::is('struktur') || Request::is('fokusprogram') || Request::is('visimisi') || Request::is('landasanutama') ? 'active' : '' }}">Profil</a></li>
-
+                    <li><a href="/" class="active">Beranda</a></li>
+                    <li><a href="/profil">Profil</a></li>
                     <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropdownmenu {{ Request::is('program') || Request::is('campaign') ? 'active' : '' }}"><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <a href="javascript:void(0)" class="dropdownmenu"><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="/program" id="dropdownitemm" class="{{ Request::is('program') ? 'active' : '' }}">Program</a></li>
-                            <li><a href="/campaign" id="dropdownitemm" class="{{ Request::is('campaign') ? 'active' : '' }}">Kampanye</a></li>
+                            <li><a href="/program" class="dropdownitemm">Program</a></li>
+                            <li><a href="/campaign" class="dropdownitemm">Campaign</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropdownmenu {{ Request::is('berita') || Request::is('pengumuman') || Request::is('dokumen') ? 'active' : '' }}"><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <a href="javascript:void(0)" class="dropdownmenu"><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="/berita" id="dropdownitemm" class="{{ Request::is('berita') ? 'active' : '' }}">Berita</a></li>
-                            <li><a href="/pengumuman" id="dropdownitemm" class="{{ Request::is('pengumuman') ? 'active' : '' }}">Pengumuman</a></li>
-                            <li><a href="/dokumen" id="dropdownitemm" class="{{ Request::is('dokumen') ? 'active' : '' }}">Dokumen</a></li>
+                            <li><a href="/berita" class="dropdownitemm">Berita</a></li>
+                            <li><a href="/pengumuman" class="dropdownitemm">Pengumuman</a></li>
+                            <li><a href="/dokumen" class="dropdownitemm">Dokumen</a></li>
                         </ul>
                     </li>
-                    <li><a href="/dokumentasi" class="{{ Request::is('galeri') ? 'active' : '' }}">Galeri</a></li>
+                    <li><a href="/galeri">Galeri</a></li>
                     <li class="language-switcher">
                         <a href="javascript:void(0)" class="language-link">
                             <img src="{{ asset('assets/img/flag-ID.png') }}" alt="Indonesian Flag" class="flag-icon">
@@ -87,58 +84,55 @@
 
 <footer id="footer" class="footer accent-background">
     <div class="container footer-top">
-        <div class="row gy-4 justify-content-between">
-            
-            <!-- About Section -->
-            <div class="col-lg-4 col-md-6 footer-about text-center text-md-start">
-                <a href="/" class="logo d-flex align-items-center justify-content-md-start justify-content-center" aria-label="logo rumah amal">
-                    <img src="{{ asset('assets/img/logorumah.webp') }}" alt="Logo Rumah Amal" class="footer-logo">
+        <div class="row gy-4">
+            <div class="col-lg-4 col-md-12 footer-about">
+                <a href="/" class="logo d-flex align-items-center" aria-label="logo rumah amal">
+                    <div class="img">
+                        <img src="{{ asset('assets/img/logorumah.png') }}" alt="">
+                    </div>
                 </a>
-                <p class="footer-address">Lantai 1 Masjid Jamik USK <br> T. Nyak Arief, Kopelma Darussalam, Banda Aceh 21311</p>
-                <div class="jadwal mt-3">
-                    <h1><strong>Jam Operasional:</strong></h1>
-                    <p><i class="bi bi-clock"></i> Senin - Jum'at: 08.00 - 17.00</p>
-                    <p><i class="bi bi-clock"></i> Sabtu - Minggu: Tutup</p>
+                <p>Lantai 1 Masjid Jamik USK <br> T. Nyak Arief, Kopelma Darussalam, Banda Aceh 21311</p>
+                <p class="mt-4"><strong>Phone:</strong> 
+                  <span>
+                    <a href="https://wa.me/628116888123">0811 6888 123</a>
+                  </span>
+                </p>
+                <p><strong>Email:</strong><span><a href="mailto:rumahamal@usk.ac.id"> rumahamal@usk.ac.id</a></span></p>
+                <p><strong>Tautan:</strong><span><a href="https://usk.ac.id/"> Universitas Syiah Kuala</a></span></p>
+                <div class="social-links d-flex mt-4">
+                    <a href="https://www.facebook.com/rumahamalusk/" aria-label="facebook"><i class="bi bi-facebook" aria-hidden="true"></i></a>
+                    <a href="https://www.tiktok.com/@rumahamal.usk" aria-label="tiktok"><i class="bi bi-tiktok" aria-hidden="true"></i></i></a>
+                    <a href="https://www.instagram.com/rumahamal.usk/" aria-label="instagram"><i class="bi bi-instagram" aria-hidden="true"></i></a>
                 </div>
-                
             </div>
-            
-            <!-- Contact Section -->
-            <div class="col-lg-4 col-md-6 footer-contact text-center text-md-start">
-                <h1><strong>Hubungi Kami:</strong></h1>
-                <p><strong>WA:</strong> <a href="https://wa.me/628116888123">0811 6888 123</a></p>
-                <p><strong>Email:</strong> <a href="mailto:rumahamal@usk.ac.id">rumahamal@usk.ac.id</a></p>
-                <p><strong>Tautan:</strong> <a href="https://usk.ac.id/">Universitas Syiah Kuala</a></p>
-                <strong><a href="/faq">FAQ</a></strong>
-                <div class="social-links d-flex justify-content-center justify-content-md-start mt-3">
-                    <a href="https://www.facebook.com/rumahamalusk/" aria-label="facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="https://www.tiktok.com/@rumahamal.usk" aria-label="tiktok"><i class="bi bi-tiktok"></i></a>
-                    <a href="https://www.instagram.com/rumahamal.usk/" aria-label="instagram"><i class="bi bi-instagram"></i></a>
-                </div>
 
-                <div class="mt-3 text-center">
-                    <a href="https://forms.gle/tVuo2prHcHjnZsWHA" class="keluhan-btn" target="_blank">
-                        Ajukan Keluhan
-                    </a>
-                </div>
+            <div class="col-lg-4 col-md-6 footer-links">
+              <div class="jadwal">
+                <p><strong>Jam Operasional:</strong></p>
+                <p class="mt-4"><i class="bi bi-clock"></i> <span>Mon - Fri: 8AM - 5PM</span></p>
+                <p><i class="bi bi-clock"></i> <span>Sat - Sun: Closed</span></p>
+              </div>  
             </div>
-            
-            <!-- Map Section -->
-            <div class="col-lg-4 col-md-12 footer-map text-center">
+
+            <div class="col-lg-4 col-md-6 footer-links location-container">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.062950078828!2d95.3687264!3d5.5709969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304037d79398cc65%3A0x164fb653d9c4a1f7!2sRumah%20Amal%20Masjid%20Jamik%20USK!5e0!3m2!1sen!2sid!4v1688584573276!5m2!1sen!2sid"
-                    width="100%" height="250px" style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade" title="GMAPS RA USK"></iframe>
+                    width="100%"
+                    height="100%"
+                    style="border:0; border-radius: 15px;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="GMAPS RA USK"
+                ></iframe>
             </div>
         </div>
     </div>
 
-    <!-- Copyright -->
     <div class="copyright text-center mt-4">
-        <p>&copy; <span>Copyright</span> <a href="/" class="sitename"><strong>Rumah Amal USK</strong></a> <span>All Rights Reserved</span></p>
+        <p>© <span>Copyright</span> <a href="/" style="color: #45474B;"><strong class="px-1 sitename">Rumah Amal USK</strong></a><span>All Rights Reserved</span></p>
     </div>
 </footer>
-
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

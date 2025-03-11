@@ -12,7 +12,7 @@
       <div class="container">
         <div class="row d-flex justify-content-center text-center">
           <div class="col-lg-8">
-            <h1>KAMPANYE</h1>
+            <h1>CAMPAIGN</h1>
           </div>
         </div>
       </div>
@@ -20,72 +20,76 @@
     <nav class="breadcrumbs">
       <div class="container">
         <ol>
-          <li><a href="/">Beranda</a></li>
-          <li class="current">Kampanye</li>
+          <li><a href="/">Home</a></li>
+          <li class="current">Campaign</li>
         </ol>
       </div>
     </nav>
   </div><!-- End Page Title -->
 
-<!-- Search Section -->
-<section id="campaign-unggulan" class="campaign-unggulan section">
+  <!-- campaign Section -->
+  <section id="campaign-unggulan" class="campaign-unggulan section">
     <div class="container">
-        <form action="{{ route('campaign.index') }}" method="GET" class="search-form">
-            <input type="text" name="search" id="search-input" class="form-control"
-                placeholder="Cari kampanye berdasarkan judul..." value="{{ request('search') }}">
-            <button type="submit" class="btn btn-green">Cari</button>
-        </form>
-        
-        <div class="row gy-4" id="campaign-container" data-aos="fade-up" data-aos-delay="200">
-        @if(count($processedCampaigns) > 0)
-            @foreach ($processedCampaigns as $campaign)
-                <div class="col-lg-4 col-md-6 campaign-unggulan-item">
-                    <div class="campaign-unggulan-content h-100">
-                        <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}">
-                            <img src="{{ $campaign['image'] }}" alt="">
-                        </a>
-                        <div class="campaign-unggulan-info">
-                            <h3>
-                                <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}">
-                                    {{ $campaign['title']['rendered'] }}
-                                </a>
-                            </h3>
-                            <div class="progress-container">
-                                <div class="Durasi">
-                                    <div class="sisa-hari">
-                                        <span>Durasi</span>
-                                        <div class="days-left">{{ $campaign['acf']['lama_campaign'] ?? 'N/A' }} hari</div>
-                                    </div>
-                                </div>
-                                <div class="progress" role="progressbar" aria-valuenow="{{ $campaign['percentage'] }}"
-                                    aria-valuemin="0" aria-valuemax="100" 
-                                    style="--progress-percentage: {{ $campaign['percentage'] }}%;">
-                                    <div class="progress-bar" style="width: var(--progress-percentage);"></div>
-                                </div>
-                                <div class="progress-info">
-                                    <div class="progress-start">
-                                        <span>Terkumpul</span>
-                                        <div class="amount">Rp. {{ number_format($campaign['terkumpul'], 0, ',', '.') }}</div>
-                                    </div>
-                                    <div class="progress-end">
-                                        <span>Dana dibutuhkan</span>
-                                        <div class="jumlah">Rp. {{ number_format($campaign['dibutuhkan'], 0, ',', '.') }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-          @else
-              <div class="col-12 text-center">
-                 <p class="alert alert-warning">Kampanye yang dicari tidak ditemukan.</p>
-              </div>
-          @endif  
+
+      <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+        <div class="program-filters" data-aos="fade-up" data-aos-delay="100">
+          <select id="filter-select" class="isotope-filters">
+            <option value="*" class="filter-active">ALL</option>
+            <option value=".filter-infak">INFAK</option>
+            <option value=".filter-zakat">ZAKAT</option>
+          </select>
         </div>
+
+        <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+          @foreach ($processedCampaigns as $campaign)
+            <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item">
+              <div class="campaign-unggulan-content h-100">
+              <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}""><img src="{{ $campaign['image'] }}" alt=""></a>
+                <div class="campaign-unggulan-info">
+                <h4>
+                    <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}">{{ $campaign['title']['rendered'] }}</a>
+                </h4>
+                  <div class="progress-container">
+                    <div class="Durasi">
+                      <div class="sisa-hari">
+                        <span>Durasi</span>
+                        <div class="days-left">{{ $campaign['acf']['lama_campaign'] ?? 'N/A' }} hari</div>
+                      </div>
+                    </div>
+
+                    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="{{ $campaign['percentage'] }}" aria-valuemin="0" aria-valuemax="100" style="--progress-percentage: {{ $campaign['percentage'] }}%;">
+                      <div class="progress-bar" style="width: var(--progress-percentage);"></div>
+                    </div>
+
+                    <div class="progress-info">
+                      <div class="progress-start">
+                        <span>Terkumpul</span>
+                        <div class="amount">Rp. {{ number_format($campaign['terkumpul'], 0, ',', '.') }}</div>
+                      </div>
+
+                      <div class="progress-end">
+                        <span>Dana dibutuhkan</span>
+                        <div class="jumlah">Rp. {{ number_format($campaign['dibutuhkan'], 0, ',', '.') }}</div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
+                </div>
+              </div>
+            </div><!-- End campaign-unggulan Item -->
+          @endforeach
+
+        </div><!-- End Portfolio Container -->
+
+      </div>
+
     </div>
-</section>
+
+  </section>
+
 </main>
 
 @endsection

@@ -11,15 +11,11 @@ class GalleryController extends Controller
     public function showGallery()
     {
         // Fetch the JSON data from the API
-        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/pages/4716');
-
-        // Check if the response is successful
-        if (!$response->ok()) {
-            abort(500, 'Failed to fetch gallery data.');
-        }
-
+        $response = Http::get('https://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/pages/4716');
         $data = $response->json();
-        $content = $data['content']['rendered'] ?? '';
+
+        // Extract the content
+        $content = $data['content']['rendered'];
 
         // Use DOMDocument to parse the HTML content
         $dom = new DOMDocument();
@@ -29,22 +25,18 @@ class GalleryController extends Controller
 
         // Get all <a> tags that contain the images
         foreach ($dom->getElementsByTagName('a') as $anchor) {
-            if (!$anchor instanceof DOMElement) continue;
-
-            $href = $anchor->getAttribute('href'); // Ambil href sebagai full image URL
+            $href = $anchor->getAttribute('href'); // High-resolution image URL
             $imgTag = $anchor->getElementsByTagName('img')->item(0);
 
             if ($imgTag instanceof DOMElement) {
                 $src = $imgTag->getAttribute('src');
-                $alt = $imgTag->getAttribute('alt') ?: 'Image';
+                $alt = $imgTag->getAttribute('alt');
                 $caption = '';
 
-                // Gunakan href jika ada, fallback ke src setelah membersihkan skala kecil
-                $finalSrc = !empty($href) ? $href : preg_replace('/-\d+x\d+| -scaled/', '', $src);
-
+                // Find the corresponding caption
                 $nextElement = $anchor->nextSibling;
                 while ($nextElement) {
-                    if ($nextElement instanceof DOMElement) {
+                    if ($nextElement->nodeType === XML_ELEMENT_NODE) {
                         if ($nextElement->nodeName === 'div' && $nextElement->getAttribute('class') === 'gallery-caption__wrapper') {
                             $captionTag = $nextElement->getElementsByTagName('dd')->item(0);
                             if ($captionTag instanceof DOMElement) {
@@ -56,9 +48,10 @@ class GalleryController extends Controller
                     $nextElement = $nextElement->nextSibling;
                 }
 
+                // Handle case where caption is directly in <dd> tags
                 if (empty($caption)) {
                     foreach ($dom->getElementsByTagName('dd') as $captionTag) {
-                        if ($captionTag instanceof DOMElement && $captionTag->getAttribute('class') === 'wp-caption-text gallery-caption') {
+                        if ($captionTag->getAttribute('class') === 'wp-caption-text gallery-caption') {
                             $caption = trim($captionTag->textContent);
                             break;
                         }
@@ -66,31 +59,15 @@ class GalleryController extends Controller
                 }
 
                 $images[] = [
-                    'src' => $finalSrc, // Gunakan full image URL
-                    'href' => $href,
+                    'src' => $src,
+                    'href' => $href, // This should be the high-res image URL
                     'alt' => $alt,
                     'caption' => $caption,
                 ];
             }
         }
 
-        // Pagination setup
-        $perPage = 8;
-        $totalImages = count($images);
-        $totalPages = ceil($totalImages / $perPage);
-        $currentPage = request()->query('page', 1);
-        $offset = ($currentPage - 1) * $perPage;
-        $paginatedImages = array_slice($images, $offset, $perPage);
-
-        $pagination = [
-            'current_page' => $currentPage,
-            'total_pages' => $totalPages
-        ];
-
-        // Pass the images and pagination data to the view
-        return view('galeri.galeri', [
-            'images' => $paginatedImages,
-            'pagination' => $pagination
-        ]);
+        // Pass the images array to the view
+        return view('galeri.galeri', ['images' => $images]);
     }
 }

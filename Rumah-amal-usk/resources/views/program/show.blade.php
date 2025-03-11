@@ -2,14 +2,6 @@
 
 @section('title', 'Program Detail')
 
-@section('meta')
-    <!-- Meta tags -->
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta name="description" content="Kami menyediakan sistem dan layanan yang memudahkan para muzakki atau donatur dalam menunaikan zakat, infaq, shadaqah, maupun wakaf dengan sebaik-baiknya.">
-
-@endsection
-
 @section('content')
 
 <main class="main">

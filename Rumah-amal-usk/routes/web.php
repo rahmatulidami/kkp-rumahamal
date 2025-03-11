@@ -9,7 +9,7 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\FaqController;
+use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,10 +57,9 @@ Route::get('pengumuman', [BeritaController::class, 'pengumuman'])->name('pengumu
 
 Route::get('/pengumuman/{slug}', [PengumumanController::class, 'show'])->name('pengumuman.show');
 
-Route::get('/dokumentasi', [GalleryController::class, 'showGallery'])->name('galeri.index');
+Route::get('/galeri', [GalleryController::class, 'showGallery']);
 
-Route::get('/dokumen', [DocumentController::class, 'showDocuments'])->name('galeri.index');
-
+Route::get('/dokumen', [DocumentController::class, 'showDocuments']);
 
 Route::get('/campaign', [CampaignController::class, 'index'])->name('campaign.index');
 
@@ -68,22 +67,6 @@ Route::get('/campaign/{slug}', [CampaignController::class, 'show'])->name('campa
 
 Route::get('/profil', function () {
     return view('profil/profil');
-});
-
-Route::get('/visimisi', function () {
-    return view('profil/visi-misi');
-});
-
-Route::get('/struktur', function () {
-    return view('profil/struktur');
-});
-
-Route::get('/landasanutama', function () {
-    return view('profil/landasanutama');
-});
-
-Route::get('/fokusprogram', function () {
-    return view('profil/fokusprogram');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home.auth');
@@ -113,13 +96,3 @@ Route::get('/program', function () {
 Route::get('/program/{slug}', function () {
     return view('program.show');
 })->name('program.show');
-
-
-Route::get('/favicon.ico', function() {
-    return response()->file(public_path('favicon.ico'));
-});
-
-Route::get('/faq', [FaqController::class, 'index'])->name('bantuan.bantuan');
-Route::get('/faq/{id}', [FaqController::class, 'show'])->name('bantuan.show');
-
-Route::get('/tag/{tag}', [BeritaController::class, 'tag'])->name('berita.tag');

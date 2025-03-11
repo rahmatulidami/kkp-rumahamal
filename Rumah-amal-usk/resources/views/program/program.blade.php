@@ -2,14 +2,6 @@
 
 @section('title', 'Program | Rumah Amal USK')
 
-@section('meta')
-    <!-- Meta tags -->
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta name="description" content="Kami menyediakan sistem dan layanan yang memudahkan para muzakki atau donatur dalam menunaikan zakat, infaq, shadaqah, maupun wakaf dengan sebaik-baiknya.">
-
-@endsection
-
 @section('content')
 
 <main class="main">
@@ -28,7 +20,7 @@
     <nav class="breadcrumbs">
       <div class="container">
         <ol>
-          <li><a href="/">Beranda</a></li>
+          <li><a href="/">Home</a></li>
           <li class="current">Program</li>
         </ol>
       </div>
@@ -41,7 +33,7 @@
       <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
         <div class="program-filters" data-aos="fade-up" data-aos-delay="100">
           <select id="filter-select" class="isotope-filters" aria-label="filter">
-            <option value="*" class="filter-active">SEMUA</option>
+            <option value="*" class="filter-active">ALL</option>
             <option value=".filter-pendidikan">PENDIDIKAN</option>
             <option value=".filter-pemberdayaan">PEMBERDAYAAN</option>
             <option value=".filter-sosial">SOSIAL & KEMANUSIAAN</option>
@@ -52,9 +44,8 @@
         </div>
 
         <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200" id="program-items">
-            <p> Sedang Memuat Program ...</p>
+            <p>Loading program ...</p>
         </div>
-        <p id="no-program-message" class="text-center alert alert-warning" style="display: none;">Kategori program yang dicari tidak ditemukan.</p>
       </div>
     </div>
   </section>
@@ -65,52 +56,44 @@
 
 <!-- JavaScript -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
   const programContainer = document.getElementById("program-items");
-  const loadingText = document.querySelector("#program-items p");
-  const noProgramMessage = document.getElementById("no-program-message");
+  const loadingText = document.querySelector("#program-items p"); // Select the loading text element
 
-  // Fetch program data dari API
-  fetch("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/program")
+  // Fetch program data from API
+  fetch("https://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/program")
     .then(response => response.json())
     .then(data => {
-      // Hapus teks loading sebelum menampilkan program
-      loadingText.style.display = "none";
+      // Remove existing content
       programContainer.innerHTML = '';
 
-      if (data.length === 0) {
-        noProgramMessage.style.display = "block";
-        return;
-      } else {
-        noProgramMessage.style.display = "none";
-      }
-
-      // Render program
+      // Render programs
       data.forEach(post => {
         let filterClass = '';
         const categories = post.categories;
 
-        // Mapping kategori ke filter class
+        // Mapping categories to filter classes
         if (categories.includes(61)) filterClass = 'filter-pendidikan';
         else if (categories.includes(64)) filterClass = 'filter-pemberdayaan';
         else if (categories.includes(65)) filterClass = 'filter-sosial';
         else if (categories.includes(62)) filterClass = 'filter-syiar';
         else if (categories.includes(63)) filterClass = 'filter-kemitraan';
         else if (categories.includes(66)) filterClass = 'filter-fasilitator';
-        else filterClass = 'filter-none'; // Tambahkan ini jika kategori tidak cocok
 
-        // Ambil gambar dari konten
+        // Extract image URL from the content
         const parser = new DOMParser();
-        const doc = parser.parseFromString(post.content.rendered, "text/html");
+        const contentHtml = post.content.rendered;
+        const doc = parser.parseFromString(contentHtml, "text/html");
         const imgElement = doc.querySelector("img");
         const imageUrl = imgElement ? imgElement.src : "/assets/img/default.jpeg";
 
-        // Buat URL ke halaman detail program
-        const postSlug = post.slug || "";
-        const postLink = `/program/${postSlug}`;
+        // Get slug or ID to form link to internal program detail page
+        const postSlug = post.slug || "";  // Use slug to form URL
+        const postLink = `/program/${postSlug}`;  // Construct internal link
+
         const postTitle = post.title.rendered || "Untitled";
 
-        // Buat HTML untuk setiap program
+        // Create HTML structure for the program post
         const programItem = `
           <div class="col-lg-2-4 col-md-6 program-item isotope-item ${filterClass}">
             <div class="program-content h-100">
@@ -121,41 +104,28 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
         `;
 
-        // Tambahkan program ke dalam container
+        // Append the program item to the container
         programContainer.innerHTML += programItem;
       });
 
-      // Inisialisasi Isotope
+      // Initialize Isotope
       const iso = new Isotope(programContainer, {
         itemSelector: '.isotope-item',
         layoutMode: 'masonry'
       });
 
-      // Event listener untuk filter
+      // Filter items on select change
       document.getElementById('filter-select').addEventListener('change', function() {
         const filterValue = this.value;
         iso.arrange({ filter: filterValue });
-
-        // Tunggu sebentar sebelum mengecek jumlah elemen yang terlihat
-        setTimeout(() => {
-          let visibleItems = Array.from(document.querySelectorAll('.isotope-item')).filter(item => {
-            return item.getBoundingClientRect().height > 0;
-          });
-
-          console.log("Jumlah program yang terlihat:", visibleItems.length);
-
-          if (visibleItems.length === 0) {
-            noProgramMessage.style.display = "block";
-          } else {
-            noProgramMessage.style.display = "none";
-          }
-        }, 500);
       });
+
+      // Hide loading text after data is successfully loaded
+      loadingText.style.display = "none";
     })
     .catch(error => {
       console.error('Error fetching program data:', error);
-      programContainer.innerHTML = "<p>Gagal memuat program.</p>";
-      noProgramMessage.style.display = "block";
+      programContainer.innerHTML = "<p>Failed to load programs.</p>";
     });
 });
 

@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
 
 class PengumumanController extends Controller
 {
     private $apiBaseUrl = 'http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2';
     private $pengumumanCategoryId = 87; // Category ID for Pengumuman
-    private $cacheTime = 60 * 60; // Cache time in seconds (e.g., 1 hour)
 
     public function show($slug)
     {
@@ -19,27 +17,13 @@ class PengumumanController extends Controller
         if ($postDetails) {
             $pengumuman = $postDetails[0]; // Get the first post from the response
 
-            // Clean the title and extract the main image
             $pengumuman['title']['rendered'] = $this->cleanTitle($pengumuman['title']['rendered']);
             $mainImage = $this->getMainImage($pengumuman['content']['rendered']);
-
-            // Filter the content and remove the main image tag
             $filteredContent = $this->filterContent($pengumuman['content']['rendered'], $mainImage);
 
-            // Fetch recent posts
             $recent_posts = $this->fetchRecentPosts();
+            $tags = $this->fetchAllTags();
 
-            // Fetch tags related only to this pengumuman
-            $pengumumanTags = $pengumuman['tags'] ?? [];
-
-            if (!empty($pengumumanTags)) {
-                $tagIds = implode(',', $pengumumanTags); // Convert array to "68,85,67"
-                $tags = $this->fetchFilteredTags($tagIds);
-            } else {
-                $tags = [];
-            }
-
-            // Return the view with the necessary data
             return view('pengumuman.detail-pengumuman', compact('pengumuman', 'recent_posts', 'tags', 'mainImage', 'filteredContent'));
         } else {
             abort(404, 'Pengumuman tidak ditemukan');
@@ -56,29 +40,23 @@ class PengumumanController extends Controller
 
     private function fetchRecentPosts()
     {
-        return Cache::remember('recent_posts', $this->cacheTime, function() {
-            $response = Http::get("{$this->apiBaseUrl}/posts", [
-                'per_page' => 5,
-            ]);
-            $recent_posts = $response->json();
-            
-            foreach ($recent_posts as &$post) {
-                $post['title']['rendered'] = $this->cleanTitle($post['title']['rendered']);
-                $post['image_url'] = $this->extractImageUrl($post['content']['rendered']) ?? asset('assets/img/default.jpeg');
-            }
+        $response = Http::get("{$this->apiBaseUrl}/posts", [
+            'per_page' => 5,
+        ]);
+        $recent_posts = $response->json();
 
-            return $recent_posts;
-        });
+        foreach ($recent_posts as &$post) {
+            $post['title']['rendered'] = $this->cleanTitle($post['title']['rendered']);
+            $post['image_url'] = $this->extractImageUrl($post['content']['rendered']) ?? asset('assets/img/default.jpeg');
+        }
+
+        return $recent_posts;
     }
 
-    private function fetchFilteredTags($tagIds)
+    private function fetchAllTags()
     {
-        return Cache::remember('tags_' . $tagIds, $this->cacheTime, function() use ($tagIds) {
-            $response = Http::get("{$this->apiBaseUrl}/tags", [
-                'include' => $tagIds, // Fetch only relevant tags
-            ]);
-            return $response->json();
-        });
+        $response = Http::get("{$this->apiBaseUrl}/tags");
+        return $response->json();
     }
 
     private function extractImageUrl($content)
