@@ -180,7 +180,7 @@ class BeritaController extends Controller
     {
         // Fetch the post by slug from the API and cache it
         $berita = Cache::remember('post_' . $slug, $this->cacheTime, function() use ($slug) {
-            $response = Http::get('http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/posts', [
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
                 'slug' => $slug,
             ]);
 
@@ -199,7 +199,7 @@ class BeritaController extends Controller
 
         // Ambil recent posts
         $recent_posts = Cache::remember('recent_posts', $this->cacheTime, function() {
-            $response = Http::get('http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/posts', ['per_page' => 5]);
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', ['per_page' => 5]);
             return array_filter($response->json(), function ($post) {
                 return !in_array(88, $post['categories'] ?? []);
             });
@@ -216,7 +216,7 @@ class BeritaController extends Controller
         if (!empty($beritaTags)) {
             $tagIds = implode(',', $beritaTags); // Gabungkan ID menjadi string "68,85,67"
             $filteredTags = Cache::remember('tags_' . $tagIds, $this->cacheTime, function() use ($tagIds) {
-                $response = Http::get("http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/tags", [
+                $response = Http::get("http://rumahamal.usk.ac.id/api/wp-json/wp/v2/tags", [
                     'include' => $tagIds, // Ambil hanya tag yang dibutuhkan
                 ]);
                 return $response->json();
@@ -240,7 +240,7 @@ class BeritaController extends Controller
     private function getTagName($tagId)
     {
         return Cache::remember("tag_name_{$tagId}", $this->cacheTime, function () use ($tagId) {
-            $response = Http::get("http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/tags/{$tagId}");
+            $response = Http::get("http://rumahamal.usk.ac.id/api/wp-json/wp/v2/tags/{$tagId}");
             return $response->successful() ? $response->json()['name'] ?? 'Tanpa Tag' : 'Tanpa Tag';
         });
     }
@@ -259,7 +259,7 @@ class BeritaController extends Controller
 
         // Ambil semua berita dari cache
         $posts = Cache::remember('posts', $this->cacheTime, function () {
-            $response = Http::get('http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/posts', [
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
                 'per_page' => 100,
             ]);
             return $response->json();
