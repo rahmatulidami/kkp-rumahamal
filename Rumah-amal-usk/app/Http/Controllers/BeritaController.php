@@ -26,12 +26,22 @@ class BeritaController extends Controller
     
         $categoryMap = array_column($categories, 'name', 'id');
     
-        // Fetch posts (cache for 60 minutes)
+        // Fetch posts (cache for 60 minutes) with proper sorting
         $posts = Cache::remember('posts', $this->cacheTime, function() {
             $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
                 'per_page' => 100,
+                'orderby' => 'date',
+                'order' => 'desc'
             ]);
-            return $response->json();
+            
+            $posts = $response->json();
+            
+            // Fallback sorting if API doesn't respect parameters
+            usort($posts, function($a, $b) {
+                return strtotime($b['date']) - strtotime($a['date']);
+            });
+            
+            return $posts;
         });
     
         // Filter out posts with category ID 88 and 'Pengumuman'
@@ -83,7 +93,7 @@ class BeritaController extends Controller
     public function pengumuman(Request $request)
     {
         $searchQuery = $request->get('search');
-        $tagFilter = $request->get('tag'); // Pastikan tag filter diambil dari request
+        $tagFilter = $request->get('tag');
     
         // Fetch categories from cache
         $categories = Cache::remember('categories', $this->cacheTime, function() {
@@ -92,12 +102,22 @@ class BeritaController extends Controller
     
         $categoryMap = array_column($categories, 'name', 'id');
     
-        // Fetch posts from cache
+        // Fetch posts from cache with proper sorting
         $posts = Cache::remember('posts', $this->cacheTime, function() {
             $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
                 'per_page' => 100,
+                'orderby' => 'date',
+                'order' => 'desc'
             ]);
-            return $response->json();
+            
+            $posts = $response->json();
+            
+            // Fallback sorting if API doesn't respect parameters
+            usort($posts, function($a, $b) {
+                return strtotime($b['date']) - strtotime($a['date']);
+            });
+            
+            return $posts;
         });
     
         // Filter posts untuk kategori Pengumuman
@@ -141,7 +161,6 @@ class BeritaController extends Controller
             'total_pages' => ceil($totalPosts / $perPage),
         ];
     
-        // Send data to the view
         return view('pengumuman.pengumuman', compact('pengumumanPosts', 'pagination', 'searchQuery', 'tagFilter'));
     }
     
@@ -197,10 +216,22 @@ class BeritaController extends Controller
         $berita['title']['rendered'] = $this->cleanTitle($berita['title']['rendered']);
         $mainImage = $this->extractImageUrl($berita['content']['rendered']);
     
-        // Ambil recent posts
+        // Ambil recent posts dengan sorting yang benar
         $recent_posts = Cache::remember('recent_posts', $this->cacheTime, function() {
-            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', ['per_page' => 5]);
-            return array_filter($response->json(), function ($post) {
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
+                'per_page' => 5,
+                'orderby' => 'date',
+                'order' => 'desc'
+            ]);
+            
+            $posts = $response->json();
+            
+            // Fallback sorting
+            usort($posts, function($a, $b) {
+                return strtotime($b['date']) - strtotime($a['date']);
+            });
+            
+            return array_filter($posts, function ($post) {
                 return !in_array(88, $post['categories'] ?? []);
             });
         });
@@ -214,10 +245,10 @@ class BeritaController extends Controller
         $beritaTags = $berita['tags'] ?? [];
     
         if (!empty($beritaTags)) {
-            $tagIds = implode(',', $beritaTags); // Gabungkan ID menjadi string "68,85,67"
+            $tagIds = implode(',', $beritaTags);
             $filteredTags = Cache::remember('tags_' . $tagIds, $this->cacheTime, function() use ($tagIds) {
                 $response = Http::get("http://rumahamal.usk.ac.id/api/wp-json/wp/v2/tags", [
-                    'include' => $tagIds, // Ambil hanya tag yang dibutuhkan
+                    'include' => $tagIds,
                 ]);
                 return $response->json();
             });
@@ -236,7 +267,6 @@ class BeritaController extends Controller
         return view('berita.detail-berita', compact('berita', 'recent_posts', 'filteredTags', 'mainImage', 'comment_count', 'comments'));
     }
 
-
     private function getTagName($tagId)
     {
         return Cache::remember("tag_name_{$tagId}", $this->cacheTime, function () use ($tagId) {
@@ -245,10 +275,9 @@ class BeritaController extends Controller
         });
     }
 
-
     public function tag($tag, Request $request)
     {
-        $tagName = $this->getTagName($tag); // Ambil nama tag dari API
+        $tagName = $this->getTagName($tag);
 
         // Ambil daftar kategori dari cache
         $categories = Cache::remember('categories', $this->cacheTime, function () {
@@ -257,12 +286,22 @@ class BeritaController extends Controller
 
         $categoryMap = array_column($categories, 'name', 'id');
 
-        // Ambil semua berita dari cache
+        // Ambil semua berita dari cache dengan sorting yang benar
         $posts = Cache::remember('posts', $this->cacheTime, function () {
             $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
                 'per_page' => 100,
+                'orderby' => 'date',
+                'order' => 'desc'
             ]);
-            return $response->json();
+            
+            $posts = $response->json();
+            
+            // Fallback sorting
+            usort($posts, function($a, $b) {
+                return strtotime($b['date']) - strtotime($a['date']);
+            });
+            
+            return $posts;
         });
 
         // Filter berita berdasarkan tag
@@ -270,7 +309,7 @@ class BeritaController extends Controller
             return in_array($tag, $post['tags'] ?? []);
         });
 
-        // Proses post (ambil gambar, sanitasi konten, dll.)
+        // Proses post
         foreach ($beritaPosts as &$post) {
             $post['image_url'] = $this->extractImageUrl($post['content']['rendered']);
             $post['content']['rendered'] = $this->sanitizeContent($post['content']['rendered']);
@@ -292,9 +331,6 @@ class BeritaController extends Controller
             'total_pages' => ceil($totalPosts / $perPage),
         ];
 
-        // Tampilkan template khusus untuk tag
         return view('berita.tag', compact('beritaPosts', 'pagination', 'tag', 'tagName'));
     }
-
-        
 }

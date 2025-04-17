@@ -40,6 +40,7 @@
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
+        <img src="assets/img/profil/mesjid-jamik.webp" class="img-fluid rounded-4 mb-4" alt="Profil Image">
           <div class="fokus-box">
             <h4 class="title">VISI</h4>
             <p>Menjadi Lembaga Amil Zakat dan pemberdayaan ekonomi umat yang inovatif, responsif, profesional dan terkemuka untuk kemaslahatan bersama yang berbasis masjid.</p>
