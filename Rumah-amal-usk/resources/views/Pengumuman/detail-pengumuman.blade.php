@@ -66,13 +66,17 @@
                     <a href="#" id="share-instagram" title="Share on Instagram"><i class="bi bi-instagram"></i></a>
                     <a href="#" id="share-whatsapp" title="Share on WhatsApp"><i class="bi bi-whatsapp"></i></a>
                     <a href="#" id="share-facebook" title="Share on Facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="#" id="copy-link" title="Copy Link"><i class="bi bi-link-45deg"></i></a>
+
+                    <!-- Copy link tombol dengan tooltip -->
+                    <a href="#" id="copy-link" title="Copy Link" class="copy-btn">
+                      <i class="bi bi-link-45deg"></i>
+                      <span class="tooltip-text" id="tooltip-copy">Tautan telah disalin</span>
+                    </a>
                   </div>
-                  <p id="share-instructions" style="display: none;">URL disalin!</p>
+
                 </div>
 
               </div><!-- End meta bottom -->
-
             </article>
 
           </div>
@@ -128,7 +132,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const copyLinkButton = document.getElementById('copy-link');
-  const shareInstructions = document.getElementById('share-instructions');
+  const tooltip = document.getElementById('tooltip-copy');
 
   const shareUrls = {
     'share-whatsapp': 'https://api.whatsapp.com/send?text=',
@@ -150,13 +154,13 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   copyLinkButton.addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the default anchor click behavior
+    event.preventDefault();
     const url = window.location.href;
     navigator.clipboard.writeText(url)
       .then(() => {
-        shareInstructions.style.display = 'inline';
+        this.classList.add('show-tooltip');
         setTimeout(() => {
-          shareInstructions.style.display = 'none';
+          this.classList.remove('show-tooltip');
         }, 2000);
       })
       .catch(err => {
@@ -165,7 +169,5 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
-
-
 
 @endsection

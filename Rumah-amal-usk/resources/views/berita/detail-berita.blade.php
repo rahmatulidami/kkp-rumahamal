@@ -3,16 +3,16 @@
 @section('title', 'Detail Berita | Rumah Amal USK')
 
 @section('meta')
-    <!-- Meta tags -->
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta name="description" content="{{ Str::limit(strip_tags($berita['content']['rendered']), 150) }}">
-    <meta name="keywords" content="Rumah Amal, Berita, USK, Charity, News">
-    <meta property="og:title" content="{{ $berita['title']['rendered'] }}" />
-    <meta property="og:description" content="{{ Str::limit(strip_tags($berita['content']['rendered']), 150) }}" />
-    <meta property="og:image" content="{{ $mainImage }}" />
-    <meta property="og:url" content="{{ url()->current() }}" />
-    <meta name="twitter:card" content="summary_large_image">
+<!-- Meta tags -->
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta name="description" content="{{ Str::limit(strip_tags($berita['content']['rendered']), 150) }}">
+<meta name="keywords" content="Rumah Amal, Berita, USK, Charity, News">
+<meta property="og:title" content="{{ $berita['title']['rendered'] }}" />
+<meta property="og:description" content="{{ Str::limit(strip_tags($berita['content']['rendered']), 150) }}" />
+<meta property="og:image" content="{{ $mainImage }}" />
+<meta property="og:url" content="{{ url()->current() }}" />
+<meta name="twitter:card" content="summary_large_image">
 @endsection
 
 @section('content')
@@ -66,9 +66,14 @@
                     <a href="#" id="share-instagram" title="Share on Instagram"><i class="bi bi-instagram"></i></a>
                     <a href="#" id="share-whatsapp" title="Share on WhatsApp"><i class="bi bi-whatsapp"></i></a>
                     <a href="#" id="share-facebook" title="Share on Facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="#" id="copy-link" title="Copy Link"><i class="bi bi-link-45deg"></i></a>
+
+                    <!-- Copy link tombol dengan tooltip -->
+                    <a href="#" id="copy-link" title="Copy Link" class="copy-btn">
+                      <i class="bi bi-link-45deg"></i>
+                      <span class="tooltip-text" id="tooltip-copy">Tautan telah disalin</span>
+                    </a>
                   </div>
-                  <p id="share-instructions" style="display: none;">URL disalin!</p>
+
                 </div>
 
               </div><!-- End meta bottom -->
@@ -140,55 +145,50 @@
       <div class="col-lg-4 sidebar">
         <div class="widgets-container">
 
-        <!-- Search Widget -->
-        <div class="search-widget widget-item">
+          <!-- Search Widget -->
+          <div class="search-widget widget-item">
             <h3 class="widget-title">Pencarian</h3>
             <form action="{{ route('berita') }}" method="GET">
-                <input type="text" name="search" placeholder="Cari berita berdasarkan judul...." value="{{ request('search') }}">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+              <input type="text" name="search" placeholder="Cari berita berdasarkan judul...." value="{{ request('search') }}">
+              <button type="submit" title="Search"><i class="bi bi-search"></i></button>
             </form>
-        </div>
-        <!--/Search Widget -->
-
+          </div>
 
           <div class="recent-posts-widget widget-item">
-              <h3 class="widget-title">Postingan Terkini</h3>
+            <h3 class="widget-title">Postingan Terkini</h3>
+            @foreach($recent_posts as $recent)
+              <div class="post-item">
+                <img src="{{ $recent['image_url'] ?? asset('assets/img/default.jpeg') }}" alt="{{ $recent['title']['rendered'] }}" class="img-fluid recent-post-img">
+                <div>
+                  <h4><a href="{{ route('berita.show', $recent['slug']) }}">{{ $recent['title']['rendered'] }}</a></h4>
+                  <time datetime="{{ $recent['date'] }}">{{ \Carbon\Carbon::parse($recent['date'])->translatedFormat('d F Y') }}</time>
+                </div>
+              </div>
+            @endforeach
+          </div>
 
-              @foreach($recent_posts as $recent)
-                <div class="post-item">
-                  <img src="{{ $recent['image_url'] ?? asset('assets/img/default.jpeg') }}" alt="{{ $recent['title']['rendered'] }}" class="img-fluid recent-post-img">
-                  <div>
-                    <h4><a href="{{ route('berita.show', $recent['slug']) }}">{{ $recent['title']['rendered'] }}</a></h4>
-                    <time datetime="{{ $recent['date'] }}">{{ \Carbon\Carbon::parse($recent['date'])->translatedFormat('d F Y') }}</time>
-                  </div>
-                </div><!-- End post item -->
-              @endforeach
-
-          </div><!--/Recent Posts Widget -->
-
-
-        <!-- Tags Widget -->
-        <div class="tags-widget widget-item">
+          <div class="tags-widget widget-item">
             <h3 class="widget-title">Tags</h3>
             <ul class="tags">
-                @foreach($filteredTags as $tag)
-                    <li><a href="{{ route('berita.tag', ['tag' => $tag['id']]) }}">{{ $tag['name'] }}</a></li>
-                @endforeach
+              @foreach($filteredTags as $tag)
+                <li><a href="{{ route('berita.tag', ['tag' => $tag['id']]) }}">{{ $tag['name'] }}</a></li>
+              @endforeach
             </ul>
-        </div><!--/Tags Widget -->
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
 
 
-        </div><!--/widgets-container -->
-      </div><!--/sidebar -->
-
-    </div><!--/row -->
-  </div><!--/container -->
-</main><!--/main -->
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const copyLinkButton = document.getElementById('copy-link');
-  const shareInstructions = document.getElementById('share-instructions');
+  const tooltip = document.getElementById('tooltip-copy');
 
   const shareUrls = {
     'share-whatsapp': 'https://api.whatsapp.com/send?text=',
@@ -210,13 +210,13 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   copyLinkButton.addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the default anchor click behavior
+    event.preventDefault();
     const url = window.location.href;
     navigator.clipboard.writeText(url)
       .then(() => {
-        shareInstructions.style.display = 'inline';
+        this.classList.add('show-tooltip');
         setTimeout(() => {
-          shareInstructions.style.display = 'none';
+          this.classList.remove('show-tooltip');
         }, 2000);
       })
       .catch(err => {
@@ -225,6 +225,5 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
-
 
 @endsection
