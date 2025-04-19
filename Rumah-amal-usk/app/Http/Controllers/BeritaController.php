@@ -195,38 +195,38 @@ class BeritaController extends Controller
         return str_replace("&#8217;", "'", html_entity_decode(trim($title), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
     }
 
+
     public function show($slug)
     {
-        // Fetch the post by slug from the API and cache it
-        $berita = Cache::remember('post_' . $slug, $this->cacheTime, function() use ($slug) {
-            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
-                'slug' => $slug,
-            ]);
-    
-            $posts = $response->json();
-    
-            return !empty($posts) ? $posts[0] : null;
-        });
-    
-        if (!$berita) {
+        // Fetch the post by slug from the API
+        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
+            'slug' => $slug,
+            '_' => time() // Avoid cache
+        ]);
+
+        $posts = $response->json();
+        
+        if (empty($posts)) {
             abort(404, 'Berita tidak ditemukan');
         }
-    
+
+        $berita = $posts[0];
+        
         // Bersihkan judul dan ekstrak gambar utama
-        $berita['title']['rendered'] = $this->cleanTitle($berita['title']['rendered']);
-        $mainImage = $this->extractImageUrl($berita['content']['rendered']);
-    
-        // Ambil recent posts dengan sorting yang benar
-        $recent_posts = Cache::remember('recent_posts', $this->cacheTime, function() {
+        $berita['title']['rendered'] = $this->cleanTitle($berita['title']['rendered'] ?? '');
+        $mainImage = $this->extractImageUrl($berita['content']['rendered'] ?? '');
+
+        // Ambil recent posts (exclude current post)
+        $recent_posts = Cache::remember('recent_posts_'.$berita['id'], $this->cacheTime, function() use ($berita) {
             $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
                 'per_page' => 5,
                 'orderby' => 'date',
-                'order' => 'desc'
+                'order' => 'desc',
+                'exclude' => [$berita['id']] // Exclude current post
             ]);
             
             $posts = $response->json();
             
-            // Fallback sorting
             usort($posts, function($a, $b) {
                 return strtotime($b['date']) - strtotime($a['date']);
             });
@@ -235,36 +235,42 @@ class BeritaController extends Controller
                 return !in_array(88, $post['categories'] ?? []);
             });
         });
-    
+
         foreach ($recent_posts as &$post) {
-            $post['image_url'] = $this->extractImageUrl($post['content']['rendered']);
-            $post['title']['rendered'] = $this->cleanTitle($post['title']['rendered']);
+            $post['image_url'] = $this->extractImageUrl($post['content']['rendered'] ?? '');
+            $post['title']['rendered'] = $this->cleanTitle($post['title']['rendered'] ?? '');
         }
-    
-        // Ambil tag yang hanya terkait dengan berita ini
+
+        // Ambil tag
         $beritaTags = $berita['tags'] ?? [];
-    
+        $filteredTags = [];
+
         if (!empty($beritaTags)) {
-            $tagIds = implode(',', $beritaTags);
-            $filteredTags = Cache::remember('tags_' . $tagIds, $this->cacheTime, function() use ($tagIds) {
-                $response = Http::get("http://rumahamal.usk.ac.id/api/wp-json/wp/v2/tags", [
-                    'include' => $tagIds,
-                ]);
-                return $response->json();
-            });
-        } else {
-            $filteredTags = [];
+            $tagResponse = Http::get("http://rumahamal.usk.ac.id/api/wp-json/wp/v2/tags", [
+                'include' => implode(',', $beritaTags)
+            ]);
+            $filteredTags = $tagResponse->json();
         }
-    
+
         // Ambil comments
-        $comments = Cache::remember('comments_' . $berita['id'], $this->cacheTime, function() use ($berita) {
-            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/comments', ['post' => $berita['id']]);
-            return $response->json();
-        });
-    
+        $comments = [];
+        if (!empty($berita['id'])) {
+            $commentResponse = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/comments', [
+                'post' => $berita['id']
+            ]);
+            $comments = $commentResponse->json();
+        }
+
         $comment_count = $berita['comment_count'] ?? 0;
-    
-        return view('berita.detail-berita', compact('berita', 'recent_posts', 'filteredTags', 'mainImage', 'comment_count', 'comments'));
+
+        return view('berita.detail-berita', [
+            'berita' => $berita,
+            'recent_posts' => $recent_posts,
+            'filteredTags' => $filteredTags,
+            'mainImage' => $mainImage,
+            'comment_count' => $comment_count,
+            'comments' => $comments
+        ]);
     }
 
     private function getTagName($tagId)
