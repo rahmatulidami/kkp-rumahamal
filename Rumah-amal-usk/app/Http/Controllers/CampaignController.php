@@ -94,7 +94,7 @@ class CampaignController extends Controller
         $campaign['content']['rendered'] = $contentWithoutImages;
 
         // Fetch all donors from the database
-        $donors = Donation::all();
+        // $donors = Donation::all();
 
         // Filter out campaigns that are exactly the same
         $otherCampaigns = collect($campaigns)
@@ -130,6 +130,8 @@ class CampaignController extends Controller
         });
 
         // Pass campaign, donors, and 3 distinct other campaigns to the view
-        return view('campaign.detail-campaign', compact('campaign', 'donors', 'otherCampaigns'));
+        return view('campaign.detail-campaign', compact('campaign', 'otherCampaigns'));
+    
+        // return view('campaign.detail-campaign', compact('campaign', 'donors', 'otherCampaigns'));
     }
 }

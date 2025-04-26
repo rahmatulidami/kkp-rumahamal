@@ -79,10 +79,12 @@
                             <a href="#" id="share-instagram" title="Share on Instagram"><i class="bi bi-instagram"></i></a>
                             <a href="#" id="share-whatsapp" title="Share on WhatsApp"><i class="bi bi-whatsapp"></i></a>
                             <a href="#" id="share-facebook" title="Share on Facebook"><i class="bi bi-facebook"></i></a>
-                            <a href="#" id="copy-link" title="Copy Link"><i class="bi bi-link-45deg"></i></a>
+                            <a href="#" id="copy-link" title="Copy Link" class="copy-btn">
+                                <i class="bi bi-link-45deg"></i>
+                                <span class="tooltip-text" id="tooltip-copy">Tautan telah disalin</span>
+                            </a>
                         </div>
                     </div>
-                    <p id="share-instructions" style="display: none;">URL copied!</p>
                 </div>
                 <a class="button-selengkapnya" href="/donate" role="button">DONASI</a>
             </div>
@@ -112,25 +114,11 @@
 <section class="donatur" id="donatur-section" style="display: block;">
     <div class="container">
         <div class="donor-list">
-            @if($donors->count() > 0)
-                @foreach($donors as $donor)
-                    <div class="para-donatur">
-                        <div class="top-info">
-                            <p class="donation-date"><strong>Tanggal Donasi: </strong>{{ $donor->created_at->format('d-m-Y') }}</p>
-                            <p class="donation-category"><strong>Kategori: </strong>{{ $donor->category ?? 'N/A' }}</p>
-                        </div>
-                        <div class="icon-and-details">
-                            <i class="bi bi-person-square"></i>
-                            <div class="details">
-                                <p class="donor-name">{{ $donor->name ?? 'Anonymous' }}</p>
-                                <p class="donation-amount"><strong>Rp. {{ number_format($donor->amount ?? 0, 0, ',', '.') }}</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <p>No donors found.</p>
-            @endif
+            <div class="para-donatur">
+                <div class="top-info">
+                    <p>Data donatur belum tersedia.</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -195,6 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const whatsappShareButton = document.getElementById('share-whatsapp');
     const facebookShareButton = document.getElementById('share-facebook');
     const copyLinkButton = document.getElementById('copy-link');
+    const tooltip = document.getElementById('tooltip-copy');
     const shareInstructions = document.getElementById('share-instructions');
     const detailSection = document.getElementById('detail-section');
     const donaturSection = document.getElementById('donatur-section');
@@ -220,14 +209,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     copyLinkButton.addEventListener('click', function(event) {
-        event.preventDefault();
-        navigator.clipboard.writeText(currentUrl).then(function() {
-            shareInstructions.style.display = 'block';
-            setTimeout(function() {
-                shareInstructions.style.display = 'none';
-            }, 2000);
-        });
-    });
+    event.preventDefault();
+    const url = window.location.href;
+    navigator.clipboard.writeText(url)
+      .then(() => {
+        this.classList.add('show-tooltip');
+        setTimeout(() => {
+          this.classList.remove('show-tooltip');
+        }, 2000);
+      })
+      .catch(err => {
+        console.error('Could not copy text: ', err);
+      });
+  });
 
     // Determine the initial state based on the URL parameter
     if (sectionParam === 'donatur') {
