@@ -793,7 +793,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 .page-title nav {
-    background-color: color-mix(in srgb, var(--background-color), transparent 92%);
+    background-color: color-mix(in srgb, var(--background-color), transparent 80%);
     padding: 10px 0;
     color: #FFBB0C;
 }
@@ -807,7 +807,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0px;
 }
 .page-title nav ol a {
-    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    color: #45474B;
 }
 .page-title nav ol a:hover {
     color: var(--default-color);
@@ -819,7 +819,7 @@ h1, h2, h3, h4, h5, h6 {
     content: "/";
     display: inline-block;
     padding-right: 10px;
-    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    color: #45474B;
 }
 @media (max-width: 750px) {
     .breadcrumbs ol{

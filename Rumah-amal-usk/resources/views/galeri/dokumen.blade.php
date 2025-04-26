@@ -51,7 +51,7 @@
                             <option value="type-csv">CSV</option>
                         </select>
                         <input type="text" id="search-input" class="form-control" placeholder="Cari Dokumen..." value="{{ request('search', '') }}">
-                        <button class="btn btn-outline-secondary" id="search-button"><i class="bi bi-search"></i></button>
+                        <button class="btn btn-outline-secondary" id="search-button" aria-label="Cari" ><i class="bi bi-search"></i></button>
                     </div>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                 <ul class="pagination">
                     @if($pagination['current_page'] > 1)
                         <li class="page-item">
-                            <a class="page-link" href="{{ url('dokumen?page=' . ($pagination['current_page'] - 1)) }}">
+                            <a class="page-link" aria-label="previous" href="{{ url('dokumen?page=' . ($pagination['current_page'] - 1)) }}">
                                 <i class="bi bi-chevron-left"></i>
                             </a>
                         </li>
@@ -111,7 +111,7 @@
 
                     @if($pagination['current_page'] < $pagination['total_pages'])
                         <li class="page-item">
-                            <a class="page-link" href="{{ url('dokumen?page=' . ($pagination['current_page'] + 1)) }}">
+                            <a class="page-link" aria-label="Next page" href="{{ url('dokumen?page=' . ($pagination['current_page'] + 1)) }}">
                                 <i class="bi bi-chevron-right"></i>
                             </a>
                         </li>
