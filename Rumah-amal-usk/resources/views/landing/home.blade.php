@@ -380,34 +380,39 @@
         }
     }
 
-    // Function to extract image URL from post content
+    // Function to extract clean image URL from post content
     function extractImageUrl(content) {
         const doc = new DOMParser().parseFromString(content, 'text/html');
         const imgTag = doc.querySelector('img');
-        return imgTag ? imgTag.src : '';
+        if (imgTag) {
+            imgTag.removeAttribute('loading'); // Remove 'loading' attribute (lazy load)
+            return imgTag.getAttribute('src') || '';
+        }
+        return '';
     }
 
     // Function to initialize and populate the carousel
     async function initializeCarousel() {
         // Fetch carousel data
         const carouselItems = await fetchCarouselData();
-        
+
         // Fetch post data for each carousel item
         const posts = await Promise.all(carouselItems.map(async (item) => {
             const postData = await fetchPostData(item.acf.post);
-            const postSlug = postData?.slug || ''; // Use slug for URL
-            const postLink = postSlug ? `${baseUrl}/pengumuman/${postSlug}` : ''; // Construct link based on slug
+            const postSlug = postData?.slug || '';
+            const postLink = postSlug ? `${baseUrl}/pengumuman/${postSlug}` : '';
+
             return {
                 id: item.id,
                 slug: item.slug,
-                image_url: extractImageUrl(postData?.content.rendered || ''), // Extract image URL from content
+                image_url: extractImageUrl(postData?.content.rendered || ''),
                 title: postData?.title.rendered || 'Untitled',
                 link: postLink,
                 priority: item.acf.priority
             };
         }));
 
-        // Sort posts by priority (lowest priority first)
+        // Sort posts by priority (lower priority first)
         posts.sort((a, b) => a.priority - b.priority);
 
         // Populate the carousel
@@ -416,7 +421,7 @@
             <div class="swiper-slide">
                 <div class="image-container">
                     <a href="${post.link}">
-                        <img src="${post.image_url}" alt="${post.title}" loading="lazy">
+                        <img src="${post.image_url}" alt="${post.title}">
                     </a>
                 </div>
             </div>
@@ -428,9 +433,7 @@
         new Swiper('.hero-slider', swiperOptions);
     }
 
-    // Call the function to initialize the carousel
+    // Initialize the carousel when DOM is ready
     document.addEventListener('DOMContentLoaded', initializeCarousel);
-  </script>
-
-
+</script>
 @endsection
