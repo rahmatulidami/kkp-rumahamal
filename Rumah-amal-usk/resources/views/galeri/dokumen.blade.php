@@ -90,36 +90,63 @@
         </div>
     </section>
     
-    <!-- Pagination -->
-    <section id="gallery-pagination" class="gallery-pagination section">
-        <div class="container">
-            <div class="d-flex justify-content-center">
-                <ul class="pagination">
-                    @if($pagination['current_page'] > 1)
-                        <li class="page-item">
-                            <a class="page-link" aria-label="previous" href="{{ url('dokumen?page=' . ($pagination['current_page'] - 1)) }}">
-                                <i class="bi bi-chevron-left"></i>
-                            </a>
+<!-- Pagination -->
+<section id="gallery-pagination" class="gallery-pagination section">
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <ul class="pagination-list">
+                @if($pagination['current_page'] > 1)
+                    <li class="page-item">
+                        <a href="{{ url('dokumen?page=' . ($pagination['current_page'] - 1)) }}" class="page-link prev" aria-label="Previous">
+                            <i class="bi bi-chevron-left"></i>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                @endif
+
+                {{-- First page --}}
+                @if($pagination['current_page'] > 3)
+                    <li class="page-item">
+                        <a href="{{ url('dokumen?page=1') }}" class="page-link">1</a>
+                    </li>
+                    @if($pagination['current_page'] > 4)
+                        <li class="page-item disabled dots">
+                            <span class="page-link">...</span>
                         </li>
                     @endif
+                @endif
 
-                    @for($i = 1; $i <= $pagination['total_pages']; $i++)
-                        <li class="page-item {{ $pagination['current_page'] == $i ? 'active' : '' }}">
-                            <a class="page-link" href="{{ url('dokumen?page=' . $i) }}">{{ $i }}</a>
-                        </li>
-                    @endfor
+                {{-- Middle pages --}}
+                @for($i = max(1, $pagination['current_page'] - 2); $i <= min($pagination['total_pages'], $pagination['current_page'] + 2); $i++)
+                    <li class="page-item {{ $pagination['current_page'] == $i ? 'active' : '' }}">
+                        <a href="{{ url('dokumen?page=' . $i) }}" class="page-link">{{ $i }}</a>
+                    </li>
+                @endfor
 
-                    @if($pagination['current_page'] < $pagination['total_pages'])
-                        <li class="page-item">
-                            <a class="page-link" aria-label="Next page" href="{{ url('dokumen?page=' . ($pagination['current_page'] + 1)) }}">
-                                <i class="bi bi-chevron-right"></i>
-                            </a>
+                {{-- Last page --}}
+                @if($pagination['current_page'] < $pagination['total_pages'] - 2)
+                    @if($pagination['current_page'] < $pagination['total_pages'] - 3)
+                        <li class="page-item disabled dots">
+                            <span class="page-link">...</span>
                         </li>
                     @endif
-                </ul>
-            </div>
+                    <li class="page-item">
+                        <a href="{{ url('dokumen?page=' . $pagination['total_pages']) }}" class="page-link">{{ $pagination['total_pages'] }}</a>
+                    </li>
+                @endif
+
+                @if($pagination['current_page'] < $pagination['total_pages'])
+                    <li class="page-item">
+                        <a href="{{ url('dokumen?page=' . ($pagination['current_page'] + 1)) }}" class="page-link next" aria-label="Next">
+                            <i class="bi bi-chevron-right"></i>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                @endif
+            </ul>
         </div>
-    </section>
+    </div>
+</section><!-- /Pagination -->
 
     <!-- Modal untuk konfirmasi download -->
     <div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">

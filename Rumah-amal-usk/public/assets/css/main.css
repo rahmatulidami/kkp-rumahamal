@@ -3491,48 +3491,104 @@ img.fixed-dimension {
 /*--------------------------------------------------------------
 # gallery-pagination Section
 --------------------------------------------------------------*/
+/* Gallery Pagination */
 .gallery-pagination {
-    padding-top: 0;
-    color: color-mix(in srgb, var(--default-color), transparent 40%);
+    padding: 20px 0;
+    margin: 0 auto;
+    overflow-x: auto;
 }
-.gallery-pagination ul {
+
+.gallery-pagination .pagination-list {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     padding: 0;
     margin: 0;
     list-style: none;
+    gap: 5px;
 }
-.gallery-pagination li {
-    margin: 0 5px;
-    transition: 0.3s;
+
+.gallery-pagination .page-item {
+    margin: 0;
 }
-.gallery-pagination li a {
-    color: color-mix(in srgb, var(--default-color), transparent 40%);
-    padding: 7px 16px;
+
+.gallery-pagination .page-link {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.gallery-pagination li a.active, .gallery-pagination li a:hover {
-    background: var(--accent-color);
-    color: var(--contrast-color);
-}
-.gallery-pagination li a.active a, .gallery-pagination li a:hover a {
-    color: var(--contrast-color);
-}
-.pagination li a {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 4px;
     color: color-mix(in srgb, var(--default-color), transparent 40%);
-    padding: 7px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none; 
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
-.pagination li.active a {
+
+.gallery-pagination .page-link.prev,
+.gallery-pagination .page-link.next {
+    padding: 0 15px;
+}
+
+.gallery-pagination .page-item.active .page-link,
+.gallery-pagination .page-link:hover {
     background: var(--accent-color);
     color: var(--contrast-color);
 }
-.pagination li a:hover {
-    background-color:var(--accent-color);
+
+.gallery-pagination .page-item.disabled .page-link {
+    pointer-events: none;
+    background: transparent;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .gallery-pagination .page-link {
+        min-width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-pagination .pagination-list {
+        gap: 3px;
+    }
+    
+    .gallery-pagination .page-link {
+        min-width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+    
+    .gallery-pagination .page-link.prev,
+    .gallery-pagination .page-link.next {
+        padding: 0 10px;
+    }
+    
+    .gallery-pagination .page-item:nth-child(n+4):nth-last-child(n+4):not(.active):not(.dots) {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-pagination {
+        padding: 15px 0;
+    }
+    
+    .gallery-pagination .page-link {
+        min-width: 28px;
+        height: 28px;
+        font-size: 13px;
+    }
+    
+    .gallery-pagination .page-item:nth-child(n+4):nth-last-child(n+4):not(.active):not(.dots) {
+        display: none;
+    }
+    
+    .gallery-pagination .page-link.prev,
+    .gallery-pagination .page-link.next {
+        padding: 0 8px;
+    }
 }
 
 /*--------------------------------------------------------------
