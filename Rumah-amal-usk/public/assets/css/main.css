@@ -2461,6 +2461,9 @@ img.fixed-dimension {
 .infak .left .button-zakat {
     background: #d9d9d9;
 }
+.infak .left .button-zakat:hover {
+    background: #FFBB0C;
+}
 .infak .right {
     flex: 3; 
     padding: 40px; 
@@ -2498,6 +2501,9 @@ img.fixed-dimension {
     font-size: 20px;
     font-weight: 700;
     border-radius: 10px;
+}
+.right .button-infak:hover {
+    background: #FFBB0C;
 }
 .input-group {
     display: flex;
@@ -2618,6 +2624,9 @@ img.fixed-dimension {
 .zakat .left .button-zakat {
     background: #FFBB0C;
 }
+.zakat .left .button-infak:hover {
+    background: #FFBB0C;
+}
 .zakat .right {
     flex: 3; 
     padding: 40px; 
@@ -2655,6 +2664,9 @@ img.fixed-dimension {
     font-size: 20px;
     font-weight: 700;
     border-radius: 10px;
+}
+.right .button-zakat:hover {
+    background: #FFBB0C;
 }
 .input-group {
     display: flex;
@@ -3295,7 +3307,7 @@ img.fixed-dimension {
 .file-icon {
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); 
     border-radius: 5px; 
-    width: 100px;
+    width: 105px;
     height: 140px;
 }
 

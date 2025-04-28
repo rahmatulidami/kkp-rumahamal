@@ -45,65 +45,6 @@
 
 @endsection
 
-<style>
-
-  .form-group {
-    margin-bottom: 15px;
-  }
-
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-
-  .input-group input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-left: none;
-    font-size: 16px;
-    flex: 1;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-  }
-
-  .input-group button {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-right: none;
-    font-size: 16px;
-    background-color: #f8f8f8;
-    cursor: default;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-  }
-
-  .total-zakat {
-    font-weight: bold;
-    margin-top: 15px;
-  }
-
-  .button {
-    margin-top: 20px;
-    text-align: center;
-  }
-
-  .button a {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-
-  .button a:hover {
-    background-color: #0056b3;
-  }
-</style>
-
 <script>
   function updateInputs() {
     const zakatType = document.getElementById('zakat-type').value;
