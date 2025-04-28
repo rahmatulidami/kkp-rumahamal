@@ -63,7 +63,7 @@
 
 @endsection
 
-<!-- JavaScript -->
+@push('scripts')
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const programContainer = document.getElementById("program-items");
@@ -160,3 +160,4 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+@endpush

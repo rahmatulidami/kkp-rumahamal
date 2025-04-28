@@ -129,6 +129,10 @@
   </div><!--/container -->
 </main><!--/main -->
 
+@endsection
+
+@push('scripts')
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const copyLinkButton = document.getElementById('copy-link');
@@ -169,5 +173,5 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+@endpush
 
-@endsection

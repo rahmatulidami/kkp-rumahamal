@@ -55,7 +55,8 @@
 
 @endsection
 
-<!-- JavaScript -->
+@push('scripts')
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const programTitle = document.getElementById('program-title');
@@ -108,3 +109,4 @@
       });
   });
 </script>
+@endpush

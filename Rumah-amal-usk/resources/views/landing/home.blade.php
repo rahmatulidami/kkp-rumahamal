@@ -348,6 +348,10 @@
 <!-- /Clients Section -->
 </main>
 
+@endsection
+
+@push('scripts')
+
 <script>
     // Base URL for the website
     const baseUrl = 'https://rumahamal.usk.ac.id';
@@ -436,4 +440,5 @@
     // Initialize the carousel when DOM is ready
     document.addEventListener('DOMContentLoaded', initializeCarousel);
 </script>
-@endsection
+
+@endpush

@@ -140,6 +140,7 @@
 
 @endsection
 
+@push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
     const images = Array.from(document.querySelectorAll('.gallery-image'));
@@ -217,3 +218,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 </script>
+@endpush
