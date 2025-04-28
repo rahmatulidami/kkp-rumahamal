@@ -224,182 +224,10 @@
 
 @endsection
 
-<style>
-
-section#pembayaran .container {
-    margin-top: 0 !important; /* Hilangkan margin atas */
-    padding-top: 0 !important; /* Hilangkan padding atas */
-}
-
-.payment {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.payment-category {
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    overflow: hidden;
-}
-
-.payment-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.category-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 15px 15px 15px 15px;
-    cursor: pointer;
-    /* height: px; */
-    border-radius: 10px 0 0;
-    color: white;
-    background-color: #45474b;
-    font-weight: 450;
-
-    .d-flex{
-        img{
-            height: 15px;
-            margin-left: 10%;}
-        width: 50%;
-    }
-}
-
-.bottom-logo{
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    background-color: white;
-    border-top: 1px solid #e0e0e0;
-    /* height: 50px; */
-    padding: 15px;
-    img{
-        height: 15px;
-    }
-}
-
-/* .category-logos {
-    width:
-} */
-
-/* #category-label {
-    font-weight: 400;
-    color: rgb(69, 71, 75);
-    font-size: 90%;
-} */
-
-.category-content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25em;
-    display: none;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    padding: 0px 15px 10px 15px;
-    background-color: #45474b;
-    /* border-top: 1px solid #e0e0e0; */
-}
-
-.payment-method {
-    background-color: white;
-    width: 170px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid rgba(69, 71, 75, 0.5);
-    border-radius: 10px;
-    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    div{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-    }
-    img {
-        height:25px;
-        margin-bottom: 10px;
-    }
-    span {
-        font-size: 70%;
-        font-weight: 400;
-    }
-}
-
-.fee{
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.payment-method:hover,
-.payment-method.selected {
-    border: 4px solid #707feb;
-    box-shadow: 2px 2px 10px #707feb;
-}
-
-.fa-chevron-down {
-    transition: transform 0.3s;
-}
-
-.payment-category .category-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-}
-
-.payment-category.active .fa-chevron-down {
-    transform: rotate(180deg);
-}
-
-.payment-category.active .category-content {
-    max-height: 1000px;
-    /* transition: max-height 0.3s ease-in; */
-}
-
-.submit{
-    background-color: #8b8f97;
-    border-radius: 10px;
-    color: white;
-    height: 35px;
-    font-weight: 600;
-    font-size: 90%;
-}
-
-
-</style>
-
-
+@push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const paymentCategories = document.querySelectorAll('.payment-category');
-
-    paymentCategories.forEach(category => {
-        const header = category.querySelector('.category-header');
-        header.addEventListener('click', () => {
-            const content = category.querySelector('.category-content');
-            content.style.display = content.style.display === 'none' || !content.style.display ? 'flex' : 'none';
-            const icon = header.querySelector('i');
-            icon.classList.toggle('fa-chevron-down');
-            icon.classList.toggle('fa-chevron-up');
-        });
-    });
-
-    const paymentMethods = document.querySelectorAll('.payment-method');
-    paymentMethods.forEach(method => {
-        method.addEventListener('click', () => {
-            paymentMethods.forEach(m => m.classList.remove('selected'));
-            method.classList.add('selected');
-            const selectedPaymentMethod = method.getAttribute('data-method');
-            document.getElementById('selected_payment_method').value = selectedPaymentMethod;
-        });
-    });
-});
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
+    // === DOM Elements ===
     const paymentCategories = document.querySelectorAll('.payment-category');
     const paymentMethods = document.querySelectorAll('.payment-method');
     const amountInput = document.getElementById('amount');
@@ -411,6 +239,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const paymentMethodWarning = document.getElementById('payment-method-warning');
     const alfamartWarning = document.getElementById('alfamart-warning');
     const indomaretWarning = document.getElementById('indomaret-warning');
+
+    // === Pricing Configuration ===
     const pricing = {
         QRIS: { fee: 0.007, fixed: false },
         SHOPEEPAY: { fee: 0.02, fixed: false },
@@ -423,166 +253,118 @@ document.addEventListener('DOMContentLoaded', function() {
         MANDIRI: { fee: 4000, fixed: true }
     };
 
-    const checkSubmitButtonState = () => {
-        const amount = parseFloat(amountInput.value) || 0;
-        const selectedPaymentMethod = selectedPaymentMethodInput.value;
-        const termsAccepted = termsCheckbox.checked;
-        let validAmount = amount >= 1000;
-        let validPayment = true;
-
-        alfamartWarning.style.display = 'none';
-        indomaretWarning.style.display = 'none';
-
-        if (selectedPaymentMethod === 'ALFAMART' || selectedPaymentMethod === 'INDOMARET') {
-            const methodConfig = pricing[selectedPaymentMethod];
-            validPayment = amount >= methodConfig.min && amount <= methodConfig.max;
-            if (!validPayment) {
-                if (selectedPaymentMethod === 'ALFAMART') {
-                    alfamartWarning.style.display = 'block';
-                } else if (selectedPaymentMethod === 'INDOMARET') {
-                    indomaretWarning.style.display = 'block';
-                }
-            }
-        }
-
-        if (selectedPaymentMethod === '') {
-            validPayment = false;
-            paymentMethodWarning.style.display = 'block';
-        } else {
-            paymentMethodWarning.style.display = 'none';
-        }
-
-        if (validAmount && validPayment && termsAccepted) {
-            submitButton.disabled = false;
-            submitButton.style.backgroundColor = '#fece03';
-        } else {
-            submitButton.disabled = true;
-            submitButton.style.backgroundColor = '#8b8f97';
-        }
-    };
-
-    if (anonymousCheckbox) {
-        anonymousCheckbox.addEventListener('change', function() {
-            const nameInput = document.getElementById('name');
-            if (this.checked) {
-                nameInput.value = 'Hamba Allah';
-                nameInput.disabled = true;
-            } else {
-                nameInput.value = '';
-                nameInput.disabled = false;
-            }
-        });
-    }
-
+    // === Core Functions ===
     const updatePricingDetails = (methodName) => {
         const feeConfig = pricing[methodName];
         const amount = parseFloat(amountInput.value) || 0;
-        let fee, vat, totalfee, total;
-
+        
+        let fee, vat, totalfee;
         if (feeConfig.fixed) {
             fee = feeConfig.fee;
-            vat = 0.11 * fee;
+            vat = fee * 0.11;
             totalfee = fee + vat;
-            total = amount + totalfee;
         } else {
             fee = amount * feeConfig.fee;
-            vat = 0.11 * fee;
+            vat = fee * 0.11;
             totalfee = fee + vat;
-            total = amount + totalfee;
         }
 
-        const selectedMethod = document.querySelector(`.payment-method[data-method="${methodName}"]`);
-        if (selectedMethod) {
-            selectedMethod.querySelector('.fee').textContent = `+Rp ${totalfee.toFixed(2)}`;
-            selectedMethod.querySelector('.price').textContent = `Rp ${total.toFixed(2)}`;
+        const methodElement = document.querySelector(`.payment-method[data-method="${methodName}"]`);
+        if (methodElement) {
+            methodElement.querySelector('.fee').textContent = `+Rp ${totalfee.toFixed(2)}`;
+            methodElement.querySelector('.price').textContent = `Rp ${(amount + totalfee).toFixed(2)}`;
         }
     };
 
     const updateAllPricingDetails = () => {
         paymentMethods.forEach(method => {
-            const methodName = method.getAttribute('data-method');
-            updatePricingDetails(methodName);
+            updatePricingDetails(method.getAttribute('data-method'));
         });
     };
 
+    const validatePaymentMethod = (methodName, amount) => {
+        if (methodName === 'ALFAMART' || methodName === 'INDOMARET') {
+            const config = pricing[methodName];
+            return amount >= config.min && amount <= config.max;
+        }
+        return true;
+    };
+
+    const checkSubmitButtonState = () => {
+        const amount = parseFloat(amountInput.value) || 0;
+        const method = selectedPaymentMethodInput.value;
+        const isAmountValid = amount >= 1000;
+        const isMethodValid = method && validatePaymentMethod(method, amount);
+        const isTermsAccepted = termsCheckbox.checked;
+
+        // Update warnings
+        amountWarning.style.display = isAmountValid ? 'none' : 'block';
+        paymentMethodWarning.style.display = method ? 'none' : 'block';
+        alfamartWarning.style.display = (method === 'ALFAMART' && !validatePaymentMethod(method, amount)) ? 'block' : 'none';
+        indomaretWarning.style.display = (method === 'INDOMARET' && !validatePaymentMethod(method, amount)) ? 'block' : 'none';
+
+        // Toggle submit button
+        submitButton.disabled = !(isAmountValid && isMethodValid && isTermsAccepted);
+        submitButton.style.backgroundColor = submitButton.disabled ? '#8b8f97' : '#fece03';
+    };
+
+    // === Event Handlers ===
     paymentCategories.forEach(category => {
         const header = category.querySelector('.category-header');
-        header.addEventListener('click', function() {
-            const isActive = category.classList.contains('active');
-            
+        header.addEventListener('click', () => {
+            // Close all categories first
             paymentCategories.forEach(cat => {
                 cat.classList.remove('active');
-                const content = cat.querySelector('.category-content');
-                content.style.display = 'none';
+                cat.querySelector('.category-content').style.display = 'none';
             });
-
-            if (!isActive) {
-                category.classList.add('active');
-                const content = category.querySelector('.category-content');
-                content.style.display = 'flex';
-
-                const methodsInCategory = category.querySelectorAll('.payment-method');
-                methodsInCategory.forEach(method => {
-                    const methodName = method.getAttribute('data-method');
-                    updatePricingDetails(methodName);
-                });
+            
+            // Toggle current category
+            category.classList.toggle('active');
+            const content = category.querySelector('.category-content');
+            content.style.display = category.classList.contains('active') ? 'flex' : 'none';
+            
+            // Update icons
+            const icon = header.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
             }
         });
     });
 
     paymentMethods.forEach(method => {
         method.addEventListener('click', function() {
+            // Update selected method
+            paymentMethods.forEach(m => m.classList.remove('selected'));
+            this.classList.add('selected');
+            
             const methodName = this.getAttribute('data-method');
             selectedPaymentMethodInput.value = methodName;
-
-            paymentMethods.forEach(m => m.classList.remove('selected'));
-
-            this.classList.add('selected');
-
-            const amount = parseFloat(amountInput.value) || 0;
-            let validPayment = true;
-            if (methodName === 'ALFAMART' || methodName === 'INDOMARET') {
-                const methodConfig = pricing[methodName];
-                validPayment = amount >= methodConfig.min && amount <= methodConfig.max;
-                if (!validPayment) {
-                    if (methodName === 'ALFAMART') {
-                        alfamartWarning.style.display = 'block';
-                    } else if (methodName === 'INDOMARET') {
-                        indomaretWarning.style.display = 'block';
-                    }
-                } else {
-                    alfamartWarning.style.display = 'none';
-                    indomaretWarning.style.display = 'none';
-                }
-            } else {
-                alfamartWarning.style.display = 'none';
-                indomaretWarning.style.display = 'none';
-            }
-
-            if (validPayment) {
-                updatePricingDetails(methodName);
-            }
+            
+            // Update pricing and validate
+            updatePricingDetails(methodName);
             checkSubmitButtonState();
         });
     });
 
-    amountInput.addEventListener('input', function() {
-        const amount = parseFloat(amountInput.value) || 0;
-        if (amount >= 1000) {
-            amountWarning.style.display = 'none';
-            updateAllPricingDetails();
-        } else {
-            amountWarning.style.display = 'block';
-            alfamartWarning.style.display = 'none';
-            indomaretWarning.style.display = 'none';
-        }
+    amountInput.addEventListener('input', () => {
+        updateAllPricingDetails();
         checkSubmitButtonState();
     });
 
     termsCheckbox.addEventListener('change', checkSubmitButtonState);
 
+    if (anonymousCheckbox) {
+        anonymousCheckbox.addEventListener('change', function() {
+            const nameInput = document.getElementById('name');
+            nameInput.value = this.checked ? 'Hamba Allah' : '';
+            nameInput.disabled = this.checked;
+        });
+    }
+
+    // === Initialization ===
     updateAllPricingDetails();
+    checkSubmitButtonState();
 });
-
 </script>
-
+@endpush

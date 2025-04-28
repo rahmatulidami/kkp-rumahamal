@@ -53,9 +53,9 @@
   </section> <!-- End Section -->
 
 </main>
-
 @endsection
 
+@push('scripts')
 <script>
     function updateTotal() {
         const amount = document.getElementById('infak-amount').value;
@@ -69,3 +69,4 @@
         }
     }
 </script>
+@endpush

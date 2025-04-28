@@ -170,9 +170,9 @@
 </section>
 
 </main>
-
 @endsection
 
+@push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const currentUrl = window.location.href;
@@ -264,3 +264,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+@endpush

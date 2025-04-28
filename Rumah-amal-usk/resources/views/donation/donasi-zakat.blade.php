@@ -45,6 +45,7 @@
 
 @endsection
 
+@push('scripts')
 <script>
   function updateInputs() {
     const zakatType = document.getElementById('zakat-type').value;
@@ -127,3 +128,4 @@
     totalZakat.innerHTML = zakatType ? `Jumlah total ${zakatType}mu adalah <span class="total-amount">Rp. ${zakatAmount.toFixed(2)}</span>` : '';
   }
 </script>
+@endpush

@@ -57,6 +57,10 @@
   </section>
 </main>
 
+@endsection
+
+@push('scripts')
+
 <script>
   function searchFaqs() {
     let searchQuery = document.getElementById('searchFaq').value.toLowerCase().trim();
@@ -83,4 +87,4 @@
     }
   }
 </script>
-@endsection
+@endpush
