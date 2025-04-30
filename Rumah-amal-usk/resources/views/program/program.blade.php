@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <div class="col-lg-2-4 col-md-6 program-item isotope-item ${filterClass}">
             <div class="program-content h-100">
               <a href="${postLink}">
-                <img src="${imageUrl}" class="img-fluid" alt="${postTitle}" loading="lazy">
+                <img src="${imageUrl}" class="img-fluid" alt="${postTitle}">
               </a>
             </div>
           </div>

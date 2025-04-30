@@ -37,7 +37,7 @@
     <div class="branding d-flex align-items-center">
         <div class="container position-relative d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center" aria-label="Kembali ke beranda">
-                <img src="{{ asset('assets/img/logorumah.webp') }}" alt="">
+                <img src="{{ asset('assets/img/logorumah.webp') }}" width="192" height="50"  alt="">
             </a>
             <nav id="navmenu" class="navmenu">
                 <ul>
@@ -92,7 +92,7 @@
             <!-- About Section -->
             <div class="col-lg-4 col-md-6 footer-about text-center text-md-start">
                 <a href="/" class="logo d-flex align-items-center justify-content-md-start justify-content-center" aria-label="logo rumah amal">
-                    <img src="{{ asset('assets/img/logorumah.webp') }}" alt="Logo Rumah Amal" class="footer-logo">
+                    <img src="{{ asset('assets/img/logorumah.webp') }}" width="250" height="90" alt="Logo Rumah Amal" class="footer-logo">
                 </a>
                 <p class="footer-address">Lantai 1 Masjid Jamik USK <br> T. Nyak Arief, Kopelma Darussalam, Banda Aceh 21311</p>
                 <div class="jadwal mt-3">

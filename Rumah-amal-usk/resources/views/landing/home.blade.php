@@ -100,7 +100,7 @@
       @foreach ($campaigns as $campaign)
             <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-{{ $campaign['category'] }}">
               <div class="campaign-unggulan-content h-100">
-                <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}" aria-label="Detail campaign"><img src="{{ $campaign['image'] }}" alt="" loading="lazy"></a>
+                <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}" aria-label="Detail campaign"><img src="{{ $campaign['image'] }}" alt="" loading="lazy" width="1024" height="576" style="aspect-ratio: 1024/576"></a>
                 <div class="campaign-unggulan-info">
                 <h3>
                     <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}" aria-label="Detail campaign">{{ $campaign['title']['rendered'] }}</a>
@@ -162,8 +162,8 @@
 
   <div class="row gy-4">
     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-      <img src="assets/img/profil/usk.png" class="img-fluid rounded-4 mb-4" alt="" loading="lazy">
-      <img src="assets/img/profil/mesjid-jamik.png" class="img-fluid rounded-4 mb-4" alt="" loading="lazy">
+      <img src="assets/img/profil/usk.png" class="img-fluid rounded-4 mb-4" alt="" loading="lazy" width="1024" height="576" style="aspect-ratio: 1024/576">
+      <img src="assets/img/profil/mesjid-jamik.png" class="img-fluid rounded-4 mb-4" alt="" loading="lazy" width="1024" height="576" style="aspect-ratio: 1024/576">
     </div>
     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
       <div class="content ps-0 ps-lg-5">
@@ -205,7 +205,7 @@
                     <article>
                         @if(isset($post['image_url']) && $post['image_url'])
                             <div class="post-img">
-                                <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" loading="lazy">
+                            <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" loading="lazy" width="1024" height="576" style="aspect-ratio: 1024/576">
                             </div>
                         @endif
                         <p class="post-category">
@@ -242,11 +242,11 @@
     <div class="container">
         <div class="row gy-4">
             @foreach($latestBeritaPosts as $post)
-                <div class="col-lg-4">
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <article>
                         @if(isset($post['image_url']) && $post['image_url'])
                             <div class="post-img">
-                                <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" style="width: 100%; height: auto;" loading="lazy">
+                            <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" loading="lazy" width="1024" height="576" style="aspect-ratio: 1024/576">
                             </div>
                         @endif
                         <p class="post-category">{{ implode(', ', $post['categories'] ?? []) }}</p>

@@ -674,10 +674,10 @@ h1, h2, h3, h4, h5, h6 {
         display: none;
     }
     .footer-logo {
-        max-height: 70px;
+        max-height: 90px;
         padding: 10px;
     }
-    .copyright {
+    .copyright p {
         font-size: 12px;
     }
 }
@@ -888,6 +888,7 @@ section, .section {
         margin-top: 80px;
     }
 }
+
 .img-fluid {
     width: 100%; 
     height: auto; 
@@ -1575,6 +1576,20 @@ img.fixed-dimension {
 .bsi-bold {
     font-weight: 700;
     color: #005621;
+}
+@media (max-width: 576px) {
+    .logo-bsi {
+        width: 50px;
+        margin-right: 15px;
+        margin-bottom: 0;
+    }
+    .rekening-info p {
+        margin: 5px 0;
+        font-size: 12px !important;
+    }   
+    .rekening-info p strong{
+        font-weight: 400;
+    }
 }
     
 /*--------------------------------------------------------------

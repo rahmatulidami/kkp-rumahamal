@@ -2,6 +2,14 @@
 
 @section('title', 'Berita | Rumah Amal USK')
 
+@section('meta')
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="Kami menyediakan sistem dan layanan yang memudahkan para muzakki atau donatur dalam menunaikan zakat, infaq, shadaqah, maupun wakaf dengan sebaik-baiknya.">
+
+@endsection
+
 @section('content')
 
 <main class="main">
@@ -52,7 +60,7 @@
                             <article>
                                 @if($post['image_url'])
                                     <div class="post-img">
-                                        <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" style="width: 100%; height: auto;">
+                                        <img src="{{ $post['image_url'] }}" alt="" width="800" height="450" class="img-fluid" style="width: 100%; height: auto;">
                                     </div>
                                 @endif
                                 <p class="post-category">{{ implode(', ', $post['categories']) }}</p>
@@ -76,26 +84,62 @@
         </div>
     </section><!-- /Blog Posts Section -->
 
-    <!-- Blog Pagination Section -->
-    <section id="blog-pagination" class="blog-pagination section">
+    <!-- Pagination -->
+    <section id="gallery-pagination" class="gallery-pagination section">
         <div class="container">
             <div class="d-flex justify-content-center">
-                <ul>
+                <ul class="pagination-list">
                     @if($pagination['current_page'] > 1)
-                        <li><a href="{{ url('berita?page=' . ($pagination['current_page'] - 1)) }}"><i class="bi bi-chevron-left"></i></a></li>
+                        <li class="page-item">
+                            <a href="{{ url('berita?page=' . ($pagination['current_page'] - 1)) }}" class="page-link prev" aria-label="Previous">
+                                <i class="bi bi-chevron-left"></i>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
                     @endif
 
-                    @for($i = 1; $i <= $pagination['total_pages']; $i++)
-                        <li><a href="{{ url('berita?page=' . $i) }}" class="{{ $pagination['current_page'] == $i ? 'active' : '' }}">{{ $i }}</a></li>
+                    {{-- First page --}}
+                    @if($pagination['current_page'] > 3)
+                        <li class="page-item">
+                            <a href="{{ url('berita?page=1') }}" class="page-link">1</a>
+                        </li>
+                        @if($pagination['current_page'] > 4)
+                            <li class="page-item disabled dots">
+                                <span class="page-link">...</span>
+                            </li>
+                        @endif
+                    @endif
+
+                    {{-- Middle pages --}}
+                    @for($i = max(1, $pagination['current_page'] - 2); $i <= min($pagination['total_pages'], $pagination['current_page'] + 2); $i++)
+                        <li class="page-item {{ $pagination['current_page'] == $i ? 'active' : '' }}">
+                            <a href="{{ url('berita?page=' . $i) }}" class="page-link">{{ $i }}</a>
+                        </li>
                     @endfor
 
+                    {{-- Last page --}}
+                    @if($pagination['current_page'] < $pagination['total_pages'] - 2)
+                        @if($pagination['current_page'] < $pagination['total_pages'] - 3)
+                            <li class="page-item disabled dots">
+                                <span class="page-link">...</span>
+                            </li>
+                        @endif
+                        <li class="page-item">
+                            <a href="{{ url('berita?page=' . $pagination['total_pages']) }}" class="page-link">{{ $pagination['total_pages'] }}</a>
+                        </li>
+                    @endif
+
                     @if($pagination['current_page'] < $pagination['total_pages'])
-                        <li><a href="{{ url('berita?page=' . ($pagination['current_page'] + 1)) }}"><i class="bi bi-chevron-right"></i></a></li>
+                        <li class="page-item">
+                            <a href="{{ url('berita?page=' . ($pagination['current_page'] + 1)) }}" class="page-link next" aria-label="Next">
+                                <i class="bi bi-chevron-right"></i>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
                     @endif
                 </ul>
             </div>
         </div>
-    </section><!-- /Blog Pagination Section -->
-
+    </section><!-- /Pagination -->
 </main>
 @endsection
