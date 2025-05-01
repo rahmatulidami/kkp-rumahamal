@@ -37,7 +37,7 @@
     <div class="branding d-flex align-items-center">
         <div class="container position-relative d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center" aria-label="Kembali ke beranda">
-                <img src="{{ asset('assets/img/logorumah.webp') }}" width="192" height="50"  alt="">
+            <img src="{{ asset('assets/img/logorumah.webp') }}" width="183" height="50" style="aspect-ratio: 3.66/1" loading="eager" alt="">
             </a>
             <nav id="navmenu" class="navmenu">
                 <ul>
@@ -62,13 +62,13 @@
                     <li><a href="/dokumentasi" class="{{ Request::is('galeri') ? 'active' : '' }}">Galeri</a></li>
                     <li class="language-switcher">
                         <a href="javascript:void(0)" class="language-link">
-                            <img src="{{ asset('assets/img/flag-ID.png') }}" alt="Indonesian Flag" class="flag-icon">
+                            <img src="{{ asset('assets/img/flag-ID.webp') }}" alt="Indonesian Flag" class="flag-icon">
                             <span>ID</span>
                             <i class="bi bi-chevron-down toggle-dropdown"></i>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="?lang=en" class="language-link">
-                                <img src="{{ asset('assets/img/flag-EN.jpg') }}" alt="English Flag" class="flag-icon">
+                                <img src="{{ asset('assets/img/flag-EN.webp') }}" alt="English Flag" class="flag-icon">
                                 <span>EN</span>
                             </a></li>
                         </ul>
@@ -90,21 +90,22 @@
         <div class="row gy-4 justify-content-between">
             
             <!-- About Section -->
-            <div class="col-lg-4 col-md-6 footer-about text-center text-md-start">
-                <a href="/" class="logo d-flex align-items-center justify-content-md-start justify-content-center" aria-label="logo rumah amal">
-                    <img src="{{ asset('assets/img/logorumah.webp') }}" width="250" height="90" alt="Logo Rumah Amal" class="footer-logo">
+            <div class="col-lg-4 col-md-6 footer-about text-md-start ">
+                <div class="footer-logo mx-auto">
+                <a href="/" class="logo d-flex align-items-center justify-content-center" aria-label="logo rumah amal">
+                    <img src="{{ asset('assets/img/logorumah.webp') }}" width="183" height="50" style="aspect-ratio: 3.66/1" alt="Logo Rumah Amal">
                 </a>
+                </div>
                 <p class="footer-address">Lantai 1 Masjid Jamik USK <br> T. Nyak Arief, Kopelma Darussalam, Banda Aceh 21311</p>
                 <div class="jadwal mt-3">
                     <h1><strong>Jam Operasional:</strong></h1>
                     <p><i class="bi bi-clock"></i> Senin - Jum'at: 08.00 - 17.00</p>
                     <p><i class="bi bi-clock"></i> Sabtu - Minggu: Tutup</p>
                 </div>
-                
             </div>
             
             <!-- Contact Section -->
-            <div class="col-lg-4 col-md-6 footer-contact text-center text-md-start">
+            <div class="col-lg-4 col-md-6 footer-contact text-md-start">
                 <h1><strong>Hubungi Kami:</strong></h1>
                 <p><strong>WA:</strong> <a href="https://wa.me/628116888123">0811 6888 123</a></p>
                 <p><strong>Email:</strong> <a href="mailto:rumahamal@usk.ac.id">rumahamal@usk.ac.id</a></p>
@@ -127,7 +128,7 @@
             <div class="col-lg-4 col-md-12 footer-map text-center">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.062950078828!2d95.3687264!3d5.5709969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304037d79398cc65%3A0x164fb653d9c4a1f7!2sRumah%20Amal%20Masjid%20Jamik%20USK!5e0!3m2!1sen!2sid!4v1688584573276!5m2!1sen!2sid"
-                    width="100%" height="250px" style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy"
+                    width="100%" height="250px" style="border:0; border-radius: 15px;" sandbox="allow-scripts allow-same-origin" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade" title="GMAPS RA USK"></iframe>
             </div>
         </div>

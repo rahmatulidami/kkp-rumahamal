@@ -100,7 +100,7 @@
       @foreach ($campaigns as $campaign)
             <div class="col-lg-4 col-md-6 campaign-unggulan-item isotope-item filter-{{ $campaign['category'] }}">
               <div class="campaign-unggulan-content h-100">
-                <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}" aria-label="Detail campaign"><img src="{{ $campaign['image'] }}" alt="" loading="lazy" width="1024" height="576" style="aspect-ratio: 1024/576"></a>
+                <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}" aria-label="Detail campaign"><img src="{{ $campaign['image'] }}" alt="" loading="lazy" width="416" height="234" style="aspect-ratio: 16/9"></a>
                 <div class="campaign-unggulan-info">
                 <h3>
                     <a href="{{ route('campaign.show', ['slug' => $campaign['slug']]) }}" aria-label="Detail campaign">{{ $campaign['title']['rendered'] }}</a>
@@ -162,8 +162,8 @@
 
   <div class="row gy-4">
     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-      <img src="assets/img/profil/usk.png" class="img-fluid rounded-4 mb-4" alt="" loading="lazy" width="1024" height="576" style="aspect-ratio: 1024/576">
-      <img src="assets/img/profil/mesjid-jamik.png" class="img-fluid rounded-4 mb-4" alt="" loading="lazy" width="1024" height="576" style="aspect-ratio: 1024/576">
+      <img src="assets/img/profil/usk.webp" class="img-fluid rounded-4 mb-4" alt="" loading="lazy" width="816" height="479" style="aspect-ratio: 17/10">
+      <img src="assets/img/profil/mesjid-jamik.webp" class="img-fluid rounded-4 mb-4" alt="" loading="lazy" width="800" height="450" style="aspect-ratio: 16/9">
     </div>
     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
       <div class="content ps-0 ps-lg-5">
@@ -175,7 +175,7 @@
 
         <div class="position-relative mt-4">
           <div class="rekening-container">
-              <img src="assets/img/logobsi.png" alt="BSI Logo" class="logo-bsi">
+              <img src="assets/img/logobsi.webp" alt="BSI Logo" class="logo-bsi" width="100" height="100" style="aspect-ratio: 1/1">
               <div class="rekening-info">
                   <p><strong>Bank Syariah Indonesia (<span class="bsi-bold">BSI</span>)</strong></p>
                   <p><strong>No. Rekening: <span class="bsi-bold">7099400409</span></strong></p>
@@ -205,7 +205,7 @@
                     <article>
                         @if(isset($post['image_url']) && $post['image_url'])
                             <div class="post-img">
-                            <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" loading="lazy" width="1024" height="576" style="aspect-ratio: 1024/576">
+                            <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" loading="lazy" width="416" height="234" style="aspect-ratio: 16/9">
                             </div>
                         @endif
                         <p class="post-category">
@@ -246,7 +246,7 @@
                     <article>
                         @if(isset($post['image_url']) && $post['image_url'])
                             <div class="post-img">
-                            <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" loading="lazy" width="1024" height="576" style="aspect-ratio: 1024/576">
+                            <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" loading="lazy" width="416" height="234" style="aspect-ratio: 16/9">
                             </div>
                         @endif
                         <p class="post-category">{{ implode(', ', $post['categories'] ?? []) }}</p>
@@ -279,12 +279,12 @@
         <div class="row d-flex flex-wrap">
           <div class="col-md-8 text-center p-2">
           <div class="video-container">
-              <iframe id="youtube-video" src="https://www.youtube.com/embed/jPpcdsT2kF4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Youtube RA USK" loading="lazy"></iframe>
+              <iframe id="youtube-video" src="https://www.youtube.com/embed/jPpcdsT2kF4" frameborder="0" sandbox="allow-scripts allow-same-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Youtube RA USK" loading="lazy"></iframe>
           </div>
           </div>
           <div class="col-md-4 text-center p-2">
             <div class="instagram-container">
-            <iframe src="https://www.instagram.com/rumahamal.usk/embed" frameborder="0" title="Instagram RA USK" loading="lazy"></iframe>
+            <iframe src="https://www.instagram.com/rumahamal.usk/embed" frameborder="0" sandbox="allow-scripts allow-same-origin" title="Instagram RA USK" referrerpolicy="no-referrer-when-downgrade" loading="lazy"></iframe>
             </div>
           </div>
         </div>
@@ -335,12 +335,12 @@
             }
             </script>
             <div class="swiper-wrapper align-items-center">
-				        <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy"></div>
-                <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy"></div>
-                <div class="swiper-slide"><img src="assets/img/clients/RAsalman.png" class="img-fluid" alt="" loading="lazy"></div>
-                <div class="swiper-slide"><img src="assets/img/clients/hi.png" class="img-fluid" alt="" loading="lazy"></div>
-				        <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy"></div>
-                <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy"></div>
+				        <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
+                <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
+                <div class="swiper-slide"><img src="assets/img/clients/RAsalman.png" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
+                <div class="swiper-slide"><img src="assets/img/clients/hi.png" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
+				        <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
+                <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy"width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
             </div>
         </div>
     </div>
@@ -425,7 +425,7 @@
             <div class="swiper-slide">
                 <div class="image-container">
                     <a href="${post.link}">
-                        <img src="${post.image_url}" alt="${post.title}">
+                        <img src="${post.image_url}" alt="${post.title}" width="1297" height="518.79" style="aspect-ratio: 5/2">
                     </a>
                 </div>
             </div>

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 
 class PengumumanController extends Controller
 {
-    private $apiBaseUrl = 'http://rumahamal.usk.ac.id/api/wp-json/wp/v2';
+    private $apiBaseUrl = 'https://rumahamal.usk.ac.id/api/wp-json/wp/v2';
     private $pengumumanCategoryId = 87; // Category ID for Pengumuman
     private $cacheTime = 60 * 60; // Cache time in seconds (e.g., 1 hour)
 

@@ -55,7 +55,7 @@
 
             <div class="gambar">
                 <a href="assets/img/struktur.png" data-lightbox="struktur" data-title="Struktur Organisasi Rumah Amal USK">
-                    <img src="assets/img/struktur.png" alt="Struktur Organisasi" class="img-fluid">
+                    <img src="assets/img/struktur.webp" alt="Struktur Organisasi" class="img-fluid">
                 </a>
             </div>
         </div>

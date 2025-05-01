@@ -93,7 +93,7 @@ class HomeController extends Controller
 
     private function fetchAllPosts()
     {
-        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
+        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
             'orderby' => 'date',
             'order' => 'desc',
             'per_page' => 50 // Increased to get more posts for filtering
@@ -120,7 +120,7 @@ class HomeController extends Controller
 
     private function fetchCategories()
     {
-        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/categories');
+        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/categories');
         $categories = $response->json();
         if (!is_array($categories)) {
             abort(500, 'Failed to fetch categories.');

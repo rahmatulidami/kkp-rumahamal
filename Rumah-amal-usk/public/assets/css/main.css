@@ -617,6 +617,7 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 2rem;
 }
 .footer-logo {
+    width: fit-content;
     max-height: 90px;
     background-color: #f3f3f3;
     padding: 15px;
@@ -1040,7 +1041,7 @@ img.fixed-dimension {
     transition: 0.3s;
 }
 .icon-box .btn-btn-primary {
-    color: #ff9d00; 
+    color: #1D7E05; 
     background: #F5F7F8;
     font-family: var(--heading-font);
     font-weight: 800;
@@ -1050,14 +1051,14 @@ img.fixed-dimension {
     padding: 10px 50px;
     border-radius: 20px;
     transition: 0.3s;
-    border: 1.5px solid #FFBB0C; 
+    border: 1.5px solid #1D7E05; 
 }
 .icon-box:hover {
     background-color: color-mix(in srgb, #F5F7F8, white 10%);
 }
 .icon-box:hover .btn-btn-primary {
     color: #ffffff;
-    background: #FFBB0C;
+    background: #1D7E05;
 }
 
 /*--------------------------------------------------------------
@@ -1080,7 +1081,7 @@ img.fixed-dimension {
 }
 @media (max-width: 480px) {
     .clients .swiper-slide img {
-        width: 50%; 
+        width: 100%; 
     }
 }
 

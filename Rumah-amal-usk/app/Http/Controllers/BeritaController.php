@@ -28,7 +28,7 @@ class BeritaController extends Controller
     
         // Fetch posts (cache for 60 minutes) with proper sorting
         $posts = Cache::remember('posts', $this->cacheTime, function() {
-            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
+            $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
                 'per_page' => 100,
                 'orderby' => 'date',
                 'order' => 'desc'
@@ -104,7 +104,7 @@ class BeritaController extends Controller
     
         // Fetch posts from cache with proper sorting
         $posts = Cache::remember('posts', $this->cacheTime, function() {
-            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
+            $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
                 'per_page' => 100,
                 'orderby' => 'date',
                 'order' => 'desc'
@@ -166,7 +166,7 @@ class BeritaController extends Controller
     
     private function fetchCategories()
     {
-        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/categories');
+        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/categories');
         
         return array_map(function ($category) {
             return [
@@ -199,7 +199,7 @@ class BeritaController extends Controller
     public function show($slug)
     {
         // Fetch the post by slug from the API
-        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
+        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
             'slug' => $slug,
             '_' => time() // Avoid cache
         ]);
@@ -218,7 +218,7 @@ class BeritaController extends Controller
 
         // Ambil recent posts (exclude current post)
         $recent_posts = Cache::remember('recent_posts_'.$berita['id'], $this->cacheTime, function() use ($berita) {
-            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
+            $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
                 'per_page' => 5,
                 'orderby' => 'date',
                 'order' => 'desc',
@@ -246,7 +246,7 @@ class BeritaController extends Controller
         $filteredTags = [];
 
         if (!empty($beritaTags)) {
-            $tagResponse = Http::get("http://rumahamal.usk.ac.id/api/wp-json/wp/v2/tags", [
+            $tagResponse = Http::get("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/tags", [
                 'include' => implode(',', $beritaTags)
             ]);
             $filteredTags = $tagResponse->json();
@@ -255,7 +255,7 @@ class BeritaController extends Controller
         // Ambil comments
         $comments = [];
         if (!empty($berita['id'])) {
-            $commentResponse = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/comments', [
+            $commentResponse = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/comments', [
                 'post' => $berita['id']
             ]);
             $comments = $commentResponse->json();
@@ -276,7 +276,7 @@ class BeritaController extends Controller
     private function getTagName($tagId)
     {
         return Cache::remember("tag_name_{$tagId}", $this->cacheTime, function () use ($tagId) {
-            $response = Http::get("http://rumahamal.usk.ac.id/api/wp-json/wp/v2/tags/{$tagId}");
+            $response = Http::get("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/tags/{$tagId}");
             return $response->successful() ? $response->json()['name'] ?? 'Tanpa Tag' : 'Tanpa Tag';
         });
     }
@@ -294,7 +294,7 @@ class BeritaController extends Controller
 
         // Ambil semua berita dari cache dengan sorting yang benar
         $posts = Cache::remember('posts', $this->cacheTime, function () {
-            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
+            $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
                 'per_page' => 100,
                 'orderby' => 'date',
                 'order' => 'desc'
