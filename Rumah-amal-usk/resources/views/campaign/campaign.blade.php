@@ -2,6 +2,13 @@
 
 @section('title', 'Campaign | Rumah Amal USK')
 
+@section('meta')
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="Kami menyediakan sistem dan layanan yang memudahkan para muzakki atau donatur dalam menunaikan zakat, infaq, shadaqah, maupun wakaf dengan sebaik-baiknya.">
+@endsection
+
 @section('content')
 
 <main class="main">
@@ -58,7 +65,7 @@
                                     </div>
                                 </div>
                                 <div class="progress" role="progressbar" aria-valuenow="{{ $campaign['percentage'] }}"
-                                    aria-valuemin="0" aria-valuemax="100" 
+                                    aria-valuemin="0" aria-valuemax="100" aria-label="Loading data"
                                     style="--progress-percentage: {{ $campaign['percentage'] }}%;">
                                     <div class="progress-bar" style="width: var(--progress-percentage);"></div>
                                 </div>

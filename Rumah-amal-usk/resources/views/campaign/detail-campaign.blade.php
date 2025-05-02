@@ -134,7 +134,7 @@
               <div class="campaign-unggulan-content h-100">
                 <a href="{{ route('campaign.show', ['slug' => $otherCampaign['slug']]) }}" aria-label="Detail campaign"><img src="{{ $otherCampaign['image'] }}" alt=""></a>
                 <div class="campaign-unggulan-info">
-                  <h4><a href="{{ route('campaign.show', ['slug' => $otherCampaign['slug']]) }}" aria-label="Detail campaign">{{ $otherCampaign['title']['rendered'] }}</a></h4>
+                  <h3><a href="{{ route('campaign.show', ['slug' => $otherCampaign['slug']]) }}" aria-label="Detail campaign">{{ $otherCampaign['title']['rendered'] }}</a></h3>
                   <div class="progress-container">
                     <div class="Durasi">
                       <div class="sisa-hari">
