@@ -22,7 +22,7 @@
     <!-- Search Section -->
     <section id="tag-section" class="tag-section section">
         <div class="container">
-        <h1 class="text-center mt-2">Menampilkan Postingan dengan tag: <strong>{{ $tagName }}</strong></h1>
+        <h1>Menampilkan Postingan dengan tag: <b> {{ $tagName }}</b></h1>
         </div>
     </section>
 
