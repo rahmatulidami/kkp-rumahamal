@@ -20,7 +20,7 @@
     </div><!-- End Page Title -->
 
     <!-- Search Section -->
-    <section id="search-section" class="search-section section">
+    <section id="tag-section" class="tag-section section">
         <div class="container">
         <h1 class="text-center mt-2">Menampilkan Postingan dengan tag: <strong>{{ $tagName }}</strong></h1>
         </div>

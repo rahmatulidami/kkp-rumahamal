@@ -53,7 +53,7 @@
                 <i class="bi bi-tags"></i>
                 <ul class="tags">
                   @foreach($tags as $tag)
-                    <li><a href="#">{{ $tag['name'] }}</a></li>
+                    <li><a href="{{ route('berita.tag', ['tag' => $tag['id']]) }}">{{ $tag['name'] }}</a></li>
                   @endforeach
                 </ul>
 

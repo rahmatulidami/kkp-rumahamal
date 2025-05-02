@@ -303,12 +303,13 @@
         <div class="swiper init-swiper">
             <script type="application/json" class="swiper-config">
             {
-                "loop": true,
+                "loop": false,
                 "speed": 600,
                 "autoplay": {
                     "delay": 5000
                 },
                 "slidesPerView": "auto",
+                "watchOverflow": true,
                 "pagination": {
                     "el": ".swiper-pagination",
                     "type": "bullets",
