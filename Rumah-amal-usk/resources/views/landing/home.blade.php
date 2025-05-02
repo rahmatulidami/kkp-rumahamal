@@ -284,7 +284,7 @@
           </div>
           <div class="col-md-4 text-center p-2">
             <div class="instagram-container">
-            <iframe src="https://www.instagram.com/rumahamal.usk/embed" frameborder="0" sandbox="allow-scripts allow-same-origin" title="Instagram RA USK" referrerpolicy="no-referrer-when-downgrade" loading="lazy"></iframe>
+            <iframe src="https://www.instagram.com/rumahamal.usk/embed" frameborder="0" title="Instagram RA USK" referrerpolicy="no-referrer-when-downgrade" loading="lazy"></iframe>
             </div>
           </div>
         </div>

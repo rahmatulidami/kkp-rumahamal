@@ -45,14 +45,14 @@
                     <li><a href="/profil" class="{{ Request::is('profil') || Request::is('struktur') || Request::is('fokusprogram') || Request::is('visimisi') || Request::is('landasanutama') ? 'active' : '' }}">Profil</a></li>
 
                     <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropdownmenu {{ Request::is('program') || Request::is('campaign') ? 'active' : '' }}"><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <a href="#" class="dropdownmenu {{ Request::is('program') || Request::is('campaign') ? 'active' : '' }}"><span>Program</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="/program" id="dropdownitemm" class="{{ Request::is('program') ? 'active' : '' }}">Program</a></li>
                             <li><a href="/campaign" id="dropdownitemm" class="{{ Request::is('campaign') ? 'active' : '' }}">Kampanye</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropdownmenu {{ Request::is('berita') || Request::is('pengumuman') || Request::is('dokumen') ? 'active' : '' }}"><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <a href="#" class="dropdownmenu {{ Request::is('berita') || Request::is('pengumuman') || Request::is('dokumen') ? 'active' : '' }}"><span>Informasi</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="/berita" id="dropdownitemm" class="{{ Request::is('berita') ? 'active' : '' }}">Berita</a></li>
                             <li><a href="/pengumuman" id="dropdownitemm" class="{{ Request::is('pengumuman') ? 'active' : '' }}">Pengumuman</a></li>
@@ -61,7 +61,7 @@
                     </li>
                     <li><a href="/dokumentasi" class="{{ Request::is('galeri') ? 'active' : '' }}">Galeri</a></li>
                     <li class="language-switcher">
-                        <a href="javascript:void(0)" class="language-link">
+                        <a href="#" class="language-link">
                             <img src="{{ asset('assets/img/flag-ID.webp') }}" alt="Indonesian Flag" class="flag-icon">
                             <span>ID</span>
                             <i class="bi bi-chevron-down toggle-dropdown"></i>
@@ -140,6 +140,14 @@
     </div>
 </footer>
 
+<script>
+    document.querySelector('.dropdown-trigger').addEventListener('click', function(e) {
+        e.preventDefault(); // Blokir navigasi ke "#"
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        this.nextElementSibling.setAttribute('aria-hidden', isExpanded);
+    });
+</script>
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
