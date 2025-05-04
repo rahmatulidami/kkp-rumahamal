@@ -60,19 +60,6 @@
                         </ul>
                     </li>
                     <li><a href="/dokumentasi" class="{{ Request::is('galeri') ? 'active' : '' }}">Galeri</a></li>
-                    <li class="language-switcher">
-                        <a href="#" class="language-link">
-                            <img src="{{ asset('assets/img/flag-ID.webp') }}" alt="Indonesian Flag" class="flag-icon">
-                            <span>ID</span>
-                            <i class="bi bi-chevron-down toggle-dropdown"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="?lang=en" class="language-link">
-                                <img src="{{ asset('assets/img/flag-EN.webp') }}" alt="English Flag" class="flag-icon">
-                                <span>EN</span>
-                            </a></li>
-                        </ul>
-                    </li>
                     <li class="login-button">
                         <button id="login-button" class="btn btn-primary">Login</button>
                     </li>
@@ -172,10 +159,24 @@
   <script >
     AOS.init();
   </script>
-  <!-- Main JS File -->
-  <script src="{{ asset('assets/js/main.js') }}"></script>
   
-  @stack('scripts')
+  <script src="{{ asset('assets/js/main.js') }}"></script>
+
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'id',
+        includedLanguages: 'en,id,ar',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+
+  <div id="google_translate_element"></div>
+  <script src="https://translate.googleapis.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+@stack('scripts')
 
 </body>
 
