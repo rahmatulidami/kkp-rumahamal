@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    
   @yield('meta')
 
   <title>@yield('title')</title>
@@ -123,29 +124,32 @@
 
     <!-- Copyright -->
     <div class="copyright text-center mt-4">
-        <p><span>Copyright &copy; 2025</span> <a href="/" class="sitename"><strong>Rumah Amal USK.</strong></a> <span>All Rights Reserved</span></p>
+        <p><span>Copyright &copy; 2025</span> <a href="/" class="sitename"><b>Rumah Amal USK.</b></a> <span>All Rights Reserved</span></p>
     </div>
 </footer>
 
 <script>
-    document.querySelector('.dropdown-trigger').addEventListener('click', function(e) {
+  document.addEventListener('DOMContentLoaded', function () {
+    const trigger = document.querySelector('.dropdown-trigger');
+    if (trigger) {
+      trigger.addEventListener('click', function(e) {
         e.preventDefault(); // Blokir navigasi ke "#"
         const isExpanded = this.getAttribute('aria-expanded') === 'true';
         this.setAttribute('aria-expanded', !isExpanded);
         this.nextElementSibling.setAttribute('aria-hidden', isExpanded);
-    });
+      });
+    }
+  });
 </script>
 
-  <!-- Scroll Top -->
+<!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Preloader -->
   <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
-  <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}" defer></script>
   <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}" defer></script>
-  <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
   <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
   <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}" defer></script>
   <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
@@ -162,21 +166,21 @@
   
   <script src="{{ asset('assets/js/main.js') }}"></script>
 
-  <script>
+  @stack('scripts')
+
+
+  <script defer>
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'id',
         includedLanguages: 'en,id,ar',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
       }, 'google_translate_element');
     }
   </script>
 
   <div id="google_translate_element"></div>
-  <script src="https://translate.googleapis.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-@stack('scripts')
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" referrerpolicy="no-referrer-when-downgrade"></script>
 
 </body>
 

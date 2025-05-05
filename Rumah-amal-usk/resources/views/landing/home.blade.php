@@ -351,7 +351,10 @@
 
 @endsection
 
+
 @push('scripts')
+<!-- Load Swiper JS terlebih dahulu -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 <script>
     // Base URL for the website
@@ -390,7 +393,7 @@
         const doc = new DOMParser().parseFromString(content, 'text/html');
         const imgTag = doc.querySelector('img');
         if (imgTag) {
-            imgTag.removeAttribute('loading'); // Remove 'loading' attribute (lazy load)
+            imgTag.removeAttribute('loading');
             return imgTag.getAttribute('src') || '';
         }
         return '';
@@ -398,48 +401,95 @@
 
     // Function to initialize and populate the carousel
     async function initializeCarousel() {
-        // Fetch carousel data
-        const carouselItems = await fetchCarouselData();
+        try {
+            // Cek apakah elemen swiper ada
+            const heroSlider = document.querySelector('.hero-slider');
+            if (!heroSlider) {
+                console.warn('Hero slider element not found');
+                return;
+            }
 
-        // Fetch post data for each carousel item
-        const posts = await Promise.all(carouselItems.map(async (item) => {
-            const postData = await fetchPostData(item.acf.post);
-            const postSlug = postData?.slug || '';
-            const postLink = postSlug ? `${baseUrl}/pengumuman/${postSlug}` : '';
+            // Cek apakah Swiper terdefinisi
+            if (typeof Swiper === 'undefined') {
+                console.error('Swiper library not loaded');
+                return;
+            }
 
-            return {
-                id: item.id,
-                slug: item.slug,
-                image_url: extractImageUrl(postData?.content.rendered || ''),
-                title: postData?.title.rendered || 'Untitled',
-                link: postLink,
-                priority: item.acf.priority
-            };
-        }));
+            // Fetch carousel data
+            const carouselItems = await fetchCarouselData();
+            
+            // Fetch post data for each carousel item
+            const posts = await Promise.all(carouselItems.map(async (item) => {
+                const postData = await fetchPostData(item.acf.post);
+                const postSlug = postData?.slug || '';
+                const postLink = postSlug ? `${baseUrl}/pengumuman/${postSlug}` : '';
 
-        // Sort posts by priority (lower priority first)
-        posts.sort((a, b) => a.priority - b.priority);
+                return {
+                    id: item.id,
+                    slug: item.slug,
+                    image_url: extractImageUrl(postData?.content.rendered || ''),
+                    title: postData?.title.rendered || 'Untitled',
+                    link: postLink,
+                    priority: item.acf.priority
+                };
+            }));
 
-        // Populate the carousel
-        const swiperWrapper = document.querySelector('.swiper-wrapper');
-        swiperWrapper.innerHTML = posts.map(post => `
-            <div class="swiper-slide">
-                <div class="image-container">
-                    <a href="${post.link}">
-                        <img src="${post.image_url}" alt="${post.title}" width="1297" height="518.79" style="aspect-ratio: 5/2">
-                    </a>
-                </div>
-            </div>
-        `).join('');
+            // Sort posts by priority
+            posts.sort((a, b) => a.priority - b.priority);
 
-        // Initialize Swiper
-        const swiperConfig = document.querySelector('.swiper-config').textContent;
-        const swiperOptions = JSON.parse(swiperConfig);
-        new Swiper('.hero-slider', swiperOptions);
+            // Populate the carousel
+            const swiperWrapper = heroSlider.querySelector('.swiper-wrapper');
+            if (swiperWrapper) {
+                swiperWrapper.innerHTML = posts.map(post => `
+                    <div class="swiper-slide">
+                        <div class="image-container">
+                            <a href="${post.link}">
+                                <img src="${post.image_url}" alt="${post.title}" width="1297" height="518.79" style="aspect-ratio: 5/2">
+                            </a>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Get config from script tag
+            const swiperConfigScript = document.querySelector('.hero-slider .swiper-config');
+            if (!swiperConfigScript) {
+                console.warn('Swiper config not found');
+                return;
+            }
+
+            try {
+                const swiperOptions = JSON.parse(swiperConfigScript.textContent);
+                new Swiper(heroSlider, swiperOptions);
+            } catch (e) {
+                console.error('Error parsing Swiper config:', e);
+            }
+
+        } catch (error) {
+            console.error('Error initializing carousel:', error);
+        }
     }
 
-    // Initialize the carousel when DOM is ready
-    document.addEventListener('DOMContentLoaded', initializeCarousel);
-</script>
+    // Function to initialize clients slider
+    function initializeClientsSlider() {
+        const clientsSlider = document.querySelector('#clients .swiper');
+        if (!clientsSlider) return;
 
+        const configScript = clientsSlider.querySelector('.swiper-config');
+        if (!configScript) return;
+
+        try {
+            const options = JSON.parse(configScript.textContent);
+            new Swiper(clientsSlider, options);
+        } catch (e) {
+            console.error('Error initializing clients slider:', e);
+        }
+    }
+
+    // Initialize everything when window loads
+    window.addEventListener('load', () => {
+        initializeCarousel();
+        initializeClientsSlider();
+    });
+</script>
 @endpush
