@@ -793,7 +793,7 @@ h1, h2, h3, h4, h5, h6 {
 .page-title nav {
     background-color: color-mix(in srgb, #ffffff, transparent 80%);
     padding: 10px 0;
-    color: #FFBB0C;
+    color: #006400;
 }
 .page-title nav ol {
     display: flex;
@@ -808,7 +808,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #45474B;
 }
 .page-title nav ol a:hover {
-    color: #222222;
+    color: #006400;
 }
 .page-title nav ol li + li {
     padding-left: 10px;

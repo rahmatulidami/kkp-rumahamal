@@ -354,7 +354,7 @@
 
 @push('scripts')
 <!-- Load Swiper JS terlebih dahulu -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/swiper@11.0.5/swiper-bundle.min.js"></script>
 
 <script>
     // Base URL for the website

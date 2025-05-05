@@ -58,7 +58,7 @@
                             <article>
                                 @if($post['image_url'])
                                     <div class="post-img">
-                                        <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" style="width: 100%; height: auto;">
+                                        <img src="{{ $post['image_url'] }}" alt="" width="800" height="450" class="img-fluid" style="width: 100%; height: auto;" loading="eager">
                                     </div>
                                 @endif
                                 <p class="post-category">
