@@ -40,22 +40,20 @@
     <div class="container">
       <!-- Gallery -->
         <div class="row">
-            @foreach ($images as $image)
-                <div class="col-lg-3 col-md-4 mb-4 mb-lg-0">
-                    <div class="image-container">
-                        <a href="{{ $image['href'] }}" class="gallery-link">
-                            <img
-                            src="{{ $image['src'] }}"
-                            class="w-100 shadow-1-strong rounded mb-4 gallery-image"
+        @foreach ($images as $image)
+            <div class="col-lg-3 col-md-4 mb-4 mb-lg-0">
+                <div class="image-container">
+                    <a href="{{ $image['href'] }}" class="gallery-link" aria-label="{{ $image['alt'] }}">
+                        <img src="{{ $image['src'] }}" 
+                            class="w-100 shadow-1-strong rounded mb-4 gallery-image" 
                             alt="{{ $image['alt'] }}"
-                            data-caption="{{ $image['caption'] }}"
-                            loading="lazy"
-                            />
-                        </a>
-                        <div class="caption">{{ $image['caption'] }}</div>
-                    </div>
+                            loading="eager"
+                            data-fullsize="{{ $image['href'] }}"> <!-- Tambahkan atribut data-fullsize -->
+                    </a>
+                    <div class="caption">{{ $image['caption'] }}</div>
                 </div>
-            @endforeach
+            </div>
+        @endforeach
         </div>
         <!-- Gallery -->
     </div>
@@ -79,7 +77,7 @@
                 {{-- First page --}}
                 @if($pagination['current_page'] > 3)
                     <li class="page-item">
-                        <a href="{{ url('dokumentasi?page=1') }}" class="page-link">1</a>
+                        <a href="{{ url('dokumentasi?page=1') }}" class="page-link" aria-label="halaman 1">1</a>
                     </li>
                     @if($pagination['current_page'] > 4)
                         <li class="page-item disabled dots">
@@ -91,7 +89,7 @@
                 {{-- Middle pages --}}
                 @for($i = max(1, $pagination['current_page'] - 2); $i <= min($pagination['total_pages'], $pagination['current_page'] + 2); $i++)
                     <li class="page-item {{ $pagination['current_page'] == $i ? 'active' : '' }}">
-                        <a href="{{ url('dokumentasi?page=' . $i) }}" class="page-link">{{ $i }}</a>
+                        <a href="{{ url('dokumentasi?page=' . $i) }}" class="page-link" aria-label="halaman 2">{{ $i }}</a>
                     </li>
                 @endfor
 
@@ -103,7 +101,7 @@
                         </li>
                     @endif
                     <li class="page-item">
-                        <a href="{{ url('dokumentasi?page=' . $pagination['total_pages']) }}" class="page-link">{{ $pagination['total_pages'] }}</a>
+                        <a href="{{ url('dokumentasi?page=' . $pagination['total_pages']) }}" aria-label="next" class="page-link">{{ $pagination['total_pages'] }}</a>
                     </li>
                 @endif
 
@@ -192,30 +190,38 @@ document.addEventListener('DOMContentLoaded', (event) => {
         currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1;
         updateModalImage();
     });
-
     function updateModalImage() {
         if (currentImageIndex === null || images.length === 0) return;
 
-        loadingSpinner.style.display = 'block'; // Show loading spinner
-        const newSrc = images[currentImageIndex].parentElement.href;
+        loadingSpinner.style.display = 'block';
+        const currentImage = images[currentImageIndex];
         
-        // Set up the image loader
+        // Gunakan data-fullsize sebagai fallback jika href tidak ada
+        const newSrc = currentImage.dataset.fullsize || currentImage.parentElement.href;
+        
+        // Validasi URL
+        if (!newSrc) {
+            console.error('Image URL is undefined');
+            loadingSpinner.style.display = 'none';
+            return;
+        }
+
         const tempImg = new Image();
         tempImg.src = newSrc;
         
         tempImg.onload = () => {
-            modalImg.src = newSrc; // Set the new image source
-            loadingSpinner.style.display = 'none'; // Hide loading spinner
+            modalImg.src = newSrc;
+            modalImg.alt = currentImage.alt;
+            captionText.textContent = currentImage.dataset.caption || '';
+            loadingSpinner.style.display = 'none';
         };
 
         tempImg.onerror = () => {
-            // Handle error, possibly hide the spinner or show an error message
-            loadingSpinner.style.display = 'none'; // Hide loading spinner
+            console.error('Failed to load image:', newSrc);
+            loadingSpinner.style.display = 'none';
+            captionText.textContent = 'Gambar tidak dapat dimuat';
         };
-
-        // Reset the src to trigger loading
-        modalImg.src = '';
-    }
+}
 });
 </script>
 @endpush

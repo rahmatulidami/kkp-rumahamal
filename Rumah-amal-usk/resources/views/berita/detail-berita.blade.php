@@ -68,9 +68,9 @@
                     <a href="#" id="share-facebook" title="Share on Facebook"><i class="bi bi-facebook"></i></a>
 
                     <!-- Copy link tombol dengan tooltip -->
-                    <a href="#" id="copy-link" title="Copy Link" class="copy-btn">
+                    <a href="#" id="copy-link" class="copy-btn" aria-label="Salin tautan ke clipboard">
                       <i class="bi bi-link-45deg"></i>
-                      <span class="tooltip-text" id="tooltip-copy">Tautan telah disalin</span>
+                      <span class="tooltip-text">Tautan telah disalin!</span>
                     </a>
                   </div>
 
@@ -209,20 +209,13 @@ document.addEventListener('DOMContentLoaded', function() {
     window.open('https://www.instagram.com', '_blank');
   });
 
-  copyLinkButton.addEventListener('click', function(event) {
-    event.preventDefault();
-    const url = window.location.href;
-    navigator.clipboard.writeText(url)
-      .then(() => {
-        this.classList.add('show-tooltip');
-        setTimeout(() => {
-          this.classList.remove('show-tooltip');
-        }, 2000);
-      })
-      .catch(err => {
-        console.error('Could not copy text: ', err);
-      });
-  });
+  document.getElementById('copy-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      this.classList.add('show-tooltip');
+      setTimeout(() => {
+        this.classList.remove('show-tooltip');
+      }, 2000);
+    });
 });
 </script>
 
