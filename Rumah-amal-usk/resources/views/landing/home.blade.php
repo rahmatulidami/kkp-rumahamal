@@ -7,7 +7,74 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="description" content="Kami menyediakan sistem dan layanan yang memudahkan para muzakki atau donatur dalam menunaikan zakat, infaq, shadaqah, maupun wakaf dengan sebaik-baiknya.">
+    
+    <!-- Preload hero images -->
+    @isset($heroImages)
+        @foreach($heroImages as $image)
+            <link rel="preload" href="{{ $image }}" as="image" fetchpriority="high">
+        @endforeach
+    @endisset
 
+    <!-- Inline critical CSS -->
+    <style>
+        /* Hero Section Styles */
+        .hero-slider {
+            position: relative;
+            min-height: 518.79px;
+            overflow: hidden;
+        }
+        .hero-slider .swiper-wrapper {
+            transition-timing-function: cubic-bezier(0.17, 0.67, 0.83, 0.67);
+        }
+        .hero-slider .image-container {
+            width: 100%;
+            height: 100%;
+        }
+        .hero-slider .image-container img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .loading-placeholder {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            height: 518.79px;
+            width: 100%;
+        }
+        @keyframes shimmer {
+            to { background-position: -200% 0; }
+        }
+        
+        /* Navigation buttons */
+        .swiper-button-prev,
+        .swiper-button-next {
+            color: white;
+            background: rgba(0,0,0,0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .swiper-button-prev::after,
+        .swiper-button-next::after {
+            font-size: 20px;
+        }
+        
+        /* Pagination */
+        .swiper-pagination-bullet {
+            background: white;
+            opacity: 0.5;
+            width: 10px;
+            height: 10px;
+        }
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+            background: #fff;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -16,40 +83,59 @@
 
 <!-- Hero Section -->
 <section id="hero">
-<div class="container-fluid">
-    <div class="hero-slider swiper init-swiper">
-        <script type="application/json" class="swiper-config">
-          {
-              "loop": true,
-              "speed": 600,
-              "autoplay": false,
-              "slidesPerView": 1,
-              "spaceBetween": 0,
-              "navigation": {
-                  "nextEl": ".swiper-button-next",
-                  "prevEl": ".swiper-button-prev"
-              },
-              "pagination": {
-                  "el": ".swiper-pagination",
-                  "type": "bullets",
-                  "clickable": true
-              }
-          }
-        </script>
-        <div class="swiper-wrapper align-items-center">
-            <!-- Loading placeholder for carousel items -->
-            <div class="swiper-slide">
-                <div class="loading-placeholder"></div>
+    <div class="container-fluid">
+        <div class="hero-slider swiper init-swiper">
+            <script type="application/json" class="swiper-config">
+            {
+                "loop": true,
+                "speed": 600,
+                "autoplay": false,
+                "slidesPerView": 1,
+                "spaceBetween": 0,
+                "navigation": {
+                    "nextEl": ".swiper-button-next",
+                    "prevEl": ".swiper-button-prev"
+                },
+                "pagination": {
+                    "el": ".swiper-pagination",
+                    "type": "bullets",
+                    "clickable": true
+                }
+            }
+            </script>
+            <div class="swiper-wrapper align-items-center">
+                @isset($heroSlides)
+                    @foreach($heroSlides as $slide)
+                        <div class="swiper-slide">
+                            <div class="image-container">
+                                <a href="{{ $slide['link'] }}">
+                                    <img src="{{ $slide['image_url'] }}" 
+                                         alt="{{ $slide['title'] }}" 
+                                         width="1297" 
+                                         height="518.79" 
+                                         style="aspect-ratio: 5/2"
+                                         loading="eager"
+                                         fetchpriority="high">
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <!-- Fallback loading state -->
+                    <div class="swiper-slide">
+                        <div class="loading-placeholder"></div>
+                    </div>
+                @endisset
             </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-pagination"></div>
         </div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-pagination"></div>
     </div>
-  </div>
 </section>
 <!-- End Hero Section -->
 
+<!-- Rest of your content remains exactly the same -->
 <!-- icon zakat/infak Section -->  
 <section id="icon-boxed" class="icon-boxes section">
   <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
@@ -351,145 +437,101 @@
 
 @endsection
 
-
 @push('scripts')
-<!-- Load Swiper JS terlebih dahulu -->
-<script src="https://unpkg.com/swiper@11.0.5/swiper-bundle.min.js"></script>
-
 <script>
-    // Base URL for the website
-    const baseUrl = 'https://rumahamal.usk.ac.id';
+// Global variable to track Swiper loading state
+window.swiperLoaded = false;
 
-    // Function to fetch carousel data
-    async function fetchCarouselData() {
-        try {
-            const response = await fetch(`${baseUrl}/api/wp-json/wp/v2/carausel?_fields=id,slug,acf`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch carousel data.');
-            }
-            return await response.json();
-        } catch (error) {
-            console.error(error);
-            return [];
+// Function to load Swiper
+function loadSwiper() {
+    return new Promise((resolve) => {
+        if (typeof Swiper !== 'undefined') {
+            window.swiperLoaded = true;
+            return resolve();
         }
-    }
-
-    // Function to fetch post data by ID
-    async function fetchPostData(postId) {
-        try {
-            const response = await fetch(`${baseUrl}/api/wp-json/wp/v2/posts/${postId}`);
-            if (!response.ok) {
-                throw new Error(`Failed to fetch post with ID ${postId}.`);
-            }
-            return await response.json();
-        } catch (error) {
-            console.error(error);
-            return null;
-        }
-    }
-
-    // Function to extract clean image URL from post content
-    function extractImageUrl(content) {
-        const doc = new DOMParser().parseFromString(content, 'text/html');
-        const imgTag = doc.querySelector('img');
-        if (imgTag) {
-            imgTag.removeAttribute('loading');
-            return imgTag.getAttribute('src') || '';
-        }
-        return '';
-    }
-
-    // Function to initialize and populate the carousel
-    async function initializeCarousel() {
-        try {
-            // Cek apakah elemen swiper ada
-            const heroSlider = document.querySelector('.hero-slider');
-            if (!heroSlider) {
-                console.warn('Hero slider element not found');
-                return;
-            }
-
-            // Cek apakah Swiper terdefinisi
-            if (typeof Swiper === 'undefined') {
-                console.error('Swiper library not loaded');
-                return;
-            }
-
-            // Fetch carousel data
-            const carouselItems = await fetchCarouselData();
-            
-            // Fetch post data for each carousel item
-            const posts = await Promise.all(carouselItems.map(async (item) => {
-                const postData = await fetchPostData(item.acf.post);
-                const postSlug = postData?.slug || '';
-                const postLink = postSlug ? `${baseUrl}/pengumuman/${postSlug}` : '';
-
-                return {
-                    id: item.id,
-                    slug: item.slug,
-                    image_url: extractImageUrl(postData?.content.rendered || ''),
-                    title: postData?.title.rendered || 'Untitled',
-                    link: postLink,
-                    priority: item.acf.priority
-                };
-            }));
-
-            // Sort posts by priority
-            posts.sort((a, b) => a.priority - b.priority);
-
-            // Populate the carousel
-            const swiperWrapper = heroSlider.querySelector('.swiper-wrapper');
-            if (swiperWrapper) {
-                swiperWrapper.innerHTML = posts.map(post => `
-                    <div class="swiper-slide">
-                        <div class="image-container">
-                            <a href="${post.link}">
-                                <img src="${post.image_url}" alt="${post.title}" width="1297" height="518.79" style="aspect-ratio: 5/2">
-                            </a>
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            // Get config from script tag
-            const swiperConfigScript = document.querySelector('.hero-slider .swiper-config');
-            if (!swiperConfigScript) {
-                console.warn('Swiper config not found');
-                return;
-            }
-
-            try {
-                const swiperOptions = JSON.parse(swiperConfigScript.textContent);
-                new Swiper(heroSlider, swiperOptions);
-            } catch (e) {
-                console.error('Error parsing Swiper config:', e);
-            }
-
-        } catch (error) {
-            console.error('Error initializing carousel:', error);
-        }
-    }
-
-    // Function to initialize clients slider
-    function initializeClientsSlider() {
-        const clientsSlider = document.querySelector('#clients .swiper');
-        if (!clientsSlider) return;
-
-        const configScript = clientsSlider.querySelector('.swiper-config');
-        if (!configScript) return;
-
-        try {
-            const options = JSON.parse(configScript.textContent);
-            new Swiper(clientsSlider, options);
-        } catch (e) {
-            console.error('Error initializing clients slider:', e);
-        }
-    }
-
-    // Initialize everything when window loads
-    window.addEventListener('load', () => {
-        initializeCarousel();
-        initializeClientsSlider();
+        
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/swiper@11.0.5/swiper-bundle.min.js';
+        script.onload = function() {
+            window.swiperLoaded = true;
+            resolve();
+        };
+        script.async = true;
+        document.head.appendChild(script);
     });
+}
+
+// Function to initialize hero carousel with safety check
+function initHeroCarousel() {
+    if (!window.swiperLoaded || typeof Swiper === 'undefined') {
+        console.warn('Swiper not loaded yet - retrying...');
+        setTimeout(initHeroCarousel, 100);
+        return;
+    }
+    
+    const heroSlider = document.querySelector('.hero-slider');
+    if (!heroSlider) return;
+    
+    const configScript = heroSlider.querySelector('.swiper-config');
+    if (!configScript) return;
+    
+    try {
+        const options = JSON.parse(configScript.textContent);
+        new Swiper(heroSlider, options);
+    } catch (e) {
+        console.error('Error initializing hero carousel:', e);
+    }
+}
+
+// Function to initialize clients slider with safety check
+function initClientsSlider() {
+    if (!window.swiperLoaded || typeof Swiper === 'undefined') {
+        console.warn('Swiper not loaded yet for clients slider - retrying...');
+        setTimeout(initClientsSlider, 100);
+        return;
+    }
+    
+    const clientsSlider = document.querySelector('#clients .swiper');
+    if (!clientsSlider) return;
+
+    const configScript = clientsSlider.querySelector('.swiper-config');
+    if (!configScript) return;
+
+    try {
+        const options = JSON.parse(configScript.textContent);
+        new Swiper(clientsSlider, options);
+    } catch (e) {
+        console.error('Error initializing clients slider:', e);
+    }
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    // Load Swiper first
+    loadSwiper().then(() => {
+        // Initialize hero carousel when visible
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    initHeroCarousel();
+                    heroObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        const heroSection = document.getElementById('hero');
+        if (heroSection) heroObserver.observe(heroSection);
+        
+        // Initialize clients slider with lower priority
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(initClientsSlider);
+        } else {
+            // Fallback with slight delay
+            setTimeout(initClientsSlider, 500);
+        }
+    }).catch(err => {
+        console.error('Failed to load Swiper:', err);
+    });
+});
 </script>
 @endpush

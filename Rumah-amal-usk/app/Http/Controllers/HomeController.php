@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 use DOMDocument;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        // Authentication check
         if (Auth::id()) {
             $usertype = Auth::user()->usertype;
 
@@ -24,23 +26,27 @@ class HomeController extends Controller
             }
         }
 
-        // Fetch categories and posts from the API
+        // Cache hero slides for 1 hour
+        $heroSlides = Cache::remember('hero_slides', 3600, function() {
+            return $this->fetchHeroSlides();
+        });
+
+        // Extract image URLs for preloading
+        $heroImages = collect($heroSlides)->pluck('image_url')->filter()->toArray();
+
+        // Fetch other required data
         $categories = $this->fetchCategories();
         $allPosts = $this->fetchAllPosts();
-
-        // Log the fetched data
-        Log::info('All Posts Count:', [count($allPosts)]);
-        Log::info('Categories:', $categories);
 
         if (!is_array($categories) || !is_array($allPosts)) {
             abort(500, 'Invalid data received from API.');
         }
 
-        // Map category IDs to names and decode HTML entities
+        // Process categories
         $categoryMap = array_column($categories, 'name', 'id');
         $categoryMap = array_map('html_entity_decode', $categoryMap);
 
-        // Filter posts and sort by date descending (newest first)
+        // Filter and sort posts
         $pengumumanPosts = array_filter($allPosts, function($post) {
             return is_array($post) && in_array(87, $post['categories'] ?? []);
         });
@@ -49,7 +55,7 @@ class HomeController extends Controller
             return is_array($post) && !in_array(87, $post['categories'] ?? []) && !in_array(88, $post['categories'] ?? []);
         });
 
-        // Sort posts by date (newest first)
+        // Sort by date (newest first)
         usort($pengumumanPosts, function($a, $b) {
             return strtotime($b['date']) - strtotime($a['date']);
         });
@@ -58,17 +64,11 @@ class HomeController extends Controller
             return strtotime($b['date']) - strtotime($a['date']);
         });
 
-        Log::info('Filtered Pengumuman Count:', [count($pengumumanPosts)]);
-        Log::info('Filtered Berita Count:', [count($beritaPosts)]);
-
-        // Get the 6 newest posts
+        // Get latest posts
         $latestPengumumanPosts = array_slice($pengumumanPosts, 0, 6);
         $latestBeritaPosts = array_slice($beritaPosts, 0, 6);
 
-        Log::info('Sliced Pengumuman Posts Count:', [count($latestPengumumanPosts)]);
-        Log::info('Sliced Berita Posts Count:', [count($latestBeritaPosts)]);
-
-        // Process posts for display
+        // Process post data
         foreach ($latestPengumumanPosts as &$post) {
             $post['categories'] = array_map(fn($id) => $categoryMap[$id] ?? 'Uncategorized', $post['categories'] ?? []);
             $post['title']['rendered'] = html_entity_decode($post['title']['rendered'] ?? 'Untitled', ENT_QUOTES, 'UTF-8');
@@ -85,10 +85,53 @@ class HomeController extends Controller
         $campaigns = $this->fetchAndProcessCampaigns();
 
         return view('landing.home', [
+            'heroSlides' => $heroSlides,
+            'heroImages' => $heroImages,
             'latestPengumumanPosts' => $latestPengumumanPosts,
             'latestBeritaPosts' => $latestBeritaPosts,
             'campaigns' => $campaigns
         ]);
+    }
+
+    private function fetchHeroSlides()
+    {
+        try {
+            $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/carausel?_fields=id,slug,acf');
+            $carouselItems = $response->json();
+            
+            if (!is_array($carouselItems)) {
+                return [];
+            }
+
+            $slides = [];
+            
+            foreach ($carouselItems as $item) {
+                $postResponse = Http::get("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts/{$item['acf']['post']}");
+                $postData = $postResponse->json();
+                
+                $imageUrl = $this->extractImageUrlFromContent($postData['content']['rendered'] ?? '');
+
+                $slides[] = [
+                    'id' => $item['id'],
+                    'slug' => $item['slug'],
+                    'image_url' => $imageUrl,
+                    'title' => $postData['title']['rendered'] ?? 'Untitled',
+                    'link' => $postData['slug'] ? "https://rumahamal.usk.ac.id/pengumuman/{$postData['slug']}" : '#',
+                    'priority' => $item['acf']['priority'] ?? 0
+                ];
+            }
+
+            // Sort by priority
+            usort($slides, function($a, $b) {
+                return $a['priority'] <=> $b['priority'];
+            });
+
+            return $slides;
+
+        } catch (\Exception $e) {
+            Log::error('Error fetching hero slides: ' . $e->getMessage());
+            return [];
+        }
     }
 
     private function fetchAllPosts()
@@ -96,7 +139,7 @@ class HomeController extends Controller
         $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
             'orderby' => 'date',
             'order' => 'desc',
-            'per_page' => 50 // Increased to get more posts for filtering
+            'per_page' => 50
         ]);
 
         $posts = $response->json();
@@ -170,6 +213,21 @@ class HomeController extends Controller
         }, $campaigns);
 
         return array_slice($processedCampaigns, 0, 6);
+    }
+
+    private function extractImageUrlFromContent($content)
+    {
+        if (empty($content)) {
+            return '';
+        }
+
+        $doc = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $doc->loadHTML($content);
+        libxml_clear_errors();
+        $imgTags = $doc->getElementsByTagName('img');
+        
+        return $imgTags->length > 0 ? $imgTags->item(0)->getAttribute('src') : '';
     }
 
     private function extractImageUrl($post)
