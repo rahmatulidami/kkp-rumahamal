@@ -248,8 +248,7 @@
 
   <div class="row gy-4">
     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-      <img src="assets/img/profil/usk.webp" class="img-fluid rounded-4 mb-4" alt="" loading="lazy" width="816" height="479" style="aspect-ratio: 17/10">
-      <img src="assets/img/profil/mesjid-jamik.webp" class="img-fluid rounded-4 mb-4" alt="" loading="lazy" width="800" height="450" style="aspect-ratio: 16/9">
+      <img src="assets/img/profil/mesjid.webp" class="img-fluid rounded-4 mb-4" alt="" loading="lazy" width="800" height="450" style="aspect-ratio: 16/9">
     </div>
     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
       <div class="content ps-0 ps-lg-5">
@@ -294,9 +293,11 @@
                             <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" loading="lazy" width="416" height="234" style="aspect-ratio: 16/9">
                             </div>
                         @endif
+                        <div class="category">
                         <p class="post-category">
                             {{ end($post['categories']) ?? 'Uncategorized' }}
                         </p>
+                        </div>
                         <h2 class="title">
                             <a href="{{ route('pengumuman.show', ['slug' => $post['slug']]) }}">{{ $post['title']['rendered'] }}</a>
                         </h2>
@@ -335,7 +336,9 @@
                             <img src="{{ $post['image_url'] }}" alt="" class="img-fluid" loading="lazy" width="416" height="234" style="aspect-ratio: 16/9">
                             </div>
                         @endif
-                        <p class="post-category">{{ implode(', ', $post['categories'] ?? []) }}</p>
+                        <div class="category">
+                            <p class="post-category">{{ implode(', ', $post['categories'] ?? []) }}</p>
+                        </div>
                         <h2 class="title">
                             <a href="{{ route('berita.show', ['slug' => $post['slug']]) }}">{{ $post['title']['rendered'] }}</a>
                         </h2>

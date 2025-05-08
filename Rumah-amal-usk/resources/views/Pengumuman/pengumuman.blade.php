@@ -61,9 +61,11 @@
                                         <img src="{{ $post['image_url'] }}" alt="" width="800" height="450" class="img-fluid" style="width: 100%; height: auto;" loading="eager">
                                     </div>
                                 @endif
-                                <p class="post-category">
-                                    {{ end($post['categories']) ?? 'Uncategorized' }}
-                                </p>
+                                <div class="category">
+                                    <p class="post-category">
+                                        {{ end($post['categories']) ?? 'Uncategorized' }}
+                                    </p>
+                                </div>
                                 <h2 class="title">
                                     <a href="{{ route('pengumuman.show', ['slug' => $post['slug']]) }}">{{ $post['title']['rendered'] }}</a>
                                 </h2>

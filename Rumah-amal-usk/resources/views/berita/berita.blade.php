@@ -63,7 +63,9 @@
                                         <img src="{{ $post['image_url'] }}" alt="" width="800" height="450" class="img-fluid" style="width: 100%; height: auto;">
                                     </div>
                                 @endif
-                                <p class="post-category">{{ implode(', ', $post['categories']) }}</p>
+                                <div class="category">
+                                    <p class="post-category">{{ implode(', ', $post['categories']) }}</p>
+                                </div>
                                 <h2 class="title">
                                 <a href="{{ route('berita.show', $post['slug']) }}">{{ $post['title']['rendered'] }}</a>
                                 </h2>
