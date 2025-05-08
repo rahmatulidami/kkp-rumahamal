@@ -199,7 +199,7 @@
         <strong>Ketentuan Zakat Emas:</strong><br>
         - Nishab: 85 gram emas<br>
         - Kadar zakat: 2.5% dari total nilai emas<br>
-        <strong>Harga emas hari ini:</strong> ${formatRupiah(goldPricePerGram)}/gram
+        <strong>Harga emas hari ini (<a href="https://www.hargaemas.com/" target="_blank" style="color:rgb(3, 129, 41); ">hargaemas.com</a>):</strong> ${formatRupiah(goldPricePerGram)}/gram
       `;
       zakatInfo.style.display = 'block';
     } else {
