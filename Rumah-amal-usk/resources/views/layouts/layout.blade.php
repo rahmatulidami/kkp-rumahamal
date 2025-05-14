@@ -19,11 +19,12 @@
  
   <!-- Vendor CSS Files -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/swiper@11.0.5/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@11.0.5/swiper-bundle.min.css" media="print" onload="this.media='all'">
 
+  
   <!-- Main CSS File -->
   <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
