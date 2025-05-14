@@ -147,7 +147,7 @@
 
   <!-- Vendor JS Files -->
   <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js" defer></script>
   <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5/imagesloaded.pkgd.min.js"async></script>
   <script src="https://cdn.jsdelivr.net/npm/isotope-layout@3/dist/isotope.pkgd.min.js" async></script>
