@@ -368,12 +368,12 @@
         <div class="row d-flex flex-wrap">
           <div class="col-md-8 text-center p-2">
           <div class="video-container">
-              <iframe id="youtube-video" src="https://www.youtube.com/embed/jPpcdsT2kF4" frameborder="0" sandbox="allow-scripts allow-same-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Youtube RA USK" loading="lazy"></iframe>
+              <iframe id="youtube-video" src="https://www.youtube.com/embed/jPpcdsT2kF4" frameborder="0"  allowfullscreen title="Youtube RA USK" loading="lazy"></iframe>
           </div>
           </div>
           <div class="col-md-4 text-center p-2">
             <div class="instagram-container">
-            <iframe src="https://www.instagram.com/rumahamal.usk/embed" frameborder="0" title="Instagram RA USK" referrerpolicy="no-referrer-when-downgrade" loading="lazy"></iframe>
+            <iframe src="https://www.instagram.com/rumahamal.usk/embed" frameborder="0" title="Instagram RA USK" loading="lazy"></iframe>
             </div>
           </div>
         </div>

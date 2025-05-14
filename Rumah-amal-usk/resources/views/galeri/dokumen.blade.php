@@ -46,9 +46,6 @@
                             <option value="name-desc">Z-A</option>
                             <option value="date-asc">Terlama</option>
                             <option value="date-desc">Terbaru</option>
-                            <option value="type-pdf">PDF</option>
-                            <option value="type-doc">DOC</option>
-                            <option value="type-csv">CSV</option>
                         </select>
                         <input type="text" id="search-input" class="form-control" placeholder="Cari Dokumen..." value="{{ request('search', '') }}">
                         <button class="btn btn-outline-secondary" id="search-button" aria-label="Cari" ><i class="bi bi-search"></i></button>
@@ -97,7 +94,8 @@
             <ul class="pagination-list">
                 @if($pagination['current_page'] > 1)
                     <li class="page-item">
-                        <a href="{{ url('dokumen?page=' . ($pagination['current_page'] - 1)) }}" class="page-link prev" aria-label="Previous">
+                        <a href="{{ url('dokumen?page=' . ($pagination['current_page'] - 1) . '&search=' . request('search') . '&filter=' . request('filter')) }}" 
+                           class="page-link prev" aria-label="Previous">
                             <i class="bi bi-chevron-left"></i>
                             <span class="sr-only">Previous</span>
                         </a>
@@ -107,7 +105,8 @@
                 {{-- First page --}}
                 @if($pagination['current_page'] > 3)
                     <li class="page-item">
-                        <a href="{{ url('dokumen?page=1') }}" class="page-link">1</a>
+                        <a href="{{ url('dokumen?page=1&search=' . request('search') . '&filter=' . request('filter')) }}" 
+                           class="page-link">1</a>
                     </li>
                     @if($pagination['current_page'] > 4)
                         <li class="page-item disabled dots">
@@ -119,7 +118,8 @@
                 {{-- Middle pages --}}
                 @for($i = max(1, $pagination['current_page'] - 2); $i <= min($pagination['total_pages'], $pagination['current_page'] + 2); $i++)
                     <li class="page-item {{ $pagination['current_page'] == $i ? 'active' : '' }}">
-                        <a href="{{ url('dokumen?page=' . $i) }}" class="page-link">{{ $i }}</a>
+                        <a href="{{ url('dokumen?page=' . $i . '&search=' . request('search') . '&filter=' . request('filter')) }}" 
+                           class="page-link">{{ $i }}</a>
                     </li>
                 @endfor
 
@@ -131,13 +131,15 @@
                         </li>
                     @endif
                     <li class="page-item">
-                        <a href="{{ url('dokumen?page=' . $pagination['total_pages']) }}" class="page-link">{{ $pagination['total_pages'] }}</a>
+                        <a href="{{ url('dokumen?page=' . $pagination['total_pages'] . '&search=' . request('search') . '&filter=' . request('filter')) }}" 
+                           class="page-link">{{ $pagination['total_pages'] }}</a>
                     </li>
                 @endif
 
                 @if($pagination['current_page'] < $pagination['total_pages'])
                     <li class="page-item">
-                        <a href="{{ url('dokumen?page=' . ($pagination['current_page'] + 1)) }}" class="page-link next" aria-label="Next">
+                        <a href="{{ url('dokumen?page=' . ($pagination['current_page'] + 1) . '&search=' . request('search') . '&filter=' . request('filter')) }}" 
+                           class="page-link next" aria-label="Next">
                             <i class="bi bi-chevron-right"></i>
                             <span class="sr-only">Next</span>
                         </a>
@@ -146,7 +148,7 @@
             </ul>
         </div>
     </div>
-</section><!-- /Pagination -->
+</section>
 
     <!-- Modal untuk konfirmasi download -->
     <div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">
