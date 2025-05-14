@@ -66,7 +66,7 @@
                     @foreach ($documents as $document)
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                             <div class="kumpulan-dokumen p-3 border rounded d-flex flex-column align-items-center text-center shadow-sm" data-name="{{ $document['name'] }}" data-type="{{ $document['type'] }}" style="height: 330px;">
-                            <img src="{{ asset('assets/img/icondokumen.webp') }}" alt="{{ $document['type'] }}" class="file-icon mb-2" loading="eager"/>
+                            <img src="{{ asset('assets/img/icondokumen-1.webp') }}" alt="{{ $document['type'] }}" class="file-icon mb-2"  width="105" height="140"  loading="eager"/>
                                 <p class="dokumen-name mb-2 font-weight-bold">{{ $document['name'] }}</p>
                                 <div class="dokumen-info">
                                     <p class="text-muted mb-1">Ukuran: {{ $document['size'] }}</p>

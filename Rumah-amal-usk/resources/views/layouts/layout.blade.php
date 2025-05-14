@@ -13,14 +13,9 @@
   <link href="{{ asset('assets/img/favicon.png') }}" rel="apple-touch-icon">
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-  <!-- Tambahkan ini di dalam <head> -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" 
-    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" >
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@500&display=swap">
  
   <!-- Vendor CSS Files -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
@@ -40,7 +35,7 @@
     <div class="branding d-flex align-items-center">
         <div class="container position-relative d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center" aria-label="Kembali ke beranda">
-            <img src="{{ asset('assets/img/logorumah.webp') }}" width="183" height="50" style="aspect-ratio: 3.66/1" loading="eager" alt="">
+            <img src="{{ asset('assets/img/logorumah-1.webp') }}" width="183" height="50" style="aspect-ratio: 3.66/1" loading="eager" alt="">
             </a>
             <nav id="navmenu" class="navmenu">
                 <ul>
@@ -83,7 +78,7 @@
             <div class="col-lg-4 col-md-6 footer-about text-md-start ">
                 <div class="footer-logo mx-auto">
                 <a href="/" class="logo d-flex align-items-center justify-content-center" aria-label="logo rumah amal">
-                    <img src="{{ asset('assets/img/logorumah.webp') }}" width="183" height="50" style="aspect-ratio: 3.66/1" alt="Logo Rumah Amal">
+                    <img src="{{ asset('assets/img/logorumah-1.webp') }}" width="183" height="50" style="aspect-ratio: 3.66/1" alt="Logo Rumah Amal">
                 </a>
                 </div>
                 <p class="footer-address">Lantai 1 Masjid Jamik USK <br> T. Nyak Arief, Kopelma Darussalam, Banda Aceh 21311</p>
@@ -152,10 +147,10 @@
 
   <!-- Vendor JS Files -->
   <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
-  <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js" async></script>
+  <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5/imagesloaded.pkgd.min.js"async></script>
+  <script src="https://cdn.jsdelivr.net/npm/isotope-layout@3/dist/isotope.pkgd.min.js" async></script>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
@@ -165,7 +160,7 @@
     AOS.init();
   </script>
   
-  <script src="{{ asset('assets/js/main.js') }}"></script>
+  <script src="{{ asset('assets/js/main.js') }}" defer></script>
 
   @stack('scripts')
 
@@ -181,7 +176,7 @@
   </script>
 
   <div id="google_translate_element"></div>
-  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" referrerpolicy="no-referrer-when-downgrade"></script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" referrerpolicy="no-referrer-when-downgrade" defer></script>
 
 </body>
 
