@@ -110,3 +110,7 @@ section#pembayaran .container {
     font-weight: 600;
     font-size: 90%;
 }
+.form-check-label a{
+    color: #006400;
+    font-weight: 500;
+}

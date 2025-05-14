@@ -94,7 +94,7 @@
                         </div>
                         <div class="category-content">
                             <div class="payment-method" data-method="QRIS" required>
-                                    <img src="assets/img/qris-logo.jpg" alt="QRIS" width="20%" class="me-1">
+                                    <img src="assets/img/qris-logo.webp" alt="QRIS" width="50" height="25" class="me-1">
                                         <div class="payment-content">
                                             <span class="fee"></span>
                                             <span class="price"></span>
@@ -102,7 +102,7 @@
                                 </div>
                         </div>
                         <div class="bottom-logo">
-                            <img src="assets/img/qris-logo.jpg" alt="QRIS" class="me-1">    
+                            <img src="assets/img/qris-logo.webp" alt="QRIS" width="30" height="15" class="me-1">    
                         </div>
                     </div>
                     <div class="payment-category" data-category="ewallet">
@@ -114,7 +114,7 @@
                         </div>
                         <div class="category-content">
                             <div class="payment-method" data-method="SHOPEEPAY">
-                                <img src="assets/img/shopeepay-logo.png" alt="SHOPEEPAY" class="me-1">
+                                <img src="assets/img/shopeepay-logo.webp" alt="SHOPEEPAY" class="me-1" width="56.25" height="25">
                                 <div>
                                     <span>SHOPEEPAY</span>
                                     <span class="fee"></span>
@@ -122,7 +122,7 @@
                                 </div>
                             </div>
                             <div class="payment-method" data-method="DANA">
-                                <img src="assets/img/dana-logo.png" alt="Dana" class="me-1">
+                                <img src="assets/img/dana-logo.webp" alt="Dana" class="me-1" width="86.53" height="25">
                                 <div>
                                     <span>Dana</span>
                                      <span class="fee"></span>
@@ -130,7 +130,7 @@
                                 </div>
                             </div>
                             <div class="payment-method" data-method="OVO">
-                                <img src="assets/img/ovo-logo.png" alt="OVO" class="me-1">
+                                <img src="assets/img/ovo-logo.webp" alt="OVO" class="me-1" width="17.3" height="25">
                                 <div>
                                     <span>OVO</span>
                                      <span class="fee"></span>
@@ -139,9 +139,9 @@
                             </div>
                         </div>
                         <div class="bottom-logo">
-                                <img src="assets/img/shopeepay-logo.png" alt="SHOPEEPAY" class="me-1">
-                                <img src="assets/img/dana-logo.png" alt="DANA" class="me-1">
-                                <img src="assets/img/ovo-logo.png" alt="OVO" class="me-1">   
+                                <img src="assets/img/shopeepay-logo.webp" alt="SHOPEEPAY" width="33.75" height="15" class="me-1">
+                                <img src="assets/img/dana-logo.webp" alt="DANA" width="51.92" height="15" class="me-1">
+                                <img src="assets/img/ovo-logo.webp" alt="OVO" width="10.38" height="15" class="me-1">   
                         </div>
                     </div>
                     <div class="payment-category" data-category="convenience-store">
@@ -153,7 +153,7 @@
                         </div>
                         <div class="category-content">
                             <div class="payment-method" data-method="ALFAMART">
-                                <img src="assets/img/alfamart-logo.png" alt="Alfamart" class="me-1">
+                                <img src="assets/img/alfamart-logo.webp" alt="Alfamart" class="me-1" width="76.92" height="25">
                                 <div>
                                     <span>Alfamart</span>
                                      <span class="fee"></span>
@@ -161,7 +161,7 @@
                                 </div>
                             </div>
                             <div class="payment-method" data-method="INDOMARET">
-                                <img src="assets/img/indomaret-logo.png" alt="Indomaret" class="me-1">
+                                <img src="assets/img/indomaret-logo.webp" alt="Indomaret" class="me-1" width="70.31" height="25">
                                 <div>
                                     <span>Indomaret</span>
                                      <span class="fee"></span>
@@ -170,8 +170,8 @@
                             </div>
                         </div>
                         <div class="bottom-logo">
-                            <img src="assets/img/alfamart-logo.png" alt="Alfamart" class="me-1">
-                            <img src="assets/img/indomaret-logo.png" alt="Indomaret">
+                            <img src="assets/img/alfamart-logo.webp" alt="Alfamart" class="me-1" width="46.15" height="15">
+                            <img src="assets/img/indomaret-logo.webp" alt="Indomaret" width="42.19" height="15">
                         </div>  
                     </div>
                     </div>
@@ -184,7 +184,7 @@
                         </div>
                         <div class="category-content">
                             <div class="payment-method" data-method="BSI">
-                                <img src="assets/img/bsi-logo.png" alt="BSI" class="me-1">
+                                <img src="assets/img/bsi-logo.webp" alt="BSI" class="me-1" width="86.53" height="25">
                                 <div>
                                     <span>BSI</span>
                                      <span class="fee"></span>
@@ -192,7 +192,7 @@
                                 </div>
                             </div>
                             <div class="payment-method" data-method="BNI">
-                                <img src="assets/img/bni-logo.png" alt="BNI" class="me-1">
+                                <img src="assets/img/bni-logo.webp" alt="BNI" class="me-1" width="68.18" height="25">
                                 <div>
                                     <span>BNI</span>
                                     <span class="fee"></span>
@@ -200,7 +200,7 @@
                                 </div>
                             </div>
                             <div class="payment-method" data-method="MANDIRI">
-                                <img src="assets/img/mandiri-logo.png" alt="Mandiri" class="me-1">
+                                <img src="assets/img/mandiri-logo.webp" alt="Mandiri" class="me-1" width="86.53" height="25">
                                 <div>
                                     <span>Mandiri</span>
                                     <span class="fee"></span>
@@ -209,9 +209,9 @@
                             </div>
                         </div>
                         <div class="bottom-logo">
-                            <img src="assets/img/bsi-logo.png" alt="BSI" class="me-1">
-                            <img src="assets/img/bni-logo.png" alt="BNI" class="me-1">
-                            <img src="assets/img/mandiri-logo.png" alt="Mandiri">
+                            <img src="assets/img/bsi-logo.webp" alt="BSI" class="me-1" width="51.92" height="15">
+                            <img src="assets/img/bni-logo.webp" alt="BNI" class="me-1" width="40.91" height="15">
+                            <img src="assets/img/mandiri-logo.webp" alt="Mandiri" width="51.92" height="15">
                         </div>  
                     </div>
                 <div id="payment-details" class="mt-3"></div>
