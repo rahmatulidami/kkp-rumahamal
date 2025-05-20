@@ -55,13 +55,16 @@ Route::prefix('comments')->group(function () {
     Route::post('/', [CommentController::class, 'store']); // Tambahkan komentar baru
 });
 
-Route::prefix('comments')->middleware('auth')->group(function () {
-    Route::delete('/{id}', [CommentController::class, 'destroy']); // Hapus komentar
-});
+// Route::prefix('comments')->middleware('auth')->group(function () {
+//     Route::delete('/{id}', [CommentController::class, 'destroy']); // Hapus komentar
+// });
 
-Route::get('/admin', function () {
-    return view('admin/index');
-});
+// routes/web.php atau routes/api.php
+Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->middleware('admin');
+
+// Route::get('/admin', function () {
+//     return view('admin/dashboard');
+// });
 
 Route::get('pengumuman', [BeritaController::class, 'pengumuman'])->name('pengumuman');
 

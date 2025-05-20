@@ -11,7 +11,8 @@ class Comment extends Model
         'post_id',
         'parent_id',
         'author',
-        'content'
+        'content', 
+        'is_admin'
     ];
 
     public function parent()
@@ -26,6 +27,18 @@ class Comment extends Model
 
     public function children()
     {
-        return $this->child()->with('children');
+        return $this->child()->with('children')->with('parent');
+
+    }
+
+    // app/Models/Comment.php
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($comment) {
+            $comment->children()->each(function ($child) {
+                $child->delete();
+            });
+        });
     }
 }

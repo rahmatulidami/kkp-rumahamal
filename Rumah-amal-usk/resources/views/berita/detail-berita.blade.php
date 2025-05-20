@@ -66,20 +66,22 @@
         </section><!-- /Blog Details Section -->
 
         <div class="comment-section">
+          <h2>Comments (<span id="comment-count">0</span>)</h2>
+          <form class="comment-form" id="mainForm" onsubmit="return handleComment(event)">
+              @csrf
+              <input type="hidden" id="post_id" value="{{ $berita['id'] }}">
+              <div id="authorInputArea">
+                  <input type="text" id="author" name="author" placeholder="Nama (optional)">
+              </div>
+              <textarea id="content" name="content" placeholder="Tulis komentar Anda..." required></textarea>
+              <button type="submit">Kirim Komentar</button>
+          </form>
             <!-- Container untuk komentar -->
             <div class="comments" id="commentsContainer">
-                <h2>Comments</h2>
                 <ul id="comments-list"></ul>
             </div>
 
             <!-- Form untuk komentar baru -->
-            <form class="comment-form" id="mainForm" onsubmit="return handleComment(event)">
-                @csrf
-                <input type="hidden" id="post_id" value="{{ $berita['id'] }}">
-                <input type="text" id="author" name="author" placeholder="Nama (optional)">
-                <textarea id="content" name="content" placeholder="Tulis komentar Anda..." required></textarea>
-                <button type="submit">Kirim Komentar</button>
-            </form>
         </div>
       </div>
 
@@ -138,140 +140,292 @@
 </script>
 
 <script>
+    window.IS_ADMIN = {{ auth()->check() && auth()->user()->is_admin ? 'true' : 'false' }};
+    window.ADMIN_NAME = "{{ auth()->check() && auth()->user()->is_admin ? (auth()->user()->name ?? 'Admin') : '' }}";
+
+    document.addEventListener('DOMContentLoaded', function () {
+    if (window.IS_ADMIN) {
+        // Hilangkan input nama, ganti dengan label fixed
+        document.getElementById('authorInputArea').innerHTML = `
+            <div class="admin-label">Sebagai <span class="admin-name">Admin</span></div>
+        `;
+    }
+});
+</script>
+
+<script>
   const postId = {{ $berita['id'] }};
   const commentsContainer = document.getElementById('commentsContainer');
 
-  // Ambil komentar dari server
-  document.addEventListener('DOMContentLoaded', function () {
-    fetch(`/comments/${postId}`)
-      .then(response => response.json())
-      .then(comments => {
-        comments.forEach(comment => {
-          addCommentToDom(comment, commentsContainer);
-        });
-      });
-  });
+// =========== FLATTEN AND RENDER COMMENTS (TWO LEVELS) ===========
 
-  // Tambahkan komentar ke DOM
-  function addCommentToDom(comment, container, level = 1) {
-    const commentEl = document.createElement('div');
-    commentEl.className = `comment ${comment.parent_id ? 'comment-reply' : ''}`;
-    commentEl.setAttribute('data-id', comment.id); // Tambahkan atribut data-id
-
-    // Buat elemen komentar
-    commentEl.innerHTML = `
-        <div class="author">
-            ${comment.author}
-            <span class="timestamp">${dayjs(comment.created_at).fromNow()}</span>
-        </div>
-        ${
-            comment.replied_to && level > 1
-                ? `<div class="reply-preview">Membalas "${truncate(comment.replied_to.content, 30)}"</div>`
-                : ''
+// Flatten all replies under a single comment (no matter how deep)
+function flattenReplies(children) {
+    let result = [];
+    children.forEach(child => {
+        result.push(child);
+        if (child.children && child.children.length > 0) {
+            result = result.concat(flattenReplies(child.children));
         }
+    });
+    return result;
+}
+
+// Render all comments: only two levels (main + all replies flat under main)
+function renderCommentsTwoLevel(comments, container) {
+    container.innerHTML = '';
+
+    // Urutkan komentar utama dari yang terbaru
+    comments.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+    comments.forEach(comment => {
+
+        const commentEl = makeCommentElement(comment, false);
+        container.appendChild(commentEl);
+
+        // Flatten & urutkan replies dari yang terbaru
+        const replies = comment.children ? flattenReplies(comment.children) : [];
+        replies.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+        // Render max 2 reply, sisanya hidden
+        const repliesToShow = replies.slice(0, 2);
+        const repliesHidden = replies.slice(2);
+
+        repliesToShow.forEach(reply => {
+            const replyEl = makeCommentElement(reply, true);
+            container.appendChild(replyEl);
+        });
+
+        if (repliesHidden.length > 0) {
+            // Wrap hidden replies in a div
+            const hiddenRepliesDiv = document.createElement('div');
+            hiddenRepliesDiv.style.display = "none";
+            repliesHidden.forEach(reply => {
+                const replyEl = makeCommentElement(reply, true);
+                hiddenRepliesDiv.appendChild(replyEl);
+            });
+            container.appendChild(hiddenRepliesDiv);
+
+            // Toggle button
+            const moreBtn = document.createElement('button');
+            moreBtn.className = 'reply-btn more-replies-btn';
+            moreBtn.textContent = `Tampilkan ${repliesHidden.length} balasan lainnya`;
+            let expanded = false;
+            moreBtn.onclick = function () {
+                expanded = !expanded;
+                if (expanded) {
+                    hiddenRepliesDiv.style.display = "";
+                    moreBtn.textContent = "Sembunyikan balasan";
+                } else {
+                    hiddenRepliesDiv.style.display = "none";
+                    moreBtn.textContent = `Tampilkan ${repliesHidden.length} balasan lainnya`;
+                }
+            };
+            container.appendChild(moreBtn);
+        }
+    });
+}
+
+function deleteComment(commentId) {
+    if (!confirm('Yakin ingin menghapus komentar ini?')) return;
+    fetch(`/comments/${commentId}`, {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            // Refresh komentar setelah hapus
+            fetchAndRenderComments();
+        } else {
+            alert(data.message || 'Gagal menghapus komentar');
+        }
+    });
+}
+
+// Create a comment DOM element
+function makeCommentElement(comment, isReply) {
+    const commentEl = document.createElement('div');
+   let isAdminComment = comment.is_admin; // bukan cuma cek author
+commentEl.className = 'comment' + (isReply ? ' comment-reply' : '') + (isAdminComment ? ' comment-admin' : '');
+
+    commentEl.setAttribute('data-id', comment.id);
+
+    // Preview hanya jika reply ke reply
+    let previewHTML = '';
+    if (isReply && comment.parent && comment.parent.parent_id !== null) {
+        previewHTML = `
+            <div class="reply-preview">
+                Membalas ${comment.parent.author}: "${truncate(comment.parent.content, 30)}"
+            </div>
+        `;
+    }
+
+    // Tombol delete hanya jika admin
+    let deleteBtnHTML = '';
+    if (window.IS_ADMIN) {
+        deleteBtnHTML = `
+            <button class="delete-btn" onclick="deleteComment(${comment.id})">Hapus</button>
+        `;
+    }
+
+    commentEl.innerHTML = `
+        ${previewHTML}
+        <div class="author">
+            <span class="${isAdminComment ? 'admin-name' : ''}">${comment.author}</span>
+            <span class="timestamp">${dayjs(comment.created_at).fromNow()}</span>
+            ${deleteBtnHTML}
+        </div>
         <div class="content">${comment.content}</div>
         <button class="reply-btn" onclick="showReplyForm(${comment.id})">Balas</button>
         <div class="replies"></div>
     `;
-
-    container.appendChild(commentEl);
-
-    // Tambahkan balasan (anak komentar)
-    if (comment.children && comment.children.length > 0) {
-        const repliesContainer = commentEl.querySelector('.replies');
-
-        comment.children.forEach(child => {
-            // Render anak komentar
-            addCommentToDom(child, repliesContainer, level + 1);
-        });
-    }
+    return commentEl;
 }
-
+// Truncate helper
 function truncate(text, maxLength) {
-    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+    return text && text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
 }
 
-  // Tampilkan form balasan 
-  function showReplyForm(parentId) {
+// Show reply form below the comment
+function showReplyForm(parentId) {
     const parentComment = document.querySelector(`.comment[data-id="${parentId}"]`);
     const repliesContainer = parentComment?.querySelector('.replies');
 
-    // Validasi apakah elemen ditemukan
     if (!parentComment || !repliesContainer) {
         console.error(`Parent comment with ID ${parentId} not found.`);
         return;
     }
 
-    // Hapus form reply yang sudah ada sebelumnya
+    // Remove any existing reply form
     document.querySelectorAll('.reply-form').forEach(form => form.remove());
 
-    // Buat form balasan
+    // Create reply form
     const form = document.createElement('form');
     form.className = 'comment-form reply-form';
-    form.innerHTML = `
-        <input type="text" class="reply-author" placeholder="Nama (optional)" >
-        <textarea class="reply-content" required placeholder="Balasan Anda"></textarea>
-        <button type="submit">Kirim Balasan</button>
-    `;
+    form.innerHTML = window.IS_ADMIN
+        ? `
+            <div class="admin-label">Sebagai <span class="admin-name">Admin</span></div>
+            <textarea class="reply-content" required placeholder="Balasan Anda"></textarea>
+            <button type="submit">Kirim Balasan</button>
+        `
+        : `
+            <input type="text" class="reply-author" placeholder="Nama (optional)">
+            <textarea class="reply-content" required placeholder="Balasan Anda"></textarea>
+            <button type="submit">Kirim Balasan</button>
+        `;
     form.onsubmit = (e) => handleReply(e, parentId);
     repliesContainer.appendChild(form);
 }
 
-  // Tangani komentar baru
-  async function handleComment(e) {
+// Handle main comment submit
+async function handleComment(e) {
     e.preventDefault();
 
-    const author = document.getElementById('author').value || 'Anonim';
+    const author = window.IS_ADMIN ? (window.ADMIN_NAME || 'Admin') : (document.getElementById('author').value || 'Anonim');
+
     const content = document.getElementById('content').value;
 
     const response = await fetch('/comments', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      },
-      body: JSON.stringify({ post_id: postId, author, content, parent_id: null })
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ post_id: postId, author, content, parent_id: null })
     });
 
     const data = await response.json();
     if (data.success) {
-      addCommentToDom(data.comment, commentsContainer);
-      document.getElementById('mainForm').reset();
+        // Refetch all comments so the order stays correct
+        await fetchAndRenderComments();
+        document.getElementById('mainForm').reset();
     }
-  }
+}
 
-  // Tangani balasan baru
-  async function handleReply(e, parentId) {
+// Handle reply submit
+async function handleReply(e, parentId) {
     e.preventDefault();
 
     const form = e.target;
-    const author = form.querySelector('.reply-author').value || 'Anonim';
+    const author = window.IS_ADMIN
+    ? (window.ADMIN_NAME || 'Admin')
+    : (form.querySelector('.reply-author')?.value || 'Anonim');
+
     const content = form.querySelector('.reply-content').value;
 
     const response = await fetch('/comments', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      },
-      body: JSON.stringify({ post_id: postId, author, content, parent_id: parentId })
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ post_id: postId, author, content, parent_id: parentId })
     });
 
     const data = await response.json();
     if (data.success) {
-      const repliesContainer = document.querySelector(`.comment[data-id="${parentId}"] .replies`);
-      addCommentToDom(data.comment, repliesContainer);
-      form.remove(); // Hapus form setelah balasan berhasil
+        form.remove();
+        // Refetch all comments so the order and structure stays correct
+        await fetchAndRenderComments();
     }
-  }
+}
 
-  // Fungsi untuk memotong teks
-  function truncate(text, maxLength) {
-    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
-  }
+// Fetch and render comments on page
+async function fetchAndRenderComments() {
+    const commentsContainer = document.getElementById('commentsContainer');
+    const response = await fetch(`/comments/${postId}`);
+    const comments = await response.json();
+    renderCommentsTwoLevel(comments.comments, commentsContainer);
+
+    document.getElementById('comment-count').textContent = comments.count;
+}
+
+// INIT: Fetch on page load
+document.addEventListener('DOMContentLoaded', function () {
+    fetchAndRenderComments();
+});
 </script>
 
 <style>
+ .admin-label {
+    font-weight: bold;
+    color: #fff;
+    background: #1e88e5;
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+}
+.admin-name {
+    color: #fff;
+    font-weight: bold;
+}
+.comment-admin {
+    background: #e3f2fd !important;
+    border-left: 4px solid #1e88e5 !important;
+}
+.comment-admin .author .admin-name {
+    color: #1565c0;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+}
+
+    .delete-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.3rem 1rem;
+    border-radius: 5px;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+.delete-btn:hover {
+    background: #b71c1c;
+}
+
         * {
             box-sizing: border-box;
             margin: 0;

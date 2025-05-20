@@ -12,17 +12,17 @@ class HomeController extends Controller
 {
     public function index()
     {
-        if (Auth::id()) {
-            $usertype = Auth::user()->usertype;
+        // if (Auth::id()) {
+        //     $usertype = Auth::user()->usertype;
 
-            if ($usertype == 'user') {
-                return view('user.dashboard');
-            } elseif ($usertype == 'admin') {
-                return view('admin.dashboard');
-            } else {
-                return view('auth.login');
-            }
-        }
+        //     if ($usertype == 'user') {
+        //         return view('user.dashboard');
+        //     } elseif ($usertype == 'admin') {
+        //         return view('admin.dashboard');
+        //     } else {
+        //         return view('auth.login');
+        //     }
+        // }
 
         // Fetch categories and posts from the API
         $categories = $this->fetchCategories();
