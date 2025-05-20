@@ -56,10 +56,10 @@
 @push('scripts')
 <script>
   let goldPricePerGram = 0;
-  const nishabMaal = 85;
-  const nishabProfesi = 6900000;
-  const nishabEmas = 85;
-  const nishabPerniagaan = 85;
+  const nishabMaal = 94;
+  const nishabProfesi = 10500000;
+  const nishabEmas = 94;
+  const nishabPerniagaan = 94;
 
   async function getGoldPrice() {
     try {
@@ -83,13 +83,13 @@
       zakatInfo.innerHTML = `<strong>Harga emas hari ini:</strong> ${formatRupiah(goldPricePerGram)}/gram`;
       zakatInfo.style.display = 'block';
     } else if (zakatType === 'Zakat Maal' || zakatType === 'Zakat Perniagaan') {
-      zakatInfo.innerHTML = `<strong>Nishab (85 gram emas):</strong> ${formatRupiah(nishabMaal * goldPricePerGram)}`;
+      zakatInfo.innerHTML = `<strong>Nishab (94 gram emas):</strong> ${formatRupiah(nishabMaal * goldPricePerGram)}`;
       zakatInfo.style.display = 'block';
     } else if (zakatType === 'Zakat Profesi') {
       zakatInfo.innerHTML = `
         <strong>Ketentuan Zakat Profesi:</strong><br>
-        - Nishab: ${formatRupiah(nishabProfesi)} per tahun<br>
-        (${formatRupiah(nishabProfesi/12)} per bulan)
+        - Nishab: ${formatRupiah(nishabProfesi)} per bulan<br>
+        (${formatRupiah(nishabProfesi*12)} per tahun)
       `;
       zakatInfo.style.display = 'block';
     } else {
@@ -135,7 +135,7 @@
       `;
       zakatInfo.innerHTML = `
         <strong>Ketentuan Zakat Maal:</strong><br>
-        - Nishab: 85 gram emas (senilai ${formatRupiah(nishabMaal * goldPricePerGram)})<br>
+        - Nishab: 94 gram emas (senilai ${formatRupiah(nishabMaal * goldPricePerGram)})<br>
         - Kadar zakat: 2.5% dari total harta bersih<br>
         - Harta bersih = Total Harta - Hutang
       `;
@@ -153,8 +153,8 @@
       `;
       zakatInfo.innerHTML = `
         <strong>Ketentuan Zakat Profesi:</strong><br>
-        - Nishab: ${formatRupiah(nishabProfesi)} per tahun<br>
-        (${formatRupiah(nishabProfesi/12)} per bulan)<br>
+        - Nishab: ${formatRupiah(nishabProfesi)} per bulan<br>
+        (${formatRupiah(nishabProfesi*12)} per tahun)<br>
         - Kadar zakat: 2.5% dari penghasilan bersih
       `;
       zakatInfo.style.display = 'block';
@@ -183,7 +183,7 @@
       `;
       zakatInfo.innerHTML = `
         <strong>Ketentuan Zakat Perniagaan:</strong><br>
-        - Nishab: 85 gram emas (senilai ${formatRupiah(nishabPerniagaan * goldPricePerGram)})<br>
+        - Nishab: 94 gram emas (senilai ${formatRupiah(nishabPerniagaan * goldPricePerGram)})<br>
         - Kadar zakat: 2.5% dari total harta usaha<br>
         - Harta usaha = (Modal + Keuntungan + Piutang) - (Hutang + Kerugian)
       `;
@@ -197,7 +197,7 @@
       `;
       zakatInfo.innerHTML = `
         <strong>Ketentuan Zakat Emas:</strong><br>
-        - Nishab: 85 gram emas<br>
+        - Nishab: 94 gram emas<br>
         - Kadar zakat: 2.5% dari total nilai emas<br>
         <strong>Harga emas hari ini (<a href="https://www.hargaemas.com/" target="_blank" style="color:rgb(3, 129, 41); ">hargaemas.com</a>):</strong> ${formatRupiah(goldPricePerGram)}/gram
       `;
@@ -249,7 +249,7 @@
         totalZakat.style.display = 'none';
         notWajibMessage.innerHTML = `
           Anda belum wajib zakat maal, silahkan anda berinfak saja.<br>
-          Nishab zakat maal saat ini adalah ${formatRupiah(nishabValue)} (85 gram emas).<br>
+          Nishab zakat maal saat ini adalah ${formatRupiah(nishabValue)} (94 gram emas).<br>
           Total harta bersih Anda ${formatRupiah(hartaBersih)}.
         `;
         notWajibMessage.style.display = 'block';
@@ -259,12 +259,16 @@
       const penghasilan = parseCurrency(document.getElementById('penghasilan')?.value || 0);
       const bonus = parseCurrency(document.getElementById('bonus')?.value || 0);
       const penghasilanBulanan = penghasilan + bonus;
+      const penghasilanTahunan = (penghasilan + bonus ) * 12;
 
       if (penghasilanBulanan >= nishabProfesi) {
         const zakatAmount = penghasilanBulanan * 0.025;
+        const zakatTahun = penghasilanBulanan * 0.025 * 12;
         totalZakat.innerHTML = `
-          <strong>Zakat Profesi yang harus dibayar:</strong> ${formatRupiah(zakatAmount)}<br>
-          <small>Perhitungan: 2.5% × ${formatRupiah(penghasilanBulanan)} (penghasilan bulanan)</small>
+          <strong>Zakat Profesi yang harus dibayar per bulan:</strong> ${formatRupiah(zakatAmount)}<br>
+          <small>Perhitungan: 2.5% × ${formatRupiah(penghasilanBulanan)} (penghasilan bulanan)</small><br>
+          <strong>Zakat Profesi yang harus dibayar per tahun:</strong> ${formatRupiah(zakatTahun)}<br>
+          <small>Perhitungan: 2.5% × ${formatRupiah(penghasilanTahunan)} (penghasilan tahunan)</small>
         `;
         totalZakat.style.display = 'block';
         notWajibMessage.style.display = 'none';
@@ -305,7 +309,7 @@
         totalZakat.style.display = 'none';
         notWajibMessage.innerHTML = `
           Anda belum wajib zakat perniagaan, silahkan anda berinfak saja<br>
-          Nishab zakat perniagaan saat ini adalah ${formatRupiah(nishabValue)} (85 gram emas).<br>
+          Nishab zakat perniagaan saat ini adalah ${formatRupiah(nishabValue)} (94 gram emas).<br>
           Total harta usaha Anda ${formatRupiah(totalAsset)}.
         `;
         notWajibMessage.style.display = 'block';
