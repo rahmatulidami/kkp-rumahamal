@@ -2,32 +2,69 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
-use App\Models\Comment; // Adjust according to your Comment model
 
 class CommentController extends Controller
 {
+    /**
+     * Ambil semua komentar untuk sebuah post.
+     */
+    public function index($postId)
+    {
+        // Ambil komentar utama dan semua descendants secara rekursif
+        $comments = Comment::where('post_id', $postId)
+            ->whereNull('parent_id')
+            ->with('children')
+            ->get();
+
+        return response()->json($comments);
+    }
+
+    /**
+     * Tambahkan komentar baru.
+     */
     public function store(Request $request)
     {
-        // Validate the incoming request
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'website' => 'nullable|url|max:255',
-            'comment' => 'required|string',
-            'berita_id' => 'required|integer|exists:posts,id', // Assuming 'posts' is your table
+        $request->validate([
+            'post_id' => 'required|integer',
+            'content' => 'required|string|max:1000',
+            'author' => 'nullable|string|max:255',
+            'parent_id' => 'nullable|integer|exists:comments,id',
         ]);
 
-        // Create the comment
-        Comment::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'website' => $validated['website'],
-            'content' => $validated['comment'],
-            'berita_id' => $validated['berita_id'],
+        $comment = Comment::create([
+            'post_id' => $request->post_id,
+            'parent_id' => $request->parent_id,
+            'author' => $request->author ?? 'Anonim',
+            'content' => $request->content,
         ]);
 
-        // Redirect back with a success message
-        return redirect()->back()->with('success', 'Comment posted successfully!');
+        return response()->json(['success' => true, 'comment' => $comment]);
+    }
+
+    /**
+     * Hapus komentar (beserta semua child-nya).
+     */
+    public function destroy($id)
+    {
+        $comment = Comment::findOrFail($id);
+
+        // Hapus komentar secara rekursif
+        $this->deleteRecursive($comment);
+
+        return response()->json(['success' => true, 'message' => 'Komentar berhasil dihapus.']);
+    }
+
+    /**
+     * Fungsi untuk menghapus komentar beserta semua child-nya secara rekursif.
+     */
+    private function deleteRecursive(Comment $comment)
+    {
+        foreach ($comment->children as $child) {
+            $this->deleteRecursive($child);
+        }
+
+        $comment->delete();
     }
 }

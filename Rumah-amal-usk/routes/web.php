@@ -48,7 +48,16 @@ Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
 
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
 
-Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+// Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+
+Route::prefix('comments')->group(function () {
+    Route::get('/{postId}', [CommentController::class, 'index']); // Ambil komentar berdasarkan post
+    Route::post('/', [CommentController::class, 'store']); // Tambahkan komentar baru
+});
+
+Route::prefix('comments')->middleware('auth')->group(function () {
+    Route::delete('/{id}', [CommentController::class, 'destroy']); // Hapus komentar
+});
 
 Route::get('/admin', function () {
     return view('admin/index');

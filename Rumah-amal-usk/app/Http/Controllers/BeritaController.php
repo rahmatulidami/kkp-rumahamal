@@ -191,6 +191,8 @@ class BeritaController extends Controller
             return $response->json();
         });
 
+        // $postId = $berita['id'];
+
         $comment_count = $berita['comment_count'] ?? 0;
 
         return view('berita.detail-berita', compact('berita', 'recent_posts', 'tags', 'mainImage', 'comment_count', 'comments'));

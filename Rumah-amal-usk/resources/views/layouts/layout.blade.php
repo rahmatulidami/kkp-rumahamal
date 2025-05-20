@@ -26,7 +26,7 @@
 
   <!-- Main CSS File -->
   <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
-
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body class="index-page" style="user-select: none;">
@@ -72,6 +72,9 @@
                     </li>
                     <li class="login-button">
                         <button id="login-button" class="btn btn-primary">Login</button>
+                    </li>
+                    <li class="register-button">
+                        <button id="register-button" class="btn btn-primary">register</button>
                     </li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

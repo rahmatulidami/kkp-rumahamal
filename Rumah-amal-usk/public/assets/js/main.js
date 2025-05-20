@@ -121,6 +121,15 @@
             });
         }
     });
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        const registerButton = document.querySelector("#register-button");
+        if (registerButton) {
+            registerButton.addEventListener("click", () => {
+                window.location.href = "/register"; // Arahkan ke halaman login
+            });
+        }
+    });
 
     // Tombol scroll ke atas
     const scrollTop = document.querySelector(".scroll-top");
