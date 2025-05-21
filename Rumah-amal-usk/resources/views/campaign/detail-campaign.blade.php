@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="button-selengkapnya" href="/donate" role="button">DONASI</a>
+                <a class="button-selengkapnya" href="{{ route('donate.show', ['slug' => $campaign['slug']]) }}" role="button">DONASI</a>
             </div>
         </div>
     </div>
@@ -161,7 +161,7 @@
                     </div>
 
                   </div>
-                  <a class="btn-btn-primary" href="/donate" role="button">DONASI</a>
+                  <a class="btn-btn-primary" href="{{ route('donate.show', ['slug' => $campaign['slug']]) }}" role="button">DONASI</a>
                 </div>
               </div>
             </div><!-- End campaign-unggulan Item -->

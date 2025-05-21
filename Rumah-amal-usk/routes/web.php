@@ -31,6 +31,10 @@ Route::get('/success', function () {
     return view('donation/success');
 });
 
+Route::get('/donate/{slug}', [DonationController::class, 'show'])->name('donate.show');
+Route::post('/xendit/webhook', [DonationController::class, 'handleWebhook']);
+
+
 Route::get('/failure', function () {
     return view('failure');
 });
