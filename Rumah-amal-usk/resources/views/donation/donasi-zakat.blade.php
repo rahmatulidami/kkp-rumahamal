@@ -34,6 +34,7 @@
             <option value="Zakat Profesi">Profesi</option>
             <option value="Zakat Emas">Emas</option>
             <option value="Zakat Perniagaan">Perniagaan</option>
+            <option value="Zakat Perusahaan">Perusahaan</option>
           </select>
         </div>
 
@@ -60,6 +61,7 @@
   const nishabProfesi = 10500000;
   const nishabEmas = 94;
   const nishabPerniagaan = 94;
+  const nishabPerusahaan = 94;
 
   async function getGoldPrice() {
     try {
@@ -82,7 +84,7 @@
     if (zakatType === 'Zakat Emas') {
       zakatInfo.innerHTML = `<strong>Harga emas hari ini:</strong> ${formatRupiah(goldPricePerGram)}/gram`;
       zakatInfo.style.display = 'block';
-    } else if (zakatType === 'Zakat Maal' || zakatType === 'Zakat Perniagaan') {
+    } else if (zakatType === 'Zakat Maal' || zakatType === 'Zakat Perniagaan' || zakatType === 'Zakat Perusahaan') {
       zakatInfo.innerHTML = `<strong>Nishab (94 gram emas):</strong> ${formatRupiah(nishabMaal * goldPricePerGram)}`;
       zakatInfo.style.display = 'block';
     } else if (zakatType === 'Zakat Profesi') {
@@ -137,7 +139,8 @@
         <strong>Ketentuan Zakat Maal:</strong><br>
         - Nishab: 94 gram emas (senilai ${formatRupiah(nishabMaal * goldPricePerGram)})<br>
         - Kadar zakat: 2.5% dari total harta bersih<br>
-        - Harta bersih = Total Harta - Hutang
+        - Harta bersih = Total Harta - Hutang <br><br>
+		 <strong>Perhatian:</strong> Nishab zakat di Aceh adalah 94 gram emas
       `;
       zakatInfo.style.display = 'block';
     } else if (zakatType === 'Zakat Profesi') {
@@ -153,39 +156,28 @@
       `;
       zakatInfo.innerHTML = `
         <strong>Ketentuan Zakat Profesi:</strong><br>
-        - Nishab: ${formatRupiah(nishabProfesi)} per bulan<br>
-        (${formatRupiah(nishabProfesi*12)} per tahun)<br>
-        - Kadar zakat: 2.5% dari penghasilan bersih
+        - Nishab per Bulan: ${formatRupiah(nishabProfesi)} <br>
+        - Nishab per Tahun: ${formatRupiah(nishabProfesi*12)} <br>
+        - Kadar Zakat: 2.5% dari penghasilan bersih
       `;
       zakatInfo.style.display = 'block';
     } else if (zakatType === 'Zakat Perniagaan') {
       inputFields.innerHTML = `
         <div class="form-group">
-          <label for="modal">Modal Usaha (Rp):</label>
-          <input type="text" id="modal" class="form-control" oninput="formatInput(this); calculateZakat()" placeholder="Total modal usaha">
+          <label for="aset">Total Aset dan Keuntungan (Rp):</label>
+          <input type="text" id="aset" class="form-control" oninput="formatInput(this); calculateZakat()" placeholder="Total Aset dan Keuntungan yang dimiliki">
         </div>
         <div class="form-group">
-          <label for="keuntungan">Keuntungan (Rp):</label>
-          <input type="text" id="keuntungan" class="form-control" oninput="formatInput(this); calculateZakat()" placeholder="Keuntungan bersih">
-        </div>
-        <div class="form-group">
-          <label for="hutang">Hutang (Rp):</label>
-          <input type="text" id="hutang" class="form-control" oninput="formatInput(this); calculateZakat()" placeholder="Hutang usaha">
-        </div>
-        <div class="form-group">
-          <label for="piutang">Piutang (Rp):</label>
-          <input type="text" id="piutang" class="form-control" oninput="formatInput(this); calculateZakat()" placeholder="Piutang yang akan dibayar">
-        </div>
-        <div class="form-group">
-          <label for="kerugian">Kerugian (Rp):</label>
-          <input type="text" id="kerugian" class="form-control" oninput="formatInput(this); calculateZakat()" placeholder="Kerugian usaha">
+          <label for="hutang">Hutang Jangka Pendek (Rp):</label>
+          <input type="text" id="hutang" class="form-control" oninput="formatInput(this); calculateZakat()" placeholder="Hutang yang harus segera dibayar">
         </div>
       `;
       zakatInfo.innerHTML = `
         <strong>Ketentuan Zakat Perniagaan:</strong><br>
         - Nishab: 94 gram emas (senilai ${formatRupiah(nishabPerniagaan * goldPricePerGram)})<br>
         - Kadar zakat: 2.5% dari total harta usaha<br>
-        - Harta usaha = (Modal + Keuntungan + Piutang) - (Hutang + Kerugian)
+        - Harta usaha = Total Aset dan Keuntungan - Hutang Jangka Pendek<br><br>
+        <strong>Perhatian:</strong> Nishab zakat di Aceh adalah 94 gram emas
       `;
       zakatInfo.style.display = 'block';
     } else if (zakatType === 'Zakat Emas') {
@@ -200,8 +192,55 @@
         - Nishab: 94 gram emas<br>
         - Kadar zakat: 2.5% dari total nilai emas<br>
         <strong>Harga emas hari ini (<a href="https://www.hargaemas.com/" target="_blank" style="color:rgb(3, 129, 41); ">hargaemas.com</a>):</strong> ${formatRupiah(goldPricePerGram)}/gram
+		<br><br>
+		 <strong>Perhatian:</strong> Nishab zakat di Aceh adalah 94 gram emas
       `;
       zakatInfo.style.display = 'block';
+    } else if (zakatType === 'Zakat Perusahaan') {
+      inputFields.innerHTML = `
+        <div class="form-group">
+          <label for="jenis-perusahaan">Jenis Perusahaan:</label>
+          <select id="jenis-perusahaan" class="form-control" onchange="calculateZakat()">
+            <option value="dagang">Perusahaan Dagang/Industri</option>
+            <option value="jasa">Perusahaan Jasa</option>
+          </select>
+        </div>
+        <div class="form-group" id="aset-lancar-group">
+          <label for="aset-lancar">Aset Lancar (Rp):</label>
+          <input type="text" id="aset-lancar" class="form-control" oninput="formatInput(this); calculateZakat()" placeholder="Total aset lancar perusahaan">
+        </div>
+        <div class="form-group" id="utang-lancar-group">
+          <label for="utang-lancar">Utang Lancar (Rp):</label>
+          <input type="text" id="utang-lancar" class="form-control" oninput="formatInput(this); calculateZakat()" placeholder="Total utang lancar perusahaan">
+        </div>
+        <div class="form-group" id="laba-group" style="display:none;">
+          <label for="laba">Laba Sebelum Pajak (Rp):</label>
+          <input type="text" id="laba" class="form-control" oninput="formatInput(this); calculateZakat()" placeholder="Laba sebelum pajak">
+        </div>
+      `;
+      zakatInfo.innerHTML = `
+        <strong>Ketentuan Zakat Perusahaan:</strong><br>
+        - Nishab: 94 gram emas (senilai ${formatRupiah(nishabPerusahaan * goldPricePerGram)})<br>
+        - Untuk perusahaan dagang/industri: 2.5% × (Aset Lancar - Utang Lancar)<br>
+        - Untuk perusahaan jasa: 2.5% × Laba Sebelum Pajak<br><br>
+        <strong>Perhatian:</strong> Nishab zakat di Aceh adalah 94 gram emas
+      `;
+      zakatInfo.style.display = 'block';
+      
+      // Add event listener for company type change
+      document.getElementById('jenis-perusahaan').addEventListener('change', function() {
+        const jenis = this.value;
+        if (jenis === 'dagang') {
+          document.getElementById('aset-lancar-group').style.display = 'block';
+          document.getElementById('utang-lancar-group').style.display = 'block';
+          document.getElementById('laba-group').style.display = 'none';
+        } else {
+          document.getElementById('aset-lancar-group').style.display = 'none';
+          document.getElementById('utang-lancar-group').style.display = 'none';
+          document.getElementById('laba-group').style.display = 'block';
+        }
+        calculateZakat();
+      });
     } else {
       zakatInfo.style.display = 'none';
     }
@@ -248,7 +287,7 @@
       } else {
         totalZakat.style.display = 'none';
         notWajibMessage.innerHTML = `
-          Anda belum wajib zakat maal, silahkan anda berinfak saja.<br>
+          <strong>Anda belum wajib zakat Maal, silahkan anda berinfak saja</strong><br>
           Nishab zakat maal saat ini adalah ${formatRupiah(nishabValue)} (94 gram emas).<br>
           Total harta bersih Anda ${formatRupiah(hartaBersih)}.
         `;
@@ -287,19 +326,16 @@
         payButton.style.display = 'none';
       }
     } else if (zakatType === 'Zakat Perniagaan') {
-      const modal = parseCurrency(document.getElementById('modal')?.value || 0);
-      const keuntungan = parseCurrency(document.getElementById('keuntungan')?.value || 0);
+      const aset = parseCurrency(document.getElementById('aset')?.value || 0);
       const hutang = parseCurrency(document.getElementById('hutang')?.value || 0);
-      const piutang = parseCurrency(document.getElementById('piutang')?.value || 0);
-      const kerugian = parseCurrency(document.getElementById('kerugian')?.value || 0);
       
-      const totalAsset = (modal + keuntungan + piutang) - (hutang + kerugian);
+      const totalAsset = aset - hutang;
       const nishabValue = nishabPerniagaan * goldPricePerGram;
 
       if (totalAsset >= nishabValue) {
         const zakatAmount = totalAsset * 0.025;
         totalZakat.innerHTML = `
-          <strong>Zakat Perniagaan yang harus dibayar:</strong> ${formatRupiah(zakatAmount)}<br>
+          <strong>Zakat Perniagaan yang harus dibayar:</strong> <strong style="color: #218838;">${formatRupiah(zakatAmount)}</strong><br>
           <small>Perhitungan: 2.5% × ${formatRupiah(totalAsset)} (total harta usaha)</small>
         `;
         totalZakat.style.display = 'block';
@@ -308,7 +344,7 @@
       } else {
         totalZakat.style.display = 'none';
         notWajibMessage.innerHTML = `
-          Anda belum wajib zakat perniagaan, silahkan anda berinfak saja<br>
+          <strong>Anda belum wajib zakat perniagaan, silahkan anda berinfak saja</strong><br>
           Nishab zakat perniagaan saat ini adalah ${formatRupiah(nishabValue)} (94 gram emas).<br>
           Total harta usaha Anda ${formatRupiah(totalAsset)}.
         `;
@@ -322,7 +358,7 @@
       if (beratEmas >= nishabEmas) {
         const zakatAmount = totalNilaiEmas * 0.025;
         totalZakat.innerHTML = `
-          <strong>Zakat Emas yang harus dibayar:</strong> ${formatRupiah(zakatAmount)}<br>
+          <strong>Zakat Emas yang harus dibayar:</strong> <strong style="color: #218838;">${formatRupiah(zakatAmount)}</strong><br>
           <small>Perhitungan: 2.5% × (${beratEmas} gram × ${formatRupiah(goldPricePerGram)}/gram)</small>
         `;
         totalZakat.style.display = 'block';
@@ -331,10 +367,62 @@
       } else {
         totalZakat.style.display = 'none';
         notWajibMessage.innerHTML = `
-          Anda belum wajib zakat emas, silahkan anda berinfak saja<br>
+          <strong>Anda belum wajib zakat Emas, silahkan anda berinfak saja</strong><br>
           Nishab zakat emas adalah ${nishabEmas} gram (senilai ${formatRupiah(nishabEmas * goldPricePerGram)}).<br>
           Emas yang Anda miliki ${beratEmas} gram (senilai ${formatRupiah(totalNilaiEmas)}).
         `;
+        notWajibMessage.style.display = 'block';
+        payButton.style.display = 'none';
+      }
+    } else if (zakatType === 'Zakat Perusahaan') {
+      const jenisPerusahaan = document.getElementById('jenis-perusahaan').value;
+      let zakatAmount = 0;
+      let nishabValue = nishabPerusahaan * goldPricePerGram;
+      let wajibZakat = false;
+      let calculationDetails = '';
+
+      if (jenisPerusahaan === 'dagang') {
+        const asetLancar = parseCurrency(document.getElementById('aset-lancar')?.value || 0);
+        const utangLancar = parseCurrency(document.getElementById('utang-lancar')?.value || 0);
+        const hartaBersih = asetLancar - utangLancar;
+        
+        if (hartaBersih >= nishabValue) {
+          zakatAmount = hartaBersih * 0.025;
+          calculationDetails = `2.5% × (${formatRupiah(asetLancar)} - ${formatRupiah(utangLancar)})`;
+          wajibZakat = true;
+        } else {
+          notWajibMessage.innerHTML = `
+            <strong>Perusahaan Anda belum wajib zakat, silahkan berinfak saja</strong><br>
+            Nishab zakat perusahaan saat ini adalah ${formatRupiah(nishabValue)} (94 gram emas).<br>
+            Total harta bersih perusahaan Anda ${formatRupiah(hartaBersih)}.
+          `;
+        }
+      } else {
+        const laba = parseCurrency(document.getElementById('laba')?.value || 0);
+        
+        if (laba >= nishabValue) {
+          zakatAmount = laba * 0.025;
+          calculationDetails = `2.5% × ${formatRupiah(laba)}`;
+          wajibZakat = true;
+        } else {
+          notWajibMessage.innerHTML = `
+             <strong>Perusahaan Anda belum wajib zakat, silahkan berinfak saja</strong><br>
+            Nishab zakat perusahaan saat ini adalah ${formatRupiah(nishabValue)} (94 gram emas).<br>
+            Laba perusahaan Anda ${formatRupiah(laba)}.
+          `;
+        }
+      }
+
+      if (wajibZakat) {
+        totalZakat.innerHTML = `
+          <strong>Zakat Perusahaan yang harus dibayar:</strong> <strong style="color: #218838;">${formatRupiah(zakatAmount)}</strong><br>
+          <small>Perhitungan: ${calculationDetails}</small>
+        `;
+        totalZakat.style.display = 'block';
+        notWajibMessage.style.display = 'none';
+        payButton.style.display = 'block';
+      } else {
+        totalZakat.style.display = 'none';
         notWajibMessage.style.display = 'block';
         payButton.style.display = 'none';
       }
