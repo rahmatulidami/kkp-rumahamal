@@ -61,7 +61,7 @@
   const loadingText = document.querySelector("#program-items p"); // Select the loading text element
 
   // Fetch program data from API
-  fetch("https://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/program")
+  fetch("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/program")
     .then(response => response.json())
     .then(data => {
       // Remove existing content

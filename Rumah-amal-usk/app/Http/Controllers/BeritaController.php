@@ -25,7 +25,7 @@ class BeritaController extends Controller
 
         // Fetch posts (cache for 60 minutes)
         $posts = Cache::remember('posts', $this->cacheTime, function() {
-            $response = Http::get('http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/posts', [
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
                 'per_page' => 100,
             ]);
             return $response->json();
@@ -74,7 +74,7 @@ class BeritaController extends Controller
 
         // Fetch posts from cache
         $posts = Cache::remember('posts', $this->cacheTime, function() {
-            $response = Http::get('http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/posts', [
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
                 'per_page' => 100,
             ]);
             return $response->json();
@@ -113,7 +113,7 @@ class BeritaController extends Controller
 
     private function fetchCategories()
     {
-        $response = Http::get('http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/categories');
+        $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/categories');
 
         return array_map(function ($category) {
             return [
@@ -146,7 +146,7 @@ class BeritaController extends Controller
     {
         // Fetch the post by slug from the API and cache it
         $berita = Cache::remember('post_' . $slug, $this->cacheTime, function() use ($slug) {
-            $response = Http::get('http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/posts', [
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', [
                 'slug' => $slug, // Menggunakan slug untuk mengambil post
             ]);
 
@@ -166,7 +166,7 @@ class BeritaController extends Controller
 
         // Ambil recent posts
         $recent_posts = Cache::remember('recent_posts', $this->cacheTime, function() {
-            $response = Http::get('http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/posts', ['per_page' => 5]);
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts', ['per_page' => 5]);
             $posts = $response->json();
 
             return array_filter($posts, function ($post) {
@@ -181,13 +181,13 @@ class BeritaController extends Controller
 
         // Ambil tags
         $tags = Cache::remember('tags', $this->cacheTime, function() {
-            $response = Http::get('http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/tags');
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/tags');
             return $response->json();
         });
 
         // Ambil comments
         $comments = Cache::remember('comments_' . $berita['id'], $this->cacheTime, function() use ($berita) {
-            $response = Http::get('http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/comments', ['post' => $berita['id']]);
+            $response = Http::get('http://rumahamal.usk.ac.id/api/wp-json/wp/v2/comments', ['post' => $berita['id']]);
             return $response->json();
         });
 

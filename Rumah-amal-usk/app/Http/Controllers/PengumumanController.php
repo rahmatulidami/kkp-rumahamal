@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class PengumumanController extends Controller
 {
-    private $apiBaseUrl = 'http://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2';
+    private $apiBaseUrl = 'http://rumahamal.usk.ac.id/api/wp-json/wp/v2';
     private $pengumumanCategoryId = 87; // Category ID for Pengumuman
 
     public function show($slug)

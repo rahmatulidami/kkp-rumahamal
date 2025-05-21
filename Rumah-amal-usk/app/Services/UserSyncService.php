@@ -13,7 +13,7 @@ class UserSyncService
     {
         // Periksa apakah user sudah ada di WordPress
         $response = Http::withBasicAuth(env('WORDPRESS_USERNAME'), env('WORDPRESS_APPLICATION_PASSWORD'))
-            ->get('https://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/users', [
+            ->get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/users', [
                 'search' => $user->email, // Cari user berdasarkan email
             ]);
 
@@ -24,7 +24,7 @@ class UserSyncService
         } else {
             // Buat user baru di WordPress
             $response = Http::withBasicAuth(env('WORDPRESS_USERNAME'), env('WORDPRESS_APPLICATION_PASSWORD'))
-                ->post('https://rumahamal.usk.ac.id/api-staging/wp-json/wp/v2/users', [
+                ->post('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/users', [
                     'username' => $user->name,
                     'email' => $user->email,
                     'name' => $user->name,
