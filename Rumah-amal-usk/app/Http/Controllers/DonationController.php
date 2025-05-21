@@ -138,7 +138,7 @@ class DonationController extends Controller
     
         try {
             // dd($data); // Debugging: Tampilkan data yang akan dikirim
-            \Log::info('Payload sent to WordPress:', $data); // Log payload yang dikirim
+            Log::info('Payload sent to WordPress:', $data); // Log payload yang dikirim
             $response = Http::withHeaders([
                 'Authorization' => 'Basic ' . $auth,
             ])->post($wordpressEndpoint, $data);
@@ -148,7 +148,7 @@ class DonationController extends Controller
             }
         } catch (\Exception $e) {
             // Log error jika pengiriman data gagal
-            \Log::error('Error syncing with WordPress: ' . $e->getMessage());
+            Log::error('Error syncing with WordPress: ' . $e->getMessage());
             throw $e;
         }
     }

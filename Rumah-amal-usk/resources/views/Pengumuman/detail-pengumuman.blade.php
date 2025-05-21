@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function() {
               from { transform: translateX(-20px); opacity: 0; }
               to { transform: translateX(0); opacity: 1; }
           }
-    </style>
+</style>
 
 
 @endsection
