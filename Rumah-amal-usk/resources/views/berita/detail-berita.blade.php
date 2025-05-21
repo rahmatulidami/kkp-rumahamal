@@ -157,236 +157,236 @@
   const postId = {{ $berita['id'] }};
   const commentsContainer = document.getElementById('commentsContainer');
 
-// =========== FLATTEN AND RENDER COMMENTS (TWO LEVELS) ===========
+  // =========== FLATTEN AND RENDER COMMENTS (TWO LEVELS) ===========
 
-// Flatten all replies under a single comment (no matter how deep)
-function flattenReplies(children) {
-    let result = [];
-    children.forEach(child => {
-        result.push(child);
-        if (child.children && child.children.length > 0) {
-            result = result.concat(flattenReplies(child.children));
-        }
-    });
-    return result;
-}
+  // Flatten all replies under a single comment (no matter how deep)
+  function flattenReplies(children) {
+      let result = [];
+      children.forEach(child => {
+          result.push(child);
+          if (child.children && child.children.length > 0) {
+              result = result.concat(flattenReplies(child.children));
+          }
+      });
+      return result;
+  }
 
-// Render all comments: only two levels (main + all replies flat under main)
-function renderCommentsTwoLevel(comments, container) {
-    container.innerHTML = '';
+  // Render all comments: only two levels (main + all replies flat under main)
+  function renderCommentsTwoLevel(comments, container) {
+      container.innerHTML = '';
 
-    // Urutkan komentar utama dari yang terbaru
-    comments.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      // Urutkan komentar utama dari yang terbaru
+      comments.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-    comments.forEach(comment => {
+      comments.forEach(comment => {
 
-        const commentEl = makeCommentElement(comment, false);
-        container.appendChild(commentEl);
+          const commentEl = makeCommentElement(comment, false);
+          container.appendChild(commentEl);
 
-        // Flatten & urutkan replies dari yang terbaru
-        const replies = comment.children ? flattenReplies(comment.children) : [];
-        replies.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+          // Flatten & urutkan replies dari yang terbaru
+          const replies = comment.children ? flattenReplies(comment.children) : [];
+          replies.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-        // Render max 2 reply, sisanya hidden
-        const repliesToShow = replies.slice(0, 2);
-        const repliesHidden = replies.slice(2);
+          // Render max 2 reply, sisanya hidden
+          const repliesToShow = replies.slice(0, 2);
+          const repliesHidden = replies.slice(2);
 
-        repliesToShow.forEach(reply => {
-            const replyEl = makeCommentElement(reply, true);
-            container.appendChild(replyEl);
-        });
+          repliesToShow.forEach(reply => {
+              const replyEl = makeCommentElement(reply, true);
+              container.appendChild(replyEl);
+          });
 
-        if (repliesHidden.length > 0) {
-            // Wrap hidden replies in a div
-            const hiddenRepliesDiv = document.createElement('div');
-            hiddenRepliesDiv.style.display = "none";
-            repliesHidden.forEach(reply => {
-                const replyEl = makeCommentElement(reply, true);
-                hiddenRepliesDiv.appendChild(replyEl);
-            });
-            container.appendChild(hiddenRepliesDiv);
+          if (repliesHidden.length > 0) {
+              // Wrap hidden replies in a div
+              const hiddenRepliesDiv = document.createElement('div');
+              hiddenRepliesDiv.style.display = "none";
+              repliesHidden.forEach(reply => {
+                  const replyEl = makeCommentElement(reply, true);
+                  hiddenRepliesDiv.appendChild(replyEl);
+              });
+              container.appendChild(hiddenRepliesDiv);
 
-            // Toggle button
-            const moreBtn = document.createElement('button');
-            moreBtn.className = 'reply-btn more-replies-btn';
-            moreBtn.textContent = `Tampilkan ${repliesHidden.length} balasan lainnya`;
-            let expanded = false;
-            moreBtn.onclick = function () {
-                expanded = !expanded;
-                if (expanded) {
-                    hiddenRepliesDiv.style.display = "";
-                    moreBtn.textContent = "Sembunyikan balasan";
-                } else {
-                    hiddenRepliesDiv.style.display = "none";
-                    moreBtn.textContent = `Tampilkan ${repliesHidden.length} balasan lainnya`;
-                }
-            };
-            container.appendChild(moreBtn);
-        }
-    });
-}
+              // Toggle button
+              const moreBtn = document.createElement('button');
+              moreBtn.className = 'reply-btn more-replies-btn';
+              moreBtn.textContent = `Tampilkan ${repliesHidden.length} balasan lainnya`;
+              let expanded = false;
+              moreBtn.onclick = function () {
+                  expanded = !expanded;
+                  if (expanded) {
+                      hiddenRepliesDiv.style.display = "";
+                      moreBtn.textContent = "Sembunyikan balasan";
+                  } else {
+                      hiddenRepliesDiv.style.display = "none";
+                      moreBtn.textContent = `Tampilkan ${repliesHidden.length} balasan lainnya`;
+                  }
+              };
+              container.appendChild(moreBtn);
+          }
+      });
+  }
 
-function deleteComment(commentId) {
-    if (!confirm('Yakin ingin menghapus komentar ini?')) return;
-    fetch(`/comments/${commentId}`, {
-        method: 'DELETE',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        }
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) {
-            // Refresh komentar setelah hapus
-            fetchAndRenderComments();
-        } else {
-            alert(data.message || 'Gagal menghapus komentar');
-        }
-    });
-}
+  function deleteComment(commentId) {
+      if (!confirm('Yakin ingin menghapus komentar ini?')) return;
+      fetch(`/comments/${commentId}`, {
+          method: 'DELETE',
+          headers: {
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          }
+      })
+      .then(res => res.json())
+      .then(data => {
+          if (data.success) {
+              // Refresh komentar setelah hapus
+              fetchAndRenderComments();
+          } else {
+              alert(data.message || 'Gagal menghapus komentar');
+          }
+      });
+  }
 
-// Create a comment DOM element
-function makeCommentElement(comment, isReply) {
-    const commentEl = document.createElement('div');
-   let isAdminComment = comment.is_admin; // bukan cuma cek author
-commentEl.className = 'comment' + (isReply ? ' comment-reply' : '') + (isAdminComment ? ' comment-admin' : '');
+  // Create a comment DOM element
+  function makeCommentElement(comment, isReply) {
+      const commentEl = document.createElement('div');
+    let isAdminComment = comment.is_admin; // bukan cuma cek author
+  commentEl.className = 'comment' + (isReply ? ' comment-reply' : '') + (isAdminComment ? ' comment-admin' : '');
 
-    commentEl.setAttribute('data-id', comment.id);
+      commentEl.setAttribute('data-id', comment.id);
 
-    // Preview hanya jika reply ke reply
-    let previewHTML = '';
-    if (isReply && comment.parent && comment.parent.parent_id !== null) {
-        previewHTML = `
-            <div class="reply-preview">
-                Membalas ${comment.parent.author}: "${truncate(comment.parent.content, 30)}"
-            </div>
-        `;
-    }
+      // Preview hanya jika reply ke reply
+      let previewHTML = '';
+      if (isReply && comment.parent && comment.parent.parent_id !== null) {
+          previewHTML = `
+              <div class="reply-preview">
+                  Membalas ${comment.parent.author}: "${truncate(comment.parent.content, 30)}"
+              </div>
+          `;
+      }
 
-    // Tombol delete hanya jika admin
-    let deleteBtnHTML = '';
-    if (window.IS_ADMIN) {
-        deleteBtnHTML = `
-            <button class="delete-btn" onclick="deleteComment(${comment.id})">Hapus</button>
-        `;
-    }
+      // Tombol delete hanya jika admin
+      let deleteBtnHTML = '';
+      if (window.IS_ADMIN) {
+          deleteBtnHTML = `
+              <button class="delete-btn" onclick="deleteComment(${comment.id})">Hapus</button>
+          `;
+      }
 
-    commentEl.innerHTML = `
-        ${previewHTML}
-        <div class="author">
-            <span class="${isAdminComment ? 'admin-name' : ''}">${comment.author}</span>
-            <span class="timestamp">${dayjs(comment.created_at).fromNow()}</span>
-            ${deleteBtnHTML}
-        </div>
-        <div class="content">${comment.content}</div>
-        <button class="reply-btn" onclick="showReplyForm(${comment.id})">Balas</button>
-        <div class="replies"></div>
-    `;
-    return commentEl;
-}
-// Truncate helper
-function truncate(text, maxLength) {
-    return text && text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
-}
+      commentEl.innerHTML = `
+          ${previewHTML}
+          <div class="author">
+              <span class="${isAdminComment ? 'admin-name' : ''}">${comment.author}</span>
+              <span class="timestamp">${dayjs(comment.created_at).fromNow()}</span>
+              ${deleteBtnHTML}
+          </div>
+          <div class="content">${comment.content}</div>
+          <button class="reply-btn" onclick="showReplyForm(${comment.id})">Balas</button>
+          <div class="replies"></div>
+      `;
+      return commentEl;
+  }
+  // Truncate helper
+  function truncate(text, maxLength) {
+      return text && text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+  }
 
-// Show reply form below the comment
-function showReplyForm(parentId) {
-    const parentComment = document.querySelector(`.comment[data-id="${parentId}"]`);
-    const repliesContainer = parentComment?.querySelector('.replies');
+  // Show reply form below the comment
+  function showReplyForm(parentId) {
+      const parentComment = document.querySelector(`.comment[data-id="${parentId}"]`);
+      const repliesContainer = parentComment?.querySelector('.replies');
 
-    if (!parentComment || !repliesContainer) {
-        console.error(`Parent comment with ID ${parentId} not found.`);
-        return;
-    }
+      if (!parentComment || !repliesContainer) {
+          console.error(`Parent comment with ID ${parentId} not found.`);
+          return;
+      }
 
-    // Remove any existing reply form
-    document.querySelectorAll('.reply-form').forEach(form => form.remove());
+      // Remove any existing reply form
+      document.querySelectorAll('.reply-form').forEach(form => form.remove());
 
-    // Create reply form
-    const form = document.createElement('form');
-    form.className = 'comment-form reply-form';
-    form.innerHTML = window.IS_ADMIN
-        ? `
-            <div class="admin-label">Sebagai <span class="admin-name">Admin</span></div>
-            <textarea class="reply-content" required placeholder="Balasan Anda"></textarea>
-            <button type="submit">Kirim Balasan</button>
-        `
-        : `
-            <input type="text" class="reply-author" placeholder="Nama (optional)">
-            <textarea class="reply-content" required placeholder="Balasan Anda"></textarea>
-            <button type="submit">Kirim Balasan</button>
-        `;
-    form.onsubmit = (e) => handleReply(e, parentId);
-    repliesContainer.appendChild(form);
-}
+      // Create reply form
+      const form = document.createElement('form');
+      form.className = 'comment-form reply-form';
+      form.innerHTML = window.IS_ADMIN
+          ? `
+              <div class="admin-label">Sebagai <span class="admin-name">Admin</span></div>
+              <textarea class="reply-content" required placeholder="Balasan Anda"></textarea>
+              <button type="submit">Kirim Balasan</button>
+          `
+          : `
+              <input type="text" class="reply-author" placeholder="Nama (optional)">
+              <textarea class="reply-content" required placeholder="Balasan Anda"></textarea>
+              <button type="submit">Kirim Balasan</button>
+          `;
+      form.onsubmit = (e) => handleReply(e, parentId);
+      repliesContainer.appendChild(form);
+  }
 
-// Handle main comment submit
-async function handleComment(e) {
-    e.preventDefault();
+  // Handle main comment submit
+  async function handleComment(e) {
+      e.preventDefault();
 
-    const author = window.IS_ADMIN ? (window.ADMIN_NAME || 'Admin') : (document.getElementById('author').value || 'Anonim');
+      const author = window.IS_ADMIN ? (window.ADMIN_NAME || 'Admin') : (document.getElementById('author').value || 'Anonim');
 
-    const content = document.getElementById('content').value;
+      const content = document.getElementById('content').value;
 
-    const response = await fetch('/comments', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        body: JSON.stringify({ post_id: postId, author, content, parent_id: null })
-    });
+      const response = await fetch('/comments', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          },
+          body: JSON.stringify({ post_id: postId, author, content, parent_id: null })
+      });
 
-    const data = await response.json();
-    if (data.success) {
-        // Refetch all comments so the order stays correct
-        await fetchAndRenderComments();
-        document.getElementById('mainForm').reset();
-    }
-}
+      const data = await response.json();
+      if (data.success) {
+          // Refetch all comments so the order stays correct
+          await fetchAndRenderComments();
+          document.getElementById('mainForm').reset();
+      }
+  }
 
-// Handle reply submit
-async function handleReply(e, parentId) {
-    e.preventDefault();
+  // Handle reply submit
+  async function handleReply(e, parentId) {
+      e.preventDefault();
 
-    const form = e.target;
-    const author = window.IS_ADMIN
-    ? (window.ADMIN_NAME || 'Admin')
-    : (form.querySelector('.reply-author')?.value || 'Anonim');
+      const form = e.target;
+      const author = window.IS_ADMIN
+      ? (window.ADMIN_NAME || 'Admin')
+      : (form.querySelector('.reply-author')?.value || 'Anonim');
 
-    const content = form.querySelector('.reply-content').value;
+      const content = form.querySelector('.reply-content').value;
 
-    const response = await fetch('/comments', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        body: JSON.stringify({ post_id: postId, author, content, parent_id: parentId })
-    });
+      const response = await fetch('/comments', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          },
+          body: JSON.stringify({ post_id: postId, author, content, parent_id: parentId })
+      });
 
-    const data = await response.json();
-    if (data.success) {
-        form.remove();
-        // Refetch all comments so the order and structure stays correct
-        await fetchAndRenderComments();
-    }
-}
+      const data = await response.json();
+      if (data.success) {
+          form.remove();
+          // Refetch all comments so the order and structure stays correct
+          await fetchAndRenderComments();
+      }
+  }
 
-// Fetch and render comments on page
-async function fetchAndRenderComments() {
-    const commentsContainer = document.getElementById('commentsContainer');
-    const response = await fetch(`/comments/${postId}`);
-    const comments = await response.json();
-    renderCommentsTwoLevel(comments.comments, commentsContainer);
+  // Fetch and render comments on page
+  async function fetchAndRenderComments() {
+      const commentsContainer = document.getElementById('commentsContainer');
+      const response = await fetch(`/comments/${postId}`);
+      const comments = await response.json();
+      renderCommentsTwoLevel(comments.comments, commentsContainer);
 
-    document.getElementById('comment-count').textContent = comments.count;
-}
+      document.getElementById('comment-count').textContent = comments.count;
+  }
 
-// INIT: Fetch on page load
-document.addEventListener('DOMContentLoaded', function () {
-    fetchAndRenderComments();
-});
+  // INIT: Fetch on page load
+  document.addEventListener('DOMContentLoaded', function () {
+      fetchAndRenderComments();
+  });
 </script>
 
 <style>
@@ -398,158 +398,158 @@ document.addEventListener('DOMContentLoaded', function () {
     padding: 0.3rem 1rem;
     border-radius: 6px;
     margin-bottom: 0.5rem;
-}
-.admin-name {
-    color: #fff;
-    font-weight: bold;
-}
-.comment-admin {
-    background: #e3f2fd !important;
-    border-left: 4px solid #1e88e5 !important;
-}
-.comment-admin .author .admin-name {
-    color: #1565c0;
-    font-weight: bold;
-    font-family: 'Montserrat', sans-serif;
-}
+  }
+  .admin-name {
+      color: #fff;
+      font-weight: bold;
+  }
+  .comment-admin {
+      background: #e3f2fd !important;
+      border-left: 4px solid #1e88e5 !important;
+  }
+  .comment-admin .author .admin-name {
+      color: #1565c0;
+      font-weight: bold;
+      font-family: 'Montserrat', sans-serif;
+  }
 
-    .delete-btn {
-    background: #dc3545;
-    color: white;
-    border: none;
-    padding: 0.3rem 1rem;
-    border-radius: 5px;
-    margin-left: 1rem;
-    cursor: pointer;
-}
-.delete-btn:hover {
-    background: #b71c1c;
-}
+      .delete-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 0.3rem 1rem;
+      border-radius: 5px;
+      margin-left: 1rem;
+      cursor: pointer;
+  }
+  .delete-btn:hover {
+      background: #b71c1c;
+  }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+          * {
+              box-sizing: border-box;
+              margin: 0;
+              padding: 0;
+          }
 
-        /* body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            background-color: #f5f5f5;
-        } */
+          /* body {
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              max-width: 800px;
+              margin: 2rem auto;
+              padding: 0 1rem;
+              background-color: #f5f5f5;
+          } */
 
-        .comment-section {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-        }
+          .comment-section {
+              background: white;
+              padding: 2rem;
+              border-radius: 10px;
+              box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+          }
 
-        .comment {
-            margin: 1rem 0;
-            padding: 1rem;
-            background: #fff;
-            border-radius: 8px;
-            border: 1px solid #eee;
-            animation: fadeIn 0.3s ease-in;
-            transition: transform 0.2s;
-        }
+          .comment {
+              margin: 1rem 0;
+              padding: 1rem;
+              background: #fff;
+              border-radius: 8px;
+              border: 1px solid #eee;
+              animation: fadeIn 0.3s ease-in;
+              transition: transform 0.2s;
+          }
 
-        .comment:hover {
-            transform: translateX(5px);
-        }
+          .comment:hover {
+              transform: translateX(5px);
+          }
 
-        .comment-reply {
-            margin-left: 2rem;
-            border-left: 3px solid #007bff;
-            /* padding-left: 1rem; */
-            animation: slideIn 0.3s ease-out;
-        }
+          .comment-reply {
+              margin-left: 2rem;
+              border-left: 3px solid #007bff;
+              /* padding-left: 1rem; */
+              animation: slideIn 0.3s ease-out;
+          }
 
-        .author {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
+          .author {
+              font-weight: 600;
+              color: #333;
+              margin-bottom: 0.5rem;
+          }
 
-        .timestamp {
-            font-size: 0.8rem;
-            color: #666;
-            margin-left: 1rem;
-        }
+          .timestamp {
+              font-size: 0.8rem;
+              color: #666;
+              margin-left: 1rem;
+          }
 
-        .content {
-            color: #444;
-            line-height: 1.5;
-        }
+          .content {
+              color: #444;
+              line-height: 1.5;
+          }
 
-        .reply-preview {
-            font-size: 0.9rem;
-            color: #666;
-            padding: 0.5rem;
-            background: #f8f9fa;
-            border-radius: 5px;
-            margin: 0.5rem 0;
-            border-left: 2px solid #007bff;
-        }
+          .reply-preview {
+              font-size: 0.9rem;
+              color: #666;
+              padding: 0.5rem;
+              background: #f8f9fa;
+              border-radius: 5px;
+              margin: 0.5rem 0;
+              border-left: 2px solid #007bff;
+          }
 
-        .reply-btn {
-            background: none;
-            border: none;
-            color: #007bff;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            margin-top: 0.5rem;
-            border-radius: 5px;
-            transition: background 0.2s;
-        }
+          .reply-btn {
+              background: none;
+              border: none;
+              color: #007bff;
+              cursor: pointer;
+              padding: 0.5rem 1rem;
+              margin-top: 0.5rem;
+              border-radius: 5px;
+              transition: background 0.2s;
+          }
 
-        .reply-btn:hover {
-            background: #e3f2fd;
-        }
+          .reply-btn:hover {
+              background: #e3f2fd;
+          }
 
-        .comment-form {
-            margin-top: 2rem;
-            padding: 1rem;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
+          .comment-form {
+              margin-top: 2rem;
+              padding: 1rem;
+              background: #fff;
+              border-radius: 8px;
+              box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+          }
 
-        input, textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: inherit;
-        }
+          input, textarea {
+              width: 100%;
+              padding: 0.8rem;
+              margin: 0.5rem 0;
+              border: 1px solid #ddd;
+              border-radius: 5px;
+              font-family: inherit;
+          }
 
-        button[type="submit"] {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
+          button[type="submit"] {
+              background: #007bff;
+              color: white;
+              border: none;
+              padding: 0.8rem 1.5rem;
+              border-radius: 5px;
+              cursor: pointer;
+              transition: background 0.2s;
+          }
 
-        button[type="submit"]:hover {
-            background: #0056b3;
-        }
+          button[type="submit"]:hover {
+              background: #0056b3;
+          }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+          @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+          }
 
-        @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
+          @keyframes slideIn {
+              from { transform: translateX(-20px); opacity: 0; }
+              to { transform: translateX(0); opacity: 1; }
+          }
     </style>
 
 <script>
