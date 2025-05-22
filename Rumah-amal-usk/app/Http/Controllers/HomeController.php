@@ -27,7 +27,7 @@ class HomeController extends Controller
         }
 
         // Cache hero slides for 1 hour
-        $heroSlides = Cache::remember('hero_slides', 3600, function() {
+        $heroSlides = Cache::remember('hero_slides', 360, function() {
             return $this->fetchHeroSlides();
         });
 
