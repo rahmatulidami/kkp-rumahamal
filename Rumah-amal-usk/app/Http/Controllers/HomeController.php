@@ -106,17 +106,29 @@ class HomeController extends Controller
             $slides = [];
             
             foreach ($carouselItems as $item) {
-                $postResponse = Http::get("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts/{$item['acf']['post']}");
-                $postData = $postResponse->json();
+                // Build proper URL from slug
+                $link = str_replace(
+                    'https-rumahamal-usk-ac-id-berita-', 
+                    'https://rumahamal.usk.ac.id/berita/',
+                    $item['slug']
+                );
                 
-                $imageUrl = $this->extractImageUrlFromContent($postData['content']['rendered'] ?? '');
+                // Get image URL if available in ACF
+                $imageUrl = null;
+                if (!empty($item['acf']['image'])) {
+                    $mediaResponse = Http::get("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/media/{$item['acf']['image']}");
+                    if ($mediaResponse->successful()) {
+                        $mediaData = $mediaResponse->json();
+                        $imageUrl = $mediaData['source_url'] ?? null;
+                    }
+                }
 
                 $slides[] = [
                     'id' => $item['id'],
                     'slug' => $item['slug'],
                     'image_url' => $imageUrl,
-                    'title' => $postData['title']['rendered'] ?? 'Untitled',
-                    'link' => $postData['slug'] ? "https://rumahamal.usk.ac.id/pengumuman/{$postData['slug']}" : '#',
+                    'title' => $this->extractTitleFromSlug($item['slug']),
+                    'link' => $link,
                     'priority' => $item['acf']['priority'] ?? 0
                 ];
             }
@@ -132,6 +144,13 @@ class HomeController extends Controller
             Log::error('Error fetching hero slides: ' . $e->getMessage());
             return [];
         }
+    }
+
+    private function extractTitleFromSlug($slug)
+    {
+        // Remove prefix and replace hyphens with spaces
+        $title = str_replace(['https-rumahamal-usk-ac-id-berita-', '-'], ['', ' '], $slug);
+        return ucwords($title);
     }
 
     private function fetchAllPosts()
@@ -213,21 +232,6 @@ class HomeController extends Controller
         }, $campaigns);
 
         return array_slice($processedCampaigns, 0, 6);
-    }
-
-    private function extractImageUrlFromContent($content)
-    {
-        if (empty($content)) {
-            return '';
-        }
-
-        $doc = new DOMDocument();
-        libxml_use_internal_errors(true);
-        $doc->loadHTML($content);
-        libxml_clear_errors();
-        $imgTags = $doc->getElementsByTagName('img');
-        
-        return $imgTags->length > 0 ? $imgTags->item(0)->getAttribute('src') : '';
     }
 
     private function extractImageUrl($post)
