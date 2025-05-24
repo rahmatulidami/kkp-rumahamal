@@ -59,9 +59,28 @@
                         </ul>
                     </li>
                     <li><a href="/dokumentasi" class="{{ Request::is('galeri') ? 'active' : '' }}">Galeri</a></li>
-                    <li class="login-button">
+                    <!-- <li class="login-button">
                         <button id="login-button" class="btn btn-primary">Login</button>
+                    </li> -->
+
+                     @auth
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-weight: bold;">
+                            {{ Auth::user()->name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard Admin</a>
+                            </li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button class="dropdown-item" type="submit">Log Out</button>
+                                </form>
+                            </li>
+                        </ul>
                     </li>
+                    @endauth
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>

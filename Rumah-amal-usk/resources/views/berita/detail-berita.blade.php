@@ -13,6 +13,7 @@
 <meta property="og:image" content="{{ $mainImage }}" />
 <meta property="og:url" content="{{ url()->current() }}" />
 <meta name="twitter:card" content="summary_large_image">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('content')
@@ -80,6 +81,23 @@
 
             </article>
 
+            @include('components.comments', ['postId' => $berita['id']])
+            <script src="{{ asset('assets/js/comments.js') }}"></script>
+            <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/relativeTime.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/dayjs@1/locale/id.js"></script>
+            <script>
+                dayjs.extend(dayjs_plugin_relativeTime);
+                dayjs.locale('id'); // Gunakan bahasa Indonesia
+            </script>
+            <script>
+                window.initComments(
+                    {{ $berita['id'] }},
+                    {{ auth()->check() && auth()->user()->is_admin ? 'true' : 'false' }},
+                    "{{ auth()->check() && auth()->user()->is_admin ? (auth()->user()->name ?? 'Admin') : '' }}"
+                );
+            </script>
+
           </div>
         </section><!-- /Blog Details Section -->
 
@@ -103,42 +121,6 @@
 
           </div>
         </section><!-- /Blog Comments Section -->
-
-        <!-- Comment Form Section -->
-        <section id="comment-form" class="comment-form section">
-          <div class="container">
-            <form action="{{ route('comments.store') }}" method="POST">
-              @csrf
-              <input type="hidden" name="berita_id" value="{{ $berita['id'] }}">
-
-              <h4>Post Comment</h4>
-              <p>Your email address will not be published. Required fields are marked *</p>
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input name="name" type="text" class="form-control" placeholder="Your Name*" required>
-                </div>
-                <div class="col-md-6 form-group">
-                  <input name="email" type="email" class="form-control" placeholder="Your Email*" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col form-group">
-                  <input name="website" type="text" class="form-control" placeholder="Your Website">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col form-group">
-                  <textarea name="comment" class="form-control" placeholder="Your Comment*" required></textarea>
-                </div>
-              </div>
-
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary">Post Comment</button>
-              </div>
-
-            </form>
-          </div>
-        </section><!-- /Comment Form Section -->
 
       </div>
 

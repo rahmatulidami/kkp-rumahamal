@@ -13,6 +13,7 @@
     <meta property="og:image" content="{{ $mainImage }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('content')

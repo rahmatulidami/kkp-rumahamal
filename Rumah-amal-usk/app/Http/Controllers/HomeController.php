@@ -14,17 +14,17 @@ class HomeController extends Controller
     public function index()
     {
         // Authentication check
-        if (Auth::id()) {
-            $usertype = Auth::user()->usertype;
+        // if (Auth::id()) {
+        //     $usertype = Auth::user()->usertype;
 
-            if ($usertype == 'user') {
-                return view('user.dashboard');
-            } elseif ($usertype == 'admin') {
-                return view('admin.dashboard');
-            } else {
-                return view('auth.login');
-            }
-        }
+        //     if ($usertype == 'user') {
+        //         return view('user.dashboard');
+        //     } elseif ($usertype == 'admin') {
+        //         return view('admin.dashboard');
+        //     } else {
+        //         return view('auth.login');
+        //     }
+        // }
 
         // Cache hero slides for 1 hour
         $heroSlides = Cache::remember('hero_slides', 3600, function() {
