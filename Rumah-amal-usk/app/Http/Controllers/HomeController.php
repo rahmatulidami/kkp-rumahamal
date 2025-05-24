@@ -26,17 +26,23 @@ class HomeController extends Controller
             }
         }
 
-        // Cache hero slides for 1 hour
-        $heroSlides = Cache::remember('hero_slides', 360, function() {
+        // Cache hero slides for 1 hour with versioned key
+        $heroSlides = Cache::remember('hero_slides:v1', now()->addHours(1), function() {
             return $this->fetchHeroSlides();
         });
 
         // Extract image URLs for preloading
         $heroImages = collect($heroSlides)->pluck('image_url')->filter()->toArray();
 
-        // Fetch other required data
-        $categories = $this->fetchCategories();
-        $allPosts = $this->fetchAllPosts();
+        // Cache categories for 6 hours (changes less frequently)
+        $categories = Cache::remember('categories:v1', now()->addHours(6), function() {
+            return $this->fetchCategories();
+        });
+
+        // Cache posts for 1 hour
+        $allPosts = Cache::remember('all_posts:v1', now()->addHours(1), function() {
+            return $this->fetchAllPosts();
+        });
 
         if (!is_array($categories) || !is_array($allPosts)) {
             abort(500, 'Invalid data received from API.');
@@ -81,8 +87,10 @@ class HomeController extends Controller
             $post['excerpt'] = $this->generateExcerpt($post['content']['rendered'] ?? '');
         }
 
-        // Fetch campaigns
-        $campaigns = $this->fetchAndProcessCampaigns();
+        // Cache campaigns for 2 hours
+        $campaigns = Cache::remember('campaigns:v1', now()->addHours(2), function() {
+            return $this->fetchAndProcessCampaigns();
+        });
 
         return view('landing.home', [
             'heroSlides' => $heroSlides,
