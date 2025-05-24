@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 use DOMDocument;
 use DOMElement;
 
@@ -10,24 +11,24 @@ class GalleryController extends Controller
 {
     public function showGallery()
     {
-        // Fetch the JSON data from the API
-        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/pages/4716');
+        // Use cache for the API response (1 hour cache duration)
+        $data = Cache::remember('gallery_page_4716', 60, function () {
+            $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/pages/4716');
 
-        // Check if the response is successful
-        if (!$response->ok()) {
-            abort(500, 'Failed to fetch gallery data.');
-        }
+            if (!$response->ok()) {
+                abort(500, 'Failed to fetch gallery data.');
+            }
+            
+            return $response->json();
+        });
 
-        $data = $response->json();
         $content = $data['content']['rendered'] ?? '';
 
-        // Use DOMDocument to parse the HTML content
         $dom = new DOMDocument();
         @$dom->loadHTML($content);
 
         $images = [];
 
-        // Get all <a> tags that contain the images
         foreach ($dom->getElementsByTagName('a') as $anchor) {
             if (!$anchor instanceof DOMElement) continue;
 
@@ -74,7 +75,7 @@ class GalleryController extends Controller
             }
         }
 
-        // Pagination setup
+        // Pagination 
         $perPage = 8;
         $totalImages = count($images);
         $totalPages = ceil($totalImages / $perPage);
@@ -87,7 +88,6 @@ class GalleryController extends Controller
             'total_pages' => $totalPages
         ];
 
-        // Pass the images and pagination data to the view
         return view('galeri.galeri', [
             'images' => $paginatedImages,
             'pagination' => $pagination
