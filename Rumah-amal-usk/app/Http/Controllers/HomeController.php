@@ -26,21 +26,21 @@ class HomeController extends Controller
             }
         }
 
-        // Cache hero slides for 1 hour with versioned key
-        $heroSlides = Cache::remember('hero_slides:v1', now()->addHours(1), function() {
+        // Cache hero slides for 15 minutes with versioned key
+        $heroSlides = Cache::remember('hero_slides:v1', now()->addMinutes(15), function() {
             return $this->fetchHeroSlides();
         });
 
         // Extract image URLs for preloading
         $heroImages = collect($heroSlides)->pluck('image_url')->filter()->toArray();
 
-        // Cache categories for 6 hours (changes less frequently)
-        $categories = Cache::remember('categories:v1', now()->addHours(6), function() {
+        // Cache categories for 15 minutes
+        $categories = Cache::remember('categories:v1', now()->addMinutes(15), function() {
             return $this->fetchCategories();
         });
 
-        // Cache posts for 1 hour
-        $allPosts = Cache::remember('all_posts:v1', now()->addHours(1), function() {
+        // Cache posts for 15 minutes
+        $allPosts = Cache::remember('all_posts:v1', now()->addMinutes(15), function() {
             return $this->fetchAllPosts();
         });
 
@@ -87,8 +87,8 @@ class HomeController extends Controller
             $post['excerpt'] = $this->generateExcerpt($post['content']['rendered'] ?? '');
         }
 
-        // Cache campaigns for 2 hours
-        $campaigns = Cache::remember('campaigns:v1', now()->addHours(2), function() {
+        // Cache campaigns for 15 minutes
+        $campaigns = Cache::remember('campaigns:v1', now()->addMinutes(15), function() {
             return $this->fetchAndProcessCampaigns();
         });
 
@@ -114,12 +114,20 @@ class HomeController extends Controller
             $slides = [];
             
             foreach ($carouselItems as $item) {
-                // Build proper URL from slug
-                $link = str_replace(
-                    'https-rumahamal-usk-ac-id-berita-', 
-                    'https://rumahamal.usk.ac.id/berita/',
-                    $item['slug']
-                );
+                // Build proper URL from slug hanya jika slug valid
+                $link = null;
+                if (!empty($item['slug']) && strpos($item['slug'], 'https-rumahamal-usk-ac-id-berita-') === 0) {
+                    $link = str_replace(
+                        'https-rumahamal-usk-ac-id-berita-', 
+                        'https://rumahamal.usk.ac.id/berita/',
+                        $item['slug']
+                    );
+                    
+                    // Validasi URL yang dihasilkan
+                    if (!filter_var($link, FILTER_VALIDATE_URL)) {
+                        $link = null;
+                    }
+                }
                 
                 // Get image URL if available in ACF
                 $imageUrl = null;
@@ -136,8 +144,9 @@ class HomeController extends Controller
                     'slug' => $item['slug'],
                     'image_url' => $imageUrl,
                     'title' => $this->extractTitleFromSlug($item['slug']),
-                    'link' => $link,
-                    'priority' => $item['acf']['priority'] ?? 0
+                    'link' => $link, // akan null jika tidak ada link valid
+                    'priority' => $item['acf']['priority'] ?? 0,
+                    'has_link' => !empty($link) // tambah flag untuk memudahkan pengecekan di view
                 ];
             }
 
@@ -153,7 +162,6 @@ class HomeController extends Controller
             return [];
         }
     }
-
     private function extractTitleFromSlug($slug)
     {
         // Remove prefix and replace hyphens with spaces

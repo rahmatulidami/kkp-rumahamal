@@ -105,40 +105,45 @@
                 }
             }
             </script>
-                <div class="swiper-wrapper align-items-center">
-                    @isset($heroSlides)
-                        @foreach($heroSlides as $slide)
-                            <div class="swiper-slide">
-                                <div class="image-container">
-                                    <a href="{{ $slide['link'] }}">
-                                        @if($slide['image_url'])
-                                            <img src="{{ $slide['image_url'] }}" 
-                                                alt="{{ $slide['title'] }}" 
-                                                width="1297" 
-                                                height="518.79"
-                                                loading="{{ $loop->first ? 'eager' : 'lazy' }}"
-                                                {{-- Hanya slide pertama yang eager loading --}}
-                                                {{ $loop->first ? 'fetchpriority="high"' : '' }}
-                                                style="aspect-ratio: 5/2">
-                                        @else
-                                            <img src="{{ asset('assets/img/default-hero.jpg') }}" 
-                                                alt="Default Hero Image"
-                                                width="1297"
-                                                height="518.79"
-                                                loading="{{ $loop->first ? 'eager' : 'lazy' }}"
-                                                {{ $loop->first ? 'fetchpriority="high"' : '' }}
-                                                style="aspect-ratio: 5/2">
-                                        @endif
-                                    </a>
-                                </div>
-                            </div>
-                        @endforeach
-                    @else
+            <div class="swiper-wrapper align-items-center">
+                @isset($heroSlides)
+                    @foreach($heroSlides as $slide)
                         <div class="swiper-slide">
-                            <div class="loading-placeholder"></div>
+                            <div class="image-container">
+                                @if(!empty($slide['link']))
+                                    <a href="{{ $slide['link'] }}" aria-label="{{ $slide['title'] }}">
+                                @endif
+                                
+                                @if($slide['image_url'])
+                                    <img src="{{ $slide['image_url'] }}" 
+                                        alt="{{ $slide['title'] }}" 
+                                        width="1297" 
+                                        height="518.79"
+                                        loading="{{ $loop->first ? 'eager' : 'lazy' }}"
+                                        {{ $loop->first ? 'fetchpriority="high"' : '' }}
+                                        style="aspect-ratio: 5/2">
+                                @else
+                                    <img src="{{ asset('assets/img/default-hero.jpg') }}" 
+                                        alt="Default Hero Image"
+                                        width="1297"
+                                        height="518.79"
+                                        loading="{{ $loop->first ? 'eager' : 'lazy' }}"
+                                        {{ $loop->first ? 'fetchpriority="high"' : '' }}
+                                        style="aspect-ratio: 5/2">
+                                @endif
+                                
+                                @if(!empty($slide['link']))
+                                    </a>
+                                @endif
+                            </div>
                         </div>
-                    @endisset
-                </div>
+                    @endforeach
+                @else
+                    <div class="swiper-slide">
+                        <div class="loading-placeholder"></div>
+                    </div>
+                @endisset
+            </div>
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
             <div class="swiper-pagination"></div>
