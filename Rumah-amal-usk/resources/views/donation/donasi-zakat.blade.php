@@ -27,7 +27,13 @@
         </div>
 
         <div class="form-group">
-          <label for="zakat-type">Pilih Jenis Zakat:</label>
+          <strong><p style="margin-bottom: 4px; text-align: left;">Perhitungan Zakat Berdasarkan:</p></strong>
+          <ul style=" list-style-position: inside; padding-left: 10px;">
+            <li>Qannun Aceh No. 10/ 2018 Tentang Baitul Mall </li>
+            <li>SK DPS BMA No. 02/ 2024: Zakat 2,5% Dari Pendapatan Rp10,5 juta/bulan </li>
+          </ul>
+
+          <label for="zakat-type" style=" font-weight: 600;">Pilih Jenis Zakat:</label>
           <select id="zakat-type" class="form-control" onchange="updateInputs()">
             <option value="">--Pilih Jenis Zakat--</option>
             <option value="Zakat Maal">Maal</option>
@@ -140,7 +146,6 @@
         - Nishab: 94 gram emas (senilai ${formatRupiah(nishabMaal * goldPricePerGram)})<br>
         - Kadar zakat: 2.5% dari total harta bersih<br>
         - Harta bersih = Total Harta - Hutang <br><br>
-		 <strong>Perhatian:</strong> Nishab zakat di Aceh adalah 94 gram emas
       `;
       zakatInfo.style.display = 'block';
     } else if (zakatType === 'Zakat Profesi') {
@@ -177,7 +182,6 @@
         - Nishab: 94 gram emas (senilai ${formatRupiah(nishabPerniagaan * goldPricePerGram)})<br>
         - Kadar zakat: 2.5% dari total harta usaha<br>
         - Harta usaha = Total Aset dan Keuntungan - Hutang Jangka Pendek<br><br>
-        <strong>Perhatian:</strong> Nishab zakat di Aceh adalah 94 gram emas
       `;
       zakatInfo.style.display = 'block';
     } else if (zakatType === 'Zakat Emas') {
@@ -190,10 +194,9 @@
       zakatInfo.innerHTML = `
         <strong>Ketentuan Zakat Emas:</strong><br>
         - Nishab: 94 gram emas<br>
-        - Kadar zakat: 2.5% dari total nilai emas<br>
+        - Kadar zakat: 2.5% dari total nilai emas<br> <br> 
         <strong>Harga emas hari ini (<a href="https://www.hargaemas.com/" target="_blank" style="color:rgb(3, 129, 41); ">hargaemas.com</a>):</strong> ${formatRupiah(goldPricePerGram)}/gram
 		<br><br>
-		 <strong>Perhatian:</strong> Nishab zakat di Aceh adalah 94 gram emas
       `;
       zakatInfo.style.display = 'block';
     } else if (zakatType === 'Zakat Perusahaan') {
@@ -223,7 +226,6 @@
         - Nishab: 94 gram emas (senilai ${formatRupiah(nishabPerusahaan * goldPricePerGram)})<br>
         - Untuk perusahaan dagang/industri: 2.5% × (Aset Lancar - Utang Lancar)<br>
         - Untuk perusahaan jasa: 2.5% × Laba Sebelum Pajak<br><br>
-        <strong>Perhatian:</strong> Nishab zakat di Aceh adalah 94 gram emas
       `;
       zakatInfo.style.display = 'block';
       
