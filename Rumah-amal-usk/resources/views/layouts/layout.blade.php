@@ -59,9 +59,11 @@
                         </ul>
                     </li>
                     <li><a href="/dokumentasi" class="{{ Request::is('galeri') ? 'active' : '' }}">Galeri</a></li>
+                    <li><a href="/donasi-zakat" class="{{ Request::is('donasi-zakat') ? 'active' : '' }}">Kalkulator Zakat</a></li>
+                    
                     <!-- <li class="login-button">
                         <button id="login-button" class="btn btn-primary">Login</button>
-                    </li> -->
+                    </li> --> -->
 
                      @auth
                     <li class="nav-item dropdown">

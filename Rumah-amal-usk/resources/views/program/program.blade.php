@@ -68,95 +68,143 @@ document.addEventListener("DOMContentLoaded", function () {
   const programContainer = document.getElementById("program-items");
   const loadingText = document.querySelector("#program-items p");
   const noProgramMessage = document.getElementById("no-program-message");
+  const cacheKey = 'programs_cache';
+  const cacheExpiry = 30 * 60 * 1000; // 30 menit cache
 
-  // Fetch program data dari API
+  // Cek cache pertama
+  const cachedData = localStorage.getItem(cacheKey);
+  if (cachedData) {
+    const { data, timestamp } = JSON.parse(cachedData);
+    if (Date.now() - timestamp < cacheExpiry) {
+      renderPrograms(data);
+      return;
+    }
+  }
+
+  // Jika tidak ada cache atau expired, fetch baru
+  loadingText.style.display = "block";
+  
   fetch("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/program")
     .then(response => response.json())
     .then(data => {
-      // Hapus teks loading sebelum menampilkan program
-      loadingText.style.display = "none";
-      programContainer.innerHTML = '';
-
-      if (data.length === 0) {
-        noProgramMessage.style.display = "block";
-        return;
-      } else {
-        noProgramMessage.style.display = "none";
-      }
-
-      // Render program
-      data.forEach(post => {
-        let filterClass = '';
-        const categories = post.categories;
-
-        // Mapping kategori ke filter class
-        if (categories.includes(61)) filterClass = 'filter-pendidikan';
-        else if (categories.includes(64)) filterClass = 'filter-pemberdayaan';
-        else if (categories.includes(65)) filterClass = 'filter-sosial';
-        else if (categories.includes(62)) filterClass = 'filter-syiar';
-        else if (categories.includes(63)) filterClass = 'filter-kemitraan';
-        else if (categories.includes(66)) filterClass = 'filter-fasilitator';
-        else filterClass = 'filter-none'; // Tambahkan ini jika kategori tidak cocok
-
-        // Ambil gambar dari konten
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(post.content.rendered, "text/html");
-        const imgElement = doc.querySelector("img");
-        const imageUrl = imgElement ? imgElement.src : "/assets/img/default.jpeg";
-
-        // Buat URL ke halaman detail program
-        const postSlug = post.slug || "";
-        const postLink = `/program/${postSlug}`;
-        const postTitle = post.title.rendered || "Untitled";
-
-        // Buat HTML untuk setiap program
-        const programItem = `
-          <div class="col-lg-2-4 col-md-6 program-item isotope-item ${filterClass}">
-            <div class="program-content h-100">
-              <a href="${postLink}">
-                <img src="${imageUrl}" class="img-fluid" alt="${postTitle}">
-              </a>
-            </div>
-          </div>
-        `;
-
-        // Tambahkan program ke dalam container
-        programContainer.innerHTML += programItem;
-      });
-
-      // Inisialisasi Isotope
-      const iso = new Isotope(programContainer, {
-        itemSelector: '.isotope-item',
-        layoutMode: 'masonry'
-      });
-
-      // Event listener untuk filter
-      document.getElementById('filter-select').addEventListener('change', function() {
-        const filterValue = this.value;
-        iso.arrange({ filter: filterValue });
-
-        // Tunggu sebentar sebelum mengecek jumlah elemen yang terlihat
-        setTimeout(() => {
-          let visibleItems = Array.from(document.querySelectorAll('.isotope-item')).filter(item => {
-            return item.getBoundingClientRect().height > 0;
-          });
-
-          console.log("Jumlah program yang terlihat:", visibleItems.length);
-
-          if (visibleItems.length === 0) {
-            noProgramMessage.style.display = "block";
-          } else {
-            noProgramMessage.style.display = "none";
-          }
-        }, 500);
-      });
+      // Simpan ke cache
+      localStorage.setItem(cacheKey, JSON.stringify({
+        data: data,
+        timestamp: Date.now()
+      }));
+      renderPrograms(data);
     })
     .catch(error => {
-      console.error('Error fetching program data:', error);
-      programContainer.innerHTML = "<p>Gagal memuat program.</p>";
-      noProgramMessage.style.display = "block";
+      console.error('Error:', error);
+      loadingText.textContent = "Gagal memuat program";
     });
-});
 
+  function renderPrograms(data) {
+    loadingText.style.display = "none";
+    programContainer.innerHTML = '';
+    
+    if (!data || data.length === 0) {
+      noProgramMessage.style.display = "block";
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    
+    data.forEach(post => {
+      const filterClass = getFilterClass(post);
+      const item = document.createElement('div');
+      item.className = `col-lg-2-4 col-md-6 program-item isotope-item ${filterClass}`;
+      item.innerHTML = `
+        <div class="program-content h-100">
+          <a href="/program/${post.slug || ''}">
+            <img src="/assets/img/placeholder.jpg" 
+                 data-src="${getImageUrl(post)}" 
+                 class="img-fluid lazy" 
+                 alt="${post.title.rendered || 'Untitled'}" 
+                 loading="eager"
+                 width="300"
+                 height="200">
+          </a>
+        </div>
+      `;
+      fragment.appendChild(item);
+    });
+
+    programContainer.appendChild(fragment);
+    initIsotope();
+    initLazyLoad();
+  }
+
+  function getFilterClass(post) {
+    const categories = post.categories || [];
+    if (categories.includes(61)) return 'filter-pendidikan';
+    if (categories.includes(64)) return 'filter-pemberdayaan';
+    if (categories.includes(65)) return 'filter-sosial';
+    if (categories.includes(62)) return 'filter-syiar';
+    if (categories.includes(63)) return 'filter-kemitraan';
+    if (categories.includes(66)) return 'filter-fasilitator';
+    return 'filter-none';
+  }
+
+  function getImageUrl(post) {
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(post.content.rendered || "", "text/html");
+      const img = doc.querySelector("img");
+      return img ? img.src : "/assets/img/default.jpeg";
+    } catch {
+      return "/assets/img/default.jpeg";
+    }
+  }
+
+  function initIsotope() {
+    const iso = new Isotope(programContainer, {
+      itemSelector: '.isotope-item',
+      layoutMode: 'masonry',
+      transitionDuration: 0
+    });
+
+    let filterTimeout;
+    document.getElementById('filter-select').addEventListener('change', function() {
+      clearTimeout(filterTimeout);
+      filterTimeout = setTimeout(() => {
+        iso.arrange({ filter: this.value });
+        checkVisibleItems();
+      }, 100);
+    });
+  }
+
+  function initLazyLoad() {
+    const lazyImages = [].slice.call(document.querySelectorAll('.lazy'));
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+            imageObserver.unobserve(img);
+          }
+        });
+      });
+
+      lazyImages.forEach(img => imageObserver.observe(img));
+    } else {
+      // Fallback untuk browser lama
+      lazyImages.forEach(img => {
+        img.src = img.dataset.src;
+      });
+    }
+  }
+
+  function checkVisibleItems() {
+    setTimeout(() => {
+      const visibleItems = [].slice.call(document.querySelectorAll('.isotope-item'))
+        .filter(item => item.offsetParent !== null);
+      
+      noProgramMessage.style.display = visibleItems.length === 0 ? "block" : "none";
+    }, 300);
+  }
+});
 </script>
 @endpush

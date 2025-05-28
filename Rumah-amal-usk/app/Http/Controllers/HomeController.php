@@ -26,17 +26,23 @@ class HomeController extends Controller
         //     }
         // }
 
-        // Cache hero slides for 1 hour
-        $heroSlides = Cache::remember('hero_slides', 3600, function() {
+        // Cache hero slides for 15 minutes with versioned key
+        $heroSlides = Cache::remember('hero_slides:v1', now()->addMinutes(15), function() {
             return $this->fetchHeroSlides();
         });
 
         // Extract image URLs for preloading
         $heroImages = collect($heroSlides)->pluck('image_url')->filter()->toArray();
 
-        // Fetch other required data
-        $categories = $this->fetchCategories();
-        $allPosts = $this->fetchAllPosts();
+        // Cache categories for 15 minutes
+        $categories = Cache::remember('categories:v1', now()->addMinutes(15), function() {
+            return $this->fetchCategories();
+        });
+
+        // Cache posts for 15 minutes
+        $allPosts = Cache::remember('all_posts:v1', now()->addMinutes(15), function() {
+            return $this->fetchAllPosts();
+        });
 
         if (!is_array($categories) || !is_array($allPosts)) {
             abort(500, 'Invalid data received from API.');
@@ -81,8 +87,10 @@ class HomeController extends Controller
             $post['excerpt'] = $this->generateExcerpt($post['content']['rendered'] ?? '');
         }
 
-        // Fetch campaigns
-        $campaigns = $this->fetchAndProcessCampaigns();
+        // Cache campaigns for 15 minutes
+        $campaigns = Cache::remember('campaigns:v1', now()->addMinutes(15), function() {
+            return $this->fetchAndProcessCampaigns();
+        });
 
         return view('landing.home', [
             'heroSlides' => $heroSlides,
@@ -106,18 +114,39 @@ class HomeController extends Controller
             $slides = [];
             
             foreach ($carouselItems as $item) {
-                $postResponse = Http::get("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/posts/{$item['acf']['post']}");
-                $postData = $postResponse->json();
+                // Build proper URL from slug hanya jika slug valid
+                $link = null;
+                if (!empty($item['slug']) && strpos($item['slug'], 'https-rumahamal-usk-ac-id-berita-') === 0) {
+                    $link = str_replace(
+                        'https-rumahamal-usk-ac-id-berita-', 
+                        'https://rumahamal.usk.ac.id/berita/',
+                        $item['slug']
+                    );
+                    
+                    // Validasi URL yang dihasilkan
+                    if (!filter_var($link, FILTER_VALIDATE_URL)) {
+                        $link = null;
+                    }
+                }
                 
-                $imageUrl = $this->extractImageUrlFromContent($postData['content']['rendered'] ?? '');
+                // Get image URL if available in ACF
+                $imageUrl = null;
+                if (!empty($item['acf']['image'])) {
+                    $mediaResponse = Http::get("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/media/{$item['acf']['image']}");
+                    if ($mediaResponse->successful()) {
+                        $mediaData = $mediaResponse->json();
+                        $imageUrl = $mediaData['source_url'] ?? null;
+                    }
+                }
 
                 $slides[] = [
                     'id' => $item['id'],
                     'slug' => $item['slug'],
                     'image_url' => $imageUrl,
-                    'title' => $postData['title']['rendered'] ?? 'Untitled',
-                    'link' => $postData['slug'] ? "https://rumahamal.usk.ac.id/pengumuman/{$postData['slug']}" : '#',
-                    'priority' => $item['acf']['priority'] ?? 0
+                    'title' => $this->extractTitleFromSlug($item['slug']),
+                    'link' => $link, // akan null jika tidak ada link valid
+                    'priority' => $item['acf']['priority'] ?? 0,
+                    'has_link' => !empty($link) // tambah flag untuk memudahkan pengecekan di view
                 ];
             }
 
@@ -132,6 +161,12 @@ class HomeController extends Controller
             Log::error('Error fetching hero slides: ' . $e->getMessage());
             return [];
         }
+    }
+    private function extractTitleFromSlug($slug)
+    {
+        // Remove prefix and replace hyphens with spaces
+        $title = str_replace(['https-rumahamal-usk-ac-id-berita-', '-'], ['', ' '], $slug);
+        return ucwords($title);
     }
 
     private function fetchAllPosts()
@@ -213,21 +248,6 @@ class HomeController extends Controller
         }, $campaigns);
 
         return array_slice($processedCampaigns, 0, 6);
-    }
-
-    private function extractImageUrlFromContent($content)
-    {
-        if (empty($content)) {
-            return '';
-        }
-
-        $doc = new DOMDocument();
-        libxml_use_internal_errors(true);
-        $doc->loadHTML($content);
-        libxml_clear_errors();
-        $imgTags = $doc->getElementsByTagName('img');
-        
-        return $imgTags->length > 0 ? $imgTags->item(0)->getAttribute('src') : '';
     }
 
     private function extractImageUrl($post)

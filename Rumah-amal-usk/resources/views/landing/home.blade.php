@@ -11,7 +11,9 @@
     <!-- Preload hero images -->
     @isset($heroImages)
         @foreach($heroImages as $image)
-            <link rel="preload" href="{{ $image }}" as="image" fetchpriority="high">
+            @if($image)
+                <link rel="preload" href="{{ $image }}" as="image" fetchpriority="high">
+            @endif
         @endforeach
     @endisset
 
@@ -108,20 +110,35 @@
                     @foreach($heroSlides as $slide)
                         <div class="swiper-slide">
                             <div class="image-container">
-                                <a href="{{ $slide['link'] }}">
+                                @if(!empty($slide['link']))
+                                    <a href="{{ $slide['link'] }}" aria-label="{{ $slide['title'] }}">
+                                @endif
+                                
+                                @if($slide['image_url'])
                                     <img src="{{ $slide['image_url'] }}" 
-                                         alt="{{ $slide['title'] }}" 
-                                         width="1297" 
-                                         height="518.79" 
-                                         style="aspect-ratio: 5/2"
-                                         loading="eager"
-                                         fetchpriority="high">
-                                </a>
+                                        alt="{{ $slide['title'] }}" 
+                                        width="1297" 
+                                        height="518.79"
+                                        loading="{{ $loop->first ? 'eager' : 'lazy' }}"
+                                        {{ $loop->first ? 'fetchpriority="high"' : '' }}
+                                        style="aspect-ratio: 5/2">
+                                @else
+                                    <img src="{{ asset('assets/img/default-hero.jpg') }}" 
+                                        alt="Default Hero Image"
+                                        width="1297"
+                                        height="518.79"
+                                        loading="{{ $loop->first ? 'eager' : 'lazy' }}"
+                                        {{ $loop->first ? 'fetchpriority="high"' : '' }}
+                                        style="aspect-ratio: 5/2">
+                                @endif
+                                
+                                @if(!empty($slide['link']))
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     @endforeach
                 @else
-                    <!-- Fallback loading state -->
                     <div class="swiper-slide">
                         <div class="loading-placeholder"></div>
                     </div>

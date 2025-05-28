@@ -843,7 +843,7 @@ img.fixed-dimension {
     overflow: hidden;
     position: relative;
     padding-top: 80px;
-    height: 560px; 
+    height: auto; 
     display: block; 
     z-index: 10;
 }
@@ -862,7 +862,7 @@ img.fixed-dimension {
     object-fit: cover;
 }
 #hero .swiper-wrapper {
-    height: auto;
+    align-items: center;
 }
 #hero .swiper-button-prev, #hero .swiper-button-next {
     width: 40px;
@@ -882,6 +882,11 @@ img.fixed-dimension {
 }
 #hero .swiper-button-prev:hover:after, #hero .swiper-button-next:hover:after {
     background-color: rgba(0, 0, 0, 0.3);
+}
+@media (min-width: 1400px) {
+    #hero {
+        height: 700px;
+    }
 }
 @media (max-width: 1200px) {
     #hero .image-container {
@@ -942,8 +947,8 @@ img.fixed-dimension {
 .icon-boxes {
     padding-bottom: 20px;
     padding-top: 0%;
-    z-index: 3;
-    background-color: rgba(255, 255, 255, 0.6);
+    z-index: 11;
+    background-color: rgba(255, 255, 255, 0);
 }
 .row {
     margin-top: 0 !important;
@@ -993,6 +998,12 @@ img.fixed-dimension {
 .icon-box:hover .btn-btn-primary {
     color: #ffffff;
     background: #1D7E05;
+}
+@media (min-width: 1200px) {
+    .icon-boxes {
+    margin-top: -120px;
+    z-index: 12;
+}
 }
 
 /*--------------------------------------------------------------
@@ -2855,7 +2866,7 @@ body {
 #google_translate_element {
     position: fixed;
     left: 20px;
-    bottom: 0px;
+    bottom: 20px;
     z-index: 9999;
     background: #006400;
     padding: 8px 12px;
