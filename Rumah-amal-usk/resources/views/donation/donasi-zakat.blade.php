@@ -29,7 +29,7 @@
         <div class="form-group">
           <strong><p style="margin-bottom: 4px; text-align: left;">Perhitungan Zakat Berdasarkan:</p></strong>
           <ul style=" list-style-position: inside; padding-left: 10px;">
-            <li>Qannun Aceh No. 10/ 2018 Tentang Baitul Mall </li>
+            <li>Qanun Aceh No. 10/ 2018 Tentang Baitul Mall </li>
             <li>SK DPS BMA No. 02/ 2024: Zakat 2,5% Dari Pendapatan Rp10,5 juta/bulan </li>
           </ul>
 
