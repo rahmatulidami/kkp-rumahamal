@@ -48,7 +48,8 @@
 
         <div class="input-group">
           <button id="currency-button">Rp.</button>
-          <input type="number" id="infak-amount" placeholder="Masukkan jumlah" oninput="updateTotal()">
+          <input type="text" id="infak-amount" placeholder="Masukkan jumlah" oninput="formatCurrency(this)">
+          <input type="hidden" id="infak-amount-raw">
         </div>
 
         <p id="total-infak"></p>
@@ -65,13 +66,35 @@
 
 @push('scripts')
 <script>
+    function formatCurrency(input) {
+        // Remove non-digit characters
+        let value = input.value.replace(/\D/g, '');
+        
+        // Store raw value in hidden field
+        document.getElementById('infak-amount-raw').value = value;
+        
+        // Format with thousand separators
+        if (value.length > 0) {
+            value = parseInt(value, 10).toLocaleString('id-ID');
+            input.value = value;
+        } else {
+            input.value = '';
+        }
+        
+        updateTotal();
+    }
+    
     function updateTotal() {
-        const amount = document.getElementById('infak-amount').value;
+        const amount = document.getElementById('infak-amount-raw').value;
         const infakType = document.getElementById('infak-type').value;
         const totalInfak = document.getElementById('total-infak');
 
-        if (amount) {
-            totalInfak.textContent = `Jumlah total infakmu adalah Rp. ${amount} untuk ${infakType}`;
+        if (amount && infakType) {
+            const formattedAmount = parseInt(amount).toLocaleString('id-ID');
+            totalInfak.textContent = `Jumlah total infakmu adalah Rp. ${formattedAmount} untuk ${infakType}`;
+        } else if (amount) {
+            const formattedAmount = parseInt(amount).toLocaleString('id-ID');
+            totalInfak.textContent = `Jumlah total infakmu adalah Rp. ${formattedAmount}`;
         } else {
             totalInfak.textContent = '';
         }
