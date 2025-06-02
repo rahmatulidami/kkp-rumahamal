@@ -19,11 +19,24 @@
 
 <main class="main">
 
-  <!-- Page Title -->
+   <!-- Page Title -->
   <div class="page-title">
     <div class="heading">
+      <div class="container">
+        
+      </div>
     </div>
+    <nav class="breadcrumbs">
+      <div class="container">
+        <ol>
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/berita">Berita</a></li>
+          <li class="current">{{ $berita['title']['rendered'] }}</li>
+        </ol>
+      </div>
+    </nav>
   </div><!-- End Page Title -->
+
 
   <div class="container">
     <div class="row">
@@ -111,29 +124,29 @@
               @csrf
               <input type="hidden" name="berita_id" value="{{ $berita['id'] }}">
 
-              <h4>Post Comment</h4>
-              <p>Your email address will not be published. Required fields are marked *</p>
+              <h4>Kirim Komentar</h4>
+              <p>Alamat email Anda tidak akan dipublikasikan. Kolom yang wajib diisi ditandai *</p>
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input name="name" type="text" class="form-control" placeholder="Your Name*" required>
+                  <input name="name" type="text" class="form-control" placeholder="Nama*" required>
                 </div>
                 <div class="col-md-6 form-group">
-                  <input name="email" type="email" class="form-control" placeholder="Your Email*" required>
+                  <input name="email" type="email" class="form-control" placeholder="Email*" required>
                 </div>
               </div>
               <div class="row">
                 <div class="col form-group">
-                  <input name="website" type="text" class="form-control" placeholder="Your Website">
+                  <input name="website" type="text" class="form-control" placeholder="Website">
                 </div>
               </div>
               <div class="row">
                 <div class="col form-group">
-                  <textarea name="comment" class="form-control" placeholder="Your Comment*" required></textarea>
+                  <textarea name="comment" class="form-control" placeholder="Komentar*" required></textarea>
                 </div>
               </div>
 
               <div class="text-center">
-                <button type="submit" class="btn btn-primary">Post Comment</button>
+                <button type="submit" class="btn btn-primary">Kirim Komentar</button>
               </div>
 
             </form>
@@ -168,7 +181,7 @@
           </div>
 
           <div class="tags-widget widget-item">
-            <h3 class="widget-title">Tags</h3>
+            <h3 class="widget-title">Tagar</h3>
             <ul class="tags">
               @foreach($filteredTags as $tag)
                 <li><a href="{{ route('berita.tag', ['tag' => $tag['id']]) }}">{{ $tag['name'] }}</a></li>
