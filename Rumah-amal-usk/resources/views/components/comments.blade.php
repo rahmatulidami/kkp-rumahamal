@@ -29,7 +29,7 @@
       font-weight: bold;
   }
   .comment-admin {
-      background: #e3f2fd !important;
+      background:rgb(255, 255, 255) !important;
       border-left: 4px solid #1e88e5 !important;
   }
   .comment-admin .author .admin-name {

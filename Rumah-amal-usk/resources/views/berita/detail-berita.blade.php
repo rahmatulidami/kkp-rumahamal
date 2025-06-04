@@ -101,27 +101,6 @@
           </div>
         </section><!-- /Blog Details Section -->
 
-        <!-- Blog Comments Section -->
-        <section id="blog-comments" class="blog-comments section">
-          <div class="container">
-            <h4 class="comments-count">{{ $comment_count }} Komentar </h4>
-
-            @foreach($comments as $comment)
-              <div id="comment-{{ $comment['id'] }}" class="comment">
-                <div class="d-flex">
-                  <div class="comment-img"><img src="{{ asset('storage/' . $comment['user_image']) }}" alt=""></div>
-                  <div>
-                    <h5><a href="#">{{ $comment['user_name'] }}</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                    <time datetime="{{ $comment['created_at'] }}">{{ \Carbon\Carbon::parse($comment['created_at'])->translatedFormat('d F Y') }}</time>
-                    <p>{{ $comment['content'] }}</p>
-                  </div>
-                </div>
-              </div><!-- End comment -->
-            @endforeach
-
-          </div>
-        </section><!-- /Blog Comments Section -->
-
       </div>
 
       <div class="col-lg-4 sidebar">

@@ -119,11 +119,14 @@ window.initComments = function(postId, isAdmin, adminName) {
         }
 
         commentEl.innerHTML = `
-            ${previewHTML}
-            <div class="author">
-                <span class="${isAdminComment ? 'admin-name' : ''}">${comment.author}</span>
-                <span class="timestamp">${dayjs(comment.created_at).fromNow()}</span>
-                ${deleteBtnHTML}
+             ${previewHTML}
+        <div class="author">
+            <span class="${isAdminComment ? 'admin-name' : ''}">
+            ${comment.author}
+            ${isAdminComment ? '<i class="bi bi-patch-check-fill verified-badge" style="color:#1da1f2;vertical-align:middle;margin-left:3px;" title="Admin Terverifikasi"></i>' : ''}
+            </span>
+            <span class="timestamp">${dayjs(comment.created_at).fromNow()}</span>
+                    ${deleteBtnHTML}
             </div>
             <div class="content">${comment.content}</div>
             <button class="reply-btn" onclick="showReplyForm(${comment.id})">Balas</button>

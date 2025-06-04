@@ -92,6 +92,23 @@
               </div><!-- End meta bottom -->
             </article>
 
+	    @include('components.comments', ['postId' => $pengumuman['id']])
+            <script src="{{ asset('assets/js/comments.js') }}"></script>
+            <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/relativeTime.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/dayjs@1/locale/id.js"></script>
+            <script>
+                dayjs.extend(dayjs_plugin_relativeTime);
+                dayjs.locale('id'); // Gunakan bahasa Indonesia
+            </script>
+            <script>
+                window.initComments(
+                    {{ $pengumuman['id'] }},
+                    {{ auth()->check() && auth()->user()->is_admin ? 'true' : 'false' }},
+                    "{{ auth()->check() && auth()->user()->is_admin ? (auth()->user()->name ?? 'Admin') : '' }}"
+                );
+            </script>
+
           </div>
         </section><!-- /Blog Details Section -->
 
