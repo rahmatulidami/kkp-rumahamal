@@ -20,11 +20,24 @@
 
 <main class="main">
 
-  <!-- Page Title -->
+   <!-- Page Title -->
   <div class="page-title">
     <div class="heading">
+      <div class="container">
+        
+      </div>
     </div>
+    <nav class="breadcrumbs">
+      <div class="container">
+        <ol>
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/berita">Berita</a></li>
+          <li class="current">{{ $berita['title']['rendered'] }}</li>
+        </ol>
+      </div>
+    </nav>
   </div><!-- End Page Title -->
+
 
   <div class="container">
     <div class="row">
@@ -129,7 +142,7 @@
           </div>
 
           <div class="tags-widget widget-item">
-            <h3 class="widget-title">Tags</h3>
+            <h3 class="widget-title">Tagar</h3>
             <ul class="tags">
               @foreach($filteredTags as $tag)
                 <li><a href="{{ route('berita.tag', ['tag' => $tag['id']]) }}">{{ $tag['name'] }}</a></li>

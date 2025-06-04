@@ -42,7 +42,7 @@
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
-          <img src="assets/img/profil/usk.webp" class="img-fluid rounded-4 mb-4" alt="Profil Image">
+          <img src="assets/img/profil/mesjid.webp" class="img-fluid rounded-4 mb-4" width="800" height="450"  alt="Profil Image" style="aspect-ratio: 16/9" loading="eager">
           <div class="content">
               <h3>RUMAH AMAL MASJID JAMIK USK</h3>
               <p>

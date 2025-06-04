@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const loadingText = document.querySelector("#program-items p");
   const noProgramMessage = document.getElementById("no-program-message");
   const cacheKey = 'programs_cache';
-  const cacheExpiry = 30 * 60 * 1000; // 30 menit cache
+  const cacheExpiry = 15 * 60 * 1000; // 30 menit cache
 
   // Cek cache pertama
   const cachedData = localStorage.getItem(cacheKey);
@@ -115,15 +115,15 @@ document.addEventListener("DOMContentLoaded", function () {
       const item = document.createElement('div');
       item.className = `col-lg-2-4 col-md-6 program-item isotope-item ${filterClass}`;
       item.innerHTML = `
-        <div class="program-content h-100">
+       <div class="program-content h-100">
           <a href="/program/${post.slug || ''}">
-            <img src="/assets/img/placeholder.jpg" 
-                 data-src="${getImageUrl(post)}" 
-                 class="img-fluid lazy" 
-                 alt="${post.title.rendered || 'Untitled'}" 
-                 loading="eager"
-                 width="300"
-                 height="200">
+            <img 
+                data-src="${getImageUrl(post)}" 
+                class="img-fluid lazy" 
+                alt="${post.title.rendered || 'Untitled'}" 
+                loading="eager"
+                width="300"
+                height="200">
           </a>
         </div>
       `;
