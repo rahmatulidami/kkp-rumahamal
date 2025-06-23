@@ -13,7 +13,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // Authentication check
         if (Auth::id()) {
             $usertype = Auth::user()->usertype;
 
@@ -26,20 +25,16 @@ class HomeController extends Controller
             }
         }
 
-        // Cache hero slides for 15 minutes with versioned key
         $heroSlides = Cache::remember('hero_slides:v1', now()->addMinutes(15), function() {
             return $this->fetchHeroSlides();
         });
 
-        // Extract image URLs for preloading
         $heroImages = collect($heroSlides)->pluck('image_url')->filter()->toArray();
 
-        // Cache categories for 15 minutes
         $categories = Cache::remember('categories:v1', now()->addMinutes(15), function() {
             return $this->fetchCategories();
         });
 
-        // Cache posts for 15 minutes
         $allPosts = Cache::remember('all_posts:v1', now()->addMinutes(15), function() {
             return $this->fetchAllPosts();
         });
@@ -48,11 +43,9 @@ class HomeController extends Controller
             abort(500, 'Invalid data received from API.');
         }
 
-        // Process categories
         $categoryMap = array_column($categories, 'name', 'id');
         $categoryMap = array_map('html_entity_decode', $categoryMap);
 
-        // Filter and sort posts
         $pengumumanPosts = array_filter($allPosts, function($post) {
             return is_array($post) && in_array(87, $post['categories'] ?? []);
         });
@@ -61,7 +54,6 @@ class HomeController extends Controller
             return is_array($post) && !in_array(87, $post['categories'] ?? []) && !in_array(88, $post['categories'] ?? []);
         });
 
-        // Sort by date (newest first)
         usort($pengumumanPosts, function($a, $b) {
             return strtotime($b['date']) - strtotime($a['date']);
         });
@@ -70,11 +62,9 @@ class HomeController extends Controller
             return strtotime($b['date']) - strtotime($a['date']);
         });
 
-        // Get latest posts
         $latestPengumumanPosts = array_slice($pengumumanPosts, 0, 6);
         $latestBeritaPosts = array_slice($beritaPosts, 0, 6);
 
-        // Process post data
         foreach ($latestPengumumanPosts as &$post) {
             $post['categories'] = array_map(fn($id) => $categoryMap[$id] ?? 'Uncategorized', $post['categories'] ?? []);
             $post['title']['rendered'] = html_entity_decode($post['title']['rendered'] ?? 'Untitled', ENT_QUOTES, 'UTF-8');
@@ -87,7 +77,6 @@ class HomeController extends Controller
             $post['excerpt'] = $this->generateExcerpt($post['content']['rendered'] ?? '');
         }
 
-        // Cache campaigns for 15 minutes
         $campaigns = Cache::remember('campaigns:v1', now()->addMinutes(15), function() {
             return $this->fetchAndProcessCampaigns();
         });
@@ -101,7 +90,7 @@ class HomeController extends Controller
         ]);
     }
 
-    private function fetchHeroSlides()
+   private function fetchHeroSlides()
     {
         try {
             $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/carausel?_fields=id,slug,acf');
@@ -114,43 +103,62 @@ class HomeController extends Controller
             $slides = [];
             
             foreach ($carouselItems as $item) {
-                // Build proper URL from slug hanya jika slug valid
-                $link = null;
-                if (!empty($item['slug']) && strpos($item['slug'], 'https-rumahamal-usk-ac-id-berita-') === 0) {
-                    $link = str_replace(
-                        'https-rumahamal-usk-ac-id-berita-', 
-                        'https://rumahamal.usk.ac.id/berita/',
-                        $item['slug']
-                    );
-                    
-                    // Validasi URL yang dihasilkan
-                    if (!filter_var($link, FILTER_VALIDATE_URL)) {
-                        $link = null;
-                    }
-                }
-                
-                // Get image URL if available in ACF
                 $imageUrl = null;
-                if (!empty($item['acf']['image'])) {
+                // Selalu coba ambil gambar jika ada ID di acf.image
+                if (isset($item['acf']['image']) && !empty($item['acf']['image'])) {
                     $mediaResponse = Http::get("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/media/{$item['acf']['image']}");
                     if ($mediaResponse->successful()) {
                         $mediaData = $mediaResponse->json();
                         $imageUrl = $mediaData['source_url'] ?? null;
+                    } else {
+                        // Log jika gagal mengambil media, tapi jangan menghentikan proses
+                        Log::warning("Gagal mengambil media untuk ID: {$item['acf']['image']}. Status: {$mediaResponse->status()}");
                     }
                 }
+                // Berikan gambar default jika imageUrl masih null
+                if (!$imageUrl) {
+                    $imageUrl = url('assets/img/default_carousel.jpeg'); // Pastikan path ini benar
+                }
 
+                $link = null;
+                // Logika penentuan link tetap sama, bergantung pada slug
+                if (!empty($item['slug'])) {
+                    if (strpos($item['slug'], 'https-rumahamal-usk-ac-id-berita-') === 0) {
+                        $link = str_replace(
+                            'https-rumahamal-usk-ac-id-berita-', 
+                            'https://rumahamal.usk.ac.id/berita/',
+                            $item['slug']
+                        );
+                    } elseif (strpos($item['slug'], 'https-rumahamal-usk-ac-id-pengumuman-') === 0) {
+                        $link = str_replace(
+                            'https-rumahamal-usk-ac-id-pengumuman-', 
+                            'https://rumahamal.usk.ac.id/pengumuman/',
+                            $item['slug']
+                        );
+                    } elseif (strpos($item['slug'], 'https-rumahamal-usk-ac-id-campaign-') === 0) {
+                        $link = str_replace(
+                            'https-rumahamal-usk-ac-id-campaign-', 
+                            'https://rumahamal.usk.ac.id/campaign/',
+                            $item['slug']
+                        );
+                    }
+                    
+                    if ($link && !filter_var($link, FILTER_VALIDATE_URL)) {
+                        $link = null;
+                    }
+                }
+                
                 $slides[] = [
                     'id' => $item['id'],
                     'slug' => $item['slug'],
-                    'image_url' => $imageUrl,
+                    'image_url' => $imageUrl, // Gambar sekarang selalu ada, atau default
                     'title' => $this->extractTitleFromSlug($item['slug']),
-                    'link' => $link, // akan null jika tidak ada link valid
+                    'link' => $link,
                     'priority' => $item['acf']['priority'] ?? 0,
-                    'has_link' => !empty($link) // tambah flag untuk memudahkan pengecekan di view
+                    'has_link' => !empty($link)
                 ];
             }
 
-            // Sort by priority
             usort($slides, function($a, $b) {
                 return $a['priority'] <=> $b['priority'];
             });
@@ -162,10 +170,24 @@ class HomeController extends Controller
             return [];
         }
     }
+
     private function extractTitleFromSlug($slug)
     {
-        // Remove prefix and replace hyphens with spaces
-        $title = str_replace(['https-rumahamal-usk-ac-id-berita-', '-'], ['', ' '], $slug);
+        $title = str_replace(
+            [
+                'https-rumahamal-usk-ac-id-berita-', 
+                'https-rumahamal-usk-ac-id-pengumuman-',
+                'https-rumahamal-usk-ac-id-campaign-',
+                '-'
+            ], 
+            [
+                '', 
+                '',
+                '',
+                ' '
+            ], 
+            $slug
+        );
         return ucwords($title);
     }
 
