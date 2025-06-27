@@ -21,6 +21,6 @@ class AdminMiddleware
             return $next($request);
         }
 
-        return redirect('/'); // Redirect non-admin users
+        abort(403, 'Forbidden');
     }
 }

@@ -59,6 +59,7 @@ class CommentController extends Controller
     {
         $comment = Comment::findOrFail($id);
 
+        $delete_comment = $comment;
         // Optional: Hanya admin yang bisa hapus
         if (!auth()->user() || !auth()->user()->is_admin) {
             return response()->json(['success' => false, 'message' => 'Unauthorized'], 403);
@@ -67,7 +68,7 @@ class CommentController extends Controller
         // Hapus beserta semua anak-anaknya (jika ingin)
         $comment->delete();
 
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true, 'deleted_comment' => $delete_comment]);
     }
 
     // /**

@@ -56,7 +56,12 @@ Route::prefix('comments')->group(function () {
     Route::post('/', [CommentController::class, 'store']); // Tambahkan komentar baru
 });
 
-Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->middleware('admin');
+// Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->middleware('admin');
+Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->middleware('auth.basic');
+
+// Route::delete('/comments/{id}', [CommentController::class, 'destroy'])
+//     ->middleware(['auth', 'admin']);
+
 
 // Route::get('/admin', function () {
 //     return view('admin/index');
