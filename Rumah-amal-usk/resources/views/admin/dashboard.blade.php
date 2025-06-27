@@ -623,7 +623,7 @@
         .progress-circle svg {
             width: 140px;
             height: 140px;
-            transform: rotate(-90deg);
+            transform: rotate(0deg);
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
         }
 
