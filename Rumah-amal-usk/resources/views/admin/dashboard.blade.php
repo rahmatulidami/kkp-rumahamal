@@ -4,7 +4,6 @@
             Dashboard Kampanye Donasi
         </h2>
     </x-slot>
-
     <div class="py-12 bg-gradient-to-b from-indigo-50 via-white to-indigo-100 min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="container mx-auto bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl border border-indigo-100 overflow-hidden">
@@ -12,8 +11,8 @@
                     <h1 class="text-2xl font-bold text-slate-900 mb-2">Dashboard Kampanye</h1>
                     <p class="text-slate-500">Pantau progress dan kelola donasi secara real-time</p>
                 </div>
-                <!-- Campaign Section -->
-                <div class="section px-8 py-10">
+                <!-- Campaign Cards (Circle Progress) Section -->
+                <div class="section px-8 pt-4 pb-10">
                     <h2 class="section-title flex items-center gap-3 mb-8 uppercase font-semibold text-slate-900 text-lg">
                         <span class="inline-block w-1 h-6 rounded bg-gradient-to-b from-blue-500 to-blue-700"></span>
                         <span>Campaign</span>
@@ -30,6 +29,15 @@
                             <span>⬇</span>
                         </button>
                     </div>
+                </div>
+                <!-- Horizontal Bar Chart Section -->
+                <div class="section px-8 pt-10 pb-4">
+                    <h2 class="section-title flex items-center gap-3 mb-8 uppercase font-semibold text-slate-900 text-lg">
+                        <span class="inline-block w-1 h-6 rounded bg-gradient-to-b from-blue-500 to-blue-700"></span>
+                        <span>Progress Semua Campaign</span>
+                        <span class="flex-1 h-px bg-gradient-to-r from-slate-200 to-transparent"></span>
+                    </h2>
+                    <div id="barchart-campaigns" class="barchart-campaigns-horizontal"></div>
                 </div>
                 <!-- Current Donation Section -->
                 <div class="section px-8 py-10">
@@ -57,21 +65,70 @@
     </div>
 
     <style>
+        .barchart-campaigns-horizontal {
+            width: 100%;
+            background: #f8fafc;
+            border-radius: 14px;
+            box-shadow: 0 1px 6px 0 rgba(0,0,0,0.06);
+            padding: 28px 18px 28px 18px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .barchart-row-horizontal {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+            min-height: 38px;
+        }
+        .barchart-label-horizontal {
+            flex: 0 0 165px;
+            font-size: 15px;
+            color: #444;
+            font-weight: 500;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            padding-right: 10px;
+        }
+        .barchart-bar-horizontal-container {
+            flex: 1 1 auto;
+            background: #e5e7eb;
+            border-radius: 8px;
+            height: 22px;
+            position: relative;
+            overflow: hidden;
+            min-width: 90px;
+        }
+        .barchart-bar-horizontal {
+            height: 22px;
+            border-radius: 8px;
+            transition: width 1.2s cubic-bezier(.4,0,.2,1);
+        }
+        .barchart-percent-horizontal {
+            font-size: 15px;
+            width: 54px;
+            text-align: right;
+            color: #374151;
+            font-weight: 600;
+            padding-left: 8px;
+        }
+        @media (max-width: 700px) {
+            .barchart-campaigns-horizontal {padding: 10px 2px;}
+            .barchart-label-horizontal {flex-basis:80px;font-size:12px;}
+            .barchart-percent-horizontal {width:38px;font-size:12px;}
+            .barchart-bar-horizontal-container{min-width:50px;}
+        }
         .campaigns-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
             gap: 32px;
         }
-        @media (min-width: 640px) {
-            .campaigns-grid { grid-template-columns: repeat(2, 1fr);}
-        }
-        @media (min-width: 1024px) {
-            .campaigns-grid { grid-template-columns: repeat(3, 1fr);}
-        }
-        .limit-btn.active {
-            background: #6366f1 !important;
-            color: #fff !important;
-        }
+        @media (min-width: 640px) { .campaigns-grid { grid-template-columns: repeat(2, 1fr);} }
+        @media (min-width: 1024px) { .campaigns-grid { grid-template-columns: repeat(3, 1fr);} }
+        .limit-btn.active { background: #6366f1 !important; color: #fff !important; }
         .progress-circle {
             position: relative;
             width: 150px;
@@ -89,13 +146,9 @@
         }
         .progress-bar {
             fill: none;
-            stroke: #4285f4;
             stroke-width: 8;
             stroke-linecap: round;
-            transform-origin: center;
-            transform: rotate(-90deg);
-            stroke-dasharray: 440;
-            stroke-dashoffset: 440;
+            transform-origin: 80px 80px;
             transition: stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1);
         }
         .progress-text {
@@ -104,8 +157,9 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 24px;
-            color: #4285f4;
+            color: #222;
             font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.07);
         }
         .campaign-card {
             background: white;
@@ -153,7 +207,6 @@
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
-        /* Donations */
         .donations-list { display: flex; flex-direction: column; gap: 16px;}
         .donation-item {
             background: white;
@@ -224,12 +277,52 @@
     </style>
 
     <script>
+    const palette = [
+      "#4285f4", "#fbbc05", "#34a853", "#ea4335", "#ff6d01", "#46bdc6",
+      "#a142f4", "#f44292", "#2d9cdb", "#ffb800", "#00c48c", "#d7263d"
+    ];
+    function idToPaletteColor(id) {
+        let str = id.toString();
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        let idx = Math.abs(hash) % palette.length;
+        return palette[idx];
+    }
     function formatRupiah(num) {
         num = parseInt(num) || 0;
         return "Rp " + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
-
-    // CIRCLE PROGRESS BAR (using SVG, animated)
+    // --- HORIZONTAL BAR CHART ---
+    function renderBarChartCampaignsHorizontal(data) {
+        const chart = document.getElementById('barchart-campaigns');
+        if (!data || !data.length) {
+            chart.innerHTML = '<div class="text-center text-gray-400">Tidak ada data campaign.</div>';
+            return;
+        }
+        chart.innerHTML = data.map(d => {
+            let acf = d.acf || {};
+            let jumlah = parseInt(acf.jumlah_dana) || 0;
+            let terkumpul = parseInt(acf.dana_terkumpul) || 0;
+            let percent = jumlah > 0 ? Math.min(Math.round(terkumpul / jumlah * 100), 100) : 0;
+            let color = idToPaletteColor(d.id);
+            let title = d.title?.rendered || '-';
+            return `<div class="barchart-row-horizontal">
+                <div class="barchart-label-horizontal" title="${title}">${title}</div>
+                <div class="barchart-bar-horizontal-container">
+                    <div class="barchart-bar-horizontal" style="background:${color};width:0%" data-target="${percent}"></div>
+                </div>
+                <div class="barchart-percent-horizontal">${percent}%</div>
+            </div>`;
+        }).join('');
+        setTimeout(() => {
+            document.querySelectorAll('.barchart-bar-horizontal').forEach(bar => {
+                bar.style.width = bar.getAttribute('data-target') + '%';
+            });
+        }, 180);
+    }
+    // --- CIRCLE PROGRESS BAR ---
     function renderCampaignCard(data, idx) {
         let title = data.title?.rendered || "-";
         let acf = data.acf || {};
@@ -237,12 +330,13 @@
         let terkumpul = parseInt(acf.dana_terkumpul) || 0;
         let durasi = acf.lama_campaign || "-";
         let percent = jumlah > 0 ? Math.min(Math.round(terkumpul / jumlah * 100), 100) : 0;
+        let color = idToPaletteColor(data.id);
         return `
         <div class="campaign-card animate-fade-in">
-            <div class="progress-circle" data-percent="${percent}">
+            <div class="progress-circle" data-percent="${percent}" data-color="${color}">
                 <svg viewBox="0 0 160 160">
                     <circle class="progress-bg" cx="80" cy="80" r="70"></circle>
-                    <circle class="progress-bar" cx="80" cy="80" r="70"></circle>
+                    <circle class="progress-bar" cx="80" cy="80" r="70" style="stroke: ${color}; transform: rotate(-90deg); transform-origin: 80px 80px;"></circle>
                 </svg>
                 <div class="progress-text">${percent}%</div>
             </div>
@@ -253,14 +347,12 @@
             </div>
         </div>`;
     }
-
     function animateAllCircleBars() {
         document.querySelectorAll('.progress-circle').forEach(function(el){
             var percent = parseFloat(el.getAttribute('data-percent')) || 0;
             var circle = el.querySelector('.progress-bar');
             var totalLength = 2 * Math.PI * 70; // r=70
             var offset = totalLength * (1 - percent/100);
-            // Reset
             circle.style.strokeDasharray = totalLength;
             circle.style.strokeDashoffset = totalLength;
             setTimeout(function(){
@@ -268,7 +360,7 @@
             }, 120);
         });
     }
-
+    // --- FETCH CAMPAIGNS ---
     function fetchCampaigns() {
         const grid = document.getElementById('campaigns-grid');
         grid.innerHTML = `<div class="campaign-card loading-skeleton" style="height: 265px"></div>
@@ -279,28 +371,27 @@
             .then(data => {
                 if (!Array.isArray(data) || !data.length) {
                     grid.innerHTML = `<div class="col-span-full text-center text-gray-500 font-semibold py-8">Belum ada campaign unggulan.</div>`;
+                    renderBarChartCampaignsHorizontal([]);
                     return;
                 }
-                // Show only 3 (default)
                 grid.setAttribute("data-state", "max3");
                 grid.innerHTML = data.slice(0, 3).map(renderCampaignCard).join('');
                 grid.dataset.full = JSON.stringify(data);
                 setTimeout(animateAllCircleBars, 200);
+                renderBarChartCampaignsHorizontal(data);
             })
             .catch(err => {
                 grid.innerHTML = `<div class="col-span-full text-center text-red-500 font-semibold py-8">Gagal memuat data campaign.</div>`;
+                renderBarChartCampaignsHorizontal([]);
             });
     }
-
     // Expand/Collapse Campaigns
     function setupCampaignExpand() {
         const btn = document.querySelector('.expand-btn');
         const grid = document.getElementById('campaigns-grid');
         btn.addEventListener('click', function() {
             let data = [];
-            try {
-                data = JSON.parse(grid.dataset.full);
-            } catch { data = []; }
+            try { data = JSON.parse(grid.dataset.full); } catch { data = []; }
             if (grid.getAttribute("data-state") === "max3") {
                 grid.innerHTML = data.map(renderCampaignCard).join('');
                 grid.setAttribute("data-state", "all");
@@ -316,10 +407,8 @@
             }
         });
     }
-
-    // DONATION SECTION
+    // -- DONATION SECTION --
     function renderDonationItem(d) {
-        // Status badge: paid = green, unpaid = kuning jika belum expired, merah jika sudah expired
         let badgeClass = "status-badge";
         let badgeText = "Berhasil";
         let st = (d.status || '').toLowerCase();
@@ -350,7 +439,6 @@
         </div>`;
     }
     function formatWaktu(str) {
-        // Format: 2025-06-27 18:57:46 => "x menit/jam/hari yang lalu"
         const t = new Date(str.replace(/-/g,'/'));
         const now = new Date();
         const diffMs = now - t;
@@ -378,7 +466,6 @@
                 list.innerHTML = `<div class="col-span-full text-center text-red-500 font-semibold py-8">Gagal memuat data donasi.</div>`;
             });
     }
-
     function setupDonationLimit() {
         const btn5 = document.getElementById('limit5');
         const btn10 = document.getElementById('limit10');
@@ -392,7 +479,6 @@
             fetchDonations(10);
         });
     }
-
     document.addEventListener('DOMContentLoaded', function() {
         fetchCampaigns();
         fetchDonations(5);
@@ -537,7 +623,7 @@
         .progress-circle svg {
             width: 140px;
             height: 140px;
-            transform: rotate(0deg);
+            transform: rotate(-90deg);
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
         }
 
