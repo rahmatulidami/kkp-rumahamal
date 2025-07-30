@@ -80,13 +80,17 @@ class HomeController extends Controller
         $campaigns = Cache::remember('campaigns:v1', now()->addMinutes(15), function() {
             return $this->fetchAndProcessCampaigns();
         });
+        $newsletterImages = Cache::remember('newsletters:v1', now()->addMinutes(1), function() {
+            return $this->fetchNewsletters();
+        });
 
         return view('landing.home', [
             'heroSlides' => $heroSlides,
             'heroImages' => $heroImages,
             'latestPengumumanPosts' => $latestPengumumanPosts,
             'latestBeritaPosts' => $latestBeritaPosts,
-            'campaigns' => $campaigns
+            'campaigns' => $campaigns,
+            'newsletterImages' => $newsletterImages
         ]);
     }
 
@@ -271,6 +275,85 @@ class HomeController extends Controller
 
         return array_slice($processedCampaigns, 0, 6);
     }
+        private function fetchNewsletters()
+{
+    try {
+        $response = Http::get('https://rumahamal.usk.ac.id/api/wp-json/wp/v2/newsletter', [
+            'per_page' => 3,
+            'orderby' => 'date',
+            'order' => 'desc',
+            '_fields' => 'id,title,content,_links,link,date,featured_media,acf' // Tambahkan acf
+        ]);
+
+        if (!$response->ok()) {
+            Log::error('Failed to fetch newsletters. Status: ' . $response->status());
+            return [];
+        }
+
+        $newsletters = $response->json();
+        
+        if (!is_array($newsletters)) {
+            return [];
+        }
+
+        $result = [];
+        
+        foreach ($newsletters as $newsletter) {
+            $imageUrl = null;
+            
+            // 1. Coba ambil dari ACF image jika ada
+            if (!empty($newsletter['acf']['image'])) {
+                $mediaResponse = Http::get("https://rumahamal.usk.ac.id/api/wp-json/wp/v2/media/{$newsletter['acf']['image']}");
+                if ($mediaResponse->ok()) {
+                    $mediaData = $mediaResponse->json();
+                    $imageUrl = $mediaData['source_url'] ?? null;
+                }
+            }
+            
+            // 2. Coba ambil dari attachment
+            if (!$imageUrl && isset($newsletter['_links']['wp:attachment'][0]['href'])) {
+                $attachmentResponse = Http::get($newsletter['_links']['wp:attachment'][0]['href']);
+                
+                if ($attachmentResponse->ok()) {
+                    $attachments = $attachmentResponse->json();
+                    if (!empty($attachments) && isset($attachments[0]['source_url'])) {
+                        $imageUrl = $attachments[0]['source_url'];
+                    }
+                }
+            }
+            
+            // 3. Coba ambil dari konten jika ada
+            if (!$imageUrl && isset($newsletter['content']['rendered'])) {
+                $doc = new DOMDocument();
+                @$doc->loadHTML($newsletter['content']['rendered']);
+                $imgTags = $doc->getElementsByTagName('img');
+                
+                if ($imgTags->length > 0) {
+                    $imageUrl = $imgTags->item(0)->getAttribute('src');
+                }
+            }
+            
+            // 4. Default image jika semua gagal
+            if (!$imageUrl) {
+                $imageUrl = url('assets/img/default-newsletter.jpg');
+            }
+            
+            $result[] = [
+                'id' => $newsletter['id'] ?? null,
+                'title' => html_entity_decode($newsletter['title']['rendered'] ?? 'Untitled Newsletter', ENT_QUOTES, 'UTF-8'),
+                'image_url' => $imageUrl,
+                'link' => $newsletter['link'] ?? '#',
+                'date' => $newsletter['date'] ?? null
+            ];
+        }
+
+        return $result;
+
+    } catch (\Exception $e) {
+        Log::error('Error fetching newsletter images: ' . $e->getMessage());
+        return [];
+    }
+}
 
     private function extractImageUrl($post)
     {

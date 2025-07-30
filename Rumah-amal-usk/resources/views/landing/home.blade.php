@@ -378,6 +378,37 @@
     </div>
 </section>
 
+<!-- News Letter Section -->
+<section id="News-letter" class="News-letter section">
+    <div class="container section-title" data-aos="fade-up">
+        <h2>NEWS LETTER</h2>
+    </div>
+    <div class="container">
+        <div class="row gy-4">
+           @foreach($newsletterImages as $newsletter)
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <article>
+                        @if(isset($newsletter['image_url']) && $newsletter['image_url'])
+                            <div class="post-img">
+                            <img src="{{$newsletter['image_url'] }}" alt="" class="img-fluid" loading="lazy" width="234" height="416" style="aspect-ratio: 9/16">
+                            </div>
+                        @endif
+                    
+                        <!-- <h2 class="title">
+                            <a href="{{ $newsletter['link'] }}">{{ $newsletter['title'] }}</a>
+                        </h2> -->
+                        
+                    </article>
+                </div>
+            @endforeach
+        </div>
+        <!-- <div class="button-wrapper">
+            <a class="button-selengkapnya" href="/berita" role="button">News Letter Lainnya</a>
+        </div> -->
+    </div>
+</section>
+
+
 <!-- Call To Action Section -->
 <section id="call-to-action" class="call-to-action section dark-background">
   <div class="container">
@@ -409,7 +440,7 @@
         <div class="swiper init-swiper">
             <script type="application/json" class="swiper-config">
             {
-                "loop": false,
+                "loop": true,
                 "speed": 600,
                 "autoplay": {
                     "delay": 5000
@@ -423,31 +454,31 @@
                 },
                 "breakpoints": {
                     "320": {
-                        "slidesPerView": 6,
-                        "spaceBetween": 10 
+                        "slidesPerView": 5,
+                        "spaceBetween": 20 
                     },
                     "480": {
-                        "slidesPerView": 6,
+                        "slidesPerView": 5,
                         "spaceBetween": 20 
                     },
                     "640": {
-                        "slidesPerView": 6,
+                        "slidesPerView": 5,
                         "spaceBetween": 30
                     },
                     "992": {
-                        "slidesPerView": 6,
+                        "slidesPerView": 5,
                         "spaceBetween": 60
                     }
                 }
             }
             </script>
             <div class="swiper-wrapper align-items-center">
-				        <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
-                <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
                 <div class="swiper-slide"><img src="assets/img/clients/RAsalman.png" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
                 <div class="swiper-slide"><img src="assets/img/clients/hi.png" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
-				        <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
-                <div class="swiper-slide"><img src="assets/img/clients/kosong.png" class="img-fluid" alt="" loading="lazy"width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
+                <div class="swiper-slide"><img src="assets/img/clients/Bank_Syariah_Indonesia.svg" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
+				<div class="swiper-slide"><img src="assets/img/clients/Maybank_logo-6.svg" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
+                <div class="swiper-slide"><img src="assets/img/clients/logosdq_whiteq.svg" class="img-fluid" alt="" loading="lazy"width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
+                
             </div>
         </div>
     </div>
