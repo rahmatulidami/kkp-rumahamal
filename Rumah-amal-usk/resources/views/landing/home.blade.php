@@ -76,6 +76,7 @@
             opacity: 1;
             background: #fff;
         }
+
     </style>
 @endsection
 
@@ -386,28 +387,31 @@
     <div class="container">
         <div class="row gy-4">
            @foreach($newsletterImages as $newsletter)
-            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-xl-4 col-md-6 newsletter-col" data-aos="fade-up" data-aos-delay="100">
                     <article>
                         @if(isset($newsletter['image_url']) && $newsletter['image_url'])
-                            <div class="post-img">
-                            <img src="{{$newsletter['image_url'] }}" alt="" class="img-fluid" loading="lazy" width="234" height="416" style="aspect-ratio: 9/16">
+                            <div class="post-img newsletter-img" data-fullsize="{{ $newsletter['image_url'] }}">
+                            <img src="{{$newsletter['image_url'] }}" alt="" class="img-fluid" loading="lazy"  width="566" height="800" style="aspect-ratio: 0.71/1">
                             </div>
                         @endif
                     
-                        <!-- <h2 class="title">
-                            <a href="{{ $newsletter['link'] }}">{{ $newsletter['title'] }}</a>
-                        </h2> -->
-                        
+                        <h2 class="title">
+                            <span>{{ $newsletter['title'] }}</span>
+                        </h2>
                     </article>
                 </div>
             @endforeach
         </div>
-        <!-- <div class="button-wrapper">
-            <a class="button-selengkapnya" href="/berita" role="button">News Letter Lainnya</a>
-        </div> -->
     </div>
 </section>
 
+<!-- Newsletter Modal -->
+<div id="newsletterModal" class="newsletter-modal">
+    <span class="close-newsletter">&times;</span>
+    <div class="newsletter-modal-content">
+        <img id="modalNewsletterImage" src="" alt="Newsletter Image">
+    </div>
+</div>
 
 <!-- Call To Action Section -->
 <section id="call-to-action" class="call-to-action section dark-background">
@@ -443,7 +447,7 @@
                 "loop": true,
                 "speed": 600,
                 "autoplay": {
-                    "delay": 5000
+                    "delay": 900
                 },
                 "slidesPerView": "auto",
                 "watchOverflow": true,
@@ -476,8 +480,9 @@
                 <div class="swiper-slide"><img src="assets/img/clients/RAsalman.png" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
                 <div class="swiper-slide"><img src="assets/img/clients/hi.png" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
                 <div class="swiper-slide"><img src="assets/img/clients/Bank_Syariah_Indonesia.svg" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
-				<div class="swiper-slide"><img src="assets/img/clients/Maybank_logo-6.svg" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
+                <div class="swiper-slide"><img src="assets/img/clients/Maybank_logo-6.svg" class="img-fluid" alt="" loading="lazy" width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
                 <div class="swiper-slide"><img src="assets/img/clients/logosdq_whiteq.svg" class="img-fluid" alt="" loading="lazy"width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
+                <div class="swiper-slide"><img src="assets/img/clients/btn.png" class="img-fluid" alt="" loading="lazy"width="166" height="57.98" style="aspect-ratio: 2.86/1"></div>
                 
             </div>
         </div>
@@ -556,6 +561,50 @@ function initClientsSlider() {
     }
 }
 
+// Newsletter Modal functionality
+function initNewsletterModal() {
+    const modal = document.getElementById('newsletterModal');
+    const modalImg = document.getElementById('modalNewsletterImage');
+    const closeBtn = document.querySelector('.close-newsletter');
+    const newsletterImages = document.querySelectorAll('.newsletter-img');
+
+    if (!modal || !modalImg || !closeBtn || newsletterImages.length === 0) return;
+
+    // Click handler for newsletter images
+    newsletterImages.forEach(imgContainer => {
+        imgContainer.addEventListener('click', function() {
+            const fullSizeSrc = this.getAttribute('data-fullsize');
+            if (fullSizeSrc) {
+                modal.style.display = 'block';
+                modalImg.src = fullSizeSrc;
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+        });
+    });
+
+    // Close modal when X is clicked
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    });
+
+    // Close modal when clicking outside the image
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+    });
+
+    // Close modal with ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+    });
+}
+
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     // Load Swiper first
@@ -583,6 +632,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }).catch(err => {
         console.error('Failed to load Swiper:', err);
     });
+
+    // Initialize newsletter modal
+    initNewsletterModal();
 });
 </script>
 @endpush
